@@ -1,0 +1,22 @@
+{
+    "name":         "proteusthemes/one-click-demo-import",
+    "description":  "One Click Demo Import plugin by ProteusThemes.",
+    "license":      "GPL-3.0+",
+    "type":         "project",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "humanmade/WordPress-Importer",
+                "version": "dev-master",
+                "dist": {
+                    "url": "https://github.com/humanmade/WordPress-Importer/archive/master.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
+    "require": {
+        "humanmade/WordPress-Importer": "dev-master"
+    }
+}
