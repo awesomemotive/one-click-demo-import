@@ -34,6 +34,7 @@ class PT_One_Click_Demo_Import {
 
 		// Actions
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
+		add_action( 'wp_ajax_ocdi_import_data', array( $this, 'ocdi_import_data_callback' ) );
 	}
 
 	/**
@@ -53,43 +54,59 @@ class PT_One_Click_Demo_Import {
 	function display_plugin_page() {
 	?>
 		<div class="wrap">
-			<h2><span class="dashicons dashicons-download" style="line-height: 30px;"></span> One Click Demo Import</h2>
+			<h2><span class="dashicons  dashicons-download" style="line-height: 30px;"></span> One Click Demo Import</h2>
+			<p>General description of demo import goes here...</p>
 
-			<form method="post" class="js-one-click-import-form">
-				<input type="hidden" name="demononce" value="<?php echo wp_create_nonce('radium-demo-code'); ?>" />
-				<input name="reset" class="panel-save button-primary" type="submit" value="Import Demo Data" />
-				<input type="hidden" name="action" value="demo-data" />
-			</form>
+			<button class="panel-save  button-primary  js-ocdi-import-data">Import Demo Data</button>
+
+			<div class="js-ocdi-ajax-response"></div>
 
 			<script>
 				jQuery( function ( $ ) {
 					'use strict';
-					$( '.js-one-click-import-form' ).on( 'submit', function () {
-						$( this ).append( '<p style="font-width: bold; font-size: 1.5em;"><span class="spinner" style="display: inline-block; float: none; visibility: visible;"></span> Importing now, please wait!</p>' );
-						$( this ).find( '.panel-save' ).attr( 'disabled', true );
+					$( '.js-ocdi-import-data' ).on( 'click', function () {
+
+						var file = '<?php echo esc_js( PT_OCDI_PATH . "demo-import-files/demo-import-post-page-image.xml" ); ?>';
+
+						var data = {
+							'action': 'ocdi_import_data',
+							'file': file
+						};
+
+						$.ajax({
+							method: 'POST',
+							url: ajaxurl,
+							data: data,
+							beforeSend: function() {
+								$( '.js-ocdi-import-data' ).after( '<p class="js-ocdi-ajax-loader" style="font-width: bold; font-size: 1.5em;"><span class="spinner" style="display: inline-block; float: none; visibility: visible;"></span> Importing now, please wait!</p>' );
+							},
+							complete: function() {
+								$( '.js-ocdi-ajax-loader' ).remove();
+							}
+						})
+						.done( function( response ) {
+							$( '.js-ocdi-ajax-response' ).append( response );
+						})
+						.fail( function( error ) {
+							$( '.js-ocdi-ajax-response' ).append( error );
+						});
+
 					} );
 				} );
 			</script>
 
 		</div>
 	<?php
+	}
 
-		$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+	function ocdi_import_data_callback() {
+		$file = $_POST['file'];
 
-		if( 'demo-data' == $action && check_admin_referer('radium-demo-code' , 'demononce')){
+		echo '<p>Import file used: ' . $file . '</p>';
 
-			$file = PT_OCDI_PATH ."demo-import-files/demo-import-post-page-image.xml";
-			echo $file . "<br><br>";
+		$this->importer->import( $file );
 
-			// Increase the max_execution_time php setting in order for the demo import to complete in one go.
-			// NOT A GOOD PRICTICE! SHOULD SOLVE THIS WITH AJAX and stop&reset
-			// NOT A GOOD PRICTICE! SHOULD SOLVE THIS WITH AJAX and stop&reset
-			// NOT A GOOD PRICTICE! SHOULD SOLVE THIS WITH AJAX and stop&reset
-			set_time_limit(90);
-
-			$this->importer->import( $file );
-
-		}
+		wp_die(); // this is required to terminate immediately and return a proper response
 	}
 
 }

@@ -9,7 +9,7 @@ if ( ! class_exists( 'OCDI_Importer' ) ) {
 	class OCDI_Importer {
 
 		private static $instance;
-		private $importer, $importer_options;
+		private $importer, $importer_options, $logger;
 
 		/**
 		 * Private constructor to prevent creating a new instance of the *Singleton* via the `new` operator from outside of this class.
@@ -28,7 +28,9 @@ if ( ! class_exists( 'OCDI_Importer' ) ) {
 			$this->importer = new WXR_Importer( $this->importer_options );
 
 			// Set the default logger
-			$this->importer->set_logger( new OCDI_Logger() );
+			$this->logger = new OCDI_Logger();
+			$this->logger->min_level = apply_filters( 'pt-ocdi/logger_min_level', 'debug' );
+			$this->importer->set_logger( $this->logger );
 		}
 
 		/*
