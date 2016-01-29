@@ -23,7 +23,7 @@ define( 'PT_OCDI_VERSION', apply_filters( 'pt-ocdi/version', '0.1-alpha' ) );
  */
 class PT_One_Click_Demo_Import {
 
-	private $importer;
+	private $importer, $plugin_page;
 
 	function __construct() {
 		// Include files
@@ -45,7 +45,7 @@ class PT_One_Click_Demo_Import {
 	 * @since 0.1-alpha
 	 */
 	function create_plugin_page() {
-		add_theme_page( 'One Click Demo Import', 'Import Demo Data', 'switch_themes', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
+		$this->plugin_page = add_theme_page( 'One Click Demo Import', 'Import Demo Data', 'switch_themes', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
 	}
 
 
@@ -75,7 +75,7 @@ class PT_One_Click_Demo_Import {
 	 */
 	function admin_enqueue_scripts( $hook ) {
 		// enqueue the scripts only on the plugin page
-		if ( 'appearance_page_pt-one-click-demo-import' === $hook ) {
+		if ( $this->plugin_page === $hook ) {
 			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery' ), PT_OCDI_VERSION );
 
 			wp_localize_script( 'ocdi-main-js', 'ocdi',
