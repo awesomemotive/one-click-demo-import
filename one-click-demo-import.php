@@ -16,7 +16,7 @@ define( 'PT_OCDI_PATH', apply_filters( 'pt-ocdi/plugin_dir_path', plugin_dir_pat
 define( 'PT_OCDI_URL', apply_filters( 'pt-ocdi/plugin_dir_url', plugin_dir_url( __FILE__ ) ) );
 
 // Current version of the plugin
-define( 'PT_OCDI_VERSION', apply_filters( 'pt-ocdi/version', '1.0.0' ) );
+define( 'PT_OCDI_VERSION', apply_filters( 'pt-ocdi/version', '0.1-alpha' ) );
 
 /**
  * One Click Demo Import class, so we don't have to worry about namespaces
@@ -34,8 +34,10 @@ class PT_One_Click_Demo_Import {
 
 		// Actions
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'wp_ajax_ocdi_import_data', array( $this, 'ocdi_import_data_callback' ) );
 	}
+
 
 	/**
 	 * Creates the plugin page and a submenu item in WP Appearance menu
@@ -46,6 +48,7 @@ class PT_One_Click_Demo_Import {
 		add_theme_page( 'One Click Demo Import', 'Import Demo Data', 'switch_themes', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
 	}
 
+
 	/**
 	 * Plugin page display
 	 *
@@ -53,60 +56,56 @@ class PT_One_Click_Demo_Import {
 	 */
 	function display_plugin_page() {
 	?>
-		<div class="wrap">
-			<h2><span class="dashicons  dashicons-download" style="line-height: 30px;"></span> One Click Demo Import</h2>
-			<p>General description of demo import goes here...</p>
+		<div class="wrap  ocdi">
+			<h2 class="ocdi__title"><span class="dashicons  dashicons-download"></span> One Click Demo Import</h2>
+			<p>TODO: General description of demo import goes here...</p>
 
-			<button class="panel-save  button-primary  js-ocdi-import-data">Import Demo Data</button>
+			<button class="panel-save  button-primary  js-ocdi-import-data  ocdi__button">Import Demo Data</button>
 
-			<div class="js-ocdi-ajax-response"></div>
-
-			<script>
-				jQuery( function ( $ ) {
-					'use strict';
-					$( '.js-ocdi-import-data' ).on( 'click', function () {
-
-						var file = '<?php echo esc_js( PT_OCDI_PATH . "demo-import-files/demo-import-post-page-image.xml" ); ?>';
-
-						var data = {
-							'action': 'ocdi_import_data',
-							'file': file
-						};
-
-						$.ajax({
-							method: 'POST',
-							url: ajaxurl,
-							data: data,
-							beforeSend: function() {
-								$( '.js-ocdi-import-data' ).after( '<p class="js-ocdi-ajax-loader" style="font-width: bold; font-size: 1.5em;"><span class="spinner" style="display: inline-block; float: none; visibility: visible;"></span> Importing now, please wait!</p>' );
-							},
-							complete: function() {
-								$( '.js-ocdi-ajax-loader' ).remove();
-							}
-						})
-						.done( function( response ) {
-							$( '.js-ocdi-ajax-response' ).append( response );
-						})
-						.fail( function( error ) {
-							$( '.js-ocdi-ajax-response' ).append( error );
-						});
-
-					} );
-				} );
-			</script>
-
+			<div class="js-ocdi-ajax-response  ocdi__response"></div>
 		</div>
 	<?php
 	}
 
+
+	/**
+	 * Enqueue admin scripts (JS and CSS)
+	 *
+	 * @since 0.1-alpha
+	 */
+	function admin_enqueue_scripts( $hook ) {
+		// enqueue the scripts only on the plugin page
+		if ( 'appearance_page_pt-one-click-demo-import' === $hook ) {
+			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery' ), PT_OCDI_VERSION );
+
+			wp_localize_script( 'ocdi-main-js', 'ocdi',
+				array(
+					'ajax_url'   => admin_url( 'admin-ajax.php' ),
+					'ajax_nonce' => wp_create_nonce( 'ocdi-ajax-verification' ),
+					'file'       => PT_OCDI_PATH . 'demo-import-files/demo-import-post-page-image.xml'
+				)
+			);
+
+			wp_enqueue_style( 'ocdi-main-css', PT_OCDI_URL . 'assets/css/main.css', array() , PT_OCDI_VERSION );
+		}
+	}
+
+
+	/**
+	 * AJAX callback function
+	 *
+	 * @since 0.1-alpha
+	 */
 	function ocdi_import_data_callback() {
+		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+
 		$file = $_POST['file'];
 
 		echo '<p>Import file used: ' . $file . '</p>';
 
 		$this->importer->import( $file );
 
-		wp_die(); // this is required to terminate immediately and return a proper response
+		wp_die();
 	}
 
 }

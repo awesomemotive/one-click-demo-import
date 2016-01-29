@@ -1,0 +1,14 @@
+.ocdi__title span {
+	line-height: 30px;
+}
+
+.ocdi__ajax-loader {
+	font-width: bold;
+	font-size: 1.5em;
+}
+
+.ocdi__ajax-loader .spinner {
+	display: inline-block;
+	float: none;
+	visibility: visible;
+}
