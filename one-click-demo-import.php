@@ -81,7 +81,12 @@ class PT_One_Click_Demo_Import {
 			$file = PT_OCDI_PATH ."demo-import-files/demo-import-post-page-image.xml";
 			echo $file . "<br><br>";
 
-			$this->importer->set_logger( new WP_Importer_Logger_CLI() );
+			// Increase the max_execution_time php setting in order for the demo import to complete in one go.
+			// NOT A GOOD PRICTICE! SHOULD SOLVE THIS WITH AJAX and stop&reset
+			// NOT A GOOD PRICTICE! SHOULD SOLVE THIS WITH AJAX and stop&reset
+			// NOT A GOOD PRICTICE! SHOULD SOLVE THIS WITH AJAX and stop&reset
+			set_time_limit(90);
+
 			$this->importer->import( $file );
 
 		}

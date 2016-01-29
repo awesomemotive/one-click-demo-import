@@ -26,6 +26,9 @@ if ( ! class_exists( 'OCDI_Importer' ) ) {
 			// Set the WordPress Importer v2 as the importer used in this plugin
 			// More: https://github.com/humanmade/WordPress-Importer
 			$this->importer = new WXR_Importer( $this->importer_options );
+
+			// Set the default logger
+			$this->importer->set_logger( new OCDI_Logger() );
 		}
 
 		/*
@@ -36,8 +39,7 @@ if ( ! class_exists( 'OCDI_Importer' ) ) {
 				defined( 'WP_LOAD_IMPORTERS' ) || define( 'WP_LOAD_IMPORTERS', true );
 				require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 			}
-			require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-logger.php';
-			require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-logger-cli.php';
+			require PT_OCDI_PATH . 'inc/class-ocdi-logger.php';
 			require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-wxr-importer.php';
 		}
 
