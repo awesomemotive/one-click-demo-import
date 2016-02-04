@@ -42,7 +42,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Creates the plugin page and a submenu item in WP Appearance menu
 	 *
-	 * @since 0.1-alpha
+	 * @since 1.0.0
 	 */
 	function create_plugin_page() {
 		$this->plugin_page = add_theme_page( 'One Click Demo Import', 'Import Demo Data', 'switch_themes', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
@@ -52,7 +52,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Plugin page display
 	 *
-	 * @since 0.1-alpha
+	 * @since 1.0.0
 	 */
 	function display_plugin_page() {
 	?>
@@ -71,7 +71,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Enqueue admin scripts (JS and CSS)
 	 *
-	 * @since 0.1-alpha
+	 * @since 1.0.0
 	 */
 	function admin_enqueue_scripts( $hook ) {
 		// enqueue the scripts only on the plugin page
@@ -94,7 +94,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * AJAX callback function
 	 *
-	 * @since 0.1-alpha
+	 * @since 1.0.0
 	 */
 	function ocdi_import_data_callback() {
 		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
