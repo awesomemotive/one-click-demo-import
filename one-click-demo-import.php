@@ -33,6 +33,7 @@ class PT_One_Click_Demo_Import {
 		// Actions
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		add_action( 'wp_ajax_ocdi_prepare_import_data', array( $this, 'prepare_import_data_ajax_callback' ) );
 		add_action( 'wp_ajax_ocdi_import_data', array( $this, 'import_data_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
 	}
@@ -108,9 +109,9 @@ class PT_One_Click_Demo_Import {
 
 
 	/**
-	 * AJAX import callback function
+	 * AJAX download import file callback function
 	 */
-	function import_data_ajax_callback() {
+	function prepare_import_data_ajax_callback() {
 		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
 
 		// Check if user has the WP capability to import data.
@@ -121,20 +122,41 @@ class PT_One_Click_Demo_Import {
 		// Get selected file index or set it to the first file.
 		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
 
-		// Download the import file
-		$downloaded_file = OCDI_Helpers::download_import_file( $this->import_files[ $selected_index ] );
+		// Download the import file and save it to variable for later use
+		$selected_import_file_path = OCDI_Helpers::download_import_file( $this->import_files[ $selected_index ] );
 
 		// If there were no errors, then we can assume that the file was downloaded correctly
-		wp_die(
-			sprintf(
-				__( '%1$sThe import file: %2$s%3$s%4$s was %2$ssuccessfully downloaded%4$s! Continuing with demo import...%5$s', 'pt-ocdi' ),
-				'<div class="ocdi__message  ocdi_message--success"><p>',
-				'<strong>',
-				$this->import_files[ $selected_index ]['import_file_name'],
-				'</strong>',
-				'</p></div>'
-			)
+		$response = array();
+		$response['import_file_path'] = $selected_import_file_path;
+		$response['message'] = sprintf(
+			__( '%1$sThe import file: %2$s%3$s%4$s was %2$ssuccessfully downloaded%4$s! Continuing with demo import...%5$s', 'pt-ocdi' ),
+			'<div class="ocdi__message  ocdi_message--success"><p>',
+			'<strong>',
+			$this->import_files[ $selected_index ]['import_file_name'],
+			'</strong>',
+			'</p></div>'
 		);
+
+		wp_send_json( $response );
+	}
+
+	function import_data_ajax_callback() {
+		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+
+		// Check if user has the WP capability to import data.
+		if ( ! current_user_can( 'import' ) ) {
+			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
+		}
+
+		// Get import file path parameter from the AJAX call
+		$import_file_path = empty( $_POST['import_file_path'] ) ? '' : $_POST['import_file_path'];
+
+		// Import demo data
+		if ( ! empty( $import_file_path ) ) {
+			$this->importer->import( $import_file_path );
+		}
+
+		wp_die();
 	}
 
 
