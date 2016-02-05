@@ -4,9 +4,9 @@ jQuery( function ( $ ) {
 	$( '.js-ocdi-import-data' ).on( 'click', function () {
 
 		var data = {
-			'action':   'ocdi_import_data',
-			'security': ocdi.ajax_nonce,
-			'file':     ocdi.file
+			'action':    'ocdi_import_data',
+			'security':  ocdi.ajax_nonce,
+			'selected':  $( '#demo-import-files' ).val()
 		};
 
 		$.ajax({
@@ -21,10 +21,11 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-			$( '.js-ocdi-ajax-response' ).append( response );
+			$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
 		})
 		.fail( function( error ) {
-			$( '.js-ocdi-ajax-response' ).append( error );
+			console.log( error );
+			$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"> Error: ' + error.statusText + ' (' + error.status + ')' + '</div>' );
 		});
 
 	});
