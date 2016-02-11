@@ -14,10 +14,10 @@ jQuery( function ( $ ) {
 			url:        ocdi.ajax_url,
 			data:       data,
 			beforeSend: function() {
-				$( '.js-ocdi-import-data' ).after( '<p id="loader-1" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
+				$( '.js-ocdi-import-data' ).after( '<p id="js-ocdi-loader-1" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
 			},
 			complete:   function() {
-				$( '#loader-1' ).hide();
+				$( '#js-ocdi-loader-1' ).hide();
 			}
 		})
 		.done( function( response ) {
@@ -45,10 +45,10 @@ jQuery( function ( $ ) {
 			url:        ocdi.ajax_url,
 			data:       importData,
 			beforeSend: function() {
-				$( '.js-ocdi-ajax-response' ).after( '<p id="loader-2" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
+				$( '.js-ocdi-ajax-response' ).after( '<p id="js-ocdi-loader-2" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
 			},
 			complete:   function() {
-				$( '#loader-2' ).hide( 500, function(){ $( '.js-ocdi-ajax-loader' ).remove(); } );
+				$( '#js-ocdi-loader-2' ).hide( 500, function(){ $( '.js-ocdi-ajax-loader' ).remove(); } );
 			}
 		})
 		.done( function( response ) {
