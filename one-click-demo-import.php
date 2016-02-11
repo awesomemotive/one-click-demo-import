@@ -21,13 +21,14 @@ define( 'PT_OCDI_VERSION', apply_filters( 'pt-ocdi/version', '0.1-alpha' ) );
 // Include files
 require PT_OCDI_PATH . 'inc/class-ocdi-helpers.php';
 require PT_OCDI_PATH . 'inc/class-ocdi-importer.php';
+require PT_OCDI_PATH . 'inc/class-ocdi-logger.php';
 
 /**
  * One Click Demo Import class, so we don't have to worry about namespaces
  */
 class PT_One_Click_Demo_Import {
 
-	private $importer, $plugin_page, $importer_options, $logger_min_level, $import_files;
+	private $importer, $plugin_page, $importer_options, $import_files, $logger, $logger_options;
 
 	function __construct() {
 		// Actions
@@ -172,11 +173,18 @@ class PT_One_Click_Demo_Import {
 			'fetch_attachments' => true,
 		) );
 
-		// Logger reporting level for the importer
-		$this->logger_min_level = apply_filters( 'pt-ocdi/logger_min_level', 'notice' );
-
 		// Create importer instance with proper parameters
-		$this->importer = new OCDI_Importer( $this->importer_options, $this->logger_min_level );
+		$this->importer = new OCDI_Importer( $this->importer_options );
+
+		// Logger options for the importer
+		$this->logger_options = apply_filters( 'pt-ocdi/logger_options', array(
+			'logger_min_level' => 'notice',
+		) );
+
+		// Set the logger and set it to the importer
+		$this->logger            = new OCDI_Logger();
+		$this->logger->min_level = $this->logger_options['logger_min_level'];
+		$this->importer->set_logger( $this->logger );
 	}
 
 }
