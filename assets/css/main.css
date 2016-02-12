@@ -13,10 +13,17 @@
 	visibility: visible;
 }
 
-.ocdi_message--success {
-	display: inline-block;
+.ocdi__message {
 	padding: 5px 10px;
+	border-radius: 4px;
+}
+
+.ocdi__message--info {
+	background: skyblue;
+	border: 2px solid royalblue;
+}
+
+.ocdi__message--success {
 	background: springgreen;
 	border: 2px solid darkgreen;
-	border-radius: 4px;
 }

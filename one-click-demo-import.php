@@ -131,7 +131,7 @@ class PT_One_Click_Demo_Import {
 		$response['import_file_path'] = $selected_import_file_path;
 		$response['message'] = sprintf(
 			__( '%1$sThe import file: %2$s%3$s%4$s was %2$ssuccessfully downloaded%4$s! Continuing with demo import...%5$s', 'pt-ocdi' ),
-			'<div class="ocdi__message  ocdi_message--success"><p>',
+			'<div class="ocdi__message  ocdi__message--success"><p>',
 			'<strong>',
 			$this->import_files[ $selected_index ]['import_file_name'],
 			'</strong>',
@@ -155,9 +155,24 @@ class PT_One_Click_Demo_Import {
 		// Import demo data
 		if ( ! empty( $import_file_path ) ) {
 			$this->importer->import( $import_file_path );
+
+			// Create a log file with full details
+			$this->logger->create_log_file();
 		}
 
-		wp_die();
+		wp_die(
+			apply_filters(
+				'pt-ocdi/after_import_finish_message',
+				sprintf(
+					__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
+					'<div class="ocdi__message  ocdi__message--success"><p>',
+					'<br>',
+					'<strong>',
+					'</strong>',
+					'</p></div>'
+				)
+			)
+		);
 	}
 
 

@@ -95,6 +95,25 @@ class OCDI_Helpers {
 			$response_body = wp_remote_retrieve_body( $response );
 		}
 
+		// Setup filename path to save the content
+		$upload_dir = wp_upload_dir();
+
+		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+		$file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
+
+		return self::write_to_file( $response_body, $file_path );
+	}
+
+
+	/**
+	 * Write content to a file
+	 *
+	 * @param $content, content to be saved to the file
+	 * @param $file_path, file path where the content should be saved
+	 *
+	 * @return string, path to the saved file or echos an error with wp_die
+	 */
+	public static function write_to_file( $content, $file_path ) {
 		// check if the filesystem method is 'direct', if not display an error
 		if ( 'direct' === get_filesystem_method() ) {
 			// Get user credentials for WP filesystem API
@@ -120,16 +139,10 @@ class OCDI_Helpers {
 				);
 			}
 
-			// Setup filename path to save the content from
-			$upload_dir = wp_upload_dir();
-
-			$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
-			$filename = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
-
 
 			// By this point, the $wp_filesystem global should be working, so let's use it to create a file
 			global $wp_filesystem;
-			if ( ! $wp_filesystem->put_contents( $filename, $response_body, FS_CHMOD_FILE ) ) {
+			if ( ! $wp_filesystem->put_contents( $file_path, $content, FS_CHMOD_FILE ) ) {
 				wp_die(
 					sprintf(
 						__( '%sAn error occurred while writing %s%s%s file to your server! Tried file path was: %s. %s', 'pt-ocdi' ),
@@ -137,13 +150,13 @@ class OCDI_Helpers {
 						'<strong>',
 						$import_file_info['import_file_name'],
 						'</strong>',
-						$filename,
+						$file_path,
 						'</p></div>'
 					)
 				);
 			}
 			else {
-				return $filename;
+				return $file_path;
 			}
 		}
 		else {
@@ -158,7 +171,6 @@ class OCDI_Helpers {
 				)
 			);
 		}
-
 	}
 
 }
