@@ -21,8 +21,13 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-			$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
-			import_demo_data( response.import_file_path );
+			if ( 'undefined' !== typeof( response.import_file_path ) ) {
+				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
+				import_demo_data( response.import_file_path );
+			}
+			else {
+				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+			}
 		})
 		.fail( function( error ) {
 			console.log( error );
