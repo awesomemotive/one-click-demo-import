@@ -123,12 +123,12 @@ class PT_One_Click_Demo_Import {
 		// Get selected file index or set it to the first file.
 		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
 
-		// Download the import file and save it to variable for later use
-		$selected_import_file_path = OCDI_Helpers::download_import_file( $this->import_files[ $selected_index ] );
+		// Download the import files (content and widgets files) and save it to variable for later use
+		$selected_import_files = OCDI_Helpers::download_import_files( $this->import_files[ $selected_index ] );
 
 		// If there were no errors, then we can assume that the file was downloaded correctly
 		$response = array();
-		$response['import_file_path'] = $selected_import_file_path;
+		$response['import_file_paths'] = $selected_import_files;
 		$response['message'] = sprintf(
 			__( '%1$sThe import file: %2$s%3$s%4$s was %2$ssuccessfully downloaded%4$s! Continuing with demo import...%5$s', 'pt-ocdi' ),
 			'<div class="ocdi__message  ocdi__message--success"><p>',

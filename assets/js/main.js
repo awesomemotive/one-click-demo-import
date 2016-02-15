@@ -21,9 +21,9 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-			if ( 'undefined' !== typeof response.import_file_path ) {
+			if ( 'undefined' !== typeof response.import_file_paths.data ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
-				import_demo_data( response.import_file_path );
+				import_demo_data( response.import_file_paths.data );
 			}
 			else {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );

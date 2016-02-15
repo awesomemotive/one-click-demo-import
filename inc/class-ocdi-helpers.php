@@ -41,67 +41,35 @@ class OCDI_Helpers {
 
 
 	/**
-	 * Download import file
+	 * Download import files. Content .xml and widgets .json files
 	 *
 	 * @param $import_file_info, array, with import file details
 	 *
-	 * @return string, path to the downloaded file or echos an error with wp_die
+	 * @return array, array of path to the downloaded files or echos an error with wp_die
 	 */
-	public static function download_import_file( $import_file_info ) {
-		// Test if the URL to the file is defined
-		if ( empty( $import_file_info['import_file_url'] ) ) {
-			wp_die(
-				sprintf(
-					__( '%sError occurred! URL for %s%s%s file is not defined!%s', 'pt-ocdi' ),
-					'<div class="error"><p>',
-					'<strong>',
-					$import_file_info['import_file_name'],
-					'</strong>',
-					'</p></div>'
-				)
-			);
-		}
+	public static function download_import_files( $import_file_info ) {
+		$downloaded_files = array();
 
-		// Get file content from the server
-		$response = wp_remote_get( $import_file_info['import_file_url'], array( 'timeout' => apply_filters( 'pt-ocdi/timeout_for_downloading_import_file', 20 ) ) );
-		if ( is_wp_error( $response ) || 200 !== $response['response']['code'] ) {
-			// collect the right format of error data (array or WP_Error)
-			$response_error = array();
-
-			if ( is_array( $response ) ) {
-				$response_error['error_code']    = $response['response']['code'];
-				$response_error['error_message'] = $response['response']['message'];
-			}
-			else {
-				$response_error['error_code']    = $response->get_error_code();
-				$response_error['error_message'] = $response->get_error_message();
-			}
-
-			wp_die(
-				sprintf(
-					__( '%sAn error occurred while fetching %s%s%s file from the server!%sReason: %s - %s.%s', 'pt-ocdi' ),
-					'<div class="error"><p>',
-					'<strong>',
-					$import_file_info['import_file_name'],
-					'</strong>',
-					'</p><p>',
-					$response_error['error_code'],
-					$response_error['error_message'],
-					'</p></div>'
-				)
-			);
-		}
-		else {
-			$response_body = wp_remote_retrieve_body( $response );
-		}
+		// Retrieve content from the URL
+		$demo_import_content = self::get_content_from_url( $import_file_info['import_file_url'], $import_file_info['import_file_name'] );
 
 		// Setup filename path to save the content
-		$upload_dir = wp_upload_dir();
+		$upload_dir            = wp_upload_dir();
+		$upload_path           = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+		$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
 
-		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
-		$file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
+		// Write content to the file and return the file path on successful write.
+		$downloaded_files['data'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
 
-		return self::write_to_file( $response_body, $file_path );
+		// Get widgets file as well. If defined!
+		if ( ! empty( $import_file_info['import_widget_file_url'] ) ) {
+			$import_widgets_file_path    = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+			$demo_import_widgets_content = self::get_content_from_url( $import_file_info['import_widget_file_url'], $import_file_info['import_file_name'] );
+
+			$downloaded_files['widgets'] = self::write_to_file( $demo_import_widgets_content, $import_widgets_file_path );
+		}
+
+		return $downloaded_files;
 	}
 
 
@@ -170,7 +138,87 @@ class OCDI_Helpers {
 					'</p></div>'
 				)
 			);
+			return false;
 		}
+	}
+
+
+	/**
+	 * Helper function: get content from an url
+	 *
+	 * @param $url, URL to the content file
+	 * @param $file_name, optional, name of the file (used in the error reports)
+	 *
+	 * @return string|boolean, path to the saved file or echos an error with wp_die and returns false
+	 */
+	private static function get_content_from_url( $url, $file_name = 'Import file' ) {
+		// Test if the URL to the file is defined
+		if ( empty( $url ) ) {
+			wp_die(
+				sprintf(
+					__( '%sError occurred! URL for %s%s%s file is not defined!%s', 'pt-ocdi' ),
+					'<div class="error"><p>',
+					'<strong>',
+					$file_name,
+					'</strong>',
+					'</p></div>'
+				)
+			);
+		}
+
+		// Get file content from the server
+		$response = wp_remote_get(
+			$url,
+			array( 'timeout' => apply_filters( 'pt-ocdi/timeout_for_downloading_import_file', 20 ) )
+		);
+
+		if ( is_wp_error( $response ) || 200 !== $response['response']['code'] ) {
+			// collect the right format of error data (array or WP_Error)
+			$response_error = self::get_error_from_response( $response );
+
+			wp_die(
+				sprintf(
+					__( '%sAn error occurred while fetching %s%s%s file from the server!%sReason: %s - %s.%s', 'pt-ocdi' ),
+					'<div class="error"><p>',
+					'<strong>',
+					$file_name,
+					'</strong>',
+					'</p><p>',
+					$response_error['error_code'],
+					$response_error['error_message'],
+					'</p></div>'
+				)
+			);
+		}
+		else {
+			// Return content retrieved from the URL
+			return wp_remote_retrieve_body( $response );
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Helper function: get the right format of response errors
+	 *
+	 * @param $response, array or WP_Error
+	 *
+	 * @return array, with error code and error message
+	 */
+	private static function get_error_from_response( $response ) {
+		$response_error = array();
+
+		if ( is_array( $response ) ) {
+			$response_error['error_code']    = $response['response']['code'];
+			$response_error['error_message'] = $response['response']['message'];
+		}
+		else {
+			$response_error['error_code']    = $response->get_error_code();
+			$response_error['error_message'] = $response->get_error_message();
+		}
+
+		return $response_error;
 	}
 
 }
