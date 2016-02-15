@@ -36,6 +36,7 @@ class PT_One_Click_Demo_Import {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'wp_ajax_ocdi_prepare_import_data', array( $this, 'prepare_import_data_ajax_callback' ) );
 		add_action( 'wp_ajax_ocdi_import_data', array( $this, 'import_data_ajax_callback' ) );
+		add_action( 'wp_ajax_ocdi_import_widgets', array( $this, 'import_widgets_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
 	}
 
@@ -127,9 +128,9 @@ class PT_One_Click_Demo_Import {
 		$selected_import_files = OCDI_Helpers::download_import_files( $this->import_files[ $selected_index ] );
 
 		// If there were no errors, then we can assume that the file was downloaded correctly
-		$response = array();
+		$response                      = array();
 		$response['import_file_paths'] = $selected_import_files;
-		$response['message'] = sprintf(
+		$response['message']           = sprintf(
 			__( '%1$sThe import file: %2$s%3$s%4$s was %2$ssuccessfully downloaded%4$s! Continuing with demo import...%5$s', 'pt-ocdi' ),
 			'<div class="ocdi__message  ocdi__message--success"><p>',
 			'<strong>',
@@ -141,6 +142,10 @@ class PT_One_Click_Demo_Import {
 		wp_send_json( $response );
 	}
 
+
+	/**
+	 * AJAX import data callback function
+	 */
 	function import_data_ajax_callback() {
 		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
 
@@ -150,29 +155,74 @@ class PT_One_Click_Demo_Import {
 		}
 
 		// Get import file path parameter from the AJAX call
-		$import_file_path = empty( $_POST['import_file_path'] ) ? '' : $_POST['import_file_path'];
+		$import_file_paths = empty( $_POST['import_file_paths'] ) ? '' : $_POST['import_file_paths'];
 
 		// Import demo data
-		if ( ! empty( $import_file_path ) ) {
-			$this->importer->import( $import_file_path );
+		if ( ! empty( $import_file_paths ) ) {
+			$this->importer->import( $import_file_paths['data'] );
 
 			// Create a log file with full details
 			$this->logger->create_log_file();
 		}
 
-		wp_die(
-			apply_filters(
-				'pt-ocdi/after_import_finish_message',
-				sprintf(
-					__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
-					'<div class="ocdi__message  ocdi__message--success"><p>',
-					'<br>',
-					'<strong>',
-					'</strong>',
-					'</p></div>'
-				)
-			)
-		);
+
+		// Response for finished demo data import
+		$response                      = array();
+		if ( ! empty( $import_file_paths['widgets'] ) ) {
+			$response['import_file_paths'] = $import_file_paths;
+		}
+		$response['message']           = sprintf(
+				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
+				'<div class="ocdi__message  ocdi__message--success"><p>',
+				'<br>',
+				'<strong>',
+				'</strong>',
+				'</p></div>'
+			);
+
+		wp_send_json( $response );
+	}
+
+
+	/**
+	 * AJAX import widgets callback function
+	 */
+	function import_widgets_ajax_callback() {
+		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+
+		// Check if user has the WP capability to import data.
+		if ( ! current_user_can( 'import' ) ) {
+			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
+		}
+
+		// Get import file path parameter from the AJAX call
+		$import_file_paths = empty( $_POST['import_file_paths'] ) ? '' : $_POST['import_file_paths'];
+
+		// Import widgets
+		if ( ! empty( $import_file_paths['widgets'] ) ) {
+			// $this->widget_importer->import( $import_file_paths['widgets'] );
+
+		}
+
+		wp_die("test");
+
+
+		// // Response for finished demo data import
+		// $response                      = array();
+		// $response['import_file_paths'] = $import_file_paths;
+		// $response['message']           = apply_filters(
+		// 	'pt-ocdi/after_import_finish_message',
+		// 	sprintf(
+		// 		__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
+		// 		'<div class="ocdi__message  ocdi__message--success"><p>',
+		// 		'<br>',
+		// 		'<strong>',
+		// 		'</strong>',
+		// 		'</p></div>'
+		// 	)
+		// );
+
+		// wp_send_json( $response );
 	}
 
 
