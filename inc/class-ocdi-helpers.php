@@ -113,11 +113,8 @@ class OCDI_Helpers {
 			if ( ! $wp_filesystem->put_contents( $file_path, $content, FS_CHMOD_FILE ) ) {
 				wp_die(
 					sprintf(
-						__( '%sAn error occurred while writing %s%s%s file to your server! Tried file path was: %s. %s', 'pt-ocdi' ),
+						__( '%sAn error occurred while writing file to your server! Tried file path was: %s. %s', 'pt-ocdi' ),
 						'<div class="error"><p>',
-						'<strong>',
-						$import_file_info['import_file_name'],
-						'</strong>',
 						$file_path,
 						'</p></div>'
 					)
