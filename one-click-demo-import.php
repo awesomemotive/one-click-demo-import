@@ -32,6 +32,7 @@ class PT_One_Click_Demo_Import {
 	private $importer, $plugin_page, $importer_options, $import_files, $logger, $logger_options;
 
 	function __construct() {
+
 		// Actions
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
@@ -39,6 +40,7 @@ class PT_One_Click_Demo_Import {
 		add_action( 'wp_ajax_ocdi_import_data', array( $this, 'import_data_ajax_callback' ) );
 		add_action( 'wp_ajax_ocdi_import_widgets', array( $this, 'import_widgets_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
+
 	}
 
 
@@ -46,7 +48,9 @@ class PT_One_Click_Demo_Import {
 	 * Creates the plugin page and a submenu item in WP Appearance menu
 	 */
 	function create_plugin_page() {
+
 		$this->plugin_page = add_theme_page( 'One Click Demo Import', 'Import Demo Data', 'import', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
+
 	}
 
 
@@ -54,7 +58,9 @@ class PT_One_Click_Demo_Import {
 	 * Plugin page display
 	 */
 	function display_plugin_page() {
+
 	?>
+
 		<div class="ocdi  wrap">
 			<h2 class="ocdi__title"><span class="dashicons  dashicons-download"></span><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h2>
 			<p>
@@ -85,7 +91,9 @@ class PT_One_Click_Demo_Import {
 
 			<div class="js-ocdi-ajax-response  ocdi__response"></div>
 		</div>
+
 	<?php
+
 	}
 
 
@@ -95,8 +103,10 @@ class PT_One_Click_Demo_Import {
 	 * @param $hook, holds info on which admin page you are currently looking at
 	 */
 	function admin_enqueue_scripts( $hook ) {
+
 		// enqueue the scripts only on the plugin page
 		if ( $this->plugin_page === $hook ) {
+
 			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery' ), PT_OCDI_VERSION );
 
 			wp_localize_script( 'ocdi-main-js', 'ocdi',
@@ -107,7 +117,9 @@ class PT_One_Click_Demo_Import {
 			);
 
 			wp_enqueue_style( 'ocdi-main-css', PT_OCDI_URL . 'assets/css/main.css', array() , PT_OCDI_VERSION );
+
 		}
+
 	}
 
 
@@ -115,11 +127,14 @@ class PT_One_Click_Demo_Import {
 	 * AJAX download import file callback function
 	 */
 	function prepare_import_data_ajax_callback() {
+
 		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
 
 		// Check if user has the WP capability to import data.
 		if ( ! current_user_can( 'import' ) ) {
+
 			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
+
 		}
 
 		// Get selected file index or set it to the first file.
@@ -141,6 +156,7 @@ class PT_One_Click_Demo_Import {
 		);
 
 		wp_send_json( $response );
+
 	}
 
 
@@ -148,11 +164,14 @@ class PT_One_Click_Demo_Import {
 	 * AJAX import data callback function
 	 */
 	function import_data_ajax_callback() {
+
 		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
 
 		// Check if user has the WP capability to import data.
 		if ( ! current_user_can( 'import' ) ) {
+
 			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
+
 		}
 
 		// Get import file path parameter from the AJAX call
@@ -163,25 +182,30 @@ class PT_One_Click_Demo_Import {
 
 		// Import demo data
 		if ( ! empty( $import_file_paths ) ) {
+
 			ob_start();
 				$this->importer->import( $import_file_paths['data'] );
 			$import_report = ob_get_clean();
 
 			// Create a log file with full details
 			$this->logger->create_log_file();
-		}
 
+		}
 
 		// Response for finished demo data import
-		$response                      = array();
+		$response = array();
+
 		if ( ! empty( $import_file_paths['widgets'] ) ) {
+
 			$response['import_widget_path'] = $import_file_paths['widgets'];
+
 		}
-		$response['message']           = $import_report . sprintf(
-				__( '%sThe demo import has finished, widget import is next...%s', 'pt-ocdi' ),
-				'<div class="ocdi__message  ocdi__message--success"><p>',
-				'</p></div>'
-			);
+
+		$response['message'] = $import_report . sprintf(
+			__( '%sThe demo import has finished, widget import is next...%s', 'pt-ocdi' ),
+			'<div class="ocdi__message  ocdi__message--success"><p>',
+			'</p></div>'
+		);
 
 		wp_send_json( $response );
 	}
@@ -191,11 +215,14 @@ class PT_One_Click_Demo_Import {
 	 * AJAX import widgets callback function
 	 */
 	function import_widgets_ajax_callback() {
+
 		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
 
 		// Check if user has the WP capability to import data.
 		if ( ! current_user_can( 'import' ) ) {
+
 			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
+
 		}
 
 		// Get import file path parameter from the AJAX call
@@ -220,6 +247,7 @@ class PT_One_Click_Demo_Import {
 				'</p></div>'
 			)
 		);
+
 	}
 
 
