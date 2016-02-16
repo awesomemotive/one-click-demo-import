@@ -21,6 +21,7 @@ define( 'PT_OCDI_VERSION', apply_filters( 'pt-ocdi/version', '0.1-alpha' ) );
 // Include files
 require PT_OCDI_PATH . 'inc/class-ocdi-helpers.php';
 require PT_OCDI_PATH . 'inc/class-ocdi-importer.php';
+require PT_OCDI_PATH . 'inc/class-ocdi-widget-importer.php';
 require PT_OCDI_PATH . 'inc/class-ocdi-logger.php';
 
 /**
@@ -157,9 +158,14 @@ class PT_One_Click_Demo_Import {
 		// Get import file path parameter from the AJAX call
 		$import_file_paths = empty( $_POST['import_file_paths'] ) ? '' : $_POST['import_file_paths'];
 
+		// Demo import report, holds the output of demo import
+		$import_report = '';
+
 		// Import demo data
 		if ( ! empty( $import_file_paths ) ) {
-			$this->importer->import( $import_file_paths['data'] );
+			ob_start();
+				$this->importer->import( $import_file_paths['data'] );
+			$import_report = ob_get_clean();
 
 			// Create a log file with full details
 			$this->logger->create_log_file();
@@ -169,14 +175,11 @@ class PT_One_Click_Demo_Import {
 		// Response for finished demo data import
 		$response                      = array();
 		if ( ! empty( $import_file_paths['widgets'] ) ) {
-			$response['import_file_paths'] = $import_file_paths;
+			$response['import_widget_path'] = $import_file_paths['widgets'];
 		}
-		$response['message']           = sprintf(
-				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
+		$response['message']           = $import_report . sprintf(
+				__( '%sThe demo import has finished, widget import is next...%s', 'pt-ocdi' ),
 				'<div class="ocdi__message  ocdi__message--success"><p>',
-				'<br>',
-				'<strong>',
-				'</strong>',
 				'</p></div>'
 			);
 
@@ -196,33 +199,27 @@ class PT_One_Click_Demo_Import {
 		}
 
 		// Get import file path parameter from the AJAX call
-		$import_file_paths = empty( $_POST['import_file_paths'] ) ? '' : $_POST['import_file_paths'];
+		$import_widget_path = empty( $_POST['import_widget_path'] ) ? '' : $_POST['import_widget_path'];
 
 		// Import widgets
-		if ( ! empty( $import_file_paths['widgets'] ) ) {
-			// $this->widget_importer->import( $import_file_paths['widgets'] );
+		if ( ! empty( $import_widget_path ) ) {
+
+			$widget_importer = new OCDI_Widget_Importer();
+			$results = $widget_importer->import_widgets( $import_widget_path );
+			$widget_importer->format_results_for_display( $results );
 
 		}
 
-		wp_die("test");
-
-
-		// // Response for finished demo data import
-		// $response                      = array();
-		// $response['import_file_paths'] = $import_file_paths;
-		// $response['message']           = apply_filters(
-		// 	'pt-ocdi/after_import_finish_message',
-		// 	sprintf(
-		// 		__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
-		// 		'<div class="ocdi__message  ocdi__message--success"><p>',
-		// 		'<br>',
-		// 		'<strong>',
-		// 		'</strong>',
-		// 		'</p></div>'
-		// 	)
-		// );
-
-		// wp_send_json( $response );
+		wp_die(
+			sprintf(
+				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
+				'<div class="ocdi__message  ocdi__message--success"><p>',
+				'<br>',
+				'<strong>',
+				'</strong>',
+				'</p></div>'
+			)
+		);
 	}
 
 
@@ -230,6 +227,7 @@ class PT_One_Click_Demo_Import {
 	 * Get data from filters, after the theme has loaded and instantiate the importer
 	 */
 	function setup_plugin_with_filter_data() {
+
 		// Get info of import data files and filter it
 		$this->import_files = OCDI_Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
 
@@ -250,6 +248,7 @@ class PT_One_Click_Demo_Import {
 		$this->logger            = new OCDI_Logger();
 		$this->logger->min_level = $this->logger_options['logger_min_level'];
 		$this->importer->set_logger( $this->logger );
+
 	}
 
 }

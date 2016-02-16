@@ -57,9 +57,9 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-			if ( 'undefined' !== typeof response.import_file_paths ) {
+			if ( 'undefined' !== typeof response.import_widget_path ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
-				import_widgets( response.import_file_paths );
+				import_widgets( response.import_widget_path );
 			}
 			else if ( 'undefined' !== typeof response.message ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
@@ -75,12 +75,12 @@ jQuery( function ( $ ) {
 	}
 
 
-	function import_widgets( import_file_paths ) {
+	function import_widgets( import_widget_path ) {
 
 		var importData = {
-			'action':            'ocdi_import_widgets',
-			'security':          ocdi.ajax_nonce,
-			'import_file_paths': import_file_paths
+			'action':             'ocdi_import_widgets',
+			'security':           ocdi.ajax_nonce,
+			'import_widget_path': import_widget_path
 		};
 
 		$.ajax({
