@@ -42,6 +42,7 @@ if ( ! class_exists( 'OCDI_Widget_Importer' ) ) {
 
 			// Get file contents and decode
 			global $wp_filesystem;
+
 			$data = OCDI_Helpers::data_from_file( $file );
 			$data = json_decode( $data );
 

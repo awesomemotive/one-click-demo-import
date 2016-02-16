@@ -129,14 +129,8 @@ class PT_One_Click_Demo_Import {
 	 */
 	function prepare_import_data_ajax_callback() {
 
-		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
-
-		// Check if user has the WP capability to import data.
-		if ( ! current_user_can( 'import' ) ) {
-
-			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
-
-		}
+		// Verify if the AJAX call is valid
+		$this->verify_ajax_call();
 
 		// Get selected file index or set it to the first file.
 		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
@@ -166,14 +160,8 @@ class PT_One_Click_Demo_Import {
 	 */
 	function import_data_ajax_callback() {
 
-		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
-
-		// Check if user has the WP capability to import data.
-		if ( ! current_user_can( 'import' ) ) {
-
-			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
-
-		}
+		// Verify if the AJAX call is valid
+		$this->verify_ajax_call();
 
 		// Get import file path parameter from the AJAX call
 		$import_file_paths = empty( $_POST['import_file_paths'] ) ? '' : $_POST['import_file_paths'];
@@ -222,14 +210,8 @@ class PT_One_Click_Demo_Import {
 	 */
 	function import_widgets_ajax_callback() {
 
-		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
-
-		// Check if user has the WP capability to import data.
-		if ( ! current_user_can( 'import' ) ) {
-
-			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
-
-		}
+		// Verify if the AJAX call is valid
+		$this->verify_ajax_call();
 
 		// Get import file path parameter from the AJAX call
 		$import_widget_path = empty( $_POST['import_widget_path'] ) ? '' : $_POST['import_widget_path'];
@@ -262,15 +244,10 @@ class PT_One_Click_Demo_Import {
 	 */
 	function after_import_ajax_callback() {
 
-		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+		// Verify if the AJAX call is valid
+		$this->verify_ajax_call();
 
-		// Check if user has the WP capability to import data.
-		if ( ! current_user_can( 'import' ) ) {
-
-			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
-
-		}
-
+		// Enable users to add custom code to the end of the import process
 		do_action( 'pt-ocdi/after_import' );
 
 		wp_die(
@@ -309,6 +286,23 @@ class PT_One_Click_Demo_Import {
 		$this->logger            = new OCDI_Logger();
 		$this->logger->min_level = $this->logger_options['logger_min_level'];
 		$this->importer->set_logger( $this->logger );
+
+	}
+
+
+	/**
+	 * Check if the AJAX call is valid
+	 */
+	function verify_ajax_call() {
+
+		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+
+		// Check if user has the WP capability to import data.
+		if ( ! current_user_can( 'import' ) ) {
+
+			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
+
+		}
 
 	}
 
