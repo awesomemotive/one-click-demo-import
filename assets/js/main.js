@@ -63,13 +63,16 @@ jQuery( function ( $ ) {
 			}
 			else if ( 'undefined' !== typeof response.message ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
+
+				if ( true === response.after_import ) {
+					after_import();
+				}
 			}
 			else {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
 			}
 		})
 		.fail( function( error ) {
-			console.log( error );
 			$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"> Error: ' + error.statusText + ' (' + error.status + ')' + '</div>' );
 		});
 	}
@@ -96,9 +99,35 @@ jQuery( function ( $ ) {
 		})
 		.done( function( response ) {
 			$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+			after_import();
 		})
 		.fail( function( error ) {
-			console.log( error );
+			$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"> Error: ' + error.statusText + ' (' + error.status + ')' + '</div>' );
+		});
+	}
+
+	function after_import( ) {
+
+		var importData = {
+			'action':   'ocdi_after_import',
+			'security': ocdi.ajax_nonce,
+		};
+
+		$.ajax({
+			method:     'POST',
+			url:        ocdi.ajax_url,
+			data:       importData,
+			beforeSend: function() {
+				$( '.js-ocdi-ajax-response' ).after( '<p id="js-ocdi-loader-4" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
+			},
+			complete:   function() {
+				$( '#js-ocdi-loader-4' ).hide( 500, function(){ $( '.js-ocdi-ajax-loader' ).remove(); } );
+			}
+		})
+		.done( function( response ) {
+			$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+		})
+		.fail( function( error ) {
 			$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"> Error: ' + error.statusText + ' (' + error.status + ')' + '</div>' );
 		});
 	}

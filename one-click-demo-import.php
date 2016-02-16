@@ -39,6 +39,7 @@ class PT_One_Click_Demo_Import {
 		add_action( 'wp_ajax_ocdi_prepare_import_data', array( $this, 'prepare_import_data_ajax_callback' ) );
 		add_action( 'wp_ajax_ocdi_import_data', array( $this, 'import_data_ajax_callback' ) );
 		add_action( 'wp_ajax_ocdi_import_widgets', array( $this, 'import_widgets_ajax_callback' ) );
+		add_action( 'wp_ajax_ocdi_after_import', array( $this, 'after_import_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
 
 	}
@@ -200,6 +201,11 @@ class PT_One_Click_Demo_Import {
 			$response['import_widget_path'] = $import_file_paths['widgets'];
 
 		}
+		else {
+
+			$response['after_import'] = true;
+
+		}
 
 		$response['message'] = $import_report . sprintf(
 			__( '%sThe demo import has finished, widget import is next...%s', 'pt-ocdi' ),
@@ -244,6 +250,33 @@ class PT_One_Click_Demo_Import {
 				'<br>',
 				'<strong>',
 				'</strong>',
+				'</p></div>'
+			)
+		);
+
+	}
+
+
+	/**
+	 * AJAX after import callback function
+	 */
+	function after_import_ajax_callback() {
+
+		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+
+		// Check if user has the WP capability to import data.
+		if ( ! current_user_can( 'import' ) ) {
+
+			wp_die( __( 'Your user role isn\'t high enough. You don\'t have permission to import demo data.', 'pt-ocdi' ) );
+
+		}
+
+		do_action( 'pt-ocdi/after_import' );
+
+		wp_die(
+			sprintf(
+				__( '%sThe extra settings have been imported%s', 'pt-ocdi' ),
+				'<div class="ocdi__message  ocdi__message--success"><p>',
 				'</p></div>'
 			)
 		);
