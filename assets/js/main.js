@@ -14,7 +14,7 @@ jQuery( function ( $ ) {
 			url:        ocdi.ajax_url,
 			data:       data,
 			beforeSend: function() {
-				$( '.js-ocdi-import-data' ).after( '<p id="js-ocdi-loader-1" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
+				$( '.js-ocdi-import-data' ).after( '<p id="js-ocdi-loader-1" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Preparing demo files ...</p>' );
 			},
 			complete:   function() {
 				$( '#js-ocdi-loader-1' ).hide();
@@ -52,7 +52,7 @@ jQuery( function ( $ ) {
 			url:        ocdi.ajax_url,
 			data:       importData,
 			beforeSend: function() {
-				$( '.js-ocdi-ajax-response' ).after( '<p id="js-ocdi-loader-2" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
+				$( '.js-ocdi-ajax-response' ).after( '<p id="js-ocdi-loader-2" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing demo data now! Please wait, this could take a while!</p>' );
 			},
 			complete:   function() {
 				$( '#js-ocdi-loader-2' ).hide();
@@ -91,7 +91,7 @@ jQuery( function ( $ ) {
 			url:        ocdi.ajax_url,
 			data:       importData,
 			beforeSend: function() {
-				$( '.js-ocdi-ajax-response' ).after( '<p id="js-ocdi-loader-3" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
+				$( '.js-ocdi-ajax-response' ).after( '<p id="js-ocdi-loader-3" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing widgets ...</p>' );
 			},
 			complete:   function() {
 				$( '#js-ocdi-loader-3' ).hide( 500, function(){ $( '.js-ocdi-ajax-loader' ).remove(); } );
@@ -125,7 +125,7 @@ jQuery( function ( $ ) {
 			url:        ocdi.ajax_url,
 			data:       importData,
 			beforeSend: function() {
-				$( '.js-ocdi-ajax-response' ).after( '<p id="js-ocdi-loader-4" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Importing now, please wait!</p>' );
+				$( '.js-ocdi-ajax-response' ).after( '<p id="js-ocdi-loader-4" class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span> Applying after import settings!</p>' );
 			},
 			complete:   function() {
 				$( '#js-ocdi-loader-4' ).hide( 500, function(){ $( '.js-ocdi-ajax-loader' ).remove(); } );
