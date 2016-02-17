@@ -21,12 +21,14 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-			if ( 'undefined' !== typeof response.import_file_paths ) {
+			if ( 'undefined' !== typeof response.message ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
-				import_demo_data( response.import_file_paths );
 			}
 			else {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+			}
+			if ( 'undefined' !== typeof response.import_file_paths ) {
+				import_demo_data( response.import_file_paths );
 			}
 		})
 		.fail( function( error ) {
@@ -57,19 +59,17 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-			if ( 'undefined' !== typeof response.import_widget_path ) {
+			if ( 'undefined' !== typeof response.message ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
-				import_widgets( response.import_widget_path );
-			}
-			else if ( 'undefined' !== typeof response.message ) {
-				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
-
-				if ( true === response.after_import ) {
-					after_import();
-				}
 			}
 			else {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+			}
+			if ( 'undefined' !== typeof response.import_widget_path ) {
+				import_widgets( response.import_widget_path );
+			}
+			else if ( true === response.after_import ) {
+				after_import();
 			}
 		})
 		.fail( function( error ) {
@@ -98,8 +98,15 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-			$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
-			after_import();
+			if ( 'undefined' !== typeof response.message ) {
+				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
+			}
+			else {
+				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+			}
+			if ( true === response.after_import ) {
+				after_import();
+			}
 		})
 		.fail( function( error ) {
 			$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"> Error: ' + error.statusText + ' (' + error.status + ')' + '</div>' );
@@ -125,7 +132,12 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-			$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+			if ( 'undefined' !== typeof response.message ) {
+				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
+			}
+			else {
+				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+			}
 		})
 		.fail( function( error ) {
 			$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"> Error: ' + error.statusText + ' (' + error.status + ')' + '</div>' );

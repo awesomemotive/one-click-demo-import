@@ -18,7 +18,12 @@ if ( ! class_exists( 'OCDI_Widget_Importer' ) ) {
 			// get widgets data from file
 			$data = $this->process_import_file( $data_file );
 
-			// Import the widget data and return the results
+			// Return from this function if there was an error
+			if ( is_wp_error( $data ) ) {
+				return $data;
+			}
+
+			// Import the widget data and save the results
 			return $this->import_data( $data );
 
 		}
@@ -34,19 +39,22 @@ if ( ! class_exists( 'OCDI_Widget_Importer' ) ) {
 			// File exists?
 			if ( ! file_exists( $file ) ) {
 
-				wp_die(
+				return new WP_Error(
+					'widget_import_file_not_found',
 					__( 'Widget import file could not be found.', 'pt-ocdi' )
 				);
 
 			}
 
 			// Get file contents and decode
-			global $wp_filesystem;
-
 			$data = OCDI_Helpers::data_from_file( $file );
-			$data = json_decode( $data );
 
-			return $data;
+			// Return from this function if there was an error
+			if ( is_wp_error( $data ) ) {
+				return $data;
+			}
+
+			return json_decode( $data );
 
 		}
 
@@ -67,15 +75,16 @@ if ( ! class_exists( 'OCDI_Widget_Importer' ) ) {
 			// If no data or could not decode
 			if ( empty( $data ) || ! is_object( $data ) ) {
 
-				wp_die(
+				return new WP_Error(
+					'corrupted_widget_import_data',
 					__( 'Widget import data could not be read. Please try a different file.', 'pt-ocdi' )
 				);
 
 			}
 
 			// Hook before import
-			do_action( 'pt-ocdi/before_widget_import' );
-			$data = apply_filters( 'pt-ocdi/before_widget_import_data', $data );
+			do_action( 'pt-ocdi/before_widgets_import' );
+			$data = apply_filters( 'pt-ocdi/before_widgets_import_data', $data );
 
 			// Get all available widgets site supports
 			$available_widgets = $this->available_widgets();
@@ -98,9 +107,7 @@ if ( ! class_exists( 'OCDI_Widget_Importer' ) ) {
 				// Skip inactive widgets
 				// (should not be in export file)
 				if ( 'wp_inactive_widgets' == $sidebar_id ) {
-
 					continue;
-
 				}
 
 				// Check if sidebar is available on this site. Otherwise add widgets to inactive, and say so
@@ -238,7 +245,7 @@ if ( ! class_exists( 'OCDI_Widget_Importer' ) ) {
 							'widget_id_num'     => $new_instance_id_number,
 							'widget_id_num_old' => $instance_id_number
 						);
-						do_action( 'pt-ocdi/after_widget_import', $after_widget_import );
+						do_action( 'pt-ocdi/after_single_widget_import', $after_widget_import );
 
 						// Success message
 						if ( $sidebar_available ) {
@@ -266,10 +273,10 @@ if ( ! class_exists( 'OCDI_Widget_Importer' ) ) {
 			}
 
 			// Hook after import
-			do_action( 'pt-ocdi/after_import' );
+			do_action( 'pt-ocdi/after_widgets_import' );
 
 			// Return results
-			return apply_filters( 'pt-ocdi/import_results', $results );
+			return apply_filters( 'pt-ocdi/widget_import_results', $results );
 		}
 
 

@@ -56,7 +56,7 @@ class OCDI_Helpers {
 	 *
 	 * @param $import_file_info, array, with import file details
 	 *
-	 * @return array, array of path to the downloaded files or echos an error with wp_die
+	 * @return array|WP_Error, array of path to the downloaded files or WP_Error object with error message
 	 */
 	public static function download_import_files( $import_file_info ) {
 
@@ -64,6 +64,11 @@ class OCDI_Helpers {
 
 		// Retrieve content from the URL
 		$demo_import_content = self::get_content_from_url( $import_file_info['import_file_url'], $import_file_info['import_file_name'] );
+
+		// Return from this function if there was an error
+		if ( is_wp_error( $demo_import_content ) ) {
+			return $demo_import_content;
+		}
 
 		// Setup filename path to save the content
 		$upload_dir            = wp_upload_dir();
@@ -73,12 +78,29 @@ class OCDI_Helpers {
 		// Write content to the file and return the file path on successful write.
 		$downloaded_files['data'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
 
+		// Return from this function if there was an error
+		if ( is_wp_error( $downloaded_files['data'] ) ) {
+			return $downloaded_files['data'];
+		}
+
 		// Get widgets file as well. If defined!
 		if ( ! empty( $import_file_info['import_widget_file_url'] ) ) {
 
-			$import_widgets_file_path    = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+			$import_widgets_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+
 			$demo_import_widgets_content = self::get_content_from_url( $import_file_info['import_widget_file_url'], $import_file_info['import_file_name'] );
+
+			// Return from this function if there was an error
+			if ( is_wp_error( $demo_import_widgets_content ) ) {
+				return $demo_import_widgets_content;
+			}
+
 			$downloaded_files['widgets'] = self::write_to_file( $demo_import_widgets_content, $import_widgets_file_path );
+
+			// Return from this function if there was an error
+			if ( is_wp_error( $downloaded_files['widgets'] ) ) {
+				return $downloaded_files['widgets'];
+			}
 
 		}
 
@@ -93,7 +115,7 @@ class OCDI_Helpers {
 	 * @param $content, content to be saved to the file
 	 * @param $file_path, file path where the content should be saved
 	 *
-	 * @return string, path to the saved file or echos an error with wp_die
+	 * @return string|WP_Error, path to the saved file or WP_Error object with error message
 	 */
 	public static function write_to_file( $content, $file_path ) {
 
@@ -105,12 +127,9 @@ class OCDI_Helpers {
 
 			if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
 
-				wp_die(
-					sprintf(
-						__( '%sAn error occurred while retrieving writing permissions to your server (could not retrieve WP filesystem credentials)!%s', 'pt-ocdi' ),
-						'<div class="error"><p>',
-						'</p></div>'
-					)
+				return new WP_error(
+					'filesystem_credentials_could_not_be_retrieved',
+					__( 'An error occurred while retrieving writing permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
 				);
 
 			}
@@ -118,12 +137,9 @@ class OCDI_Helpers {
 			// Now we have credentials, try to get the wp_filesystem running
 			if ( ! WP_Filesystem( $creds ) ) {
 
-				wp_die(
-					sprintf(
-						__( '%sYour WordPress login credentials don\'t allow to use WP_Filesystem!%s', 'pt-ocdi' ),
-						'<div class="error"><p>',
-						'</p></div>'
-					)
+				return new WP_Error(
+					'wrong_login_credentials',
+					__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
 				);
 
 			}
@@ -134,18 +150,19 @@ class OCDI_Helpers {
 
 			if ( ! $wp_filesystem->put_contents( $file_path, $content, FS_CHMOD_FILE ) ) {
 
-				wp_die(
+				return new WP_Error(
+					'failed_writing_file_to_server',
 					sprintf(
-						__( '%sAn error occurred while writing file to your server! Tried file path was: %s. %s', 'pt-ocdi' ),
-						'<div class="error"><p>',
-						$file_path,
-						'</p></div>'
+						__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
+						'<br>',
+						$file_path
 					)
 				);
 
 			}
 			else {
 
+				// Return the file path on successfull file write
 				return $file_path;
 
 			}
@@ -153,14 +170,13 @@ class OCDI_Helpers {
 		}
 		else {
 
-			wp_die(
+			return new WP_Error(
+				'no_direct_file_write_access',
 				sprintf(
-					__( '%sThis WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with this instruction: %s.%s', 'pt-ocdi' ),
-					'<div class="error"><p>',
+					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
 					'<strong>',
 					'</strong>',
-					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>',
-					'</p></div>'
+					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
 				)
 			);
 
@@ -175,21 +191,20 @@ class OCDI_Helpers {
 	 * @param $url, URL to the content file
 	 * @param $file_name, optional, name of the file (used in the error reports)
 	 *
-	 * @return string|boolean, path to the saved file or echos an error with wp_die and returns false
+	 * @return string|WP_Error, content from the URL or WP_Error object with error message
 	 */
 	private static function get_content_from_url( $url, $file_name = 'Import file' ) {
 
 		// Test if the URL to the file is defined
 		if ( empty( $url ) ) {
 
-			wp_die(
+			return new WP_Error(
+				'url_not_defined',
 				sprintf(
-					__( '%sError occurred! URL for %s%s%s file is not defined!%s', 'pt-ocdi' ),
-					'<div class="error"><p>',
+					__( 'Error occurred! URL for %s%s%s file is not defined!', 'pt-ocdi' ),
 					'<strong>',
 					$file_name,
-					'</strong>',
-					'</p></div>'
+					'</strong>'
 				)
 			);
 
@@ -206,17 +221,16 @@ class OCDI_Helpers {
 			// collect the right format of error data (array or WP_Error)
 			$response_error = self::get_error_from_response( $response );
 
-			wp_die(
+			return new WP_Error(
+				'while_fetching_error',
 				sprintf(
-					__( '%sAn error occurred while fetching %s%s%s file from the server!%sReason: %s - %s.%s', 'pt-ocdi' ),
-					'<div class="error"><p>',
+					__( 'An error occurred while fetching %s%s%s file from the server!%sReason: %s - %s.', 'pt-ocdi' ),
 					'<strong>',
 					$file_name,
 					'</strong>',
-					'</p><p>',
+					'<br>',
 					$response_error['error_code'],
-					$response_error['error_message'],
-					'</p></div>'
+					$response_error['error_message']
 				)
 			);
 
@@ -228,7 +242,6 @@ class OCDI_Helpers {
 
 		}
 
-		return false;
 	}
 
 
@@ -264,7 +277,7 @@ class OCDI_Helpers {
 	 *
 	 * @param $file_path, file path where the content should be saved
 	 *
-	 * @return string $data, content of the file
+	 * @return string $data, content of the file or WP_Error object with error message
 	 */
 	public static function data_from_file( $file_path ) {
 
@@ -276,12 +289,9 @@ class OCDI_Helpers {
 
 			if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
 
-				wp_die(
-					sprintf(
-						__( '%sAn error occurred while retrieving reading permissions to your server (could not retrieve WP filesystem credentials)!%s', 'pt-ocdi' ),
-						'<div class="error"><p>',
-						'</p></div>'
-					)
+				return new WP_Error(
+					'filesystem_credentials_could_not_be_retrieved',
+					__( 'An error occurred while retrieving reading permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
 				);
 
 			}
@@ -289,12 +299,9 @@ class OCDI_Helpers {
 			// Now we have credentials, try to get the wp_filesystem running
 			if ( ! WP_Filesystem( $creds ) ) {
 
-				wp_die(
-					sprintf(
-						__( '%sYour WordPress login credentials don\'t allow to use WP_Filesystem!%s', 'pt-ocdi' ),
-						'<div class="error"><p>',
-						'</p></div>'
-					)
+				return new WP_Error(
+					'wrong_login_credentials',
+					__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
 				);
 
 			}
@@ -307,12 +314,12 @@ class OCDI_Helpers {
 
 			if ( ! $data ) {
 
-				wp_die(
+				return new WP_Error(
+					'failed_reading_file_from_server',
 					sprintf(
-						__( '%sAn error occurred while reading a file from your server! Tried file path was: %s. %s', 'pt-ocdi' ),
-						'<div class="error"><p>',
-						$file_path,
-						'</p></div>'
+						__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'pt-ocdi' ),
+						'<br>',
+						$file_path
 					)
 				);
 
@@ -325,14 +332,13 @@ class OCDI_Helpers {
 		}
 		else {
 
-			wp_die(
+			return new WP_Error(
+				'no_direct_file_access',
 				sprintf(
-					__( '%sThis WordPress page does not have %sdirect%s file access. This plugin needs it in order to read the demo import files from the upload directory of your site. You can change this setting with this instruction: %s.%s', 'pt-ocdi' ),
-					'<div class="error"><p>',
+					__( 'This WordPress page does not have %sdirect%s file access. This plugin needs it in order to read the demo import files from the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
 					'<strong>',
 					'</strong>',
-					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>',
-					'</p></div>'
+					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
 				)
 			);
 
