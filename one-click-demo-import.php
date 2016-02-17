@@ -167,6 +167,8 @@ class PT_One_Click_Demo_Import {
 
 		}
 
+		$response['message'] .= '<br><br> MAX EXECUTION TIME: ' . ini_get('max_execution_time');
+
 		// Send JSON response to the AJAX call
 		wp_send_json( $response );
 
@@ -186,6 +188,13 @@ class PT_One_Click_Demo_Import {
 
 		// Demo import report, holds the output of demo import
 		$import_report = '';
+
+		// This should be replaced with multiple AJAX calles (import in smaller chunks)
+		// so that it would not come to the Internal Error, because of the PHP script timeout.
+		// Also this function has no effect when PHP is running in safe mode
+		// http://php.net/manual/en/function.set-time-limit.php
+		// Increase PHP max execution time
+		set_time_limit( 120 );
 
 		// Import demo data
 		if ( ! empty( $import_file_paths ) ) {
@@ -233,6 +242,8 @@ class PT_One_Click_Demo_Import {
 			}
 
 		}
+
+		$response['message'] .= '<br><br> MAX EXECUTION TIME: ' . ini_get('max_execution_time');
 
 		// Send JSON response to the AJAX call
 		wp_send_json( $response );
@@ -353,7 +364,7 @@ class PT_One_Click_Demo_Import {
 
 		// Logger options for the importer
 		$this->logger_options = apply_filters( 'pt-ocdi/logger_options', array(
-			'logger_min_level' => 'notice',
+			'logger_min_level' => 'error',
 		) );
 
 		// Set the logger and set it to the importer
