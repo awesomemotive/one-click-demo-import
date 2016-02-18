@@ -64,6 +64,20 @@ class PT_One_Click_Demo_Import {
 
 		<div class="ocdi  wrap">
 			<h2 class="ocdi__title"><span class="dashicons  dashicons-download"></span><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h2>
+
+			<?php
+				// Display warrning if PHP safe mode is enabled, since we wont be able to change the max_execution_time
+				if( ini_get('safe_mode') ) {
+					printf(
+						__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
+						'<div class="ocdi__message  ocdi__message--warning"><p>',
+						'<strong>',
+						'</strong>',
+						'</p></div>'
+					);
+				}
+			?>
+
 			<p>
 				<?php esc_html_e( 'TODO: General description of demo import goes here...', 'pt-ocdi' ); ?>
 			</p>

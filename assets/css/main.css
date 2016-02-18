@@ -28,6 +28,11 @@
 	border: 2px solid darkgreen;
 }
 
+.ocdi__message--warning {
+	background: orange;
+	border: 2px solid orangered;
+}
+
 /*************************/
 /* CSS for Widget import */
 /*************************/

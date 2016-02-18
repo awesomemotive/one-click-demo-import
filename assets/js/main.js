@@ -3,6 +3,9 @@ jQuery( function ( $ ) {
 
 	$( '.js-ocdi-import-data' ).on( 'click', function () {
 
+		// Reset response div content:
+		$( '.js-ocdi-ajax-response' ).empty();
+
 		var data = {
 			'action':    'ocdi_prepare_import_data',
 			'security':  ocdi.ajax_nonce,
@@ -25,7 +28,7 @@ jQuery( function ( $ ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
 			}
 			else {
-				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+				$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"><p>' + response + '</p></div>' );
 			}
 			if ( 'undefined' !== typeof response.import_file_paths ) {
 				import_demo_data( response.import_file_paths );
@@ -63,7 +66,7 @@ jQuery( function ( $ ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
 			}
 			else {
-				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+				$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"><p>' + response + '</p></div>' );
 			}
 			if ( 'undefined' !== typeof response.import_widget_path ) {
 				import_widgets( response.import_widget_path );
@@ -102,7 +105,7 @@ jQuery( function ( $ ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
 			}
 			else {
-				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+				$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"><p>' + response + '</p></div>' );
 			}
 			if ( true === response.after_import ) {
 				after_import();
@@ -136,7 +139,7 @@ jQuery( function ( $ ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
 			}
 			else {
-				$( '.js-ocdi-ajax-response' ).append( '<p>' + response + '</p>' );
+				$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"><p>' + response + '</p></div>' );
 			}
 		})
 		.fail( function( error ) {
