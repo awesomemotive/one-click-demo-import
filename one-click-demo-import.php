@@ -194,7 +194,7 @@ class PT_One_Click_Demo_Import {
 		// Also this function has no effect when PHP is running in safe mode
 		// http://php.net/manual/en/function.set-time-limit.php
 		// Increase PHP max execution time
-		set_time_limit( 120 );
+		set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 120 ) );
 
 		// Import demo data
 		if ( ! empty( $import_file_paths ) ) {
