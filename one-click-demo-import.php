@@ -31,7 +31,7 @@ require PT_OCDI_PATH . 'inc/class-ocdi-logger.php';
  */
 class PT_One_Click_Demo_Import {
 
-	private $importer, $plugin_page, $importer_options, $import_files, $logger, $logger_options;
+	private $importer, $plugin_page, $importer_options, $import_files, $logger, $logger_options, $log_file_path;
 
 	function __construct() {
 
@@ -146,99 +146,121 @@ class PT_One_Click_Demo_Import {
 		// Verify if the AJAX call is valid
 		$this->verify_ajax_call();
 
+		// Create a date and time stamp to use for demo and log files
+		$demo_import_start_time = date( 'Y-m-d__H-i-s' );
+
+		// Define log file path
+		$this->log_file_path = OCDI_Helpers::get_log_path( $demo_import_start_time );
+
 		// Get selected file index or set it to the first file.
 		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
-
-		// Download the import files (content and widgets files) and save it to variable for later use
-		$selected_import_files = OCDI_Helpers::download_import_files( $this->import_files[ $selected_index ] );
 
 		// Begin AJAX response
 		$response = array( 'message' => '' );
 
-		// Check Errors. If none, then display success message and pass other parameters
+		// Download the import files (content and widgets files) and save it to variable for later use
+		$selected_import_files = OCDI_Helpers::download_import_files( $this->import_files[ $selected_index ], $demo_import_start_time );
+
+		// Check Errors
 		if ( is_wp_error( $selected_import_files ) ) {
 
-			// ADD TO LOG FILE (plain text only)
-			// $this->create_wp_error_notice_response();
+			// Add this error to log file
+			$log_added = OCDI_Helpers::append_to_file( $selected_import_files->get_error_message() , $this->log_file_path, '---Downloaded files---' . PHP_EOL );
 
 			// Send JSON Error response to the AJAX call
 			wp_send_json( $this->create_wp_error_notice_response( $selected_import_files ) );
 
 		}
 		else {
-		// ADD TO LOG FILE (plain text only)
-			$response['message'] .= sprintf(
-				__( '%1$sThe import file: %2$s%3$s%4$s was %2$ssuccessfully downloaded%4$s! Continuing with demo import...%5$s', 'pt-ocdi' ),
-				'<div class="notice  notice-success"><p>',
-				'<strong>',
-				$this->import_files[ $selected_index ]['import_file_name'],
-				'</strong>',
-				'</p></div>'
-			);
 
-			$response['message'] .= '<br><br> MAX EXECUTION TIME: ' . ini_get('max_execution_time');
+			// Add this message to log file
+			$log_added = OCDI_Helpers::append_to_file(
+				sprintf(
+					__( 'The import files for: %s were successfully downloaded! Continuing with demo import...', 'pt-ocdi' ),
+					$this->import_files[ $selected_index ]['import_file_name']
+				) . PHP_EOL .
+				sprintf(
+					__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
+					ini_get('max_execution_time')
+				) . PHP_EOL .
+				sprintf(
+					__( 'Files info:%1$sSite URL = %2$s%1$sDemo file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
+					PHP_EOL,
+					get_site_url(),
+					$selected_import_files['data'],
+					$selected_import_files['widgets']
+				),
+				$this->log_file_path,
+				'---Downloaded files---' . PHP_EOL
+			);
 
 		}
 
-
 		// Data import
-		$response['message'] .= $this->import_data( $selected_import_files['data'] );
-
+		$this->import_data( $selected_import_files['data'] );
 
 		if ( ! empty( $selected_import_files['widgets'] ) ) {
 
-			// ADD TO LOG FILE (plain text only)
-			$response['message']           .= sprintf(
-				__( '%sThe demo import has finished, widget import is next...%s', 'pt-ocdi' ),
-				'<div class="notice  notice-success"><p>',
-				'</p></div>'
+			// Add this message to log file
+			$log_added = OCDI_Helpers::append_to_file(
+				__( 'The demo import has finished, widget import is next...', 'pt-ocdi' ),
+				$this->log_file_path,
+				PHP_EOL
 			);
 
+			// Import widgets and return the output for log file
 			$widget_output = $this->import_widgets( $selected_import_files['widgets'] );
-
 
 			if ( is_wp_error( $widget_output ) ) {
 
-				// ADD TO LOG FILE (plain text only)
-				// $this->create_wp_error_notice_response();
+				// Add this error to log file
+				$log_added = OCDI_Helpers::append_to_file( $widget_output->get_error_message() , $this->log_file_path, PHP_EOL . '---Importing widgets---' . PHP_EOL );
 
 				// Send JSON Error response to the AJAX call
 				wp_send_json( $this->create_wp_error_notice_response( $widget_output ) );
 
 			}
 
-			// ADD TO LOG FILE (plain text only)
-			// Add widget output to the message
-			$response['message'] .= $widget_output;
-
-
 			if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
 
-				// ADD TO LOG FILE (plain text only)
-				$response['message']     .= sprintf(
-					__( '%sThe widget import has finished, after import setup is next...%s', 'pt-ocdi' ),
-					'<div class="notice  notice-success"><p>',
-					'</p></div>'
+				// Add this message to log file
+				$log_added = OCDI_Helpers::append_to_file(
+					__( 'The widget import has finished, after import setup is next...', 'pt-ocdi' ),
+					$this->log_file_path,
+					PHP_EOL
 				);
 
-				// ADD TO LOG FILE (plain text only)
 				// Run the after_import action to setup other settings
-				$response['message'] .= $this->after_import_setup();
+				$after_import_setup_output = $this->after_import_setup();
+
+				// Add this message to log file
+				$log_added = OCDI_Helpers::append_to_file(
+					$after_import_setup_output,
+					$this->log_file_path,
+					PHP_EOL . '---After import setup---' . PHP_EOL
+				);
 
 			}
 
 		}
 		else if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
 
-			$response['message']     .= sprintf(
-				__( '%sThe demo import has finished, after import setup is next...%s', 'pt-ocdi' ),
-				'<div class="notice  notice-success"><p>',
-				'</p></div>'
+			// Add this message to log file
+			$log_added = OCDI_Helpers::append_to_file(
+				__( 'The demo import has finished, after import setup is next...', 'pt-ocdi' ),
+				$this->log_file_path,
+				PHP_EOL
 			);
 
-			// ADD TO LOG FILE (plain text only)
 			// Run the after_import action to setup other settings
-			$response['message'] .= $this->after_import_setup();
+			$after_import_setup_output = $this->after_import_setup();
+
+			// Add this message to log file
+			$log_added = OCDI_Helpers::append_to_file(
+				$after_import_setup_output,
+				$this->log_file_path,
+				PHP_EOL . '---After import setup---' . PHP_EOL
+			);
 
 		}
 
@@ -269,17 +291,20 @@ class PT_One_Click_Demo_Import {
 
 			ob_start();
 				$this->importer->import( $import_file_path );
-			$message .= ob_get_clean() . '<br>';
+			$message .= ob_get_clean();
 
 			// THE LOG FILE WILL BE GENERATED THROUGHOUT THE IMPORT PROCES (not just data import)
 			// Create a log file with full details
 			// $this->logger->create_log_file();
 
+			// Add this message to log file
+			$log_added = OCDI_Helpers::append_to_file(
+				$message . PHP_EOL . 'MAX EXECUTION TIME = ' . ini_get('max_execution_time'),
+				$this->log_file_path,
+				PHP_EOL . '---Importing demo data---' . PHP_EOL
+			);
+
 		}
-
-		$message .= '<br><br> MAX EXECUTION TIME: ' . ini_get('max_execution_time');
-
-		return $message;
 
 	}
 
@@ -311,8 +336,15 @@ class PT_One_Click_Demo_Import {
 		}
 
 		ob_start();
-			$widget_importer->format_results_for_display( $results );
-		$message = ob_get_clean() . '<br>';
+			$widget_importer->format_results_for_log( $results );
+		$message = ob_get_clean();
+
+		// Add this message to log file
+		$log_added = OCDI_Helpers::append_to_file(
+			$message,
+			$this->log_file_path,
+			PHP_EOL . '---Importing widgets---' . PHP_EOL
+		);
 
 		return $message;
 
@@ -328,7 +360,7 @@ class PT_One_Click_Demo_Import {
 		// Append any output to the AJAX response message
 		ob_start();
 			do_action( 'pt-ocdi/after_import' );
-		$message = ob_get_clean() . '<br>';
+		$message = ob_get_clean();
 
 		// Send JSON response to the AJAX call
 		return $message;
@@ -378,7 +410,7 @@ class PT_One_Click_Demo_Import {
 			wp_die(
 				sprintf(
 					__( '%sYour user role isn\'t high enough. You don\'t have permission to import demo data.%s', 'pt-ocdi' ),
-					'<div class="error"><p>',
+					'<div class="notice  notice-error"><p>',
 					'</p></div>'
 				)
 			);
@@ -414,7 +446,7 @@ class PT_One_Click_Demo_Import {
 		$response['error_code'] = $wp_error->get_error_code();
 		$response['message']    = sprintf(
 			'%s%s%s',
-			'<div class="error"><p>',
+			'<div class="notice  notice-error"><p>',
 			$wp_error->get_error_message(),
 			'</p></div>'
 		);

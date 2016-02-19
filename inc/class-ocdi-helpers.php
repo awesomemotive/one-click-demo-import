@@ -58,7 +58,7 @@ class OCDI_Helpers {
 	 *
 	 * @return array|WP_Error, array of path to the downloaded files or WP_Error object with error message
 	 */
-	public static function download_import_files( $import_file_info ) {
+	public static function download_import_files( $import_file_info, $start_date = '' ) {
 
 		$downloaded_files = array();
 
@@ -73,7 +73,7 @@ class OCDI_Helpers {
 		// Setup filename path to save the content
 		$upload_dir            = wp_upload_dir();
 		$upload_path           = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
-		$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
+		$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
 
 		// Write content to the file and return the file path on successful write.
 		$downloaded_files['data'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
@@ -164,6 +164,85 @@ class OCDI_Helpers {
 
 				// Return the file path on successfull file write
 				return $file_path;
+
+			}
+
+		}
+		else {
+
+			return new WP_Error(
+				'no_direct_file_write_access',
+				sprintf(
+					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
+					'<strong>',
+					'</strong>',
+					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
+				)
+			);
+
+		}
+
+	}
+
+
+	/**
+	 * Append content to the file
+	 *
+	 * @param $content, content to be saved to the file
+	 * @param $file_path, file path where the content should be saved
+	 * @param $separator, separates the existing content of the file with the new content
+	 *
+	 * @return boolean|WP_Error, path to the saved file or WP_Error object with error message
+	 */
+	public static function append_to_file( $content, $file_path, $separator = '' ) {
+
+		// Check if the filesystem method is 'direct', if not display an error
+		if ( 'direct' === get_filesystem_method() ) {
+
+			// Get user credentials for WP filesystem API
+			$demo_import_page_url = wp_nonce_url( 'themes.php?page=pt-one-click-demo-import', 'pt-one-click-demo-import' );
+
+			if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
+
+				return new WP_error(
+					'filesystem_credentials_could_not_be_retrieved',
+					__( 'An error occurred while retrieving writing permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
+				);
+
+			}
+
+			// Now we have credentials, try to get the wp_filesystem running
+			if ( ! WP_Filesystem( $creds ) ) {
+
+				return new WP_Error(
+					'wrong_login_credentials',
+					__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
+				);
+
+			}
+
+
+			// By this point, the $wp_filesystem global should be working, so let's use it to create a file
+			global $wp_filesystem;
+
+			$existing_data = $wp_filesystem->get_contents( $file_path );
+
+			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content, FS_CHMOD_FILE ) ) {
+
+				return new WP_Error(
+					'failed_writing_file_to_server',
+					sprintf(
+						__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
+						'<br>',
+						$file_path
+					)
+				);
+
+			}
+			else {
+
+				// Return the file path on successfull file write
+				return true;
 
 			}
 
@@ -343,6 +422,23 @@ class OCDI_Helpers {
 			);
 
 		}
+
+	}
+
+
+	/**
+	 * Get log file path
+	 *
+	 * @param $start_date, date|time|timestamp to use in the log filename
+	 *
+	 * @return string, path to the log file
+	 */
+	public static function get_log_path( $start_date = '' ) {
+
+		$upload_dir            = wp_upload_dir();
+		$upload_path           = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+
+		return $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . $start_date . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
 
 	}
 

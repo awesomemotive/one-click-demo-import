@@ -366,6 +366,32 @@ if ( ! class_exists( 'OCDI_Widget_Importer' ) ) {
 		<?php
 		}
 
+
+		/**
+		 * Format results for log file
+		 *
+		 * @param array $results
+		 * @return string, formated results
+		 */
+		public function format_results_for_log( $results ) {
+
+			// Loop sidebars
+			foreach ( $results as $sidebar ) {
+
+				echo $sidebar['name'] . ' : ' . $sidebar['message'] . PHP_EOL . PHP_EOL;
+				// Loop widgets
+				foreach ( $sidebar['widgets'] as $widget ) {
+
+					echo $widget['name'] . ' - ' . $widget['title'] . ' - ' . $widget['message'] . PHP_EOL;
+
+				}
+
+				echo PHP_EOL;
+
+			}
+
+		}
+
 	}
 
 }
