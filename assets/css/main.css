@@ -13,26 +13,6 @@
 	visibility: visible;
 }
 
-.ocdi__message {
-	padding: 5px 10px;
-	border-radius: 4px;
-}
-
-.ocdi__message--info {
-	background: skyblue;
-	border: 2px solid royalblue;
-}
-
-.ocdi__message--success {
-	background: springgreen;
-	border: 2px solid darkgreen;
-}
-
-.ocdi__message--warning {
-	background: orange;
-	border: 2px solid orangered;
-}
-
 /*************************/
 /* CSS for Widget import */
 /*************************/

@@ -3,7 +3,7 @@
 Plugin Name: One Click Demo Import
 Plugin URI: http://www.proteusthemes.com
 Description: WordPress import made easy. Theme authors: Enable simple demo import for your theme demo data.
-Version: 0.1-alpha
+Version: 0.2-alpha
 Author: ProteusThemes
 Author URI: http://www.proteusthemes.com
 License: GPL3
@@ -11,12 +11,14 @@ License URI: http://www.gnu.org/licenses/gpl.html
 Text Domain: pt-ocdi
 */
 
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
 // Path/URL to root of this plugin, with trailing slash
 define( 'PT_OCDI_PATH', apply_filters( 'pt-ocdi/plugin_dir_path', plugin_dir_path( __FILE__ ) ) );
 define( 'PT_OCDI_URL', apply_filters( 'pt-ocdi/plugin_dir_url', plugin_dir_url( __FILE__ ) ) );
 
 // Current version of the plugin
-define( 'PT_OCDI_VERSION', apply_filters( 'pt-ocdi/version', '0.1-alpha' ) );
+define( 'PT_OCDI_VERSION', apply_filters( 'pt-ocdi/version', '0.2-alpha' ) );
 
 // Include files
 require PT_OCDI_PATH . 'inc/class-ocdi-helpers.php';
@@ -36,10 +38,7 @@ class PT_One_Click_Demo_Import {
 		// Actions
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-		add_action( 'wp_ajax_ocdi_prepare_import_data', array( $this, 'prepare_import_data_ajax_callback' ) );
-		add_action( 'wp_ajax_ocdi_import_data', array( $this, 'import_data_ajax_callback' ) );
-		add_action( 'wp_ajax_ocdi_import_widgets', array( $this, 'import_widgets_ajax_callback' ) );
-		add_action( 'wp_ajax_ocdi_after_import', array( $this, 'after_import_ajax_callback' ) );
+		add_action( 'wp_ajax_ocdi_import_demo_data', array( $this, 'import_demo_data_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
 
 	}
@@ -70,7 +69,7 @@ class PT_One_Click_Demo_Import {
 				if( ini_get('safe_mode') ) {
 					printf(
 						__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
-						'<div class="ocdi__message  ocdi__message--warning"><p>',
+						'<div class="notice  notice-error"><p>',
 						'<strong>',
 						'</strong>',
 						'</p></div>'
@@ -127,7 +126,8 @@ class PT_One_Click_Demo_Import {
 			wp_localize_script( 'ocdi-main-js', 'ocdi',
 				array(
 					'ajax_url'     => admin_url( 'admin-ajax.php' ),
-					'ajax_nonce'   => wp_create_nonce( 'ocdi-ajax-verification' )
+					'ajax_nonce'   => wp_create_nonce( 'ocdi-ajax-verification' ),
+					'loader_text'  => __( 'Importing now, please wait!', 'pt-ocdi' )
 				)
 			);
 
@@ -141,7 +141,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * AJAX download import file callback function
 	 */
-	function prepare_import_data_ajax_callback() {
+	function import_demo_data_ajax_callback() {
 
 		// Verify if the AJAX call is valid
 		$this->verify_ajax_call();
@@ -153,55 +153,109 @@ class PT_One_Click_Demo_Import {
 		$selected_import_files = OCDI_Helpers::download_import_files( $this->import_files[ $selected_index ] );
 
 		// Begin AJAX response
-		$response = array();
+		$response = array( 'message' => '' );
 
 		// Check Errors. If none, then display success message and pass other parameters
 		if ( is_wp_error( $selected_import_files ) ) {
 
-			$response['error_code'] = $selected_import_files->get_error_code();
-			$response['message']    = sprintf(
-				'%s%s%s',
-				'<div class="error"><p>',
-				$selected_import_files->get_error_message(),
-				'</p></div>'
-			);
+			// ADD TO LOG FILE (plain text only)
+			// $this->create_wp_error_notice_response();
+
+			// Send JSON Error response to the AJAX call
+			wp_send_json( $this->create_wp_error_notice_response( $selected_import_files ) );
 
 		}
 		else {
-
-			$response['import_file_paths'] = $selected_import_files;
-			$response['message']           = sprintf(
+		// ADD TO LOG FILE (plain text only)
+			$response['message'] .= sprintf(
 				__( '%1$sThe import file: %2$s%3$s%4$s was %2$ssuccessfully downloaded%4$s! Continuing with demo import...%5$s', 'pt-ocdi' ),
-				'<div class="ocdi__message  ocdi__message--success"><p>',
+				'<div class="notice  notice-success"><p>',
 				'<strong>',
 				$this->import_files[ $selected_index ]['import_file_name'],
 				'</strong>',
 				'</p></div>'
 			);
 
+			$response['message'] .= '<br><br> MAX EXECUTION TIME: ' . ini_get('max_execution_time');
+
 		}
 
-		$response['message'] .= '<br><br> MAX EXECUTION TIME: ' . ini_get('max_execution_time');
 
-		// Send JSON response to the AJAX call
+		// Data import
+		$response['message'] .= $this->import_data( $selected_import_files['data'] );
+
+
+		if ( ! empty( $selected_import_files['widgets'] ) ) {
+
+			// ADD TO LOG FILE (plain text only)
+			$response['message']           .= sprintf(
+				__( '%sThe demo import has finished, widget import is next...%s', 'pt-ocdi' ),
+				'<div class="notice  notice-success"><p>',
+				'</p></div>'
+			);
+
+			$widget_output = $this->import_widgets( $selected_import_files['widgets'] );
+
+
+			if ( is_wp_error( $widget_output ) ) {
+
+				// ADD TO LOG FILE (plain text only)
+				// $this->create_wp_error_notice_response();
+
+				// Send JSON Error response to the AJAX call
+				wp_send_json( $this->create_wp_error_notice_response( $widget_output ) );
+
+			}
+
+			// ADD TO LOG FILE (plain text only)
+			// Add widget output to the message
+			$response['message'] .= $widget_output;
+
+
+			if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
+
+				// ADD TO LOG FILE (plain text only)
+				$response['message']     .= sprintf(
+					__( '%sThe widget import has finished, after import setup is next...%s', 'pt-ocdi' ),
+					'<div class="notice  notice-success"><p>',
+					'</p></div>'
+				);
+
+				// ADD TO LOG FILE (plain text only)
+				// Run the after_import action to setup other settings
+				$response['message'] .= $this->after_import_setup();
+
+			}
+
+		}
+		else if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
+
+			$response['message']     .= sprintf(
+				__( '%sThe demo import has finished, after import setup is next...%s', 'pt-ocdi' ),
+				'<div class="notice  notice-success"><p>',
+				'</p></div>'
+			);
+
+			// ADD TO LOG FILE (plain text only)
+			// Run the after_import action to setup other settings
+			$response['message'] .= $this->after_import_setup();
+
+		}
+
+		$response['message'] .= $this->import_finished_message();
+
 		wp_send_json( $response );
 
 	}
 
 
 	/**
-	 * AJAX import data callback function
+	 * Import data from an WP XML file
 	 */
-	function import_data_ajax_callback() {
+	function import_data( $import_file_path ) {
 
-		// Verify if the AJAX call is valid
-		$this->verify_ajax_call();
-
-		// Get import file path parameter from the AJAX call
-		$import_file_paths = empty( $_POST['import_file_paths'] ) ? '' : $_POST['import_file_paths'];
-
-		// Demo import report, holds the output of demo import
-		$import_report = '';
+		// Collect demo import message
+		$message = '';
 
 		// This should be replaced with multiple AJAX calles (import in smaller chunks)
 		// so that it would not come to the Internal Error, because of the PHP script timeout.
@@ -211,73 +265,29 @@ class PT_One_Click_Demo_Import {
 		set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 120 ) );
 
 		// Import demo data
-		if ( ! empty( $import_file_paths ) ) {
+		if ( ! empty( $import_file_path ) ) {
 
 			ob_start();
-				$this->importer->import( $import_file_paths['data'] );
-			$import_report = ob_get_clean();
+				$this->importer->import( $import_file_path );
+			$message .= ob_get_clean() . '<br>';
 
+			// THE LOG FILE WILL BE GENERATED THROUGHOUT THE IMPORT PROCES (not just data import)
 			// Create a log file with full details
-			$this->logger->create_log_file();
+			// $this->logger->create_log_file();
 
 		}
 
-		// Begin AJAX response
-		$response = array();
+		$message .= '<br><br> MAX EXECUTION TIME: ' . ini_get('max_execution_time');
 
-		$response['message'] = $import_report . '<br>';
-
-		if ( ! empty( $import_file_paths['widgets'] ) ) {
-
-			$response['import_widget_path'] = $import_file_paths['widgets'];
-			$response['message']           .= sprintf(
-				__( '%sThe demo import has finished, widget import is next...%s', 'pt-ocdi' ),
-				'<div class="ocdi__message  ocdi__message--success"><p>',
-				'</p></div>'
-			);
-
-		}
-		else {
-
-			if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
-
-				$response['after_import'] = true;
-				$response['message']     .= sprintf(
-					__( '%sThe demo import has finished, after import setup is next...%s', 'pt-ocdi' ),
-					'<div class="ocdi__message  ocdi__message--success"><p>',
-					'</p></div>'
-				);
-
-			}
-			else {
-
-				$response['message'] .= $this->import_finished_message();
-
-			}
-
-		}
-
-		$response['message'] .= '<br><br> MAX EXECUTION TIME: ' . ini_get('max_execution_time');
-
-		// Send JSON response to the AJAX call
-		wp_send_json( $response );
+		return $message;
 
 	}
 
 
 	/**
-	 * AJAX import widgets callback function
+	 * Import widgets from JSON file
 	 */
-	function import_widgets_ajax_callback() {
-
-		// Verify if the AJAX call is valid
-		$this->verify_ajax_call();
-
-		// Get import file path parameter from the AJAX call
-		$import_widget_path = empty( $_POST['import_widget_path'] ) ? '' : $_POST['import_widget_path'];
-
-		// Begin AJAX response
-		$response = array();
+	function import_widgets( $widget_import_file_path ) {
 
 		// Widget import results
 		$results = array();
@@ -286,76 +296,42 @@ class PT_One_Click_Demo_Import {
 		$widget_importer = new OCDI_Widget_Importer();
 
 		// Import widgets
-		if ( ! empty( $import_widget_path ) ) {
+		if ( ! empty( $widget_import_file_path ) ) {
 
 			// Import widgets and get result
-			$results = $widget_importer->import_widgets( $import_widget_path );
+			$results = $widget_importer->import_widgets( $widget_import_file_path );
 
 		}
 
-		// Check Errors. If none, then display report + success message and pass other parameters
+		// Check for errors
 		if ( is_wp_error( $results ) ) {
 
-			$response['error_code'] = $results->get_error_code();
-			$response['message']    = sprintf(
-				'%s%s%s',
-				'<div class="error"><p>',
-				$results->get_error_message(),
-				'</p></div>'
-			);
-
-		}
-		else {
-
-			ob_start();
-				$widget_importer->format_results_for_display( $results );
-			$response['message'] = ob_get_clean() . '<br>';
-
-			if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
-
-				$response['after_import'] = true;
-				$response['message']     .= sprintf(
-					__( '%sThe widget import has finished, after import setup is next...%s', 'pt-ocdi' ),
-					'<div class="ocdi__message  ocdi__message--success"><p>',
-					'</p></div>'
-				);
-
-			}
-			else {
-
-				$response['message'] .= $this->import_finished_message();
-
-			}
+			return $results;
 
 		}
 
-		// Send JSON response to the AJAX call
-		wp_send_json( $response );
+		ob_start();
+			$widget_importer->format_results_for_display( $results );
+		$message = ob_get_clean() . '<br>';
+
+		return $message;
 
 	}
 
 
 	/**
-	 * AJAX after import callback function
+	 * Setup other things after the whole import process is finished
 	 */
-	function after_import_ajax_callback() {
-
-		// Verify if the AJAX call is valid
-		$this->verify_ajax_call();
-
-		// Begin AJAX response
-		$response = array();
+	function after_import_setup() {
 
 		// Enable users to add custom code to the end of the import process
 		// Append any output to the AJAX response message
 		ob_start();
 			do_action( 'pt-ocdi/after_import' );
-		$response['message'] = ob_get_clean() . '<br>';
-
-		$response['message'] .= $this->import_finished_message();
+		$message = ob_get_clean() . '<br>';
 
 		// Send JSON response to the AJAX call
-		wp_send_json( $response );
+		return $message;
 
 	}
 
@@ -419,12 +395,30 @@ class PT_One_Click_Demo_Import {
 
 		return sprintf(
 			__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
-			'<div class="ocdi__message  ocdi__message--success"><p>',
+			'<div class="notice  notice-success"><p>',
 			'<br>',
 			'<strong>',
 			'</strong>',
 			'</p></div>'
 		);
+
+	}
+
+
+	/**
+	 * Return response of en error
+	 */
+	private function create_wp_error_notice_response( $wp_error ) {
+
+		$response               = array();
+		$response['error_code'] = $wp_error->get_error_code();
+		$response['message']    = sprintf(
+			'%s%s%s',
+			'<div class="error"><p>',
+			$wp_error->get_error_message(),
+			'</p></div>'
+		);
+		return $response;
 
 	}
 
