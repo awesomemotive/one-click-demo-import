@@ -3,15 +3,17 @@ jQuery( function ( $ ) {
 
 	$( '.js-ocdi-import-data' ).on( 'click', function () {
 
-		// Reset response div content:
+		// Reset response div content.
 		$( '.js-ocdi-ajax-response' ).empty();
 
+		// Data for AJAX call.
 		var data = {
 			'action':    'ocdi_import_demo_data',
 			'security':  ocdi.ajax_nonce,
 			'selected':  $( '#demo-import-files' ).val()
 		};
 
+		// AJAX call.
 		$.ajax({
 			method:     'POST',
 			url:        ocdi.ajax_url,
