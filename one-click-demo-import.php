@@ -293,10 +293,6 @@ class PT_One_Click_Demo_Import {
 				$this->importer->import( $import_file_path );
 			$message .= ob_get_clean();
 
-			// THE LOG FILE WILL BE GENERATED THROUGHOUT THE IMPORT PROCES (not just data import)
-			// Create a log file with full details
-			// $this->logger->create_log_file();
-
 			// Add this message to log file
 			$log_added = OCDI_Helpers::append_to_file(
 				$message . PHP_EOL . 'MAX EXECUTION TIME = ' . ini_get('max_execution_time'),
