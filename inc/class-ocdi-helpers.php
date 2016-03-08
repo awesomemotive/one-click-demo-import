@@ -435,10 +435,26 @@ class OCDI_Helpers {
 	 */
 	public static function get_log_path( $start_date = '' ) {
 
-		$upload_dir            = wp_upload_dir();
-		$upload_path           = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+		$upload_dir  = wp_upload_dir();
+		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
 		return $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . $start_date . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
+
+	}
+
+	/**
+	 * Get log file url
+	 *
+	 * @param $log_path, log path to use for the log filename
+	 *
+	 * @return string, url to the log file
+	 */
+	public static function get_log_url( $log_path ) {
+
+		$upload_dir = wp_upload_dir();
+		$upload_url = apply_filters( 'pt-ocdi/upload_file_url', trailingslashit( $upload_dir['url'] ) );
+
+		return $upload_url . basename( $log_path );
 
 	}
 

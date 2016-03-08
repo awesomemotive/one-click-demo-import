@@ -196,8 +196,8 @@ class PT_One_Click_Demo_Import {
 
 		}
 
-		// Data import
-		$this->import_data( $selected_import_files['data'] );
+		// Data import - returns any errors greater then the "error" logger level
+		$demo_import_error_messages = $this->import_data( $selected_import_files['data'] );
 
 		if ( ! empty( $selected_import_files['widgets'] ) ) {
 
@@ -264,7 +264,15 @@ class PT_One_Click_Demo_Import {
 
 		}
 
-		$response['message'] .= $this->import_finished_message();
+		// Display final messages (success or error messages)
+		if ( empty( $demo_import_error_messages ) ) {
+			$response['message'] .= $this->sucessfull_import_finished_message();
+		}
+		else {
+			$response['message'] .= $demo_import_error_messages . '<br>';
+			$response['message'] .= $this->errors_import_finished_message( $this->log_file_path );
+		}
+
 
 		wp_send_json( $response );
 
@@ -276,7 +284,7 @@ class PT_One_Click_Demo_Import {
 	 */
 	function import_data( $import_file_path ) {
 
-		// Collect demo import message
+		// Collect demo import message for the log file
 		$message = '';
 
 		// This should be replaced with multiple AJAX calles (import in smaller chunks)
@@ -299,6 +307,9 @@ class PT_One_Click_Demo_Import {
 				$this->log_file_path,
 				PHP_EOL . '---Importing demo data---' . PHP_EOL
 			);
+
+			// Return any error messages for the front page output
+			return $this->logger->error_output;
 
 		}
 
@@ -382,7 +393,7 @@ class PT_One_Click_Demo_Import {
 
 		// Logger options for the importer
 		$this->logger_options = apply_filters( 'pt-ocdi/logger_options', array(
-			'logger_min_level' => 'error',
+			'logger_min_level' => 'warning',
 		) );
 
 		// Set the logger and set it to the importer
@@ -417,9 +428,9 @@ class PT_One_Click_Demo_Import {
 
 
 	/**
-	 * Return import finished message
+	 * Return successful import finished message
 	 */
-	private function import_finished_message() {
+	private function sucessfull_import_finished_message() {
 
 		return sprintf(
 			__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
@@ -427,6 +438,27 @@ class PT_One_Click_Demo_Import {
 			'<br>',
 			'<strong>',
 			'</strong>',
+			'</p></div>'
+		);
+
+	}
+
+
+	/**
+	 * Return import finished message with errors
+	 */
+	private function errors_import_finished_message( $log_file_path = '' ) {
+
+
+
+		return sprintf(
+			__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
+			'<div class="notice  notice-error"><p>',
+			'<br>',
+			'<strong>',
+			'</strong>',
+			'<a href="' . OCDI_Helpers::get_log_url( $log_file_path ) .'" target="_blank">',
+			'</a>',
 			'</p></div>'
 		);
 
