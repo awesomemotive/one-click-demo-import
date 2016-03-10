@@ -236,14 +236,7 @@ class PT_One_Click_Demo_Import {
 				);
 
 				// Run the after_import action to setup other settings.
-				$after_import_setup_output = $this->after_import_setup();
-
-				// Add this message to log file.
-				$log_added = OCDI_Helpers::append_to_file(
-					$after_import_setup_output,
-					$this->log_file_path,
-					PHP_EOL . '---After import setup---' . PHP_EOL
-				);
+				$this->after_import_setup();
 			}
 		}
 		elseif ( false !== has_action( 'pt-ocdi/after_import' ) ) {
@@ -256,15 +249,7 @@ class PT_One_Click_Demo_Import {
 			);
 
 			// Run the after_import action to setup other settings.
-			$after_import_setup_output = $this->after_import_setup();
-
-			// Add this message to log file.
-			$log_added = OCDI_Helpers::append_to_file(
-				$after_import_setup_output,
-				$this->log_file_path,
-				PHP_EOL . '---After import setup---' . PHP_EOL
-			);
-
+			$this->after_import_setup();
 		}
 
 		// Display final messages (success or error messages).
@@ -287,9 +272,6 @@ class PT_One_Click_Demo_Import {
 	 */
 	function import_data( $import_file_path ) {
 
-		// Collect demo import message for the log file.
-		$message = '';
-
 		// This should be replaced with multiple AJAX calles (import in smaller chunks)
 		// so that it would not come to the Internal Error, because of the PHP script timeout.
 		// Also this function has no effect when PHP is running in safe mode
@@ -302,7 +284,7 @@ class PT_One_Click_Demo_Import {
 
 			ob_start();
 				$this->importer->import( $import_file_path );
-			$message .= ob_get_clean();
+			$message = ob_get_clean();
 
 			// Add this message to log file.
 			$log_added = OCDI_Helpers::append_to_file(
@@ -310,12 +292,10 @@ class PT_One_Click_Demo_Import {
 				$this->log_file_path,
 				PHP_EOL . '---Importing demo data---' . PHP_EOL
 			);
-
-			// Return any error messages for the front page output.
-			return $this->logger->error_output;
-
 		}
 
+		// Return any error messages for the front page output.
+		return $this->logger->error_output;
 	}
 
 
@@ -370,8 +350,12 @@ class PT_One_Click_Demo_Import {
 			do_action( 'pt-ocdi/after_import' );
 		$message = ob_get_clean();
 
-		// Send JSON response to the AJAX call.
-		return $message;
+		// Add this message to log file.
+		$log_added = OCDI_Helpers::append_to_file(
+			$message,
+			$this->log_file_path,
+			PHP_EOL . '---After import setup---' . PHP_EOL
+		);
 	}
 
 
@@ -407,7 +391,6 @@ class PT_One_Click_Demo_Import {
 	 * Return successful import finished message.
 	 */
 	private function sucessfull_import_finished_message() {
-
 		return sprintf(
 			__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
 			'<div class="notice  notice-success"><p>',
@@ -416,7 +399,6 @@ class PT_One_Click_Demo_Import {
 			'</strong>',
 			'</p></div>'
 		);
-
 	}
 
 
@@ -426,7 +408,6 @@ class PT_One_Click_Demo_Import {
 	 * @param string $log_file_path path to the log file.
 	 */
 	private function errors_import_finished_message( $log_file_path = '' ) {
-
 		return sprintf(
 			__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
 			'<div class="notice  notice-error"><p>',

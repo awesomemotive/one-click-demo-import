@@ -243,6 +243,49 @@ class OCDI_Helpers {
 
 
 	/**
+	 * Get data from a file
+	 *
+	 * @param string $file_path file path where the content should be saved.
+	 * @return string $data, content of the file or WP_Error object with error message.
+	 */
+	public static function data_from_file( $file_path ) {
+
+		// Check if the filesystem method is 'direct', if not display an error.
+		if ( 'direct' === get_filesystem_method() ) {
+
+			// Verify WP filesystem credentials
+			$verified_credentials = self::check_wp_filesystem_credentials();
+
+			if ( is_wp_error( $verified_credentials ) ) {
+				return $verified_credentials;
+			}
+
+			// By this point, the $wp_filesystem global should be working, so let's use it to read a file.
+			global $wp_filesystem;
+
+			$data = $wp_filesystem->get_contents( $file_path );
+
+			if ( ! $data ) {
+				return new WP_Error(
+					'failed_reading_file_from_server',
+					sprintf(
+						__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'pt-ocdi' ),
+						'<br>',
+						$file_path
+					)
+				);
+			}
+			else {
+				return $data;
+			}
+		}
+		else {
+			return self::return_direct_filesystem_error();
+		}
+	}
+
+
+	/**
 	 * Helper function: check for WP filesystem credentials needed for reading and writing to a file.
 	 *
 	 * @return boolean|WP_Error
@@ -308,68 +351,6 @@ class OCDI_Helpers {
 		}
 
 		return $response_error;
-	}
-
-
-	/**
-	 * Get data from a file
-	 *
-	 * @param string $file_path file path where the content should be saved.
-	 * @return string $data, content of the file or WP_Error object with error message.
-	 */
-	public static function data_from_file( $file_path ) {
-
-		// Check if the filesystem method is 'direct', if not display an error.
-		if ( 'direct' === get_filesystem_method() ) {
-
-			// Get user credentials for WP filesystem API.
-			$demo_import_page_url = wp_nonce_url( 'themes.php?page=pt-one-click-demo-import', 'pt-one-click-demo-import' );
-
-			if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
-				return new WP_Error(
-					'filesystem_credentials_could_not_be_retrieved',
-					__( 'An error occurred while retrieving reading permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
-				);
-			}
-
-			// Now we have credentials, try to get the wp_filesystem running.
-			if ( ! WP_Filesystem( $creds ) ) {
-				return new WP_Error(
-					'wrong_login_credentials',
-					__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
-				);
-			}
-
-			// By this point, the $wp_filesystem global should be working, so let's use it to read a file.
-			global $wp_filesystem;
-
-			$data = $wp_filesystem->get_contents( $file_path );
-
-			if ( ! $data ) {
-				return new WP_Error(
-					'failed_reading_file_from_server',
-					sprintf(
-						__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'pt-ocdi' ),
-						'<br>',
-						$file_path
-					)
-				);
-			}
-			else {
-				return $data;
-			}
-		}
-		else {
-			return new WP_Error(
-				'no_direct_file_access',
-				sprintf(
-					__( 'This WordPress page does not have %sdirect%s file access. This plugin needs it in order to read the demo import files from the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
-					'<strong>',
-					'</strong>',
-					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
-				)
-			);
-		}
 	}
 
 
