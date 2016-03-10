@@ -155,7 +155,7 @@ class PT_One_Click_Demo_Import {
 	function import_demo_data_ajax_callback() {
 
 		// Verify if the AJAX call is valid.
-		$this->verify_ajax_call();
+		OCDI_Helpers::verify_ajax_call();
 
 		// Create a date and time stamp to use for demo and log files.
 		$demo_import_start_time = date( 'Y-m-d__H-i-s' );
@@ -403,26 +403,6 @@ class PT_One_Click_Demo_Import {
 		$this->logger            = new OCDI_Logger();
 		$this->logger->min_level = $logger_options['logger_min_level'];
 		$this->importer->set_logger( $this->logger );
-	}
-
-
-	/**
-	 * Check if the AJAX call is valid.
-	 */
-	private function verify_ajax_call() {
-
-		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
-
-		// Check if user has the WP capability to import data.
-		if ( ! current_user_can( 'import' ) ) {
-			wp_die(
-				sprintf(
-					__( '%sYour user role isn\'t high enough. You don\'t have permission to import demo data.%s', 'pt-ocdi' ),
-					'<div class="notice  notice-error"><p>',
-					'</p></div>'
-				)
-			);
-		}
 	}
 
 

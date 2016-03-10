@@ -378,8 +378,8 @@ class OCDI_Helpers {
 		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
 		return $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . $start_date . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
-
 	}
+
 
 	/**
 	 * Get log file url
@@ -393,5 +393,25 @@ class OCDI_Helpers {
 		$upload_url = apply_filters( 'pt-ocdi/upload_file_url', trailingslashit( $upload_dir['url'] ) );
 
 		return $upload_url . basename( $log_path );
+	}
+
+
+	/**
+	 * Check if the AJAX call is valid.
+	 */
+	public static function verify_ajax_call() {
+
+		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
+
+		// Check if user has the WP capability to import data.
+		if ( ! current_user_can( 'import' ) ) {
+			wp_die(
+				sprintf(
+					__( '%sYour user role isn\'t high enough. You don\'t have permission to import demo data.%s', 'pt-ocdi' ),
+					'<div class="notice  notice-error"><p>',
+					'</p></div>'
+				)
+			);
+		}
 	}
 }
