@@ -1,23 +1,22 @@
 <?php
 /**
- * Static functions used in the OCDI plugin
+ * Static functions used in the OCDI plugin.
  *
  * @package ocdi
  */
 
 /**
- * Class with static helper functions
+ * Class with static helper functions.
  */
 class OCDI_Helpers {
 
 	/**
-	 * Filter through the array of import files and get rid of those who do not comply
+	 * Filter through the array of import files and get rid of those who do not comply.
 	 *
 	 * @param  array $import_files list of arrays with import file details.
 	 * @return array list of filtered arrays.
 	 */
 	public static function validate_import_file_info( $import_files ) {
-
 		$filtered_import_file_info = array();
 
 		foreach ( $import_files as $import_file ) {
@@ -30,13 +29,12 @@ class OCDI_Helpers {
 	}
 
 	/**
-	 * A simple check for valid import file format
+	 * Helper function: a simple check for valid import file format.
 	 *
 	 * @param  array $import_file_info array with import file details.
 	 * @return boolean
 	 */
 	private static function is_import_file_info_format_correct( $import_file_info ) {
-
 		if ( empty( $import_file_info['import_file_url'] ) || empty( $import_file_info['import_file_name'] ) ) {
 			return false;
 		}
@@ -46,7 +44,7 @@ class OCDI_Helpers {
 
 
 	/**
-	 * Download import files. Content .xml and widgets .json files
+	 * Download import files. Content .xml and widgets .json files.
 	 *
 	 * @param  array  $import_file_info array with import file details.
 	 * @param  string $start_date string of date and time.
@@ -96,135 +94,6 @@ class OCDI_Helpers {
 		}
 
 		return $downloaded_files;
-	}
-
-
-	/**
-	 * Write content to a file
-	 *
-	 * @param string $content content to be saved to the file.
-	 * @param string $file_path file path where the content should be saved.
-	 * @return string|WP_Error path to the saved file or WP_Error object with error message.
-	 */
-	public static function write_to_file( $content, $file_path ) {
-
-		// Check if the filesystem method is 'direct', if not display an error.
-		if ( 'direct' === get_filesystem_method() ) {
-
-			// Get user credentials for WP filesystem API.
-			$demo_import_page_url = wp_nonce_url( 'themes.php?page=pt-one-click-demo-import', 'pt-one-click-demo-import' );
-
-			if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
-				return new WP_error(
-					'filesystem_credentials_could_not_be_retrieved',
-					__( 'An error occurred while retrieving writing permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
-				);
-			}
-
-			// Now we have credentials, try to get the wp_filesystem running.
-			if ( ! WP_Filesystem( $creds ) ) {
-				return new WP_Error(
-					'wrong_login_credentials',
-					__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
-				);
-			}
-
-			// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
-			global $wp_filesystem;
-
-			if ( ! $wp_filesystem->put_contents( $file_path, $content, FS_CHMOD_FILE ) ) {
-				return new WP_Error(
-					'failed_writing_file_to_server',
-					sprintf(
-						__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
-						'<br>',
-						$file_path
-					)
-				);
-			}
-			else {
-
-				// Return the file path on successfull file write.
-				return $file_path;
-			}
-		}
-		else {
-			return new WP_Error(
-				'no_direct_file_write_access',
-				sprintf(
-					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
-					'<strong>',
-					'</strong>',
-					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
-				)
-			);
-		}
-	}
-
-
-	/**
-	 * Append content to the file
-	 *
-	 * @param string $content content to be saved to the file.
-	 * @param string $file_path file path where the content should be saved.
-	 * @param string $separator separates the existing content of the file with the new content.
-	 * @return boolean|WP_Error, path to the saved file or WP_Error object with error message.
-	 */
-	public static function append_to_file( $content, $file_path, $separator = '' ) {
-
-		// Check if the filesystem method is 'direct', if not display an error.
-		if ( 'direct' === get_filesystem_method() ) {
-
-			// Get user credentials for WP filesystem API.
-			$demo_import_page_url = wp_nonce_url( 'themes.php?page=pt-one-click-demo-import', 'pt-one-click-demo-import' );
-
-			if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
-				return new WP_error(
-					'filesystem_credentials_could_not_be_retrieved',
-					__( 'An error occurred while retrieving writing permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
-				);
-			}
-
-			// Now we have credentials, try to get the wp_filesystem running.
-			if ( ! WP_Filesystem( $creds ) ) {
-				return new WP_Error(
-					'wrong_login_credentials',
-					__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
-				);
-			}
-
-			// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
-			global $wp_filesystem;
-
-			$existing_data = $wp_filesystem->get_contents( $file_path );
-
-			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content, FS_CHMOD_FILE ) ) {
-				return new WP_Error(
-					'failed_writing_file_to_server',
-					sprintf(
-						__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
-						'<br>',
-						$file_path
-					)
-				);
-			}
-			else {
-
-				// Return the file path on successfull file write.
-				return true;
-			}
-		}
-		else {
-			return new WP_Error(
-				'no_direct_file_write_access',
-				sprintf(
-					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
-					'<strong>',
-					'</strong>',
-					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
-				)
-			);
-		}
 	}
 
 
@@ -279,6 +148,144 @@ class OCDI_Helpers {
 			// Return content retrieved from the URL.
 			return wp_remote_retrieve_body( $response );
 		}
+	}
+
+
+	/**
+	 * Write content to a file.
+	 *
+	 * @param string $content content to be saved to the file.
+	 * @param string $file_path file path where the content should be saved.
+	 * @return string|WP_Error path to the saved file or WP_Error object with error message.
+	 */
+	public static function write_to_file( $content, $file_path ) {
+
+		// Check if the filesystem method is 'direct', if not display an error.
+		if ( 'direct' === get_filesystem_method() ) {
+
+			// Verify WP filesystem credentials
+			$verified_credentials = self::check_wp_filesystem_credentials();
+
+			if ( is_wp_error( $verified_credentials ) ) {
+				return $verified_credentials;
+			}
+
+			// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
+			global $wp_filesystem;
+
+			if ( ! $wp_filesystem->put_contents( $file_path, $content, FS_CHMOD_FILE ) ) {
+				return new WP_Error(
+					'failed_writing_file_to_server',
+					sprintf(
+						__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
+						'<br>',
+						$file_path
+					)
+				);
+			}
+			else {
+
+				// Return the file path on successfull file write.
+				return $file_path;
+			}
+		}
+		else {
+			return self::return_direct_filesystem_error();
+		}
+	}
+
+
+	/**
+	 * Append content to the file.
+	 *
+	 * @param string $content content to be saved to the file.
+	 * @param string $file_path file path where the content should be saved.
+	 * @param string $separator separates the existing content of the file with the new content.
+	 * @return boolean|WP_Error, path to the saved file or WP_Error object with error message.
+	 */
+	public static function append_to_file( $content, $file_path, $separator = '' ) {
+
+		// Check if the filesystem method is 'direct', if not display an error.
+		if ( 'direct' === get_filesystem_method() ) {
+
+			// Verify WP filesystem credentials
+			$verified_credentials = self::check_wp_filesystem_credentials();
+
+			if ( is_wp_error( $verified_credentials ) ) {
+				return $verified_credentials;
+			}
+
+			// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
+			global $wp_filesystem;
+
+			$existing_data = $wp_filesystem->get_contents( $file_path );
+
+			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content, FS_CHMOD_FILE ) ) {
+				return new WP_Error(
+					'failed_writing_file_to_server',
+					sprintf(
+						__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
+						'<br>',
+						$file_path
+					)
+				);
+			}
+			else {
+
+				// Return the file path on successfull file write.
+				return true;
+			}
+		}
+		else {
+			return self::return_direct_filesystem_error();
+		}
+	}
+
+
+	/**
+	 * Helper function: check for WP filesystem credentials needed for reading and writing to a file.
+	 *
+	 * @return boolean|WP_Error
+	 */
+	private static function check_wp_filesystem_credentials() {
+
+		// Get user credentials for WP filesystem API.
+		$demo_import_page_url = wp_nonce_url( 'themes.php?page=pt-one-click-demo-import', 'pt-one-click-demo-import' );
+
+		if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
+			return new WP_error(
+				'filesystem_credentials_could_not_be_retrieved',
+				__( 'An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
+			);
+		}
+
+		// Now we have credentials, try to get the wp_filesystem running.
+		if ( ! WP_Filesystem( $creds ) ) {
+			return new WP_Error(
+				'wrong_login_credentials',
+				__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
+			);
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Helper function: return the "no direct access filesystem" error.
+	 *
+	 * @return WP_Error
+	 */
+	private static function return_direct_filesystem_error() {
+		return new WP_Error(
+			'no_direct_file_access',
+			sprintf(
+				__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
+				'<strong>',
+				'</strong>',
+				'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
+			)
+		);
 	}
 
 

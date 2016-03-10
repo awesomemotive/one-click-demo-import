@@ -195,7 +195,7 @@ class PT_One_Click_Demo_Import {
 					PHP_EOL,
 					get_site_url(),
 					$selected_import_files['data'],
-					$selected_import_files['widgets']
+					empty( $selected_import_files['widgets'] ) ? __( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
 				),
 				$this->log_file_path,
 				'---Downloaded files---' . PHP_EOL
