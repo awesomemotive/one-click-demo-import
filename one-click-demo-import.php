@@ -12,14 +12,15 @@ License URI: http://www.gnu.org/licenses/gpl.html
 Text Domain: pt-ocdi
 */
 
+// Block direct access to the main plugin file.
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 // Path/URL to root of this plugin, with trailing slash.
-define( 'PT_OCDI_PATH', apply_filters( 'pt-ocdi/plugin_dir_path', plugin_dir_path( __FILE__ ) ) );
-define( 'PT_OCDI_URL', apply_filters( 'pt-ocdi/plugin_dir_url', plugin_dir_url( __FILE__ ) ) );
+define( 'PT_OCDI_PATH', plugin_dir_path( __FILE__ ) );
+define( 'PT_OCDI_URL', plugin_dir_url( __FILE__ ) );
 
 // Current version of the plugin.
-define( 'PT_OCDI_VERSION', apply_filters( 'pt-ocdi/version', '0.2-alpha' ) );
+define( 'PT_OCDI_VERSION', '0.2-alpha' );
 
 // Include files.
 require PT_OCDI_PATH . 'inc/class-ocdi-helpers.php';
