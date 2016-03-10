@@ -154,7 +154,7 @@ class PT_One_Click_Demo_Import {
 	 */
 	function import_demo_data_ajax_callback() {
 
-		// Verify if the AJAX call is valid.
+		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		OCDI_Helpers::verify_ajax_call();
 
 		// Create a date and time stamp to use for demo and log files.
@@ -165,9 +165,6 @@ class PT_One_Click_Demo_Import {
 
 		// Get selected file index or set it to the first file.
 		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
-
-		// Begin AJAX response.
-		$response = array( 'message' => '' );
 
 		// Download the import files (content and widgets files) and save it to variable for later use.
 		$selected_import_files = OCDI_Helpers::download_import_files( $this->import_files[ $selected_index ], $demo_import_start_time );
@@ -272,10 +269,10 @@ class PT_One_Click_Demo_Import {
 
 		// Display final messages (success or error messages).
 		if ( empty( $demo_import_error_messages ) ) {
-			$response['message'] .= $this->sucessfull_import_finished_message();
+			$response['message'] = $this->sucessfull_import_finished_message();
 		}
 		else {
-			$response['message'] .= $demo_import_error_messages . '<br>';
+			$response['message'] = $demo_import_error_messages . '<br>';
 			$response['message'] .= $this->errors_import_finished_message( $this->log_file_path );
 		}
 
