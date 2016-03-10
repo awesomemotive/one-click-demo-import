@@ -36,7 +36,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Private variables used throughout the plugin.
 	 */
-	private $importer, $plugin_page, $importer_options, $import_files, $logger, $logger_options, $log_file_path;
+	private $importer, $plugin_page, $import_files, $logger, $log_file_path;
 
 	/**
 	 * Class construct function, to initiate the plugin.
@@ -82,9 +82,19 @@ class PT_One_Click_Demo_Import {
 			}
 			?>
 
-			<p>
-				<?php esc_html_e( 'TODO: General description of demo import goes here...', 'pt-ocdi' ); ?>
-			</p>
+			<div class="ocdi__intro-text">
+				<p><?php esc_html_e( 'Importing demo data (post, pages, images, theme settings, ...) is the easiest way to setup your theme. It will allow you to quickly edit everything instead of creating content from scratch. When you import the data, the following things might happen:', 'pt-ocdi'); ?></p>
+
+				<ul>
+					<li><?php esc_html_e( 'No existing posts, pages, categories, images, custom post types or any other data will be deleted or modified.', 'pt-ocdi' ); ?></li>
+					<li><?php esc_html_e( 'Posts, pages, images, widgets and menus will get imported.', 'pt-ocdi' ); ?></li>
+					<li><?php esc_html_e( 'Please click "Import Demo Data" button only once and wait, it can take a couple of minutes.', 'pt-ocdi' ); ?></li>
+				</ul>
+			</div>
+
+			<div class="ocdi__intro-text">
+				<p><?php esc_html_e( 'Before you begin, make sure all the required plugins are activated.', 'pt-ocdi' ); ?></p>
+			</div>
 
 			<?php if ( empty( $this->import_files ) ) : ?>
 				<div class="error  below-h2">
@@ -377,21 +387,21 @@ class PT_One_Click_Demo_Import {
 		$this->import_files = OCDI_Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
 
 		// Importer options array.
-		$this->importer_options = apply_filters( 'pt-ocdi/importer_options', array(
+		$importer_options = apply_filters( 'pt-ocdi/importer_options', array(
 			'fetch_attachments' => true,
 		) );
 
 		// Create importer instance with proper parameters.
-		$this->importer = new OCDI_Importer( $this->importer_options );
+		$this->importer = new OCDI_Importer( $importer_options );
 
 		// Logger options for the importer.
-		$this->logger_options = apply_filters( 'pt-ocdi/logger_options', array(
+		$logger_options = apply_filters( 'pt-ocdi/logger_options', array(
 			'logger_min_level' => 'warning',
 		) );
 
-		// Set the logger and set it to the importer.
+		// Configure logger instance and set it to the importer.
 		$this->logger            = new OCDI_Logger();
-		$this->logger->min_level = $this->logger_options['logger_min_level'];
+		$this->logger->min_level = $logger_options['logger_min_level'];
 		$this->importer->set_logger( $this->logger );
 	}
 

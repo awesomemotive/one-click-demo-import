@@ -1,7 +1,9 @@
+/* Plugin title */
 .ocdi__title span {
 	line-height: 30px;
 }
 
+/* AJAX loader */
 .ocdi__ajax-loader {
 	font-width: bold;
 	font-size: 1.5em;
@@ -11,4 +13,22 @@
 	display: inline-block;
 	float: none;
 	visibility: visible;
+}
+
+/* Plugin intro text */
+.ocdi__intro-text {
+	background-color: #F5FAFD;
+	margin:10px 0;
+	padding: 10px;
+	color: #0C518F;
+	border: 3px solid #CAE0F3;
+	clear: both;
+	width: 90%;
+	line-height: 18px;
+}
+
+.ocdi__intro-text ul {
+	padding-left: 20px;
+	list-style-position: inside;
+	list-style-type: square;
 }
