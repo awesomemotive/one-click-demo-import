@@ -65,61 +65,61 @@ class PT_One_Click_Demo_Import {
 	function display_plugin_page() {
 	?>
 
-		<div class="ocdi  wrap">
-			<h2 class="ocdi__title"><span class="dashicons  dashicons-download"></span><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h2>
+	<div class="ocdi  wrap">
+		<h2 class="ocdi__title"><span class="dashicons  dashicons-download"></span><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h2>
 
-			<?php
+		<?php
 
-			// Display warrning if PHP safe mode is enabled, since we wont be able to change the max_execution_time.
-			if ( ini_get( 'safe_mode' ) ) {
-				printf(
-					__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
-					'<div class="notice  notice-error"><p>',
-					'<strong>',
-					'</strong>',
-					'</p></div>'
-				);
-			}
-			?>
+		// Display warrning if PHP safe mode is enabled, since we wont be able to change the max_execution_time.
+		if ( ini_get( 'safe_mode' ) ) {
+			printf(
+				__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
+				'<div class="notice  notice-error"><p>',
+				'<strong>',
+				'</strong>',
+				'</p></div>'
+			);
+		}
+		?>
 
-			<div class="ocdi__intro-text">
-				<p><?php esc_html_e( 'Importing demo data (post, pages, images, theme settings, ...) is the easiest way to setup your theme. It will allow you to quickly edit everything instead of creating content from scratch. When you import the data, the following things might happen:', 'pt-ocdi'); ?></p>
+		<div class="ocdi__intro-text">
+			<p><?php esc_html_e( 'Importing demo data (post, pages, images, theme settings, ...) is the easiest way to setup your theme. It will allow you to quickly edit everything instead of creating content from scratch. When you import the data, the following things might happen:', 'pt-ocdi'); ?></p>
 
-				<ul>
-					<li><?php esc_html_e( 'No existing posts, pages, categories, images, custom post types or any other data will be deleted or modified.', 'pt-ocdi' ); ?></li>
-					<li><?php esc_html_e( 'Posts, pages, images, widgets and menus will get imported.', 'pt-ocdi' ); ?></li>
-					<li><?php esc_html_e( 'Please click "Import Demo Data" button only once and wait, it can take a couple of minutes.', 'pt-ocdi' ); ?></li>
-				</ul>
-			</div>
-
-			<div class="ocdi__intro-text">
-				<p><?php esc_html_e( 'Before you begin, make sure all the required plugins are activated.', 'pt-ocdi' ); ?></p>
-			</div>
-
-			<?php if ( empty( $this->import_files ) ) : ?>
-				<div class="error  below-h2">
-					<p>
-						<?php esc_html_e( 'There are no import files available!', 'pt-ocdi' ); ?>
-					</p>
-				</div>
-			<?php elseif ( 1 < count( $this->import_files ) ) : ?>
-			<p>
-				<select id="demo-import-files">
-					<?php foreach ( $this->import_files as $index => $import_file ) : ?>
-						<option value="<?php echo esc_attr( $index ); ?>">
-							<?php echo esc_html( $import_file['import_file_name'] ); ?>
-						</option>
-					<?php endforeach; ?>
-				</select>
-			</p>
-			<?php endif; ?>
-
-			<p>
-				<button class="panel-save  button-primary  js-ocdi-import-data  ocdi__button" <?php disabled( true, empty( $this->import_files ) ); ?>><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
-			</p>
-
-			<div class="js-ocdi-ajax-response  ocdi__response"></div>
+			<ul>
+				<li><?php esc_html_e( 'No existing posts, pages, categories, images, custom post types or any other data will be deleted or modified.', 'pt-ocdi' ); ?></li>
+				<li><?php esc_html_e( 'Posts, pages, images, widgets and menus will get imported.', 'pt-ocdi' ); ?></li>
+				<li><?php esc_html_e( 'Please click "Import Demo Data" button only once and wait, it can take a couple of minutes.', 'pt-ocdi' ); ?></li>
+			</ul>
 		</div>
+
+		<div class="ocdi__intro-text">
+			<p><?php esc_html_e( 'Before you begin, make sure all the required plugins are activated.', 'pt-ocdi' ); ?></p>
+		</div>
+
+		<?php if ( empty( $this->import_files ) ) : ?>
+			<div class="error  below-h2">
+				<p>
+					<?php esc_html_e( 'There are no import files available!', 'pt-ocdi' ); ?>
+				</p>
+			</div>
+		<?php elseif ( 1 < count( $this->import_files ) ) : ?>
+		<p>
+			<select id="ocdi__demo-import-files">
+				<?php foreach ( $this->import_files as $index => $import_file ) : ?>
+					<option value="<?php echo esc_attr( $index ); ?>">
+						<?php echo esc_html( $import_file['import_file_name'] ); ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+		</p>
+		<?php endif; ?>
+
+		<p>
+			<button class="ocdi__button  panel-save  button-primary  js-ocdi-import-data" <?php disabled( true, empty( $this->import_files ) ); ?>><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+		</p>
+
+		<div class="ocdi__response  js-ocdi-ajax-response"></div>
+	</div>
 
 	<?php
 	}
@@ -249,7 +249,7 @@ class PT_One_Click_Demo_Import {
 				);
 			}
 		}
-		else if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
+		elseif ( false !== has_action( 'pt-ocdi/after_import' ) ) {
 
 			// Add this message to log file.
 			$log_added = OCDI_Helpers::append_to_file(

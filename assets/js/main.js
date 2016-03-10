@@ -10,7 +10,7 @@ jQuery( function ( $ ) {
 		var data = {
 			'action':    'ocdi_import_demo_data',
 			'security':  ocdi.ajax_nonce,
-			'selected':  $( '#demo-import-files' ).val()
+			'selected':  $( '#ocdi__demo-import-files' ).val()
 		};
 
 		// AJAX call.
