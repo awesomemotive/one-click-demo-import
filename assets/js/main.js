@@ -6,18 +6,25 @@ jQuery( function ( $ ) {
 		// Reset response div content.
 		$( '.js-ocdi-ajax-response' ).empty();
 
-		// Data for AJAX call.
-		var data = {
-			'action':    'ocdi_import_demo_data',
-			'security':  ocdi.ajax_nonce,
-			'selected':  $( '#ocdi__demo-import-files' ).val()
-		};
+		// Prepare data for the AJAX call
+		var data = new FormData();
+		data.append( 'action', 'ocdi_import_demo_data' );
+		data.append( 'security', ocdi.ajax_nonce );
+		data.append( 'selected', $( '#ocdi__demo-import-files' ).val() );
+		if ( $('#ocdi__data-file-upload').length ) {
+			data.append( 'data_file', $('#ocdi__data-file-upload')[0].files[0] );
+		}
+		if ( $('#ocdi__widget-file-upload').length ) {
+			data.append( 'widget_file', $('#ocdi__widget-file-upload')[0].files[0] );
+		}
 
 		// AJAX call.
 		$.ajax({
 			method:     'POST',
 			url:        ocdi.ajax_url,
 			data:       data,
+			contentType: false,
+			processData: false,
 			beforeSend: function() {
 				$( '.js-ocdi-import-data' ).after( '<p class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span>' + ocdi.loader_text + '</p>' );
 			},

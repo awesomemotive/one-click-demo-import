@@ -32,3 +32,8 @@
 	list-style-position: inside;
 	list-style-type: square;
 }
+
+/* WP info notice */
+.notice-info {
+	border-left-color: #58ACFA;
+}

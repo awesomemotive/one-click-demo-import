@@ -97,11 +97,18 @@ class PT_One_Click_Demo_Import {
 		</div>
 
 		<?php if ( empty( $this->import_files ) ) : ?>
-			<div class="error  below-h2">
+			<div class="notice  notice-info  below-h2">
 				<p>
-					<?php esc_html_e( 'There are no import files available!', 'pt-ocdi' ); ?>
+					<?php esc_html_e( 'There are no predefined import files available in this theme. Please upload the import files manually!', 'pt-ocdi' ); ?>
 				</p>
 			</div>
+			<p>
+				<label for="data-file-upload"><?php esc_html_e( 'Choose a xml file for data import:', 'pt-ocdi' ); ?></label>
+				<input id="ocdi__data-file-upload" type="file" name="data-file-upload">
+				<br>
+				<label for="widget-file-upload"><?php esc_html_e( 'Choose a json file for widget import:', 'pt-ocdi' ); ?></label>
+				<input id="ocdi__widget-file-upload" type="file" name="widget-file-upload">
+			</p>
 		<?php elseif ( 1 < count( $this->import_files ) ) : ?>
 		<p>
 			<select id="ocdi__demo-import-files">
@@ -115,7 +122,7 @@ class PT_One_Click_Demo_Import {
 		<?php endif; ?>
 
 		<p>
-			<button class="ocdi__button  panel-save  button-primary  js-ocdi-import-data" <?php disabled( true, empty( $this->import_files ) ); ?>><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+			<button class="ocdi__button  panel-save  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
 		</p>
 
 		<div class="ocdi__response  js-ocdi-ajax-response"></div>
@@ -134,7 +141,7 @@ class PT_One_Click_Demo_Import {
 
 		// Enqueue the scripts only on the plugin page.
 		if ( $this->plugin_page === $hook ) {
-			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery' ), PT_OCDI_VERSION );
+			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery', 'jquery-form' ), PT_OCDI_VERSION );
 
 			wp_localize_script( 'ocdi-main-js', 'ocdi',
 				array(
@@ -157,6 +164,9 @@ class PT_One_Click_Demo_Import {
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		OCDI_Helpers::verify_ajax_call();
 
+		// Error messages displayed on front page.
+		$frontend_error_messages = '';
+
 		// Create a date and time stamp to use for demo and log files.
 		$demo_import_start_time = date( 'Y-m-d__H-i-s' );
 
@@ -166,44 +176,116 @@ class PT_One_Click_Demo_Import {
 		// Get selected file index or set it to the first file.
 		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
 
-		// Download the import files (content and widgets files) and save it to variable for later use.
-		$selected_import_files = OCDI_Helpers::download_import_files( $this->import_files[ $selected_index ], $demo_import_start_time );
-
-		// Check Errors.
-		if ( is_wp_error( $selected_import_files ) ) {
-
-			// Add this error to log file.
-			$log_added = OCDI_Helpers::append_to_file( $selected_import_files->get_error_message() , $this->log_file_path, '---Downloaded files---' . PHP_EOL );
-
-			// Send JSON Error response to the AJAX call.
-			wp_send_json( $this->create_wp_error_notice_response( $selected_import_files ) );
-		}
-		else {
-
-			// Add this message to log file.
-			$log_added = OCDI_Helpers::append_to_file(
-				sprintf(
-					__( 'The import files for: %s were successfully downloaded! Continuing with demo import...', 'pt-ocdi' ),
-					$this->import_files[ $selected_index ]['import_file_name']
-				) . PHP_EOL .
-				sprintf(
-					__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
-					ini_get( 'max_execution_time' )
-				) . PHP_EOL .
-				sprintf(
-					__( 'Files info:%1$sSite URL = %2$s%1$sDemo file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
-					PHP_EOL,
-					get_site_url(),
-					$selected_import_files['data'],
-					empty( $selected_import_files['widgets'] ) ? __( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
-				),
-				$this->log_file_path,
-				'---Downloaded files---' . PHP_EOL
+		// Using manual file uploads?
+		if ( ! empty( $_FILES ) ) {
+			$upload_overrides = array(
+				'test_form' => false,
+				'test_type' => false
 			);
+
+			// Handle demo data file upload.
+			$demo_data_file_info = wp_handle_upload( $_FILES['data_file'], $upload_overrides );
+			$widget_file_info = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
+
+			if ( $demo_data_file_info && ! isset( $demo_data_file_info['error'] ) ) {
+
+				// Set uploaded files as $selected_import_files.
+				$selected_import_files['data'] = $demo_data_file_info['file'];
+				$this->import_files[ $selected_index ]['import_file_name'] = __( 'Manually uploaded files', 'pt-ocdi' );
+
+				if ( $widget_file_info && ! isset( $widget_file_info['error'] ) ) {
+					$selected_import_files['widgets'] = $widget_file_info['file'];
+				}
+				else {
+
+					$frontend_error_messages .= sprintf(
+						__( 'Widget file was not uploaded. %s%s', 'pt-ocdi' ),
+						$widget_file_info['error'],
+						'<br>'
+					);
+
+					// Add this error to log file.
+					$log_added = OCDI_Helpers::append_to_file( $widget_file_info['error'] , $this->log_file_path, '---Upload files---' . PHP_EOL );
+				}
+
+				// Add this message to log file.
+				$log_added = OCDI_Helpers::append_to_file(
+						__( 'The import files were successfully uploaded! Continuing with demo import...', 'pt-ocdi' )
+					 . PHP_EOL .
+					sprintf(
+						__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
+						ini_get( 'max_execution_time' )
+					) . PHP_EOL .
+					sprintf(
+						__( 'Files info:%1$sSite URL = %2$s%1$sDemo file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
+						PHP_EOL,
+						get_site_url(),
+						$selected_import_files['data'],
+						empty( $selected_import_files['widgets'] ) ? __( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
+					),
+					$this->log_file_path,
+					'---Upload files---' . PHP_EOL
+				);
+			}
+			else {
+
+				// Add this error to log file.
+				$log_added = OCDI_Helpers::append_to_file( $demo_data_file_info['error'] , $this->log_file_path, '---Upload files---' . PHP_EOL );
+
+				// Send JSON Error response to the AJAX call.
+				wp_send_json( $demo_data_file_info['error'] );
+			}
+
+		}
+		else { // Use predefined import files from wp filter: pt-ocdi/import_files
+
+			if ( ! empty( $this->import_files[ $selected_index ] ) ) {
+
+				// Download the import files (content and widgets files) and save it to variable for later use.
+				$selected_import_files = OCDI_Helpers::download_import_files( $this->import_files[ $selected_index ], $demo_import_start_time );
+
+				// Check Errors.
+				if ( is_wp_error( $selected_import_files ) ) {
+
+					// Add this error to log file.
+					$log_added = OCDI_Helpers::append_to_file( $selected_import_files->get_error_message() , $this->log_file_path, '---Downloaded files---' . PHP_EOL );
+
+					// Send JSON Error response to the AJAX call.
+					wp_send_json( $this->create_wp_error_notice_response( $selected_import_files ) );
+				}
+				else {
+
+					// Add this message to log file.
+					$log_added = OCDI_Helpers::append_to_file(
+						sprintf(
+							__( 'The import files for: %s were successfully downloaded! Continuing with demo import...', 'pt-ocdi' ),
+							$this->import_files[ $selected_index ]['import_file_name']
+						) . PHP_EOL .
+						sprintf(
+							__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
+							ini_get( 'max_execution_time' )
+						) . PHP_EOL .
+						sprintf(
+							__( 'Files info:%1$sSite URL = %2$s%1$sDemo file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
+							PHP_EOL,
+							get_site_url(),
+							$selected_import_files['data'],
+							empty( $selected_import_files['widgets'] ) ? __( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
+						),
+						$this->log_file_path,
+						'---Downloaded files---' . PHP_EOL
+					);
+				}
+			}
+			else {
+
+				// Send JSON Error response to the AJAX call.
+				wp_send_json( __( 'No import files specified!', 'pt-ocdi' ) );
+			}
 		}
 
 		// Data import - returns any errors greater then the "error" logger level.
-		$demo_import_error_messages = $this->import_data( $selected_import_files['data'] );
+		$frontend_error_messages .= $this->import_data( $selected_import_files['data'] );
 
 		if ( ! empty( $selected_import_files['widgets'] ) ) {
 
@@ -253,11 +335,11 @@ class PT_One_Click_Demo_Import {
 		}
 
 		// Display final messages (success or error messages).
-		if ( empty( $demo_import_error_messages ) ) {
+		if ( empty( $frontend_error_messages ) ) {
 			$response['message'] = $this->sucessfull_import_finished_message();
 		}
 		else {
-			$response['message'] = $demo_import_error_messages . '<br>';
+			$response['message'] = $frontend_error_messages . '<br>';
 			$response['message'] .= $this->errors_import_finished_message( $this->log_file_path );
 		}
 
