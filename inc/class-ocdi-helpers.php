@@ -44,7 +44,7 @@ class OCDI_Helpers {
 
 
 	/**
-	 * Download import files. Content .xml and widgets .json files.
+	 * Download import files. Content .xml and widgets .wie|.json files.
 	 *
 	 * @param  array  $import_file_info array with import file details.
 	 * @param  string $start_date string of date and time.
@@ -54,7 +54,7 @@ class OCDI_Helpers {
 
 		$downloaded_files = array();
 
-		// Retrieve content from the URL.
+		// Retrieve demo data content from the URL.
 		$demo_import_content = self::get_content_from_url( $import_file_info['import_file_url'], $import_file_info['import_file_name'] );
 
 		// Return from this function if there was an error.
@@ -62,12 +62,12 @@ class OCDI_Helpers {
 			return $demo_import_content;
 		}
 
-		// Setup filename path to save the content.
+		// Setup filename path to save the data content.
 		$upload_dir            = wp_upload_dir();
 		$upload_path           = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 		$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
 
-		// Write content to the file and return the file path on successful write.
+		// Write data content to the file and return the file path on successful write.
 		$downloaded_files['data'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
 
 		// Return from this function if there was an error.
@@ -77,7 +77,8 @@ class OCDI_Helpers {
 
 		// Get widgets file as well. If defined!
 		if ( ! empty( $import_file_info['import_widget_file_url'] ) ) {
-			$import_widgets_file_path    = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+
+			// Retrieve widget content from the URL.
 			$demo_import_widgets_content = self::get_content_from_url( $import_file_info['import_widget_file_url'], $import_file_info['import_file_name'] );
 
 			// Return from this function if there was an error.
@@ -85,6 +86,10 @@ class OCDI_Helpers {
 				return $demo_import_widgets_content;
 			}
 
+			// Setup filename path to save the widget content.
+			$import_widgets_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+
+			// Write widget content to the file and return the file path on successful write.
 			$downloaded_files['widgets'] = self::write_to_file( $demo_import_widgets_content, $import_widgets_file_path );
 
 			// Return from this function if there was an error.
@@ -98,7 +103,7 @@ class OCDI_Helpers {
 
 
 	/**
-	 * Helper function: get content from an url
+	 * Helper function: get content from an url.
 	 *
 	 * @param string $url URL to the content file.
 	 * @param string $file_name optional, name of the file (used in the error reports).
@@ -160,10 +165,10 @@ class OCDI_Helpers {
 	 */
 	public static function write_to_file( $content, $file_path ) {
 
-		// Check if the filesystem method is 'direct', if not display an error.
+		// Check if the file-system method is 'direct', if not display an error.
 		if ( 'direct' === get_filesystem_method() ) {
 
-			// Verify WP filesystem credentials
+			// Verify WP file-system credentials.
 			$verified_credentials = self::check_wp_filesystem_credentials();
 
 			if ( is_wp_error( $verified_credentials ) ) {
@@ -185,11 +190,13 @@ class OCDI_Helpers {
 			}
 			else {
 
-				// Return the file path on successfull file write.
+				// Return the file path on successful file write.
 				return $file_path;
 			}
 		}
 		else {
+
+			// Return error, because the file-system method is not set to "direct".
 			return self::return_direct_filesystem_error();
 		}
 	}
@@ -205,10 +212,10 @@ class OCDI_Helpers {
 	 */
 	public static function append_to_file( $content, $file_path, $separator_text = '' ) {
 
-		// Check if the filesystem method is 'direct', if not display an error.
+		// Check if the file-system method is 'direct', if not display an error.
 		if ( 'direct' === get_filesystem_method() ) {
 
-			// Verify WP filesystem credentials
+			// Verify WP file-system credentials.
 			$verified_credentials = self::check_wp_filesystem_credentials();
 
 			if ( is_wp_error( $verified_credentials ) ) {
@@ -220,7 +227,7 @@ class OCDI_Helpers {
 
 			$existing_data = $wp_filesystem->get_contents( $file_path );
 
-			// Style separator
+			// Style separator.
 			$separator = PHP_EOL . '---' . $separator_text . '---' . PHP_EOL;
 
 			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content . PHP_EOL, FS_CHMOD_FILE ) ) {
@@ -235,11 +242,13 @@ class OCDI_Helpers {
 			}
 			else {
 
-				// Return the file path on successfull file write.
+				// Return the file path on successful file write.
 				return true;
 			}
 		}
 		else {
+
+			// Return error, because the file-system method is not set to "direct".
 			return self::return_direct_filesystem_error();
 		}
 	}
@@ -253,10 +262,10 @@ class OCDI_Helpers {
 	 */
 	public static function data_from_file( $file_path ) {
 
-		// Check if the filesystem method is 'direct', if not display an error.
+		// Check if the file-system method is 'direct', if not display an error.
 		if ( 'direct' === get_filesystem_method() ) {
 
-			// Verify WP filesystem credentials
+			// Verify WP file-system credentials.
 			$verified_credentials = self::check_wp_filesystem_credentials();
 
 			if ( is_wp_error( $verified_credentials ) ) {
@@ -279,23 +288,27 @@ class OCDI_Helpers {
 				);
 			}
 			else {
+
+				// Return the file data.
 				return $data;
 			}
 		}
 		else {
+
+			// Return error, because the file-system method is not set to "direct".
 			return self::return_direct_filesystem_error();
 		}
 	}
 
 
 	/**
-	 * Helper function: check for WP filesystem credentials needed for reading and writing to a file.
+	 * Helper function: check for WP file-system credentials needed for reading and writing to a file.
 	 *
 	 * @return boolean|WP_Error
 	 */
 	private static function check_wp_filesystem_credentials() {
 
-		// Get user credentials for WP filesystem API.
+		// Get user credentials for WP file-system API.
 		$demo_import_page_url = wp_nonce_url( 'themes.php?page=pt-one-click-demo-import', 'pt-one-click-demo-import' );
 
 		if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
@@ -318,7 +331,7 @@ class OCDI_Helpers {
 
 
 	/**
-	 * Helper function: return the "no direct access filesystem" error.
+	 * Helper function: return the "no direct access file-system" error.
 	 *
 	 * @return WP_Error
 	 */
@@ -419,7 +432,7 @@ class OCDI_Helpers {
 		// Variable holding the paths to the uploaded files.
 		$selected_import_files = array();
 
-		// Upload settings to disable form and type testing.
+		// Upload settings to disable form and type testing for AJAX uploads.
 		$upload_overrides = array(
 			'test_form' => false,
 			'test_type' => false
@@ -454,19 +467,7 @@ class OCDI_Helpers {
 
 			// Add this message to log file.
 			$log_added = self::append_to_file(
-					__( 'The import files were successfully uploaded!', 'pt-ocdi' )
-				 . PHP_EOL .
-				sprintf(
-					__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
-					ini_get( 'max_execution_time' )
-				) . PHP_EOL .
-				sprintf(
-					__( 'Files info:%1$sSite URL = %2$s%1$sDemo file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
-					PHP_EOL,
-					get_site_url(),
-					$selected_import_files['data'],
-					empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
-				),
+				__( 'The import files were successfully uploaded!', 'pt-ocdi' ) . self::import_file_info( $selected_import_files ),
 				$log_file_path,
 				esc_html__( 'Upload files' , 'pt-ocdi' )
 			);
@@ -476,7 +477,7 @@ class OCDI_Helpers {
 		}
 		else {
 
-			// Write error to log file and send an AJAX response with the error
+			// Write error to log file and send an AJAX response with the error.
 			self::log_error_and_send_ajax_response(
 				__( 'Please upload XML file for data import. If you want to import widgets only, please use Widget Importer & Exporter plugin.', 'pt-ocdi' ),
 				$log_file_path,
@@ -487,17 +488,22 @@ class OCDI_Helpers {
 
 
 	/**
-	 * Create info notice, to display on front-end.
+	 * Get import file information and max execution time.
 	 *
-	 * @param string $notice text to display in the notice.
-	 * @return string, notice with additional HTML.
+	 * @param array $selected_import_files array of selected import files.
 	 */
-	public static function create_wp_info_notice( $notice ) {
-		return sprintf(
-			'%s%s%s',
-			'<div class="notice  notice-info  below-h2"><p>',
-			$notice,
-			'</p></div>'
+	public static function import_file_info( $selected_import_files ) {
+		return PHP_EOL .
+		sprintf(
+			__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
+			ini_get( 'max_execution_time' )
+		) . PHP_EOL .
+		sprintf(
+			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
+			PHP_EOL,
+			get_site_url(),
+			$selected_import_files['data'],
+			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
 		);
 	}
 
@@ -507,6 +513,7 @@ class OCDI_Helpers {
 	 *
 	 * @param string $error_text text to display in the log file and in the AJAX response.
 	 * @param string $log_file_path path to the log file.
+	 * @param string $separator title separating the old and new content.
 	 */
 	public static function log_error_and_send_ajax_response( $error_text, $log_file_path, $separator = '' ) {
 

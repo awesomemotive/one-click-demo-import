@@ -1,6 +1,9 @@
 <?php
 /**
- * Class for the widget importer used in the One Click Demo Import plugin
+ * Class for the widget importer used in the One Click Demo Import plugin.
+ *
+ * Code is mostly from the Widget Importer & Exporter plugin.
+ * @see https://wordpress.org/plugins/widget-importer-exporter/
  *
  * @package ocdi
  */
@@ -283,6 +286,10 @@ class OCDI_Widget_Importer {
 	 * @param array $results widget import results.
 	 */
 	public function format_results_for_log( $results ) {
+
+		if ( empty( $results ) ) {
+			esc_html_e( 'No results for widget import!', 'pt-ocdi' );
+		}
 
 		// Loop sidebars.
 		foreach ( $results as $sidebar ) {

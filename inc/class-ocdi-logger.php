@@ -10,6 +10,10 @@ require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-logger.php';
 require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-logger-cli.php';
 
 class OCDI_Logger extends WP_Importer_Logger_CLI {
+
+	/**
+	 * Variable for front-end error display.
+	 */
 	public $error_output = '';
 
 	/**
