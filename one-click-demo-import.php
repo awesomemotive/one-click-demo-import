@@ -118,7 +118,7 @@ class PT_One_Click_Demo_Import {
 		<?php endif; ?>
 
 		<p>
-			<button class="ocdi__button  panel-save  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+			<button class="ocdi__button  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
 		</p>
 
 		<div class="ocdi__response  js-ocdi-ajax-response"></div>
