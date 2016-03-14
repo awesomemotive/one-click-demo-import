@@ -402,4 +402,96 @@ class OCDI_Helpers {
 			);
 		}
 	}
+
+
+	/**
+	 * Process uploaded files and return the paths to these files.
+	 *
+	 * @param array $uploaded_files $_FILES array, form an AJAX request.
+	 * @param string $log_file_path path to the log file.
+	 * @return array of paths to the data import and widget import files.
+	 */
+	public static function process_uploaded_files( $uploaded_files, $log_file_path ) {
+
+		// Variable holding the paths to the uploaded files.
+		$selected_import_files = array();
+
+		// Upload settings to disable form and type testing.
+		$upload_overrides = array(
+			'test_form' => false,
+			'test_type' => false
+		);
+
+		// Handle demo data and widgets file upload.
+		$demo_data_file_info = wp_handle_upload( $_FILES['data_file'], $upload_overrides );
+		$widget_file_info    = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
+
+		if ( $demo_data_file_info && ! isset( $demo_data_file_info['error'] ) ) {
+
+			// Set uploaded data file.
+			$selected_import_files['data'] = $demo_data_file_info['file'];
+
+			if ( $widget_file_info && ! isset( $widget_file_info['error'] ) ) {
+
+				// Set uploaded widget file.
+				$selected_import_files['widgets'] = $widget_file_info['file'];
+			}
+			else {
+
+				// Add this error to log file.
+				$log_added = OCDI_Helpers::append_to_file(
+					sprintf(
+						__( 'Widget file was not uploaded. Error: %s', 'pt-ocdi' ),
+						$widget_file_info['error']
+					),
+					$log_file_path,
+					'---Upload files---' . PHP_EOL
+				);
+			}
+
+			// Add this message to log file.
+			$log_added = OCDI_Helpers::append_to_file(
+					__( 'The import files were successfully uploaded! Continuing with demo import...', 'pt-ocdi' )
+				 . PHP_EOL .
+				sprintf(
+					__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
+					ini_get( 'max_execution_time' )
+				) . PHP_EOL .
+				sprintf(
+					__( 'Files info:%1$sSite URL = %2$s%1$sDemo file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
+					PHP_EOL,
+					get_site_url(),
+					$selected_import_files['data'],
+					empty( $selected_import_files['widgets'] ) ? __( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
+				),
+				$log_file_path,
+				PHP_EOL . '---Upload files---' . PHP_EOL
+			);
+
+			// Return array with paths of uploaded files.
+			return $selected_import_files;
+		}
+		else {
+			return new WP_Error(
+				'no_data_import_file_uploaded',
+				__( 'Please upload XML file for data import. If you want to import widgets only, please use Widget Importer & Exporter plugin.', 'pt-ocdi' )
+			);
+		}
+	}
+
+
+	/**
+	 * Create info notice, to display on front-end.
+	 *
+	 * @param string $notice text to display in the notice.
+	 * @return string, notice with additional HTML.
+	 */
+	public static function create_wp_info_notice( $notice ) {
+		return sprintf(
+			'%s%s%s',
+			'<div class="notice  notice-info  below-h2"><p>',
+			$notice,
+			'</p></div>'
+		);
+	}
 }
