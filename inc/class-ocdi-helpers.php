@@ -200,10 +200,10 @@ class OCDI_Helpers {
 	 *
 	 * @param string $content content to be saved to the file.
 	 * @param string $file_path file path where the content should be saved.
-	 * @param string $separator separates the existing content of the file with the new content.
+	 * @param string $separator_text separates the existing content of the file with the new content.
 	 * @return boolean|WP_Error, path to the saved file or WP_Error object with error message.
 	 */
-	public static function append_to_file( $content, $file_path, $separator = '' ) {
+	public static function append_to_file( $content, $file_path, $separator_text = '' ) {
 
 		// Check if the filesystem method is 'direct', if not display an error.
 		if ( 'direct' === get_filesystem_method() ) {
@@ -220,7 +220,10 @@ class OCDI_Helpers {
 
 			$existing_data = $wp_filesystem->get_contents( $file_path );
 
-			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content, FS_CHMOD_FILE ) ) {
+			// Style separator
+			$separator = PHP_EOL . '---' . $separator_text . '---' . PHP_EOL;
+
+			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content . PHP_EOL, FS_CHMOD_FILE ) ) {
 				return new WP_Error(
 					'failed_writing_file_to_server',
 					sprintf(
@@ -445,7 +448,7 @@ class OCDI_Helpers {
 						$widget_file_info['error']
 					),
 					$log_file_path,
-					'---Upload files---' . PHP_EOL
+					esc_html__( 'Upload files' , 'pt-ocdi' )
 				);
 			}
 
@@ -462,10 +465,10 @@ class OCDI_Helpers {
 					PHP_EOL,
 					get_site_url(),
 					$selected_import_files['data'],
-					empty( $selected_import_files['widgets'] ) ? __( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
+					empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
 				),
 				$log_file_path,
-				PHP_EOL . '---Upload files---' . PHP_EOL
+				esc_html__( 'Upload files' , 'pt-ocdi' )
 			);
 
 			// Return array with paths of uploaded files.
@@ -477,7 +480,7 @@ class OCDI_Helpers {
 			self::log_error_and_send_ajax_response(
 				__( 'Please upload XML file for data import. If you want to import widgets only, please use Widget Importer & Exporter plugin.', 'pt-ocdi' ),
 				$log_file_path,
-				'---Upload files---'
+				esc_html__( 'Upload files', 'pt-ocdi' )
 			);
 		}
 	}
@@ -511,7 +514,7 @@ class OCDI_Helpers {
 		$log_added = self::append_to_file(
 			$error_text,
 			$log_file_path,
-			$separator . PHP_EOL
+			$separator
 		);
 
 		// Send JSON Error response to the AJAX call.

@@ -143,7 +143,7 @@ class PT_One_Click_Demo_Import {
 				array(
 					'ajax_url'    => admin_url( 'admin-ajax.php' ),
 					'ajax_nonce'  => wp_create_nonce( 'ocdi-ajax-verification' ),
-					'loader_text' => __( 'Importing now, please wait!', 'pt-ocdi' ),
+					'loader_text' => esc_html__( 'Importing now, please wait!', 'pt-ocdi' ),
 				)
 			);
 
@@ -163,8 +163,8 @@ class PT_One_Click_Demo_Import {
 		// Error messages displayed on front page.
 		$frontend_error_messages = '';
 
-		// Create a date and time stamp to use for demo and log files.
-		$demo_import_start_time = date( 'Y-m-d__H-i-s' );
+		// Create a date and time string to use for demo and log file names.
+		$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
 
 		// Define log file path.
 		$this->log_file_path = OCDI_Helpers::get_log_path( $demo_import_start_time );
@@ -182,7 +182,7 @@ class PT_One_Click_Demo_Import {
 			$selected_import_files = OCDI_Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
 
 			// Set the name of the import files, because we used the uploaded files
-			$this->import_files[ $selected_index ]['import_file_name'] = __( 'Manually uploaded files', 'pt-ocdi' );
+			$this->import_files[ $selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'pt-ocdi' );
 		}
 		else { // Use predefined import files from wp filter: pt-ocdi/import_files
 
@@ -195,7 +195,7 @@ class PT_One_Click_Demo_Import {
 				if ( is_wp_error( $selected_import_files ) ) {
 
 					// Write error to log file and send an AJAX response with the error
-					OCDI_Helpers::log_error_and_send_ajax_response( $selected_import_files->get_error_message(), $this->log_file_path, '---Downloaded files---' );
+					OCDI_Helpers::log_error_and_send_ajax_response( $selected_import_files->get_error_message(), $this->log_file_path, esc_html__( 'Downloaded files', 'pt-ocdi' ) );
 				}
 
 				// Add this message to log file.
@@ -213,16 +213,16 @@ class PT_One_Click_Demo_Import {
 						PHP_EOL,
 						get_site_url(),
 						$selected_import_files['data'],
-						empty( $selected_import_files['widgets'] ) ? __( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
+						empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
 					),
 					$this->log_file_path,
-					'---Downloaded files---' . PHP_EOL
+					esc_html__( 'Downloaded files' , 'pt-ocdi' )
 				);
 			}
 			else {
 
 				// Send JSON Error response to the AJAX call.
-				wp_send_json( __( 'No import files specified!', 'pt-ocdi' ) );
+				wp_send_json( esc_html__( 'No import files specified!', 'pt-ocdi' ) );
 			}
 		}
 
@@ -288,7 +288,7 @@ class PT_One_Click_Demo_Import {
 			$log_added = OCDI_Helpers::append_to_file(
 				$message . PHP_EOL . 'MAX EXECUTION TIME = ' . ini_get( 'max_execution_time' ),
 				$this->log_file_path,
-				PHP_EOL . '---Importing demo data---' . PHP_EOL
+				esc_html__( 'Importing demo data' , 'pt-ocdi' )
 			);
 		}
 
@@ -321,7 +321,7 @@ class PT_One_Click_Demo_Import {
 		if ( is_wp_error( $results ) ) {
 
 			// Write error to log file and send an AJAX response with the error
-			OCDI_Helpers::log_error_and_send_ajax_response( $widget_output->get_error_message(), $this->log_file_path, '---Importing widgets---' );
+			OCDI_Helpers::log_error_and_send_ajax_response( $widget_output->get_error_message(), $this->log_file_path, esc_html__( 'Importing widgets', 'pt-ocdi' ) );
 		}
 
 		ob_start();
@@ -332,7 +332,7 @@ class PT_One_Click_Demo_Import {
 		$log_added = OCDI_Helpers::append_to_file(
 			$message,
 			$this->log_file_path,
-			PHP_EOL . '---Importing widgets---' . PHP_EOL
+			esc_html__( 'Importing widgets' , 'pt-ocdi' )
 		);
 	}
 
@@ -352,7 +352,7 @@ class PT_One_Click_Demo_Import {
 		$log_added = OCDI_Helpers::append_to_file(
 			$message,
 			$this->log_file_path,
-			PHP_EOL . '---After import setup---' . PHP_EOL
+			esc_html__( 'After import setup' , 'pt-ocdi' )
 		);
 	}
 

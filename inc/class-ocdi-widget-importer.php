@@ -291,7 +291,6 @@ class OCDI_Widget_Importer {
 			foreach ( $sidebar['widgets'] as $widget ) {
 				echo $widget['name'] . ' - ' . $widget['title'] . ' - ' . $widget['message'] . PHP_EOL;
 			}
-
 			echo PHP_EOL;
 		}
 	}
