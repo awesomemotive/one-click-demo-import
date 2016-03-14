@@ -439,7 +439,7 @@ class OCDI_Helpers {
 			else {
 
 				// Add this error to log file.
-				$log_added = OCDI_Helpers::append_to_file(
+				$log_added = self::append_to_file(
 					sprintf(
 						__( 'Widget file was not uploaded. Error: %s', 'pt-ocdi' ),
 						$widget_file_info['error']
@@ -450,8 +450,8 @@ class OCDI_Helpers {
 			}
 
 			// Add this message to log file.
-			$log_added = OCDI_Helpers::append_to_file(
-					__( 'The import files were successfully uploaded! Continuing with demo import...', 'pt-ocdi' )
+			$log_added = self::append_to_file(
+					__( 'The import files were successfully uploaded!', 'pt-ocdi' )
 				 . PHP_EOL .
 				sprintf(
 					__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
@@ -472,9 +472,12 @@ class OCDI_Helpers {
 			return $selected_import_files;
 		}
 		else {
-			return new WP_Error(
-				'no_data_import_file_uploaded',
-				__( 'Please upload XML file for data import. If you want to import widgets only, please use Widget Importer & Exporter plugin.', 'pt-ocdi' )
+
+			// Write error to log file and send an AJAX response with the error
+			self::log_error_and_send_ajax_response(
+				__( 'Please upload XML file for data import. If you want to import widgets only, please use Widget Importer & Exporter plugin.', 'pt-ocdi' ),
+				$log_file_path,
+				'---Upload files---'
 			);
 		}
 	}
@@ -493,5 +496,25 @@ class OCDI_Helpers {
 			$notice,
 			'</p></div>'
 		);
+	}
+
+
+	/**
+	 * Write the error to the log file and send the AJAX response.
+	 *
+	 * @param string $error_text text to display in the log file and in the AJAX response.
+	 * @param string $log_file_path path to the log file.
+	 */
+	public static function log_error_and_send_ajax_response( $error_text, $log_file_path, $separator = '' ) {
+
+		// Add this error to log file.
+		$log_added = self::append_to_file(
+			$error_text,
+			$log_file_path,
+			$separator . PHP_EOL
+		);
+
+		// Send JSON Error response to the AJAX call.
+		wp_send_json( $error_text );
 	}
 }

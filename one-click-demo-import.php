@@ -172,21 +172,14 @@ class PT_One_Click_Demo_Import {
 		// Get selected file index or set it to the first file.
 		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
 
-		// Using manual file uploads?
-		if ( ! empty( $_FILES ) ) {
+		/**
+		 * Prepare import files.
+		 * Manually uploaded import files or predefined import files via filter: pt-ocdi/import_files
+		 */
+		if ( ! empty( $_FILES ) ) { // Using manual file uploads?
 
 			// Get paths for the uploaded files.
 			$selected_import_files = OCDI_Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
-
-			// Check Errors.
-			if ( is_wp_error( $selected_import_files ) ) {
-
-				// Add this error to log file.
-				$log_added = OCDI_Helpers::append_to_file( $selected_import_files->get_error_message() , $this->log_file_path, '---Upload files---' . PHP_EOL );
-
-				// Send JSON Error response to the AJAX call.
-				wp_send_json( $this->create_wp_error_notice_response( $selected_import_files ) );
-			}
 
 			// Set the name of the import files, because we used the uploaded files
 			$this->import_files[ $selected_index ]['import_file_name'] = __( 'Manually uploaded files', 'pt-ocdi' );
@@ -201,17 +194,14 @@ class PT_One_Click_Demo_Import {
 				// Check Errors.
 				if ( is_wp_error( $selected_import_files ) ) {
 
-					// Add this error to log file.
-					$log_added = OCDI_Helpers::append_to_file( $selected_import_files->get_error_message() , $this->log_file_path, '---Downloaded files---' . PHP_EOL );
-
-					// Send JSON Error response to the AJAX call.
-					wp_send_json( $this->create_wp_error_notice_response( $selected_import_files ) );
+					// Write error to log file and send an AJAX response with the error
+					OCDI_Helpers::log_error_and_send_ajax_response( $selected_import_files->get_error_message(), $this->log_file_path, '---Downloaded files---' );
 				}
 
 				// Add this message to log file.
 				$log_added = OCDI_Helpers::append_to_file(
 					sprintf(
-						__( 'The import files for: %s were successfully downloaded! Continuing with demo import...', 'pt-ocdi' ),
+						__( 'The import files for: %s were successfully downloaded!', 'pt-ocdi' ),
 						$this->import_files[ $selected_index ]['import_file_name']
 					) . PHP_EOL .
 					sprintf(
@@ -236,51 +226,25 @@ class PT_One_Click_Demo_Import {
 			}
 		}
 
-		// Data import - returns any errors greater then the "error" logger level.
+		/**
+		 * Import demo data.
+		 * Returns any errors greater then the "error" logger level, that can be displayed on front page.
+		 */
 		$frontend_error_messages .= $this->import_data( $selected_import_files['data'] );
 
+		/**
+		 * Import widgets.
+		 */
 		if ( ! empty( $selected_import_files['widgets'] ) ) {
 
-			// Add this message to log file.
-			$log_added = OCDI_Helpers::append_to_file(
-				__( 'The demo import has finished, widget import is next...', 'pt-ocdi' ),
-				$this->log_file_path,
-				PHP_EOL
-			);
-
-			// Import widgets and return the output for log file.
-			$widget_output = $this->import_widgets( $selected_import_files['widgets'] );
-
-			if ( is_wp_error( $widget_output ) ) {
-
-				// Add this error to log file.
-				$log_added = OCDI_Helpers::append_to_file( $widget_output->get_error_message() , $this->log_file_path, PHP_EOL . '---Importing widgets---' . PHP_EOL );
-
-				// Send JSON Error response to the AJAX call.
-				wp_send_json( $this->create_wp_error_notice_response( $widget_output ) );
-			}
-
-			if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
-
-				// Add this message to log file.
-				$log_added = OCDI_Helpers::append_to_file(
-					__( 'The widget import has finished, after import setup is next...', 'pt-ocdi' ),
-					$this->log_file_path,
-					PHP_EOL
-				);
-
-				// Run the after_import action to setup other settings.
-				$this->after_import_setup();
-			}
+			// Import widgets
+			$this->import_widgets( $selected_import_files['widgets'] );
 		}
-		elseif ( false !== has_action( 'pt-ocdi/after_import' ) ) {
 
-			// Add this message to log file.
-			$log_added = OCDI_Helpers::append_to_file(
-				__( 'The demo import has finished, after import setup is next...', 'pt-ocdi' ),
-				$this->log_file_path,
-				PHP_EOL
-			);
+		/**
+		 * After import setup.
+		 */
+		if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
 
 			// Run the after_import action to setup other settings.
 			$this->after_import_setup();
@@ -355,7 +319,9 @@ class PT_One_Click_Demo_Import {
 
 		// Check for errors.
 		if ( is_wp_error( $results ) ) {
-			return $results;
+
+			// Write error to log file and send an AJAX response with the error
+			OCDI_Helpers::log_error_and_send_ajax_response( $widget_output->get_error_message(), $this->log_file_path, '---Importing widgets---' );
 		}
 
 		ob_start();
@@ -368,8 +334,6 @@ class PT_One_Click_Demo_Import {
 			$this->log_file_path,
 			PHP_EOL . '---Importing widgets---' . PHP_EOL
 		);
-
-		return $message;
 	}
 
 
