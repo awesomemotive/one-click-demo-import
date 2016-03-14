@@ -423,7 +423,7 @@ class OCDI_Helpers {
 	/**
 	 * Process uploaded files and return the paths to these files.
 	 *
-	 * @param array $uploaded_files $_FILES array, form an AJAX request.
+	 * @param array  $uploaded_files $_FILES array form an AJAX request.
 	 * @param string $log_file_path path to the log file.
 	 * @return array of paths to the data import and widget import files.
 	 */
@@ -435,7 +435,7 @@ class OCDI_Helpers {
 		// Upload settings to disable form and type testing for AJAX uploads.
 		$upload_overrides = array(
 			'test_form' => false,
-			'test_type' => false
+			'test_type' => false,
 		);
 
 		// Handle demo data and widgets file upload.
@@ -503,7 +503,7 @@ class OCDI_Helpers {
 			PHP_EOL,
 			get_site_url(),
 			$selected_import_files['data'],
-			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi') : $selected_import_files['widgets']
+			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets']
 		);
 	}
 

@@ -3,8 +3,8 @@
  * Class for the widget importer used in the One Click Demo Import plugin.
  *
  * Code is mostly from the Widget Importer & Exporter plugin.
- * @see https://wordpress.org/plugins/widget-importer-exporter/
  *
+ * @see https://wordpress.org/plugins/widget-importer-exporter/
  * @package ocdi
  */
 
@@ -293,10 +293,10 @@ class OCDI_Widget_Importer {
 
 		// Loop sidebars.
 		foreach ( $results as $sidebar ) {
-			echo $sidebar['name'] . ' : ' . $sidebar['message'] . PHP_EOL . PHP_EOL;
+			echo esc_html( $sidebar['name'] ) . ' : ' . esc_html( $sidebar['message'] ) . PHP_EOL . PHP_EOL;
 			// Loop widgets.
 			foreach ( $sidebar['widgets'] as $widget ) {
-				echo $widget['name'] . ' - ' . $widget['title'] . ' - ' . $widget['message'] . PHP_EOL;
+				echo esc_html( $widget['name'] ) . ' - ' . esc_html( $widget['title'] ) . ' - ' . esc_html( $widget['message'] ) . PHP_EOL;
 			}
 			echo PHP_EOL;
 		}

@@ -73,7 +73,7 @@ class PT_One_Click_Demo_Import {
 		// Display warrning if PHP safe mode is enabled, since we wont be able to change the max_execution_time.
 		if ( ini_get( 'safe_mode' ) ) {
 			printf(
-				__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
+				esc_html__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
 				'<div class="notice  notice-error"><p>',
 				'<strong>',
 				'</strong>',
@@ -83,7 +83,9 @@ class PT_One_Click_Demo_Import {
 		?>
 
 		<div class="ocdi__intro-text">
-			<p><?php esc_html_e( 'Importing demo data (post, pages, images, theme settings, ...) is the easiest way to setup your theme. It will allow you to quickly edit everything instead of creating content from scratch. When you import the data, the following things might happen:', 'pt-ocdi'); ?></p>
+			<p>
+				<?php esc_html_e( 'Importing demo data (post, pages, images, theme settings, ...) is the easiest way to setup your theme. It will allow you to quickly edit everything instead of creating content from scratch. When you import the data, the following things might happen:', 'pt-ocdi' ); ?>
+			</p>
 
 			<ul>
 				<li><?php esc_html_e( 'No existing posts, pages, categories, images, custom post types or any other data will be deleted or modified.', 'pt-ocdi' ); ?></li>
@@ -189,10 +191,10 @@ class PT_One_Click_Demo_Import {
 			// Get paths for the uploaded files.
 			$selected_import_files = OCDI_Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
 
-			// Set the name of the import files, because we used the uploaded files
+			// Set the name of the import files, because we used the uploaded files.
 			$this->import_files[ $selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'pt-ocdi' );
 		}
-		else { // Use predefined import files from wp filter: pt-ocdi/import_files
+		else { // Use predefined import files from wp filter: pt-ocdi/import_files.
 
 			if ( ! empty( $this->import_files[ $selected_index ] ) ) {
 
@@ -205,7 +207,7 @@ class PT_One_Click_Demo_Import {
 				// Check Errors.
 				if ( is_wp_error( $selected_import_files ) ) {
 
-					// Write error to log file and send an AJAX response with the error
+					// Write error to log file and send an AJAX response with the error.
 					OCDI_Helpers::log_error_and_send_ajax_response(
 						$selected_import_files->get_error_message(),
 						$this->log_file_path,
@@ -240,8 +242,6 @@ class PT_One_Click_Demo_Import {
 		 * 3. Import widgets.
 		 */
 		if ( ! empty( $selected_import_files['widgets'] ) ) {
-
-			// Import widgets
 			$this->import_widgets( $selected_import_files['widgets'] );
 		}
 
@@ -339,7 +339,7 @@ class PT_One_Click_Demo_Import {
 		// Check for errors.
 		if ( is_wp_error( $results ) ) {
 
-			// Write error to log file and send an AJAX response with the error
+			// Write error to log file and send an AJAX response with the error.
 			OCDI_Helpers::log_error_and_send_ajax_response(
 				$widget_output->get_error_message(),
 				$this->log_file_path,
