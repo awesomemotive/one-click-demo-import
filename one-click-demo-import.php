@@ -3,7 +3,7 @@
 /*
 Plugin Name: One Click Demo Import
 Plugin URI: http://www.proteusthemes.com
-Description: WordPress import made easy. Theme authors: Enable simple demo import for your theme demo data.
+Description: Import your demo data, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
 Version: 0.5.0
 Author: ProteusThemes
 Author URI: http://www.proteusthemes.com

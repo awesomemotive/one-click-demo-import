@@ -1,112 +1,95 @@
-=== One-click-demo-import ===
+=== One Click Demo Import ===
 Contributors: capuderg, cyman
-Tags: import, content, demo data,
+Tags: import, content, demo data, widgets, settings
 Requires at least: 4.0.0
-Tested up to: 4.4.1
+Tested up to: 4.4.2
 Stable tag: 1.0
 License: GPLv3 or later
 
-Theme authors! Enable simple demo import for your theme demo data.
+Import your demo data, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+This plugin will create a submenu page under Appearance with the title *Import demo data*.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+If the theme you are using does not have any predefined import files, then you will be presented with two file upload inputs. First one is required and you will have to upload a demo data XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import.
 
-A few notes about the sections above:
+This plugin is using the improved WP import that you can find here: https://github.com/humanmade/WordPress-Importer.
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+The best feature of this plugin is, that theme authors can define import files in their themes and so all you (the user of the theme) have to do is click on the "Import Demo Data" button.
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+How do theme author define these files?
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+They just need to add this code (a WP filter: `pt-ocdi/import_files`) to their themes:
+`
+function ocdi_import_files() {
+	return array(
+		array(
+			'import_file_name'       => 'Demo Import 1',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data.xml',
+			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets.json'
+		),
+		array(
+			'import_file_name'       => 'Demo Import 2',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data2.xml',
+			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets2.json'
+		),array(
+			'import_file_name'       => 'Demo Import 3',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data3.xml',
+			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets3.json'
+		),
+	);
+}
+add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
+`
+
+If the theme authors need to add some special after import setup (after demo data and widgets get imported), they can add the code to the `pt-ocdi/after_import` WP action. Code example:
+`
+function ocdi_after_import( $selected_import ) {
+
+	// Menus to Import and assign - you can remove or add as many as you want
+	$main_menu = get_term_by( 'name', 'Main Menu', 'nav_menu' );
+
+	set_theme_mod( 'nav_menu_locations', array(
+		'main-menu'    => $main_menu->term_id,
+		)
+	);
+
+	// Set options for front page and blog page
+	$front_page_id = get_page_by_title( 'Home' );
+	$blog_page_id  = get_page_by_title( 'News' );
+
+	update_option( 'show_on_front', 'page' );
+	update_option( 'page_on_front', $front_page_id->ID );
+	update_option( 'page_for_posts', $blog_page_id->ID );
+
+	// Set logo in customizer
+	set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo.png' );
+	set_theme_mod( 'logo2x_img', get_template_directory_uri() . '/assets/images/logo2x.png' );
+}
+add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
+`
+
+All progress of this plugin's work is logged in a log file in the default WP upload directory, together with the demo data and widgets import files used in the importing process.
+
+NOTE: This plugin is still a work in progress!
+
+NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is on the WP Importer plugin).
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+Upload the One Click Demo Import plugin to your WordPress site, Activate it, and that's it.
 
-e.g.
-
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+Once the plugin is activated you will find the actual import setting page under *Appearance -> Import Demo Data*.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
+Will be added, once there will be questions to answer...
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+TODO
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+TODO

@@ -59,6 +59,14 @@ module.exports = function ( grunt ) {
 			},
 		},
 
+		wp_readme_to_markdown: {
+			your_target: {
+				files: {
+					'readme.md': 'readme.txt'
+				},
+			},
+		},
+
 	} );
 
 	// update languages files
@@ -66,6 +74,11 @@ module.exports = function ( grunt ) {
 		'addtextdomain',
 		'makepot:plugin',
 		'po2mo',
+	] );
+
+	// update languages files
+	grunt.registerTask( 'readme', [
+		'wp_readme_to_markdown',
 	] );
 
 };
