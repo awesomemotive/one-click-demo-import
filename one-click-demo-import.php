@@ -74,7 +74,7 @@ class PT_One_Click_Demo_Import {
 		if ( ini_get( 'safe_mode' ) ) {
 			printf(
 				esc_html__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
-				'<div class="notice  notice-error"><p>',
+				'<div class="notice  notice-warning"><p>',
 				'<strong>',
 				'</strong>',
 				'</p></div>'

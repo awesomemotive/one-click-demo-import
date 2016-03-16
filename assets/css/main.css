@@ -17,11 +17,11 @@
 
 /* Plugin intro text */
 .ocdi__intro-text {
-	background-color: #F5FAFD;
+	background-color: #f5fafd;
 	margin:10px 0;
 	padding: 10px;
 	color: #0C518F;
-	border: 3px solid #CAE0F3;
+	border: 3px solid #cae0f3;
 	clear: both;
 	width: 90%;
 	line-height: 18px;
@@ -35,5 +35,10 @@
 
 /* WP info notice */
 .notice-info {
-	border-left-color: #58ACFA;
+	border-left-color: #58acfa;
+}
+
+/* WP warning notice */
+.notice-warning {
+	border-left-color: #ed9232;
 }
