@@ -10,7 +10,7 @@ Import your demo data, widgets and theme settings with one click. Theme authors!
 
 == Description ==
 
-This plugin will create a submenu page under Appearance with the title *Import demo data*.
+This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
 If the theme you are using does not have any predefined import files, then you will be presented with two file upload inputs. First one is required and you will have to upload a demo data XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import.
 
@@ -18,7 +18,7 @@ This plugin is using the improved WP import that you can find here: https://gith
 
 The best feature of this plugin is, that theme authors can define import files in their themes and so all you (the user of the theme) have to do is click on the "Import Demo Data" button.
 
-How do theme author define these files?
+= How do theme author define these files? =
 
 They just need to add this code (a WP filter: `pt-ocdi/import_files`) to their themes:
 `
