@@ -248,7 +248,7 @@ class PT_One_Click_Demo_Import {
 		if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
 
 			// Run the after_import action to setup other settings.
-			$this->after_import_setup();
+			$this->after_import_setup( $this->import_files[ $selected_index ] );
 		}
 
 		// Display final messages (success or error messages).
@@ -359,13 +359,15 @@ class PT_One_Click_Demo_Import {
 
 	/**
 	 * Setup other things after the whole import process is finished.
+	 *
+	 * @param array $selected_import with information about the selected import.
 	 */
-	function after_import_setup() {
+	function after_import_setup( $selected_import ) {
 
 		// Enable users to add custom code to the end of the import process.
 		// Append any output to the log file.
 		ob_start();
-			do_action( 'pt-ocdi/after_import' );
+			do_action( 'pt-ocdi/after_import', $selected_import );
 		$message = ob_get_clean();
 
 		// Add this message to log file.
