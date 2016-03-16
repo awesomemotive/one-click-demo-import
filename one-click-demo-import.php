@@ -137,7 +137,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Enqueue admin scripts (JS and CSS)
 	 *
-	 * @param string $hook holds info on which admin page you are currently looking at.
+	 * @param string $hook holds info on which admin page you are currently loading.
 	 */
 	function admin_enqueue_scripts( $hook ) {
 
@@ -179,7 +179,7 @@ class PT_One_Click_Demo_Import {
 		// Define log file path.
 		$this->log_file_path = OCDI_Helpers::get_log_path( $demo_import_start_time );
 
-		// Get selected file index or set it to the first file.
+		// Get selected file index or set it to 0.
 		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
 
 		/**
@@ -194,42 +194,39 @@ class PT_One_Click_Demo_Import {
 			// Set the name of the import files, because we used the uploaded files.
 			$this->import_files[ $selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'pt-ocdi' );
 		}
-		else { // Use predefined import files from wp filter: pt-ocdi/import_files.
+		elseif ( ! empty( $this->import_files[ $selected_index ] ) ) { // Use predefined import files from wp filter: pt-ocdi/import_files.
 
-			if ( ! empty( $this->import_files[ $selected_index ] ) ) {
+			// Download the import files (content and widgets files) and save it to variable for later use.
+			$selected_import_files = OCDI_Helpers::download_import_files(
+				$this->import_files[ $selected_index ],
+				$demo_import_start_time
+			);
 
-				// Download the import files (content and widgets files) and save it to variable for later use.
-				$selected_import_files = OCDI_Helpers::download_import_files(
-					$this->import_files[ $selected_index ],
-					$demo_import_start_time
-				);
+			// Check Errors.
+			if ( is_wp_error( $selected_import_files ) ) {
 
-				// Check Errors.
-				if ( is_wp_error( $selected_import_files ) ) {
-
-					// Write error to log file and send an AJAX response with the error.
-					OCDI_Helpers::log_error_and_send_ajax_response(
-						$selected_import_files->get_error_message(),
-						$this->log_file_path,
-						esc_html__( 'Downloaded files', 'pt-ocdi' )
-					);
-				}
-
-				// Add this message to log file.
-				$log_added = OCDI_Helpers::append_to_file(
-					sprintf(
-						__( 'The import files for: %s were successfully downloaded!', 'pt-ocdi' ),
-						$this->import_files[ $selected_index ]['import_file_name']
-					) . OCDI_Helpers::import_file_info( $selected_import_files ),
+				// Write error to log file and send an AJAX response with the error.
+				OCDI_Helpers::log_error_and_send_ajax_response(
+					$selected_import_files->get_error_message(),
 					$this->log_file_path,
-					esc_html__( 'Downloaded files' , 'pt-ocdi' )
+					esc_html__( 'Downloaded files', 'pt-ocdi' )
 				);
 			}
-			else {
 
-				// Send JSON Error response to the AJAX call.
-				wp_send_json( esc_html__( 'No import files specified!', 'pt-ocdi' ) );
-			}
+			// Add this message to log file.
+			$log_added = OCDI_Helpers::append_to_file(
+				sprintf(
+					__( 'The import files for: %s were successfully downloaded!', 'pt-ocdi' ),
+					$this->import_files[ $selected_index ]['import_file_name']
+				) . OCDI_Helpers::import_file_info( $selected_import_files ),
+				$this->log_file_path,
+				esc_html__( 'Downloaded files' , 'pt-ocdi' )
+			);
+		}
+		else {
+
+			// Send JSON Error response to the AJAX call.
+			wp_send_json( esc_html__( 'No import files specified!', 'pt-ocdi' ) );
 		}
 
 		/**
@@ -295,7 +292,7 @@ class PT_One_Click_Demo_Import {
 		// Also this function has no effect when PHP is running in safe mode
 		// http://php.net/manual/en/function.set-time-limit.php.
 		// Increase PHP max execution time.
-		set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 120 ) );
+		set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 300 ) );
 
 		// Import demo data.
 		if ( ! empty( $import_file_path ) ) {
