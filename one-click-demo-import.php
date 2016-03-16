@@ -4,7 +4,7 @@
 Plugin Name: One Click Demo Import
 Plugin URI: http://www.proteusthemes.com
 Description: WordPress import made easy. Theme authors: Enable simple demo import for your theme demo data.
-Version: 0.2-alpha
+Version: 0.5.0
 Author: ProteusThemes
 Author URI: http://www.proteusthemes.com
 License: GPL3
@@ -20,7 +20,7 @@ define( 'PT_OCDI_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PT_OCDI_URL', plugin_dir_url( __FILE__ ) );
 
 // Current version of the plugin.
-define( 'PT_OCDI_VERSION', '0.2-alpha' );
+define( 'PT_OCDI_VERSION', '0.5.0' );
 
 // Include files.
 require PT_OCDI_PATH . 'inc/class-ocdi-helpers.php';
