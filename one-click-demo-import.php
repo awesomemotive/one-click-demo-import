@@ -308,7 +308,7 @@ class PT_One_Click_Demo_Import {
 			);
 		}
 
-		// Return any error messages for the front page output.
+		// Return any error messages for the front page output (errors, critical, alert and emergency level messages only).
 		return $this->logger->error_output;
 	}
 
@@ -329,7 +329,7 @@ class PT_One_Click_Demo_Import {
 		// Import widgets.
 		if ( ! empty( $widget_import_file_path ) ) {
 
-			// Import widgets and get result.
+			// Import widgets and return result.
 			$results = $widget_importer->import_widgets( $widget_import_file_path );
 		}
 

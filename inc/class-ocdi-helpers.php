@@ -28,6 +28,7 @@ class OCDI_Helpers {
 		return $filtered_import_file_info;
 	}
 
+
 	/**
 	 * Helper function: a simple check for valid import file format.
 	 *
@@ -116,7 +117,7 @@ class OCDI_Helpers {
 			return new WP_Error(
 				'url_not_defined',
 				sprintf(
-					__( 'Error occurred! URL for %s%s%s file is not defined!', 'pt-ocdi' ),
+					__( 'URL for %s%s%s file is not defined!', 'pt-ocdi' ),
 					'<strong>',
 					$file_name,
 					'</strong>'
