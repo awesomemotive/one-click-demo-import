@@ -9,7 +9,7 @@ class OCDI_Importer {
 
 	private $importer;
 
-	function __construct( $importer_options ) {
+	public function __construct( $importer_options ) {
 
 		// Include files that are needed for WordPress Importer v2.
 		$this->include_required_files();

@@ -41,7 +41,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Class construct function, to initiate the plugin.
 	 */
-	function __construct() {
+	public function __construct() {
 
 		// Actions.
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
@@ -54,7 +54,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Creates the plugin page and a submenu item in WP Appearance menu.
 	 */
-	function create_plugin_page() {
+	public function create_plugin_page() {
 		$this->plugin_page = add_theme_page( 'One Click Demo Import', 'Import Demo Data', 'import', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
 	}
 
@@ -62,7 +62,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Plugin page display.
 	 */
-	function display_plugin_page() {
+	public function display_plugin_page() {
 	?>
 
 	<div class="ocdi  wrap">
@@ -139,7 +139,7 @@ class PT_One_Click_Demo_Import {
 	 *
 	 * @param string $hook holds info on which admin page you are currently loading.
 	 */
-	function admin_enqueue_scripts( $hook ) {
+	public function admin_enqueue_scripts( $hook ) {
 
 		// Enqueue the scripts only on the plugin page.
 		if ( $this->plugin_page === $hook ) {
@@ -165,7 +165,7 @@ class PT_One_Click_Demo_Import {
 	 * 3. import widgets (optional)
 	 * 4. after import setup (optional)
 	 */
-	function import_demo_data_ajax_callback() {
+	public function import_demo_data_ajax_callback() {
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		OCDI_Helpers::verify_ajax_call();
@@ -285,7 +285,7 @@ class PT_One_Click_Demo_Import {
 	 *
 	 * @param string $import_file_path path to the import file.
 	 */
-	function import_data( $import_file_path ) {
+	private function import_data( $import_file_path ) {
 
 		// This should be replaced with multiple AJAX calls (import in smaller chunks)
 		// so that it would not come to the Internal Error, because of the PHP script timeout.
@@ -318,7 +318,7 @@ class PT_One_Click_Demo_Import {
 	 *
 	 * @param string $widget_import_file_path path to the widget import file.
 	 */
-	function import_widgets( $widget_import_file_path ) {
+	private function import_widgets( $widget_import_file_path ) {
 
 		// Widget import results.
 		$results = array();
@@ -362,7 +362,7 @@ class PT_One_Click_Demo_Import {
 	 *
 	 * @param array $selected_import with information about the selected import.
 	 */
-	function after_import_setup( $selected_import ) {
+	private function after_import_setup( $selected_import ) {
 
 		// Enable users to add custom code to the end of the import process.
 		// Append any output to the log file.
@@ -382,7 +382,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Get data from filters, after the theme has loaded and instantiate the importer.
 	 */
-	function setup_plugin_with_filter_data() {
+	public function setup_plugin_with_filter_data() {
 
 		// Get info of import data files and filter it.
 		$this->import_files = OCDI_Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
