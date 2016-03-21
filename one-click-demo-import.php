@@ -34,14 +34,36 @@ require PT_OCDI_PATH . 'inc/class-ocdi-logger.php';
 class PT_One_Click_Demo_Import {
 
 	/**
+	 * @var $instance the reference to *Singleton* instance of this class
+	 */
+	private static $instance;
+
+	/**
 	 * Private variables used throughout the plugin.
 	 */
 	private $importer, $plugin_page, $import_files, $logger, $log_file_path;
 
+
+	/**
+	 * Returns the *Singleton* instance of this class.
+	 *
+	 * @return PT_One_Click_Demo_Import the *Singleton* instance.
+	 */
+	public static function getInstance() {
+		if ( null === static::$instance ) {
+			static::$instance = new static();
+		}
+
+		return static::$instance;
+	}
+
+
 	/**
 	 * Class construct function, to initiate the plugin.
+	 * Protected constructor to prevent creating a new instance of the
+	 * *Singleton* via the `new` operator from outside of this class.
 	 */
-	public function __construct() {
+	protected function __construct() {
 
 		// Actions.
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
@@ -49,6 +71,22 @@ class PT_One_Click_Demo_Import {
 		add_action( 'wp_ajax_ocdi_import_demo_data', array( $this, 'import_demo_data_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
 	}
+
+
+	/**
+	 * Private clone method to prevent cloning of the instance of the *Singleton* instance.
+	 *
+	 * @return void
+	 */
+	private function __clone() {}
+
+
+	/**
+	 * Private unserialize method to prevent unserializing of the *Singleton* instance.
+	 *
+	 * @return void
+	 */
+	private function __wakeup() {}
 
 
 	/**
@@ -407,4 +445,4 @@ class PT_One_Click_Demo_Import {
 	}
 }
 
-new PT_One_Click_Demo_Import();
+$PT_One_Click_Demo_Import = PT_One_Click_Demo_Import::getInstance();
