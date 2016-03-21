@@ -149,11 +149,9 @@ class OCDI_Helpers {
 				)
 			);
 		}
-		else {
 
-			// Return content retrieved from the URL.
-			return wp_remote_retrieve_body( $response );
-		}
+		// Return content retrieved from the URL.
+		return wp_remote_retrieve_body( $response );
 	}
 
 
@@ -167,39 +165,33 @@ class OCDI_Helpers {
 	public static function write_to_file( $content, $file_path ) {
 
 		// Check if the file-system method is 'direct', if not display an error.
-		if ( 'direct' === get_filesystem_method() ) {
-
-			// Verify WP file-system credentials.
-			$verified_credentials = self::check_wp_filesystem_credentials();
-
-			if ( is_wp_error( $verified_credentials ) ) {
-				return $verified_credentials;
-			}
-
-			// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
-			global $wp_filesystem;
-
-			if ( ! $wp_filesystem->put_contents( $file_path, $content ) ) {
-				return new WP_Error(
-					'failed_writing_file_to_server',
-					sprintf(
-						__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
-						'<br>',
-						$file_path
-					)
-				);
-			}
-			else {
-
-				// Return the file path on successful file write.
-				return $file_path;
-			}
-		}
-		else {
-
-			// Return error, because the file-system method is not set to "direct".
+		if ( ! 'direct' === get_filesystem_method() ) {
 			return self::return_direct_filesystem_error();
 		}
+
+		// Verify WP file-system credentials.
+		$verified_credentials = self::check_wp_filesystem_credentials();
+
+		if ( is_wp_error( $verified_credentials ) ) {
+			return $verified_credentials;
+		}
+
+		// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
+		global $wp_filesystem;
+
+		if ( ! $wp_filesystem->put_contents( $file_path, $content ) ) {
+			return new WP_Error(
+				'failed_writing_file_to_server',
+				sprintf(
+					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
+					'<br>',
+					$file_path
+				)
+			);
+		}
+
+		// Return the file path on successful file write.
+		return $file_path;
 	}
 
 
@@ -214,44 +206,37 @@ class OCDI_Helpers {
 	public static function append_to_file( $content, $file_path, $separator_text = '' ) {
 
 		// Check if the file-system method is 'direct', if not display an error.
-		if ( 'direct' === get_filesystem_method() ) {
-
-			// Verify WP file-system credentials.
-			$verified_credentials = self::check_wp_filesystem_credentials();
-
-			if ( is_wp_error( $verified_credentials ) ) {
-				return $verified_credentials;
-			}
-
-			// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
-			global $wp_filesystem;
-
-			$existing_data = $wp_filesystem->get_contents( $file_path );
-
-			// Style separator.
-			$separator = PHP_EOL . '---' . $separator_text . '---' . PHP_EOL;
-
-			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content . PHP_EOL ) ) {
-				return new WP_Error(
-					'failed_writing_file_to_server',
-					sprintf(
-						__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
-						'<br>',
-						$file_path
-					)
-				);
-			}
-			else {
-
-				// Return the file path on successful file write.
-				return true;
-			}
-		}
-		else {
-
-			// Return error, because the file-system method is not set to "direct".
+		if ( ! 'direct' === get_filesystem_method() ) {
 			return self::return_direct_filesystem_error();
 		}
+
+		// Verify WP file-system credentials.
+		$verified_credentials = self::check_wp_filesystem_credentials();
+
+		if ( is_wp_error( $verified_credentials ) ) {
+			return $verified_credentials;
+		}
+
+		// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
+		global $wp_filesystem;
+
+		$existing_data = $wp_filesystem->get_contents( $file_path );
+
+		// Style separator.
+		$separator = PHP_EOL . '---' . $separator_text . '---' . PHP_EOL;
+
+		if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content . PHP_EOL ) ) {
+			return new WP_Error(
+				'failed_writing_file_to_server',
+				sprintf(
+					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
+					'<br>',
+					$file_path
+				)
+			);
+		}
+
+		return true;
 	}
 
 
@@ -264,41 +249,35 @@ class OCDI_Helpers {
 	public static function data_from_file( $file_path ) {
 
 		// Check if the file-system method is 'direct', if not display an error.
-		if ( 'direct' === get_filesystem_method() ) {
-
-			// Verify WP file-system credentials.
-			$verified_credentials = self::check_wp_filesystem_credentials();
-
-			if ( is_wp_error( $verified_credentials ) ) {
-				return $verified_credentials;
-			}
-
-			// By this point, the $wp_filesystem global should be working, so let's use it to read a file.
-			global $wp_filesystem;
-
-			$data = $wp_filesystem->get_contents( $file_path );
-
-			if ( ! $data ) {
-				return new WP_Error(
-					'failed_reading_file_from_server',
-					sprintf(
-						__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'pt-ocdi' ),
-						'<br>',
-						$file_path
-					)
-				);
-			}
-			else {
-
-				// Return the file data.
-				return $data;
-			}
-		}
-		else {
-
-			// Return error, because the file-system method is not set to "direct".
+		if ( ! 'direct' === get_filesystem_method() ) {
 			return self::return_direct_filesystem_error();
 		}
+
+		// Verify WP file-system credentials.
+		$verified_credentials = self::check_wp_filesystem_credentials();
+
+		if ( is_wp_error( $verified_credentials ) ) {
+			return $verified_credentials;
+		}
+
+		// By this point, the $wp_filesystem global should be working, so let's use it to read a file.
+		global $wp_filesystem;
+
+		$data = $wp_filesystem->get_contents( $file_path );
+
+		if ( ! $data ) {
+			return new WP_Error(
+				'failed_reading_file_from_server',
+				sprintf(
+					__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'pt-ocdi' ),
+					'<br>',
+					$file_path
+				)
+			);
+		}
+
+		// Return the file data.
+		return $data;
 	}
 
 
@@ -443,40 +422,7 @@ class OCDI_Helpers {
 		$demo_data_file_info = wp_handle_upload( $_FILES['data_file'], $upload_overrides );
 		$widget_file_info    = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
 
-		if ( $demo_data_file_info && ! isset( $demo_data_file_info['error'] ) ) {
-
-			// Set uploaded data file.
-			$selected_import_files['data'] = $demo_data_file_info['file'];
-
-			if ( $widget_file_info && ! isset( $widget_file_info['error'] ) ) {
-
-				// Set uploaded widget file.
-				$selected_import_files['widgets'] = $widget_file_info['file'];
-			}
-			else {
-
-				// Add this error to log file.
-				$log_added = self::append_to_file(
-					sprintf(
-						__( 'Widget file was not uploaded. Error: %s', 'pt-ocdi' ),
-						$widget_file_info['error']
-					),
-					$log_file_path,
-					esc_html__( 'Upload files' , 'pt-ocdi' )
-				);
-			}
-
-			// Add this message to log file.
-			$log_added = self::append_to_file(
-				__( 'The import files were successfully uploaded!', 'pt-ocdi' ) . self::import_file_info( $selected_import_files ),
-				$log_file_path,
-				esc_html__( 'Upload files' , 'pt-ocdi' )
-			);
-
-			// Return array with paths of uploaded files.
-			return $selected_import_files;
-		}
-		else {
+		if ( empty( $demo_data_file_info['file'] ) || isset( $demo_data_file_info['error'] ) ) {
 
 			// Write error to log file and send an AJAX response with the error.
 			self::log_error_and_send_ajax_response(
@@ -485,6 +431,37 @@ class OCDI_Helpers {
 				esc_html__( 'Upload files', 'pt-ocdi' )
 			);
 		}
+
+		// Set uploaded data file.
+		$selected_import_files['data'] = $demo_data_file_info['file'];
+
+		if ( $widget_file_info && ! isset( $widget_file_info['error'] ) ) {
+
+			// Set uploaded widget file.
+			$selected_import_files['widgets'] = $widget_file_info['file'];
+		}
+		else {
+
+			// Add this error to log file.
+			$log_added = self::append_to_file(
+				sprintf(
+					__( 'Widget file was not uploaded. Error: %s', 'pt-ocdi' ),
+					$widget_file_info['error']
+				),
+				$log_file_path,
+				esc_html__( 'Upload files' , 'pt-ocdi' )
+			);
+		}
+
+		// Add this message to log file.
+		$log_added = self::append_to_file(
+			__( 'The import files were successfully uploaded!', 'pt-ocdi' ) . self::import_file_info( $selected_import_files ),
+			$log_file_path,
+			esc_html__( 'Upload files' , 'pt-ocdi' )
+		);
+
+		// Return array with paths of uploaded files.
+		return $selected_import_files;
 	}
 
 
