@@ -179,7 +179,7 @@ class OCDI_Helpers {
 			// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
 			global $wp_filesystem;
 
-			if ( ! $wp_filesystem->put_contents( $file_path, $content, FS_CHMOD_FILE ) ) {
+			if ( ! $wp_filesystem->put_contents( $file_path, $content ) ) {
 				return new WP_Error(
 					'failed_writing_file_to_server',
 					sprintf(
@@ -231,7 +231,7 @@ class OCDI_Helpers {
 			// Style separator.
 			$separator = PHP_EOL . '---' . $separator_text . '---' . PHP_EOL;
 
-			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content . PHP_EOL, FS_CHMOD_FILE ) ) {
+			if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content . PHP_EOL ) ) {
 				return new WP_Error(
 					'failed_writing_file_to_server',
 					sprintf(
