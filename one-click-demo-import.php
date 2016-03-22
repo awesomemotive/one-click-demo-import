@@ -3,7 +3,7 @@
 /*
 Plugin Name: One Click Demo Import
 Plugin URI: http://www.proteusthemes.com
-Description: Import your demo data, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
+Description: Import your content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
 Version: 0.5.0
 Author: ProteusThemes
 Author URI: http://www.proteusthemes.com
@@ -143,8 +143,8 @@ class PT_One_Click_Demo_Import {
 				</p>
 			</div>
 			<p>
-				<label for="data-file-upload"><?php esc_html_e( 'Choose a XML file for data import:', 'pt-ocdi' ); ?></label>
-				<input id="ocdi__data-file-upload" type="file" name="data-file-upload">
+				<label for="content-file-upload"><?php esc_html_e( 'Choose a XML file for content import:', 'pt-ocdi' ); ?></label>
+				<input id="ocdi__content-file-upload" type="file" name="content-file-upload">
 				<br>
 				<small><?php esc_html_e( 'optional', 'pt-ocdi' ); ?></small> <label for="widget-file-upload"><?php esc_html_e( 'Choose a WIE or JSON file for widget import:', 'pt-ocdi' ); ?></label>
 				<input id="ocdi__widget-file-upload" type="file" name="widget-file-upload">
@@ -199,7 +199,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Main AJAX callback function for:
 	 * 1. prepare import files (uploaded or predefined via filters)
-	 * 2. import data
+	 * 2. import content
 	 * 3. import widgets (optional)
 	 * 4. after import setup (optional)
 	 */
@@ -268,10 +268,10 @@ class PT_One_Click_Demo_Import {
 		}
 
 		/**
-		 * 2. Import demo data.
+		 * 2. Import content.
 		 * Returns any errors greater then the "error" logger level, that will be displayed on front page.
 		 */
-		$frontend_error_messages .= $this->import_data( $selected_import_files['data'] );
+		$frontend_error_messages .= $this->import_content( $selected_import_files['content'] );
 
 		/**
 		 * 3. Import widgets.
@@ -319,11 +319,11 @@ class PT_One_Click_Demo_Import {
 
 
 	/**
-	 * Import data from an WP XML file.
+	 * Import content from an WP XML file.
 	 *
 	 * @param string $import_file_path path to the import file.
 	 */
-	private function import_data( $import_file_path ) {
+	private function import_content( $import_file_path ) {
 
 		// This should be replaced with multiple AJAX calls (import in smaller chunks)
 		// so that it would not come to the Internal Error, because of the PHP script timeout.
@@ -332,7 +332,7 @@ class PT_One_Click_Demo_Import {
 		// Increase PHP max execution time.
 		set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 300 ) );
 
-		// Import demo data.
+		// Import content.
 		if ( ! empty( $import_file_path ) ) {
 			ob_start();
 				$this->importer->import( $import_file_path );
@@ -342,7 +342,7 @@ class PT_One_Click_Demo_Import {
 			$log_added = OCDI_Helpers::append_to_file(
 				$message . PHP_EOL . 'MAX EXECUTION TIME = ' . ini_get( 'max_execution_time' ),
 				$this->log_file_path,
-				esc_html__( 'Importing demo data' , 'pt-ocdi' )
+				esc_html__( 'Importing content' , 'pt-ocdi' )
 			);
 		}
 

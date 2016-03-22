@@ -36,9 +36,9 @@ class OCDI_Importer {
 	}
 
 	/**
-	 * Imports demo data from a WordPress export file.
+	 * Imports content from a WordPress export file.
 	 *
-	 * @param string $data_file path to xml file, file with WordPress demo export data.
+	 * @param string $data_file path to xml file, file with WordPress export data.
 	 */
 	public function import( $data_file ) {
 		$this->importer->import( $data_file );

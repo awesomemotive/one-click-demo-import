@@ -11,8 +11,8 @@ jQuery( function ( $ ) {
 		data.append( 'action', 'ocdi_import_demo_data' );
 		data.append( 'security', ocdi.ajax_nonce );
 		data.append( 'selected', $( '#ocdi__demo-import-files' ).val() );
-		if ( $('#ocdi__data-file-upload').length ) {
-			data.append( 'data_file', $('#ocdi__data-file-upload')[0].files[0] );
+		if ( $('#ocdi__content-file-upload').length ) {
+			data.append( 'content_file', $('#ocdi__content-file-upload')[0].files[0] );
 		}
 		if ( $('#ocdi__widget-file-upload').length ) {
 			data.append( 'widget_file', $('#ocdi__widget-file-upload')[0].files[0] );

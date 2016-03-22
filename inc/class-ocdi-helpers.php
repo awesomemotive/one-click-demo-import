@@ -69,11 +69,11 @@ class OCDI_Helpers {
 		$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
 
 		// Write data content to the file and return the file path on successful write.
-		$downloaded_files['data'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
+		$downloaded_files['content'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
 
 		// Return from this function if there was an error.
-		if ( is_wp_error( $downloaded_files['data'] ) ) {
-			return $downloaded_files['data'];
+		if ( is_wp_error( $downloaded_files['content'] ) ) {
+			return $downloaded_files['content'];
 		}
 
 		// Get widgets file as well. If defined!
@@ -405,7 +405,7 @@ class OCDI_Helpers {
 	 *
 	 * @param array  $uploaded_files $_FILES array form an AJAX request.
 	 * @param string $log_file_path path to the log file.
-	 * @return array of paths to the data import and widget import files.
+	 * @return array of paths to the content import and widget import files.
 	 */
 	public static function process_uploaded_files( $uploaded_files, $log_file_path ) {
 
@@ -418,22 +418,22 @@ class OCDI_Helpers {
 			'test_type' => false,
 		);
 
-		// Handle demo data and widgets file upload.
-		$demo_data_file_info = wp_handle_upload( $_FILES['data_file'], $upload_overrides );
-		$widget_file_info    = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
+		// Handle demo content and widgets file upload.
+		$content_file_info = wp_handle_upload( $_FILES['content_file'], $upload_overrides );
+		$widget_file_info  = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
 
-		if ( empty( $demo_data_file_info['file'] ) || isset( $demo_data_file_info['error'] ) ) {
+		if ( empty( $content_file_info['file'] ) || isset( $content_file_info['error'] ) ) {
 
 			// Write error to log file and send an AJAX response with the error.
 			self::log_error_and_send_ajax_response(
-				__( 'Please upload XML file for data import. If you want to import widgets only, please use Widget Importer & Exporter plugin.', 'pt-ocdi' ),
+				__( 'Please upload XML file for content import. If you want to import widgets only, please use Widget Importer & Exporter plugin.', 'pt-ocdi' ),
 				$log_file_path,
 				esc_html__( 'Upload files', 'pt-ocdi' )
 			);
 		}
 
-		// Set uploaded data file.
-		$selected_import_files['data'] = $demo_data_file_info['file'];
+		// Set uploaded content file.
+		$selected_import_files['content'] = $content_file_info['file'];
 
 		if ( $widget_file_info && ! isset( $widget_file_info['error'] ) ) {
 
@@ -480,7 +480,7 @@ class OCDI_Helpers {
 			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
 			PHP_EOL,
 			get_site_url(),
-			$selected_import_files['data'],
+			$selected_import_files['content'],
 			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets']
 		);
 	}

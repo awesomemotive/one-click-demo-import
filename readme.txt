@@ -1,18 +1,18 @@
 === One Click Demo Import ===
 Contributors: capuderg, cyman
-Tags: import, content, demo data, widgets, settings
+Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
 Tested up to: 4.4.2
 Stable tag: 1.0
 License: GPLv3 or later
 
-Import your demo data, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
+Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
 
 == Description ==
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
-If the theme you are using does not have any predefined import files, then you will be presented with two file upload inputs. First one is required and you will have to upload a demo data XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import.
+If the theme you are using does not have any predefined import files, then you will be presented with two file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import.
 
 This plugin is using the improved WP import that you can find here: https://github.com/humanmade/WordPress-Importer.
 
@@ -26,17 +26,17 @@ function ocdi_import_files() {
 	return array(
 		array(
 			'import_file_name'       => 'Demo Import 1',
-			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data.xml',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-content.xml',
 			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets.json'
 		),
 		array(
 			'import_file_name'       => 'Demo Import 2',
-			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data2.xml',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-content2.xml',
 			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets2.json'
 		),
 		array(
 			'import_file_name'       => 'Demo Import 3',
-			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data3.xml',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-content3.xml',
 			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets3.json'
 		),
 	);
@@ -44,7 +44,7 @@ function ocdi_import_files() {
 add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 `
 
-If the theme authors need to add some special after import setup (after demo data and widgets get imported), they can add the code to the `pt-ocdi/after_import` WP action. Code example:
+If the theme authors need to add some special after import setup (after demo content and widgets get imported), they can add the code to the `pt-ocdi/after_import` WP action. Code example:
 `
 function ocdi_after_import( $selected_import ) {
 
@@ -71,7 +71,7 @@ function ocdi_after_import( $selected_import ) {
 add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
 `
 
-All progress of this plugin's work is logged in a log file in the default WP upload directory, together with the demo data and widgets import files used in the importing process.
+All progress of this plugin's work is logged in a log file in the default WP upload directory, together with the demo content and widgets import files used in the importing process.
 
 NOTE: This plugin is still a work in progress!
 
@@ -87,7 +87,7 @@ Once the plugin is activated you will find the actual import setting page under 
 
 = I have activated the plugin. Where is the "Import Demo Data" page? =
 
-You will find the import page in wp-admin -> Appearance -> Import Demo Data.
+You will find the import page in *wp-admin -> Appearance -> Import Demo Data*.
 
 = Where are the demo import files and the log files saved? =
 
@@ -102,12 +102,12 @@ function ocdi_import_files() {
 	return array(
 		array(
 			'import_file_name'       => 'Demo Import 1',
-			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data.xml',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-content.xml',
 			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets.json'
 		),
 		array(
 			'import_file_name'       => 'Demo Import 2',
-			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data2.xml',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-content2.xml',
 			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets2.json'
 		),
 	);
