@@ -430,10 +430,7 @@ class PT_One_Click_Demo_Import {
 			'fetch_attachments' => true,
 		) );
 
-		// Create importer instance with proper parameters.
-		$this->importer = new OCDI_Importer( $importer_options );
-
-		// Logger options for the importer.
+		// Logger options for the logger used in the importer.
 		$logger_options = apply_filters( 'pt-ocdi/logger_options', array(
 			'logger_min_level' => 'warning',
 		) );
@@ -441,7 +438,9 @@ class PT_One_Click_Demo_Import {
 		// Configure logger instance and set it to the importer.
 		$this->logger            = new OCDI_Logger();
 		$this->logger->min_level = $logger_options['logger_min_level'];
-		$this->importer->set_logger( $this->logger );
+
+		// Create importer instance with proper parameters.
+		$this->importer = new OCDI_Importer( $importer_options, $this->logger );
 	}
 }
 
