@@ -9,7 +9,7 @@ class OCDI_Importer {
 
 	private $importer;
 
-	public function __construct( $importer_options, $logger ) {
+	public function __construct( $importer_options = array(), $logger = null ) {
 
 		// Include files that are needed for WordPress Importer v2.
 		$this->include_required_files();
@@ -19,7 +19,9 @@ class OCDI_Importer {
 		$this->importer = new WXR_Importer( $importer_options );
 
 		// Set logger to the importer.
-		$this->importer->set_logger( $logger );
+		if ( ! empty( $logger ) ) {
+			$this->importer->set_logger( $logger );
+		}
 	}
 
 	/**
