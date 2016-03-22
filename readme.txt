@@ -33,7 +33,8 @@ function ocdi_import_files() {
 			'import_file_name'       => 'Demo Import 2',
 			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data2.xml',
 			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets2.json'
-		),array(
+		),
+		array(
 			'import_file_name'       => 'Demo Import 3',
 			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data3.xml',
 			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets3.json'
@@ -74,7 +75,7 @@ All progress of this plugin's work is logged in a log file in the default WP upl
 
 NOTE: This plugin is still a work in progress!
 
-NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is on the WP Importer plugin).
+NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is in the original WP Importer plugin).
 
 == Installation ==
 
@@ -84,7 +85,59 @@ Once the plugin is activated you will find the actual import setting page under 
 
 == Frequently Asked Questions ==
 
-Will be added, once there will be questions to answer...
+= I have activated the plugin. Where is the "Import Demo Data" page? =
+
+You will find the import page in wp-admin -> Appearance -> Import Demo Data.
+
+= Where are the demo import files and the log files saved? =
+
+The files used in the demo import will be saved to the default WordPress uploads directory. An example of that directory would be: `../wp-content/uploads/2016/03/`.
+
+= How to predefine demo imports? =
+
+This question is for theme authors. To predefine demo imports, you just have to add the following code structure, with your own values to your theme (using the `pt-ocdi/import_files` filter):
+
+`
+function ocdi_import_files() {
+	return array(
+		array(
+			'import_file_name'       => 'Demo Import 1',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data.xml',
+			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets.json'
+		),
+		array(
+			'import_file_name'       => 'Demo Import 2',
+			'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-data2.xml',
+			'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets2.json'
+		),
+	);
+}
+add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
+`
+
+= How to handle different "after import setups" depending on which predefined import was selected? =
+
+This question might be asked by a theme author wanting to implement different after import setups for multiple predefined demo imports. Lets say we have predefined two demo imports with the following names: 'Demo Import 1' and 'Demo Import 2', the code for after import setup would be (using the `pt-ocdi/after_import` filter):
+
+`
+function ocdi_after_import( $selected_import ) {
+	echo "This will be displayed on all after imports!";
+
+	if ( 'Demo Import 1' === $selected_import['import_file_name'] ) {
+		echo "This will be displayed only on after import if user selects Demo Import 1";
+
+		// Set logo in customizer
+		set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo1.png' );
+	}
+	elseif ( 'Demo Import 2' === $selected_import['import_file_name'] ) {
+		echo "This will be displayed only on after import if user selects Demo Import 2";
+
+		// Set logo in customizer
+		set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo2.png' );
+	}
+}
+add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
+`
 
 == Screenshots ==
 
@@ -92,4 +145,6 @@ TODO
 
 == Changelog ==
 
-TODO
+= 1.0.0 =
+
+*Release Date - 25 March 2016*
