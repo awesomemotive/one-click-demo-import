@@ -20,7 +20,7 @@ class OCDI_Importer {
 
 		// Set logger to the importer.
 		if ( ! empty( $logger ) ) {
-			$this->importer->set_logger( $logger );
+			$this->set_logger( $logger );
 		}
 	}
 
