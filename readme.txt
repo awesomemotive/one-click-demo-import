@@ -3,7 +3,7 @@ Contributors: capuderg, cyman
 Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
 Tested up to: 4.4.2
-Stable tag: 0.6.0
+Stable tag: 1.0.0
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.

@@ -2,7 +2,7 @@
 # This file is distributed under the GPL 2.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 0.5.0\n"
+"Project-Id-Version: One Click Demo Import 1.0.0\n"
 "Report-Msgid-Bugs-To: http://support.proteusthemes.com/\n"
 "POT-Creation-Date: 2016-03-14 13:27:22+00:00\n"
 "MIME-Version: 1.0\n"
@@ -34,69 +34,69 @@ msgid ""
 "%s."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:186 inc/class-ocdi-helpers.php:232
+#: inc/class-ocdi-helpers.php:187 inc/class-ocdi-helpers.php:233
 msgid ""
 "An error occurred while writing file to your server! Tried to write a file "
 "to: %s%s."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:272
+#: inc/class-ocdi-helpers.php:273
 msgid ""
 "An error occurred while reading a file from your server! Tried reading file "
 "from path: %s%s."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:297
+#: inc/class-ocdi-helpers.php:298
 msgid ""
 "An error occurred while retrieving reading/writing permissions to your "
 "server (could not retrieve WP filesystem credentials)!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:305
+#: inc/class-ocdi-helpers.php:306
 msgid "Your WordPress login credentials don't allow to use WP_Filesystem!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:322
+#: inc/class-ocdi-helpers.php:323
 msgid ""
 "This WordPress page does not have %sdirect%s write file access. This plugin "
 "needs it in order to save the demo import xml file to the upload directory "
 "of your site. You can change this setting with these instructions: %s."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:394
+#: inc/class-ocdi-helpers.php:395
 msgid ""
 "%sYour user role isn't high enough. You don't have permission to import "
 "demo data.%s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:429
+#: inc/class-ocdi-helpers.php:430
 msgid ""
 "Please upload XML file for content import. If you want to import widgets "
 "only, please use Widget Importer & Exporter plugin."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:431 inc/class-ocdi-helpers.php:452
-#: inc/class-ocdi-helpers.php:460
+#: inc/class-ocdi-helpers.php:432 inc/class-ocdi-helpers.php:453
+#: inc/class-ocdi-helpers.php:461
 msgid "Upload files"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:448
+#: inc/class-ocdi-helpers.php:449
 msgid "Widget file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:458
+#: inc/class-ocdi-helpers.php:459
 msgid "The import files were successfully uploaded!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:476
+#: inc/class-ocdi-helpers.php:477
 msgid "MAX EXECUTION TIME = %s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:480
+#: inc/class-ocdi-helpers.php:481
 msgid "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:484
+#: inc/class-ocdi-helpers.php:485
 msgid "not defined!"
 msgstr ""
 
