@@ -137,7 +137,7 @@ class OCDI_Helpers {
 			$response_error = self::get_error_from_response( $response );
 
 			return new WP_Error(
-				'while_fetching_error',
+				'file_fetching_error',
 				sprintf(
 					__( 'An error occurred while fetching %s%s%s file from the server!%sReason: %s - %s.', 'pt-ocdi' ),
 					'<strong>',
@@ -146,7 +146,8 @@ class OCDI_Helpers {
 					'<br>',
 					$response_error['error_code'],
 					$response_error['error_message']
-				)
+				) . '<br>' .
+				apply_filters( 'pt-ocdi/message_after_file_fetching_error', '' )
 			);
 		}
 
