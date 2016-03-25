@@ -43,4 +43,4 @@ cp -r trunk tags/$PLUGINVERSION
 
 # Add all new files to svn repo
 svn status | grep -v "^.[ \t]*\..*" | grep "^?" | awk '{print $2}' | xargs svn add
-svn commit --username=$SVNUSERNAME --password=$SVNPASSWORD -m "Tagging version: $PLUGINVERSION"
+svn commit --no-auth-cache --username=$SVNUSERNAME --password=$SVNPASSWORD -m "Tagging version: $PLUGINVERSION"
