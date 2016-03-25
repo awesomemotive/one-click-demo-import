@@ -16,6 +16,27 @@ module.exports = function ( grunt ) {
 
 		config: config,
 
+		// https://github.com/gruntjs/grunt-contrib-copy
+		copy: {
+			// create new directory for deployment
+			build: {
+				expand: true,
+				dot:    false,
+				dest:   config.pluginSlug + '/',
+				src:    [
+					'*.php',
+					'readme.txt',
+					'assets/**',
+					'inc/**',
+					'languages/**',
+					'vendor/humanmade/WordPress-Importer/class-logger-cli.php',
+					'vendor/humanmade/WordPress-Importer/class-logger.php',
+					'vendor/humanmade/WordPress-Importer/class-wxr-importer.php',
+				],
+				flatten: false
+			}
+		},
+
 		// https://www.npmjs.com/package/grunt-wp-i18n
 		makepot: {
 			plugin: {

@@ -2,6 +2,7 @@
   "private": true,
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-po2mo": "^0.1.2",
     "grunt-wp-i18n": "^0.5.1",
     "grunt-wp-readme-to-markdown": "^1.0.0",
