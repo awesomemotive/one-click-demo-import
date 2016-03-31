@@ -12,7 +12,7 @@ Import your demo content, widgets and theme settings with one click. Theme autho
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
-If the theme you are using does not have any predefined import files, then you will be presented with two file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import.
+If the theme you are using does not have any predefined import files, then you will be presented with two file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import. You create that file using the [Widget Importer & Exporter](https://wordpress.org/plugins/widget-importer-exporter/) plugin.
 
 This plugin is using the improved WP import that you can find here: https://github.com/humanmade/WordPress-Importer.
 
