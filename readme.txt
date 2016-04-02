@@ -3,7 +3,7 @@ Contributors: capuderg, cyman
 Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
 Tested up to: 4.4.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -90,6 +90,17 @@ add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
 
 == Changelog ==
 
+= 1.0.1 =
+
+*Release Date - 2 April 2016*
+
+Small code fixes:
+
+* Fixed undefined variable bug,
+* Fixed naming of downloaded files and their filters.
+
 = 1.0.0 =
 
 *Release Date - 25 March 2016*
+
+* Initial release!
