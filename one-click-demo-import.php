@@ -376,7 +376,7 @@ class PT_One_Click_Demo_Import {
 
 			// Write error to log file and send an AJAX response with the error.
 			OCDI_Helpers::log_error_and_send_ajax_response(
-				$widget_output->get_error_message(),
+				$results->get_error_message(),
 				$this->log_file_path,
 				esc_html__( 'Importing widgets', 'pt-ocdi' )
 			);
