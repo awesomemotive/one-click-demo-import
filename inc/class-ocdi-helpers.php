@@ -66,7 +66,7 @@ class OCDI_Helpers {
 		// Setup filename path to save the data content.
 		$upload_dir            = wp_upload_dir();
 		$upload_path           = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
-		$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_import_file_suffix_and_file_extension', '.xml' );
+		$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
 
 		// Write data content to the file and return the file path on successful write.
 		$downloaded_files['content'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
@@ -88,7 +88,7 @@ class OCDI_Helpers {
 			}
 
 			// Setup filename path to save the widget content.
-			$import_widgets_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_import_file_prefix', 'demo-import-file_' ) . date( 'Y-m-d__H-i-s' ) . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+			$import_widgets_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
 
 			// Write widget content to the file and return the file path on successful write.
 			$downloaded_files['widgets'] = self::write_to_file( $demo_import_widgets_content, $import_widgets_file_path );
