@@ -102,15 +102,5 @@ class OCDIHelpersTest extends WP_UnitTestCase {
 		);
 		$this->assertEquals( $expected_output , OCDI_Helpers::download_import_files( $import_files ) );
 
-		// Test with invalid url. Should return WP_Error obj.
-		$import_files = array(
-			'import_file_name' => 'Import file',
-			'import_file_url'  => 'http://www.yourinvaliddomain.com/ocdi/invalid-demo-content.xml',
-		);
-		$expected_output = new WP_Error(
-			'file_fetching_error',
-			'An error occurred while fetching <strong>Import file</strong> file from the server!<br>Reason: http_request_failed - Couldn\'t resolve host \'www.yourinvaliddomain.com\'.<br>'
-		);
-		$this->assertEquals( $expected_output , OCDI_Helpers::download_import_files( $import_files ) );
 	}
 }
