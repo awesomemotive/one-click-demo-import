@@ -88,6 +88,14 @@ function ocdi_after_import( $selected_import ) {
 add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
 `
 
+= I can't activate the plugin, because of a fatal error, what can I do? =
+
+You want to activate the plugin, but this error shows up:
+
+*Plugin could not be activated because it triggered a fatal error*
+
+This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
+
 == Changelog ==
 
 = 1.0.1 =
