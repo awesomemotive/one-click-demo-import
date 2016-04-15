@@ -4,7 +4,7 @@
 Plugin Name: One Click Demo Import
 Plugin URI: http://www.proteusthemes.com
 Description: Import your content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
-Version: 1.0.1
+Version: 1.0.2
 Author: ProteusThemes
 Author URI: http://www.proteusthemes.com
 License: GPL3
@@ -204,6 +204,10 @@ class PT_One_Click_Demo_Import {
 	 * 4. after import setup (optional)
 	 */
 	public function import_demo_data_ajax_callback() {
+
+		// Temporary fix for WP version 4.5. - to be removed with a proper fix.
+		// Disables generation of multiple image sizes in the content import.
+		add_filter( 'intermediate_image_sizes_advanced', create_function( '', 'return null;' ) );
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		OCDI_Helpers::verify_ajax_call();
