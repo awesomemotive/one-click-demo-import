@@ -208,15 +208,6 @@ class PT_One_Click_Demo_Import {
 		// Try to update PHP memory limit (so that it does not run out of it).
 		ini_set( 'memory_limit', apply_filters( 'pt-ocdi/import_memory_limit', '350M' ) );
 
-		// Disables generation of multiple image sizes (thumbnails) in the content import step.
-		if ( ! apply_filters( 'pt-ocdi/regenerate_thumbnails_in_content_import', false ) ) {
-			add_filter( 'intermediate_image_sizes_advanced',
-				function() {
-					return null;
-				}
-			);
-		}
-
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		OCDI_Helpers::verify_ajax_call();
 
@@ -343,6 +334,18 @@ class PT_One_Click_Demo_Import {
 		// http://php.net/manual/en/function.set-time-limit.php.
 		// Increase PHP max execution time.
 		set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 300 ) );
+
+		// Disable import of authors.
+		add_filter( 'wxr_importer.pre_process.user', '__return_false' );
+
+		// Disables generation of multiple image sizes (thumbnails) in the content import step.
+		if ( ! apply_filters( 'pt-ocdi/regenerate_thumbnails_in_content_import', false ) ) {
+			add_filter( 'intermediate_image_sizes_advanced',
+				function() {
+					return null;
+				}
+			);
+		}
 
 		// Import content.
 		if ( ! empty( $import_file_path ) ) {
