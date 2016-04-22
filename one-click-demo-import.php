@@ -205,9 +205,17 @@ class PT_One_Click_Demo_Import {
 	 */
 	public function import_demo_data_ajax_callback() {
 
-		// Temporary fix for WP version 4.5. - to be removed with a proper fix.
-		// Disables generation of multiple image sizes in the content import.
-		add_filter( 'intermediate_image_sizes_advanced', create_function( '', 'return null;' ) );
+		// Try to update PHP memory limit (so that it does not run out of it).
+		ini_set( 'memory_limit', apply_filters( 'pt-ocdi/import_memory_limit', '350M' ) );
+
+		// Disables generation of multiple image sizes (thumbnails) in the content import step.
+		if ( ! apply_filters( 'pt-ocdi/regenerate_thumbnails_in_content_import', false ) ) {
+			add_filter( 'intermediate_image_sizes_advanced',
+				function() {
+					return null;
+				}
+			);
+		}
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		OCDI_Helpers::verify_ajax_call();
@@ -280,14 +288,14 @@ class PT_One_Click_Demo_Import {
 		/**
 		 * 3. Import widgets.
 		 */
-		if ( ! empty( $selected_import_files['widgets'] ) ) {
+		if ( ! empty( $selected_import_files['widgets'] ) && empty( $frontend_error_messages ) ) {
 			$this->import_widgets( $selected_import_files['widgets'] );
 		}
 
 		/**
 		 * 4. After import setup.
 		 */
-		if ( false !== has_action( 'pt-ocdi/after_import' ) ) {
+		if ( ( false !== has_action( 'pt-ocdi/after_import' ) ) && empty( $frontend_error_messages ) ) {
 
 			// Run the after_import action to setup other settings.
 			$this->after_import_setup( $this->import_files[ $selected_index ] );

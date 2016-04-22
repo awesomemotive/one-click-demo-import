@@ -221,7 +221,10 @@ class OCDI_Helpers {
 		// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
 		global $wp_filesystem;
 
-		$existing_data = $wp_filesystem->get_contents( $file_path );
+		$existing_data = '';
+		if ( file_exists( $file_path ) ) {
+			$existing_data = $wp_filesystem->get_contents( $file_path );
+		}
 
 		// Style separator.
 		$separator = PHP_EOL . '---' . $separator_text . '---' . PHP_EOL;
