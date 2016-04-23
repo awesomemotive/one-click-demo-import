@@ -200,8 +200,9 @@ class PT_One_Click_Demo_Import {
 	 * Main AJAX callback function for:
 	 * 1. prepare import files (uploaded or predefined via filters)
 	 * 2. import content
-	 * 3. import widgets (optional)
-	 * 4. after import setup (optional)
+	 * 3. before widgets import setup (optional)
+	 * 4. import widgets (optional)
+	 * 5. after import setup (optional)
 	 */
 	public function import_demo_data_ajax_callback() {
 
@@ -277,19 +278,30 @@ class PT_One_Click_Demo_Import {
 		$frontend_error_messages .= $this->import_content( $selected_import_files['content'] );
 
 		/**
-		 * 3. Import widgets.
+		 * 3. Before widgets import setup.
+		 */
+		$action = 'pt-ocdi/before_widgets_import';
+		if ( ( false !== has_action( $action ) ) && empty( $frontend_error_messages ) ) {
+
+			// Run the before_widgets_import action to setup other settings.
+			$this->do_import_action( $action, $this->import_files[ $selected_index ] );
+		}
+
+		/**
+		 * 4. Import widgets.
 		 */
 		if ( ! empty( $selected_import_files['widgets'] ) && empty( $frontend_error_messages ) ) {
 			$this->import_widgets( $selected_import_files['widgets'] );
 		}
 
 		/**
-		 * 4. After import setup.
+		 * 5. After import setup.
 		 */
-		if ( ( false !== has_action( 'pt-ocdi/after_import' ) ) && empty( $frontend_error_messages ) ) {
+		$action = 'pt-ocdi/after_import';
+		if ( ( false !== has_action( $action ) ) && empty( $frontend_error_messages ) ) {
 
 			// Run the after_import action to setup other settings.
-			$this->after_import_setup( $this->import_files[ $selected_index ] );
+			$this->do_import_action( $action, $this->import_files[ $selected_index ] );
 		}
 
 		// Display final messages (success or error messages).
@@ -411,23 +423,22 @@ class PT_One_Click_Demo_Import {
 
 
 	/**
-	 * Setup other things after the whole import process is finished.
+	 * Setup other things in the passed wp action.
 	 *
-	 * @param array $selected_import with information about the selected import.
+	 * @param string $action the action name to be executed.
+	 * @param array  $selected_import with information about the selected import.
 	 */
-	private function after_import_setup( $selected_import ) {
+	private function do_import_action( $action, $selected_import ) {
 
-		// Enable users to add custom code to the end of the import process.
-		// Append any output to the log file.
 		ob_start();
-			do_action( 'pt-ocdi/after_import', $selected_import );
+			do_action( $action, $selected_import );
 		$message = ob_get_clean();
 
 		// Add this message to log file.
 		$log_added = OCDI_Helpers::append_to_file(
 			$message,
 			$this->log_file_path,
-			esc_html__( 'After import setup' , 'pt-ocdi' )
+			$action
 		);
 	}
 
