@@ -118,6 +118,9 @@ class PT_One_Click_Demo_Import {
 				'</p></div>'
 			);
 		}
+
+		// Start output buffer for displaying the plugin intro text.
+		ob_start();
 		?>
 
 		<div class="ocdi__intro-text">
@@ -135,6 +138,14 @@ class PT_One_Click_Demo_Import {
 		<div class="ocdi__intro-text">
 			<p><?php esc_html_e( 'Before you begin, make sure all the required plugins are activated.', 'pt-ocdi' ); ?></p>
 		</div>
+
+		<?php
+			$plugin_intro_text = ob_get_clean();
+
+			// Display the plugin intro text (can be replaced with custom text through the filter below).
+			echo wp_kses_post( apply_filters( 'pt-ocdi/plugin_intro_text', $plugin_intro_text ) );
+		?>
+
 
 		<?php if ( empty( $this->import_files ) ) : ?>
 			<div class="notice  notice-info  below-h2">
