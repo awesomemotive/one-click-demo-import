@@ -88,6 +88,32 @@ This question might be asked by a theme author wanting to implement different af
 	add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
 
 
+### Can I add some code before the widgets get imported? ###
+
+Of course you can, use the `pt-ocdi/before_widgets_import` filter. You can also target different predefined demo imports like in the example above. Here is a simple example code of the `pt-ocdi/before_widgets_import` filter:
+
+
+	function ocdi_before_widgets_import( $selected_import ) {
+		echo "Add your code here that will be executed before the widgets get imported!";
+	}
+	add_action( 'pt-ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
+
+
+### I'm a theme author and I want to change the plugin intro text, how can I do that? ###
+
+You can change the plugin intro text by using the `pt-ocdi/plugin_intro_text` filter:
+
+
+	function ocdi_plugin_intro_text( $default_text ) {
+		$default_text .= '<div class="ocdi__intro-text">This is a custom text added to this plugin intro text.</div>';
+	
+		return $default_text;
+	}
+	add_action( 'pt-ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
+
+
+To add some text in a separate "box", you should wrap your text in a div with a class of 'ocdi__intro-text', like in the code example above.
+
 ### I can't activate the plugin, because of a fatal error, what can I do? ###
 
 You want to activate the plugin, but this error shows up:
