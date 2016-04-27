@@ -90,7 +90,7 @@ This question might be asked by a theme author wanting to implement different af
 
 ### Can I add some code before the widgets get imported? ###
 
-Of course you can, use the `pt-ocdi/before_widgets_import` filter. You can also target different predefined demo imports like in the example above. Here is a simple example code of the `pt-ocdi/before_widgets_import` filter:
+Of course you can, use the `pt-ocdi/before_widgets_import` action. You can also target different predefined demo imports like in the example above. Here is a simple example code of the `pt-ocdi/before_widgets_import` action:
 
 
 	function ocdi_before_widgets_import( $selected_import ) {
@@ -109,7 +109,7 @@ You can change the plugin intro text by using the `pt-ocdi/plugin_intro_text` fi
 	
 		return $default_text;
 	}
-	add_action( 'pt-ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
+	add_filter( 'pt-ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
 
 
 To add some text in a separate "box", you should wrap your text in a div with a class of 'ocdi__intro-text', like in the code example above.
