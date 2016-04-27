@@ -2,8 +2,8 @@
 Contributors: capuderg, cyman
 Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
-Tested up to: 4.4.2
-Stable tag: 1.0.2
+Tested up to: 4.5
+Stable tag: 1.0.3
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -123,6 +123,15 @@ You want to activate the plugin, but this error shows up:
 This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
 
 == Changelog ==
+
+= 1.0.3 =
+
+*Release Date - 27 April 2016*
+
+* Added filter to enable image regeneration,
+* Added filter to change the plugin intro text,
+* Added action to execute custom code before widget import,
+* Disabled author imports.
 
 = 1.0.2 =
 
