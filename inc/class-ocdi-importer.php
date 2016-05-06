@@ -16,7 +16,7 @@ class OCDI_Importer {
 
 		// Set the WordPress Importer v2 as the importer used in this plugin.
 		// More: https://github.com/humanmade/WordPress-Importer.
-		$this->importer = new WXR_Importer( $importer_options );
+		$this->importer = new OCDI_WXR_Importer( $importer_options );
 
 		// Set logger to the importer.
 		if ( ! empty( $logger ) ) {
@@ -32,7 +32,7 @@ class OCDI_Importer {
 			defined( 'WP_LOAD_IMPORTERS' ) || define( 'WP_LOAD_IMPORTERS', true );
 			require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 		}
-		require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-wxr-importer.php';
+		require PT_OCDI_PATH . 'inc/class-ocdi-wxr-importer.php';
 	}
 
 	/**
@@ -51,5 +51,21 @@ class OCDI_Importer {
 	 */
 	public function set_logger( $logger ) {
 		$this->importer->set_logger( $logger );
+	}
+
+	/**
+	 * Get all protected variables from the WXR_Importer needed for continuing the import.
+	 */
+	public function get_importer_data() {
+		return $this->importer->get_importer_data();
+	}
+
+	/**
+	 * Sets all protected variables from the WXR_Importer needed for continuing the import.
+	 *
+	 * @param array $data with set variables.
+	 */
+	public function set_importer_data( $data ) {
+		$this->importer->set_importer_data( $data );
 	}
 }
