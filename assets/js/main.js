@@ -18,7 +18,12 @@ jQuery( function ( $ ) {
 			data.append( 'widget_file', $('#ocdi__widget-file-upload')[0].files[0] );
 		}
 
-		// AJAX call.
+		// AJAX call to import everything (content, widgets, before/after setup)
+		ajaxCall( data );
+
+	});
+
+	function ajaxCall( data ) {
 		$.ajax({
 			method:     'POST',
 			url:        ocdi.ajax_url,
@@ -26,24 +31,27 @@ jQuery( function ( $ ) {
 			contentType: false,
 			processData: false,
 			beforeSend: function() {
-				$( '.js-ocdi-import-data' ).after( '<p class="js-ocdi-ajax-loader  ocdi__ajax-loader"><span class="spinner"></span>' + ocdi.loader_text + '</p>' );
-			},
-			complete:   function() {
-				$( '.js-ocdi-ajax-loader' ).hide( 500, function(){ $( '.js-ocdi-ajax-loader' ).remove(); } );
+				$( '.js-ocdi-ajax-loader' ).show();
 			}
 		})
 		.done( function( response ) {
-			if ( 'undefined' !== typeof response.message ) {
+
+			if ( 'undefined' !== typeof response.status && 'newAJAX' === response.status ) {
+				ajaxCall( data );
+			}
+			else if ( 'undefined' !== typeof response.message ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
+				$( '.js-ocdi-ajax-loader' ).hide();
 			}
 			else {
 				$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"><p>' + response + '</p></div>' );
+				$( '.js-ocdi-ajax-loader' ).hide();
 			}
 		})
 		.fail( function( error ) {
 			$( '.js-ocdi-ajax-response' ).append( '<div class="error  below-h2"> Error: ' + error.statusText + ' (' + error.status + ')' + '</div>' );
+			$( '.js-ocdi-ajax-loader' ).hide();
 		});
-
-	});
+	}
 
 });

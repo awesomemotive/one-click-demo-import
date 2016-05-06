@@ -41,7 +41,7 @@ class PT_One_Click_Demo_Import {
 	/**
 	 * Private variables used throughout the plugin.
 	 */
-	private $importer, $plugin_page, $import_files, $logger, $log_file_path;
+	private $importer, $plugin_page, $import_files, $logger, $log_file_path, $selected_index, $selected_import_files, $microtime, $frontend_error_messages, $ajax_call_number;
 
 
 	/**
@@ -176,6 +176,10 @@ class PT_One_Click_Demo_Import {
 			<button class="ocdi__button  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
 		</p>
 
+		<p class="ocdi__ajax-loader  js-ocdi-ajax-loader">
+			<span class="spinner"></span> <?php esc_html_e( 'Importing, please wait!', 'pt-ocdi' ); ?>
+		</p>
+
 		<div class="ocdi__response  js-ocdi-ajax-response"></div>
 	</div>
 
@@ -198,7 +202,6 @@ class PT_One_Click_Demo_Import {
 				array(
 					'ajax_url'    => admin_url( 'admin-ajax.php' ),
 					'ajax_nonce'  => wp_create_nonce( 'ocdi-ajax-verification' ),
-					'loader_text' => esc_html__( 'Importing now, please wait!', 'pt-ocdi' ),
 				)
 			);
 
@@ -223,100 +226,109 @@ class PT_One_Click_Demo_Import {
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		OCDI_Helpers::verify_ajax_call();
 
-		// Error messages displayed on front page.
-		$frontend_error_messages = '';
+		// Is this a new AJAX call to continue the previous import?
+		$use_existing_importer_data = $this->get_importer_data();
 
-		// Create a date and time string to use for demo and log file names.
-		$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
+		if ( ! $use_existing_importer_data ) {
 
-		// Define log file path.
-		$this->log_file_path = OCDI_Helpers::get_log_path( $demo_import_start_time );
+			// Set the AJAX call number.
+			$this->ajax_call_number = empty( $this->ajax_call_number ) ? 0 : $this->ajax_call_number;
 
-		// Get selected file index or set it to 0.
-		$selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
+			// Error messages displayed on front page.
+			$this->frontend_error_messages = '';
 
-		/**
-		 * 1. Prepare import files.
-		 * Manually uploaded import files or predefined import files via filter: pt-ocdi/import_files
-		 */
-		if ( ! empty( $_FILES ) ) { // Using manual file uploads?
+			// Create a date and time string to use for demo and log file names.
+			$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
 
-			// Get paths for the uploaded files.
-			$selected_import_files = OCDI_Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
+			// Define log file path.
+			$this->log_file_path = OCDI_Helpers::get_log_path( $demo_import_start_time );
 
-			// Set the name of the import files, because we used the uploaded files.
-			$this->import_files[ $selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'pt-ocdi' );
-		}
-		elseif ( ! empty( $this->import_files[ $selected_index ] ) ) { // Use predefined import files from wp filter: pt-ocdi/import_files.
+			// Get selected file index or set it to 0.
+			$this->selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
 
-			// Download the import files (content and widgets files) and save it to variable for later use.
-			$selected_import_files = OCDI_Helpers::download_import_files(
-				$this->import_files[ $selected_index ],
-				$demo_import_start_time
-			);
+			/**
+			 * 1. Prepare import files.
+			 * Manually uploaded import files or predefined import files via filter: pt-ocdi/import_files
+			 */
+			if ( ! empty( $_FILES ) ) { // Using manual file uploads?
 
-			// Check Errors.
-			if ( is_wp_error( $selected_import_files ) ) {
+				// Get paths for the uploaded files.
+				$this->selected_import_files = OCDI_Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
 
-				// Write error to log file and send an AJAX response with the error.
-				OCDI_Helpers::log_error_and_send_ajax_response(
-					$selected_import_files->get_error_message(),
+				// Set the name of the import files, because we used the uploaded files.
+				$this->import_files[ $this->selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'pt-ocdi' );
+			}
+			elseif ( ! empty( $this->import_files[ $this->selected_index ] ) ) { // Use predefined import files from wp filter: pt-ocdi/import_files.
+
+				// Download the import files (content and widgets files) and save it to variable for later use.
+				$this->selected_import_files = OCDI_Helpers::download_import_files(
+					$this->import_files[ $this->selected_index ],
+					$demo_import_start_time
+				);
+
+				// Check Errors.
+				if ( is_wp_error( $this->selected_import_files ) ) {
+
+					// Write error to log file and send an AJAX response with the error.
+					OCDI_Helpers::log_error_and_send_ajax_response(
+						$this->selected_import_files->get_error_message(),
+						$this->log_file_path,
+						esc_html__( 'Downloaded files', 'pt-ocdi' )
+					);
+				}
+
+				// Add this message to log file.
+				$log_added = OCDI_Helpers::append_to_file(
+					sprintf(
+						__( 'The import files for: %s were successfully downloaded!', 'pt-ocdi' ),
+						$this->import_files[ $this->selected_index ]['import_file_name']
+					) . OCDI_Helpers::import_file_info( $this->selected_import_files ),
 					$this->log_file_path,
-					esc_html__( 'Downloaded files', 'pt-ocdi' )
+					esc_html__( 'Downloaded files' , 'pt-ocdi' )
 				);
 			}
+			else {
 
-			// Add this message to log file.
-			$log_added = OCDI_Helpers::append_to_file(
-				sprintf(
-					__( 'The import files for: %s were successfully downloaded!', 'pt-ocdi' ),
-					$this->import_files[ $selected_index ]['import_file_name']
-				) . OCDI_Helpers::import_file_info( $selected_import_files ),
-				$this->log_file_path,
-				esc_html__( 'Downloaded files' , 'pt-ocdi' )
-			);
-		}
-		else {
-
-			// Send JSON Error response to the AJAX call.
-			wp_send_json( esc_html__( 'No import files specified!', 'pt-ocdi' ) );
+				// Send JSON Error response to the AJAX call.
+				wp_send_json( esc_html__( 'No import files specified!', 'pt-ocdi' ) );
+			}
 		}
 
 		/**
 		 * 2. Import content.
 		 * Returns any errors greater then the "error" logger level, that will be displayed on front page.
 		 */
-		$frontend_error_messages .= $this->import_content( $selected_import_files['content'] );
+		$this->frontend_error_messages .= $this->import_content( $this->selected_import_files['content'] );
 
 		/**
 		 * 3. Before widgets import setup.
 		 */
 		$action = 'pt-ocdi/before_widgets_import';
-		if ( ( false !== has_action( $action ) ) && empty( $frontend_error_messages ) ) {
+		if ( ( false !== has_action( $action ) ) && empty( $this->frontend_error_messages ) ) {
 
 			// Run the before_widgets_import action to setup other settings.
-			$this->do_import_action( $action, $this->import_files[ $selected_index ] );
+			$this->do_import_action( $action, $this->import_files[ $this->selected_index ] );
 		}
 
 		/**
 		 * 4. Import widgets.
 		 */
-		if ( ! empty( $selected_import_files['widgets'] ) && empty( $frontend_error_messages ) ) {
-			$this->import_widgets( $selected_import_files['widgets'] );
+		if ( ! empty( $this->selected_import_files['widgets'] ) && empty( $this->frontend_error_messages ) ) {
+			$this->import_widgets( $this->selected_import_files['widgets'] );
 		}
 
 		/**
 		 * 5. After import setup.
 		 */
 		$action = 'pt-ocdi/after_import';
-		if ( ( false !== has_action( $action ) ) && empty( $frontend_error_messages ) ) {
+		if ( ( false !== has_action( $action ) ) && empty( $this->frontend_error_messages ) ) {
 
 			// Run the after_import action to setup other settings.
-			$this->do_import_action( $action, $this->import_files[ $selected_index ] );
+			$this->do_import_action( $action, $this->import_files[ $this->selected_index ] );
 		}
 
 		// Display final messages (success or error messages).
-		if ( empty( $frontend_error_messages ) ) {
+		if ( empty( $this->frontend_error_messages ) ) {
 			$response['message'] = sprintf(
 				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
 				'<div class="notice  notice-success"><p>',
@@ -327,7 +339,7 @@ class PT_One_Click_Demo_Import {
 			);
 		}
 		else {
-			$response['message'] = $frontend_error_messages . '<br>';
+			$response['message'] = $this->frontend_error_messages . '<br>';
 			$response['message'] .= sprintf(
 				__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
 				'<div class="notice  notice-error"><p>',
@@ -351,6 +363,8 @@ class PT_One_Click_Demo_Import {
 	 */
 	private function import_content( $import_file_path ) {
 
+		$this->microtime = microtime( true );
+
 		// This should be replaced with multiple AJAX calls (import in smaller chunks)
 		// so that it would not come to the Internal Error, because of the PHP script timeout.
 		// Also this function has no effect when PHP is running in safe mode
@@ -360,6 +374,9 @@ class PT_One_Click_Demo_Import {
 
 		// Disable import of authors.
 		add_filter( 'wxr_importer.pre_process.user', '__return_false' );
+
+		// Check, if we need to send another AJAX request.
+		add_filter( 'wxr_importer.pre_process.post', array( $this, 'new_ajax_request_maybe' ) );
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
 		if ( ! apply_filters( 'pt-ocdi/regenerate_thumbnails_in_content_import', false ) ) {
@@ -383,6 +400,9 @@ class PT_One_Click_Demo_Import {
 				esc_html__( 'Importing content' , 'pt-ocdi' )
 			);
 		}
+
+		// Delete content importer data for current import from DB.
+		delete_transient( 'ocdi_importer_data' );
 
 		// Return any error messages for the front page output (errors, critical, alert and emergency level messages only).
 		return $this->logger->error_output;
@@ -455,6 +475,76 @@ class PT_One_Click_Demo_Import {
 
 
 	/**
+	 * Check if we need to create a new AJAX request, so that server does not timeout.
+	 *
+	 * @param array $data current post data.
+	 * @return array
+	 */
+	public function new_ajax_request_maybe( $data ) {
+		$time = microtime( true ) - $this->microtime;
+
+		// We should make a new ajax call, if the time is right.
+		if ( $time > apply_filters( 'pt-ocdi/time_for_one_ajax_call', 25 ) ) {
+			$this->ajax_call_number++;
+			$this->set_importer_data();
+
+			$response = array(
+				'status'  => 'newAJAX',
+				'message' => 'Time for new AJAX request!: ' . $time,
+			);
+
+			// Add any output to the log file and clear the buffers.
+			$message = ob_get_clean();
+
+			// Add message to log file.
+			$log_added = OCDI_Helpers::append_to_file(
+				__( 'Completed AJAX call number: ' , 'pt-ocdi' ) . $this->ajax_call_number . PHP_EOL . $message,
+				$this->log_file_path,
+				''
+			);
+
+			wp_send_json( $response );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Set current state of the content importer, so we can continue the import with new AJAX request.
+	 */
+	private function set_importer_data() {
+		$data = array(
+			'frontend_error_messages' => $this->frontend_error_messages,
+			'ajax_call_number'        => $this->ajax_call_number,
+			'log_file_path'           => $this->log_file_path,
+			'selected_index'          => $this->selected_index,
+			'selected_import_files'   => $this->selected_import_files,
+		);
+
+		$data = array_merge( $data, $this->importer->get_importer_data() );
+
+		set_transient( 'ocdi_importer_data', $data, 0.5 * HOUR_IN_SECONDS );
+	}
+
+	/**
+	 * Get content importer data, so we can continue the import with this new AJAX request.
+	 */
+	private function get_importer_data() {
+		if ( $data = get_transient( 'ocdi_importer_data' ) ) {
+			$this->frontend_error_messages                = empty( $data['frontend_error_messages'] ) ? '' : $data['frontend_error_messages'];
+			$this->ajax_call_number                       = empty( $data['ajax_call_number'] ) ? 1 : $data['ajax_call_number'];
+			$this->log_file_path                          = empty( $data['log_file_path'] ) ? '' : $data['log_file_path'];
+			$this->selected_index                         = empty( $data['selected_index'] ) ? 0 : $data['selected_index'];
+			$this->selected_import_files                  = empty( $data['selected_import_files'] ) ? array() : $data['selected_import_files'];
+			$this->importer->set_importer_data( $data );
+
+			return true;
+		}
+		return false;
+	}
+
+
+	/**
 	 * Get data from filters, after the theme has loaded and instantiate the importer.
 	 */
 	public function setup_plugin_with_filter_data() {
@@ -481,4 +571,4 @@ class PT_One_Click_Demo_Import {
 	}
 }
 
-$PT_One_Click_Demo_Import = PT_One_Click_Demo_Import::getInstance();
+$pt_one_click_demo_import = PT_One_Click_Demo_Import::getInstance();

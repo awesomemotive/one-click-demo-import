@@ -5,14 +5,15 @@
 
 /* AJAX loader */
 .ocdi__ajax-loader {
-	font-width: bold;
 	font-size: 1.5em;
+	display: none;
 }
 
 .ocdi__ajax-loader .spinner {
 	display: inline-block;
 	float: none;
 	visibility: visible;
+	margin-bottom: 6px;
 }
 
 /* Plugin intro text */
