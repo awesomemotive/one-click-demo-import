@@ -379,7 +379,7 @@ class PT_One_Click_Demo_Import {
 		add_filter( 'wxr_importer.pre_process.post', array( $this, 'new_ajax_request_maybe' ) );
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
-		if ( ! apply_filters( 'pt-ocdi/regenerate_thumbnails_in_content_import', false ) ) {
+		if ( ! apply_filters( 'pt-ocdi/regenerate_thumbnails_in_content_import', true ) ) {
 			add_filter( 'intermediate_image_sizes_advanced',
 				function() {
 					return null;
