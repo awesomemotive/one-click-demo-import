@@ -54,4 +54,9 @@ jQuery( function ( $ ) {
 		});
 	}
 
+	$( '#ocdi__demo-import-files' ).on( 'change', function(){
+		var currentFilePreviewImage = ocdi.import_files[ this.value ]['import_preview_image_url'] || '';
+		$( '#ocdi__demo-import-preview-image' ).prop( 'src', currentFilePreviewImage );
+	});
+
 });

@@ -171,6 +171,10 @@ class PT_One_Click_Demo_Import {
 				<?php endforeach; ?>
 			</select>
 		</p>
+
+		<div>
+			<img id="ocdi__demo-import-preview-image" src="<?php echo ! empty( $this->import_files[0]['import_preview_image_url'] ) ? esc_url( $this->import_files[0]['import_preview_image_url'] ) : ''; ?>">
+		</div>
 		<?php endif; ?>
 
 		<p>
@@ -201,8 +205,9 @@ class PT_One_Click_Demo_Import {
 
 			wp_localize_script( 'ocdi-main-js', 'ocdi',
 				array(
-					'ajax_url'    => admin_url( 'admin-ajax.php' ),
-					'ajax_nonce'  => wp_create_nonce( 'ocdi-ajax-verification' ),
+					'ajax_url'     => admin_url( 'admin-ajax.php' ),
+					'ajax_nonce'   => wp_create_nonce( 'ocdi-ajax-verification' ),
+					'import_files' => $this->import_files,
 				)
 			);
 
