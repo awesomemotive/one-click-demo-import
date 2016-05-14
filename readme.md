@@ -3,7 +3,7 @@
 **Tags:** import, content, demo, data, widgets, settings  
 **Requires at least:** 4.0.0  
 **Tested up to:** 4.5  
-**Stable tag:** 1.0.3  
+**Stable tag:** 1.1.0  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -123,6 +123,14 @@ You want to activate the plugin, but this error shows up:
 This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
 
 ## Changelog ##
+
+### 1.1.0 ###
+
+*Release Date - 14 May 2016*
+
+* Content import now imports in multiple AJAX calls, so there should be no more server timeout errors,
+* The setting for generation of multiple image sizes in the content import is again enabled by default,
+* Plugin textdomain was loaded, so that translations can be made.
 
 ### 1.0.3 ###
 
