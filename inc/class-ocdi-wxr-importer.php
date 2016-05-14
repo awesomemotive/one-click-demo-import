@@ -86,7 +86,7 @@ class OCDI_WXR_Importer extends WXR_Importer {
 		// Is this type even valid?
 		if ( ! $post_type_object ) {
 			$this->logger->warning( sprintf(
-				__( 'Failed to import "%s": Invalid post type %s', 'wordpress-importer' ),
+				__( 'Failed to import "%s": Invalid post type %s', 'pt-ocdi' ),
 				$data['post_title'],
 				$data['post_type']
 			) );
@@ -96,7 +96,7 @@ class OCDI_WXR_Importer extends WXR_Importer {
 		$post_exists = $this->post_exists( $data );
 		if ( $post_exists ) {
 			$this->logger->info( sprintf(
-				__('%s "%s" already exists.', 'wordpress-importer'),
+				__('%s "%s" already exists.', 'pt-ocdi'),
 				$post_type_object->labels->singular_name,
 				$data['post_title']
 			) );
@@ -172,7 +172,7 @@ class OCDI_WXR_Importer extends WXR_Importer {
 		if ( 'attachment' === $postdata['post_type'] ) {
 			if ( ! $this->options['fetch_attachments'] ) {
 				$this->logger->notice( sprintf(
-					__( 'Skipping attachment "%s", fetching attachments disabled' ),
+					__( 'Skipping attachment "%s", fetching attachments disabled', 'pt-ocdi' ),
 					$data['post_title']
 				) );
 				return false;
@@ -186,7 +186,7 @@ class OCDI_WXR_Importer extends WXR_Importer {
 
 		if ( is_wp_error( $post_id ) ) {
 			$this->logger->error( sprintf(
-				__( 'Failed to import "%s" (%s)', 'wordpress-importer' ),
+				__( 'Failed to import "%s" (%s)', 'pt-ocdi' ),
 				$data['post_title'],
 				$post_type_object->labels->singular_name
 			) );
@@ -218,12 +218,12 @@ class OCDI_WXR_Importer extends WXR_Importer {
 		$this->mark_post_exists( $data, $post_id );
 
 		$this->logger->info( sprintf(
-			__( 'Imported "%s" (%s)', 'wordpress-importer' ),
+			__( 'Imported "%s" (%s)', 'pt-ocdi' ),
 			$data['post_title'],
 			$post_type_object->labels->singular_name
 		) );
 		$this->logger->debug( sprintf(
-			__( 'Post %d remapped to %d', 'wordpress-importer' ),
+			__( 'Post %d remapped to %d', 'pt-ocdi' ),
 			$original_id,
 			$post_id
 		) );

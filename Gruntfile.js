@@ -45,7 +45,7 @@ module.exports = function ( grunt ) {
 					include:         [config.phpFileRegex, '^inc/'+config.phpFileInSubfolderRegex],
 					mainFile:        'one-click-demo-import.php',
 					potComments:     'Copyright (C) {year} ProteusThemes \n# This file is distributed under the GPL 2.0.',
-					potFilename:     config.pluginSlug + '.pot',
+					potFilename:     'pt-ocdi.pot',
 					potHeaders:      {
 						poedit:                 true,
 						'report-msgid-bugs-to': 'http://support.proteusthemes.com/',

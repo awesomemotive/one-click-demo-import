@@ -70,6 +70,7 @@ class PT_One_Click_Demo_Import {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'wp_ajax_ocdi_import_demo_data', array( $this, 'import_demo_data_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 	}
 
 
@@ -541,6 +542,13 @@ class PT_One_Click_Demo_Import {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Load the plugin textdomain, so that translations can be made.
+	 */
+	public function load_textdomain() {
+		load_plugin_textdomain( 'pt-ocdi', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
 
