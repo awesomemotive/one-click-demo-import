@@ -50,14 +50,16 @@ This question is for theme authors. To predefine demo imports, you just have to 
 	function ocdi_import_files() {
 		return array(
 			array(
-				'import_file_name'       => 'Demo Import 1',
-				'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-content.xml',
-				'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets.json'
+				'import_file_name'         => 'Demo Import 1',
+				'import_file_url'          => 'http://www.your_domain.com/ocdi/demo-content.xml',
+				'import_widget_file_url'   => 'http://www.your_domain.com/ocdi/widgets.json',
+				'import_preview_image_url' => 'http://www.your_domain.com/ocdi/preview_import_image1.json',
 			),
 			array(
-				'import_file_name'       => 'Demo Import 2',
-				'import_file_url'        => 'http://www.your_domain.com/ocdi/demo-content2.xml',
-				'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets2.json'
+				'import_file_name'         => 'Demo Import 2',
+				'import_file_url'          => 'http://www.your_domain.com/ocdi/demo-content2.xml',
+				'import_widget_file_url'   => 'http://www.your_domain.com/ocdi/widgets2.json'
+				'import_preview_image_url' => 'http://www.your_domain.com/ocdi/preview_import_image2.json',
 			),
 		);
 	}
@@ -123,6 +125,12 @@ You want to activate the plugin, but this error shows up:
 This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
 
 ## Changelog ##
+
+### 1.1.1 ###
+
+*Release Date - 20 May 2016*
+
+* Preview import images can now be defined for multiple predefined import files (check FAQ "How to predefine demo imports?" for more info).
 
 ### 1.1.0 ###
 
