@@ -162,20 +162,44 @@ class PT_One_Click_Demo_Import {
 				<input id="ocdi__widget-file-upload" type="file" name="widget-file-upload">
 			</p>
 		<?php elseif ( 1 < count( $this->import_files ) ) : ?>
-		<p>
-			<select id="ocdi__demo-import-files">
-				<?php foreach ( $this->import_files as $index => $import_file ) : ?>
-					<option value="<?php echo esc_attr( $index ); ?>">
-						<?php echo esc_html( $import_file['import_file_name'] ); ?>
-					</option>
-				<?php endforeach; ?>
-			</select>
-		</p>
+			<p>
+				<select id="ocdi__demo-import-files">
+					<?php foreach ( $this->import_files as $index => $import_file ) : ?>
+						<option value="<?php echo esc_attr( $index ); ?>">
+							<?php echo esc_html( $import_file['import_file_name'] ); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</p>
 
-		<div>
-			<img id="ocdi__demo-import-preview-image" src="<?php echo ! empty( $this->import_files[0]['import_preview_image_url'] ) ? esc_url( $this->import_files[0]['import_preview_image_url'] ) : ''; ?>">
-		</div>
-		<?php endif; ?>
+			<?php
+			// Check if at least one preview image is defined, so we can prepare the structure for display.
+			$preview_image_is_defined = false;
+			foreach ( $this->import_files as $import_file ) {
+				if ( isset( $import_file['import_preview_image_url'] ) ) {
+					$preview_image_is_defined = true;
+					break;
+				}
+			}
+
+			if ( $preview_image_is_defined ) :
+			?>
+			<p>
+				<h3><?php esc_html_e( 'Import preview:', 'pt-ocdi' ); ?></h3>
+				<p class="ocdi__demo-import-preview-image-message  js-ocdi-preview-image-message">
+					<?php
+					if ( ! isset( $this->import_files[0]['import_preview_image_url'] ) ) {
+						esc_html_e( 'No preview image defined for this import.', 'pt-ocdi' );
+					}
+					// Leave the img tag below and the p tag above available for later changes via JS.
+					?>
+				</p>
+				<img id="ocdi__demo-import-preview-image" class="js-ocdi-preview-image" src="<?php echo ! empty( $this->import_files[0]['import_preview_image_url'] ) ? esc_url( $this->import_files[0]['import_preview_image_url'] ) : ''; ?>">
+			<p>
+		<?php
+			endif;
+		endif;
+		?>
 
 		<p>
 			<button class="ocdi__button  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
@@ -208,6 +232,9 @@ class PT_One_Click_Demo_Import {
 					'ajax_url'     => admin_url( 'admin-ajax.php' ),
 					'ajax_nonce'   => wp_create_nonce( 'ocdi-ajax-verification' ),
 					'import_files' => $this->import_files,
+					'texts'        => array(
+						'missing_preview_image' => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
+					),
 				)
 			);
 
