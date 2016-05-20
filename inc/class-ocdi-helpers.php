@@ -99,6 +99,29 @@ class OCDI_Helpers {
 			}
 		}
 
+		// Get customizer import file as well. If defined!
+		if ( ! empty( $import_file_info['import_customizer_file_url'] ) ) {
+
+			// Retrieve customizer content from the URL.
+			$demo_import_customizer_content = self::get_content_from_url( $import_file_info['import_customizer_file_url'], $import_file_info['import_file_name'] );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $demo_import_customizer_content ) ) {
+				return $demo_import_customizer_content;
+			}
+
+			// Setup filename path to save the customizer content.
+			$import_customizer_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
+
+			// Write customizer content to the file and return the file path on successful write.
+			$downloaded_files['customizer'] = self::write_to_file( $demo_import_customizer_content, $import_customizer_file_path );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['customizer'] ) ) {
+				return $downloaded_files['customizer'];
+			}
+		}
+
 		return $downloaded_files;
 	}
 
@@ -423,8 +446,9 @@ class OCDI_Helpers {
 		);
 
 		// Handle demo content and widgets file upload.
-		$content_file_info = wp_handle_upload( $_FILES['content_file'], $upload_overrides );
-		$widget_file_info  = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
+		$content_file_info     = wp_handle_upload( $_FILES['content_file'], $upload_overrides );
+		$widget_file_info      = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
+		$customizer_file_info  = wp_handle_upload( $_FILES['customizer_file'], $upload_overrides );
 
 		if ( empty( $content_file_info['file'] ) || isset( $content_file_info['error'] ) ) {
 
@@ -439,6 +463,7 @@ class OCDI_Helpers {
 		// Set uploaded content file.
 		$selected_import_files['content'] = $content_file_info['file'];
 
+		// Process widget import file.
 		if ( $widget_file_info && ! isset( $widget_file_info['error'] ) ) {
 
 			// Set uploaded widget file.
@@ -451,6 +476,25 @@ class OCDI_Helpers {
 				sprintf(
 					__( 'Widget file was not uploaded. Error: %s', 'pt-ocdi' ),
 					$widget_file_info['error']
+				),
+				$log_file_path,
+				esc_html__( 'Upload files' , 'pt-ocdi' )
+			);
+		}
+
+		// Process Customizer import file.
+		if ( $customizer_file_info && ! isset( $customizer_file_info['error'] ) ) {
+
+			// Set uploaded widget file.
+			$selected_import_files['customizer'] = $customizer_file_info['file'];
+		}
+		else {
+
+			// Add this error to log file.
+			$log_added = self::append_to_file(
+				sprintf(
+					__( 'Customizer file was not uploaded. Error: %s', 'pt-ocdi' ),
+					$customizer_file_info['error']
 				),
 				$log_file_path,
 				esc_html__( 'Upload files' , 'pt-ocdi' )
@@ -481,11 +525,12 @@ class OCDI_Helpers {
 			ini_get( 'max_execution_time' )
 		) . PHP_EOL .
 		sprintf(
-			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s', 'pt-ocdi' ),
+			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s', 'pt-ocdi' ),
 			PHP_EOL,
 			get_site_url(),
 			$selected_import_files['content'],
-			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets']
+			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets'],
+			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['customizer']
 		);
 	}
 

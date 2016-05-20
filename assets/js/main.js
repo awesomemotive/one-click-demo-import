@@ -17,6 +17,9 @@ jQuery( function ( $ ) {
 		if ( $('#ocdi__widget-file-upload').length ) {
 			data.append( 'widget_file', $('#ocdi__widget-file-upload')[0].files[0] );
 		}
+		if ( $('#ocdi__customizer-file-upload').length ) {
+			data.append( 'customizer_file', $('#ocdi__customizer-file-upload')[0].files[0] );
+		}
 
 		// AJAX call to import everything (content, widgets, before/after setup)
 		ajaxCall( data );

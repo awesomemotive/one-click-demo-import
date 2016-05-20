@@ -12,7 +12,7 @@ Import your demo content, widgets and theme settings with one click. Theme autho
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
-If the theme you are using does not have any predefined import files, then you will be presented with two file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import. You create that file using the [Widget Importer & Exporter](https://wordpress.org/plugins/widget-importer-exporter/) plugin.
+If the theme you are using does not have any predefined import files, then you will be presented with three file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import. You create that file using the [Widget Importer & Exporter](https://wordpress.org/plugins/widget-importer-exporter/) plugin. The third one is also optional and will import the customizer settings, select the DAT file which you can generate from [Customizer Export/Import](https://wordpress.org/plugins/customizer-export-import/) plugin (the customizer settings will be imported only if the export file was created from the same theme).
 
 This plugin is using the improved WP import that you can find here: https://github.com/humanmade/WordPress-Importer.
 
@@ -50,21 +50,25 @@ This question is for theme authors. To predefine demo imports, you just have to 
 	function ocdi_import_files() {
 		return array(
 			array(
-				'import_file_name'         => 'Demo Import 1',
-				'import_file_url'          => 'http://www.your_domain.com/ocdi/demo-content.xml',
-				'import_widget_file_url'   => 'http://www.your_domain.com/ocdi/widgets.json',
-				'import_preview_image_url' => 'http://www.your_domain.com/ocdi/preview_import_image1.json',
+				'import_file_name'           => 'Demo Import 1',
+				'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content.xml',
+				'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets.json',
+				'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer.dat',
+				'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image1.json',
 			),
 			array(
-				'import_file_name'         => 'Demo Import 2',
-				'import_file_url'          => 'http://www.your_domain.com/ocdi/demo-content2.xml',
-				'import_widget_file_url'   => 'http://www.your_domain.com/ocdi/widgets2.json'
-				'import_preview_image_url' => 'http://www.your_domain.com/ocdi/preview_import_image2.json',
+				'import_file_name'           => 'Demo Import 2',
+				'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content2.xml',
+				'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets2.json',
+				'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer2.dat',
+				'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image2.json',
 			),
 		);
 	}
 	add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 
+
+You can set content import, widgets, and customizer import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports.
 
 ### How to handle different "after import setups" depending on which predefined import was selected? ###
 
@@ -130,7 +134,8 @@ This happens, because your hosting server is using a very old version of PHP. Th
 
 *Release Date - 20 May 2016*
 
-* Preview import images can now be defined for multiple predefined import files (check FAQ "How to predefine demo imports?" for more info).
+* Preview import images can now be defined for multiple predefined import files (check FAQ "How to predefine demo imports?" for more info),
+* You can now also import customizer options (more info in the FAQ).
 
 ### 1.1.0 ###
 
