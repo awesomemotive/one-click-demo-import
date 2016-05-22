@@ -1,10 +1,10 @@
 <?php
 /**
- * Class for the widget importer used in the One Click Demo Import plugin.
+ * Class for the customizer importer used in the One Click Demo Import plugin.
  *
- * Code is mostly from the Widget Importer & Exporter plugin.
+ * Code is mostly from the Customizer Export/Import plugin.
  *
- * @see https://wordpress.org/plugins/widget-importer-exporter/
+ * @see https://wordpress.org/plugins/customizer-export-import/
  * @package ocdi
  */
 

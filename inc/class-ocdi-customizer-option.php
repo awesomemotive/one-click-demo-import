@@ -3,6 +3,8 @@
  * A class that extends WP_Customize_Setting so we can access
  * the protected updated method when importing options.
  *
+ * Used in the Customizer importer.
+ *
  * @since 1.1.1
  * @package ocdi
  */
