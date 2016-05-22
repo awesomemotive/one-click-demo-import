@@ -3,7 +3,7 @@ Contributors: capuderg, cyman
 Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
 Tested up to: 4.5
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -132,10 +132,10 @@ This happens, because your hosting server is using a very old version of PHP. Th
 
 = 1.1.1 =
 
-*Release Date - 20 May 2016*
+*Release Date - 22 May 2016*
 
 * Preview import images can now be defined for multiple predefined import files (check FAQ "How to predefine demo imports?" for more info),
-* You can now also import customizer options (more info in the FAQ).
+* You can now also import customizer settings.
 
 = 1.1.0 =
 
