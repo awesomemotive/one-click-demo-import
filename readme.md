@@ -3,7 +3,7 @@
 **Tags:** import, content, demo, data, widgets, settings  
 **Requires at least:** 4.0.0  
 **Tested up to:** 4.5  
-**Stable tag:** 1.1.0  
+**Stable tag:** 1.1.1  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -25,6 +25,10 @@ All progress of this plugin's work is logged in a log file in the default WP upl
 NOTE: This plugin is still a work in progress!
 
 NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is in the original WP Importer plugin).
+
+**Do you want to contribute?**
+
+Please refer to the official [GitHub repository](https://github.com/proteusthemes/one-click-demo-import) of this plugin.
 
 ## Installation ##
 
@@ -132,10 +136,10 @@ This happens, because your hosting server is using a very old version of PHP. Th
 
 ### 1.1.1 ###
 
-*Release Date - 20 May 2016*
+*Release Date - 22 May 2016*
 
 * Preview import images can now be defined for multiple predefined import files (check FAQ "How to predefine demo imports?" for more info),
-* You can now also import customizer options (more info in the FAQ).
+* You can now also import customizer settings.
 
 ### 1.1.0 ###
 
