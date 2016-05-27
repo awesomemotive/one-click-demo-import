@@ -26,6 +26,10 @@ NOTE: This plugin is still a work in progress!
 
 NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is in the original WP Importer plugin).
 
+**Do you want to contribute?**
+
+Please refer to the official [GitHub repository](https://github.com/proteusthemes/one-click-demo-import) of this plugin.
+
 == Installation ==
 
 Upload the One Click Demo Import plugin to your WordPress site, Activate it, and that's it.
