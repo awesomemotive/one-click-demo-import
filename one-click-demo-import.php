@@ -189,7 +189,7 @@ class PT_One_Click_Demo_Import {
 			if ( $preview_image_is_defined ) :
 			?>
 			<p>
-				<h3><?php esc_html_e( 'Import preview:', 'pt-ocdi' ); ?></h3>
+				<p><?php esc_html_e( 'Import preview:', 'pt-ocdi' ); ?></p>
 				<p class="ocdi__demo-import-preview-image-message  js-ocdi-preview-image-message">
 					<?php
 					if ( ! isset( $this->import_files[0]['import_preview_image_url'] ) ) {
