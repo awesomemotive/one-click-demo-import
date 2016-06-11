@@ -124,6 +124,12 @@ You can change the plugin intro text by using the `pt-ocdi/plugin_intro_text` fi
 
 To add some text in a separate "box", you should wrap your text in a div with a class of 'ocdi__intro-text', like in the code example above.
 
+### How to disable generation of smaller images (thumbnails) during the content import ###
+
+This will greatly improve the time needed to import the content (images), but only the original sized images will be imported. You can disable it with a filter, so just add this code to your theme function.php file:
+
+`add_filter( 'pt-ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
+
 ### I can't activate the plugin, because of a fatal error, what can I do? ###
 
 You want to activate the plugin, but this error shows up:
