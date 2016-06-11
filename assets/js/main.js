@@ -58,6 +58,7 @@ jQuery( function ( $ ) {
 	}
 
 	// Switch preview images on select change event, but only if the img element .js-ocdi-preview-image exists.
+	// Also switch the import notice (if it exists).
 	$( '#ocdi__demo-import-files' ).on( 'change', function(){
 		if ( $( '.js-ocdi-preview-image' ).length ) {
 
@@ -70,6 +71,10 @@ jQuery( function ( $ ) {
 				$( '.js-ocdi-preview-image-message' ).html( ocdi.texts.missing_preview_image );
 			}
 		}
+
+		// Update import notice.
+		var currentImportNotice = ocdi.import_files[ this.value ]['import_notice'] || '';
+		$( '.js-ocdi-demo-import-notice' ).html( currentImportNotice );
 	});
 
 });

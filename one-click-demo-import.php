@@ -188,7 +188,7 @@ class PT_One_Click_Demo_Import {
 
 			if ( $preview_image_is_defined ) :
 			?>
-			<p>
+			<div>
 				<p><?php esc_html_e( 'Import preview:', 'pt-ocdi' ); ?></p>
 				<p class="ocdi__demo-import-preview-image-message  js-ocdi-preview-image-message">
 					<?php
@@ -199,11 +199,19 @@ class PT_One_Click_Demo_Import {
 					?>
 				</p>
 				<img id="ocdi__demo-import-preview-image" class="js-ocdi-preview-image" src="<?php echo ! empty( $this->import_files[0]['import_preview_image_url'] ) ? esc_url( $this->import_files[0]['import_preview_image_url'] ) : ''; ?>">
-			<p>
+			</div>
 		<?php
 			endif;
 		endif;
 		?>
+
+		<div class="ocdi__demo-import-notice  js-ocdi-demo-import-notice">
+			<?php
+			if ( is_array( $this->import_files ) && ! empty( $this->import_files[0]['import_notice'] ) ) {
+				echo wp_kses_post( $this->import_files[0]['import_notice'] );
+			}
+			?>
+		</div>
 
 		<p>
 			<button class="ocdi__button  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
