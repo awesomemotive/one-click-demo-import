@@ -59,6 +59,7 @@ function ocdi_import_files() {
 			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets.json',
 			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer.dat',
 			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image1.json',
+			'import_notice'              => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
 		),
 		array(
 			'import_file_name'           => 'Demo Import 2',
@@ -66,6 +67,7 @@ function ocdi_import_files() {
 			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets2.json',
 			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer2.dat',
 			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image2.json',
+			'import_notice'              => __( 'A special note for this import.', 'your-textdomain' ),
 		),
 	);
 }
@@ -139,6 +141,12 @@ You want to activate the plugin, but this error shows up:
 This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
 
 == Changelog ==
+
+= 1.1.2 =
+
+*Release Date - 12 June 2016*
+
+* An 'import notice' field has been added to the predefined demo import settings. This notice is displayed above the import button (it also accepts HTML).
 
 = 1.1.1 =
 
