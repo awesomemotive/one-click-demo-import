@@ -95,7 +95,7 @@ class PT_One_Click_Demo_Import {
 	 * Creates the plugin page and a submenu item in WP Appearance menu.
 	 */
 	public function create_plugin_page() {
-		$this->plugin_page = add_theme_page( 'One Click Demo Import', 'Import Demo Data', 'import', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
+		$this->plugin_page = add_theme_page( esc_html__( 'One Click Demo Import' , 'pt-ocdi' ), esc_html__( 'Import Demo Data' , 'pt-ocdi' ), 'import', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
 	}
 
 
