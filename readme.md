@@ -146,7 +146,9 @@ This happens, because your hosting server is using a very old version of PHP. Th
 
 *Release Date - 12 June 2016*
 
-* An 'import notice' field has been added to the predefined demo import settings. This notice is displayed above the import button (it also accepts HTML).
+* An 'import notice' field has been added to the predefined demo import settings. This notice is displayed above the import button (it also accepts HTML),
+* Now displays proper error message, if the file-system method is not set to "direct",
+
 
 ### 1.1.1 ###
 
