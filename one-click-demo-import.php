@@ -95,7 +95,16 @@ class PT_One_Click_Demo_Import {
 	 * Creates the plugin page and a submenu item in WP Appearance menu.
 	 */
 	public function create_plugin_page() {
-		$this->plugin_page = add_theme_page( esc_html__( 'One Click Demo Import' , 'pt-ocdi' ), esc_html__( 'Import Demo Data' , 'pt-ocdi' ), 'import', 'pt-one-click-demo-import', array( $this, 'display_plugin_page' ) );
+		$plugin_page_setup = apply_filters( 'pt-ocdi/plugin-page-setup', array(
+				'parent_slug' => 'themes.php',
+				'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
+				'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
+				'capability'  => 'import',
+				'menu_slug'   => 'pt-one-click-demo-import',
+			)
+		);
+
+		$this->plugin_page = add_submenu_page( $plugin_page_setup['parent_slug'], $plugin_page_setup['page_title'], $plugin_page_setup['menu_title'], $plugin_page_setup['capability'], $plugin_page_setup['menu_slug'], array( $this, 'display_plugin_page' ) );
 	}
 
 

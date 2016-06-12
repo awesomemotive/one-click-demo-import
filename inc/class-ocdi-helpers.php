@@ -313,8 +313,18 @@ class OCDI_Helpers {
 			);
 		}
 
+		// Get plugin page settings.
+		$plugin_page_setup = apply_filters( 'pt-ocdi/plugin-page-setup', array(
+				'parent_slug' => 'themes.php',
+				'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
+				'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
+				'capability'  => 'import',
+				'menu_slug'   => 'pt-one-click-demo-import',
+			)
+		);
+
 		// Get user credentials for WP file-system API.
-		$demo_import_page_url = wp_nonce_url( 'themes.php?page=pt-one-click-demo-import', 'pt-one-click-demo-import' );
+		$demo_import_page_url = wp_nonce_url( $plugin_page_setup['parent_slug'] . '?page=' . $plugin_page_setup['menu_slug'], $plugin_page_setup['menu_slug'] );
 
 		if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
 			return new WP_error(

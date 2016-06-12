@@ -132,6 +132,23 @@ This will greatly improve the time needed to import the content (images), but on
 
 `add_filter( 'pt-ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
 
+= How to change the location, title and other parameters of the plugin page? =
+
+As a theme author you do not like the location of the "Import Demo Data" plugin page in *Appearance -> Import Demo Data*? You can change that with the filter below. Apart from the location, you can also change the title or the page/menu and some other parameters as well.
+
+`
+function ocdi_plugin_page_setup( $default_settings ) {
+	$default_settings['parent_slug'] = 'themes.php';
+	$default_settings['page_title']  = esc_html__( 'One Click Demo Import' , 'pt-ocdi' );
+	$default_settings['menu_title']  = esc_html__( 'Import Demo Data' , 'pt-ocdi' );
+	$default_settings['capability']  = 'import';
+	$default_settings['menu_slug']   = 'pt-one-click-demo-import';
+
+	return $default_settings;
+}
+add_filter( 'pt-ocdi/plugin-page-setup', 'ocdi_plugin_page_setup' );
+`
+
 = I can't activate the plugin, because of a fatal error, what can I do? =
 
 You want to activate the plugin, but this error shows up:
@@ -149,6 +166,7 @@ This happens, because your hosting server is using a very old version of PHP. Th
 * An 'import notice' field has been added to the predefined demo import settings. This notice is displayed above the import button (it also accepts HTML),
 * Now displays proper error message, if the file-system method is not set to "direct",
 * This plugin is now compatible with the new [Humanmade content importer plugin](https://github.com/humanmade/WordPress-Importer),
+* Added a filter to the plugin page creation, so that theme authors can now change the location of the plugin page (Demo data import) and some other parameters as well,
 
 
 = 1.1.1 =
