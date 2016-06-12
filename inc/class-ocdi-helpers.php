@@ -188,11 +188,6 @@ class OCDI_Helpers {
 	 */
 	public static function write_to_file( $content, $file_path ) {
 
-		// Check if the file-system method is 'direct', if not display an error.
-		if ( ! 'direct' === get_filesystem_method() ) {
-			return self::return_direct_filesystem_error();
-		}
-
 		// Verify WP file-system credentials.
 		$verified_credentials = self::check_wp_filesystem_credentials();
 
@@ -228,11 +223,6 @@ class OCDI_Helpers {
 	 * @return boolean|WP_Error, path to the saved file or WP_Error object with error message.
 	 */
 	public static function append_to_file( $content, $file_path, $separator_text = '' ) {
-
-		// Check if the file-system method is 'direct', if not display an error.
-		if ( ! 'direct' === get_filesystem_method() ) {
-			return self::return_direct_filesystem_error();
-		}
 
 		// Verify WP file-system credentials.
 		$verified_credentials = self::check_wp_filesystem_credentials();
@@ -275,11 +265,6 @@ class OCDI_Helpers {
 	 */
 	public static function data_from_file( $file_path ) {
 
-		// Check if the file-system method is 'direct', if not display an error.
-		if ( ! 'direct' === get_filesystem_method() ) {
-			return self::return_direct_filesystem_error();
-		}
-
 		// Verify WP file-system credentials.
 		$verified_credentials = self::check_wp_filesystem_credentials();
 
@@ -315,6 +300,19 @@ class OCDI_Helpers {
 	 */
 	private static function check_wp_filesystem_credentials() {
 
+		// Check if the file-system method is 'direct', if not display an error.
+		if ( ! ( 'direct' === get_filesystem_method() ) ) {
+			return new WP_Error(
+				'no_direct_file_access',
+				sprintf(
+					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
+					'<strong>',
+					'</strong>',
+					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
+				)
+			);
+		}
+
 		// Get user credentials for WP file-system API.
 		$demo_import_page_url = wp_nonce_url( 'themes.php?page=pt-one-click-demo-import', 'pt-one-click-demo-import' );
 
@@ -334,24 +332,6 @@ class OCDI_Helpers {
 		}
 
 		return true;
-	}
-
-
-	/**
-	 * Helper function: return the "no direct access file-system" error.
-	 *
-	 * @return WP_Error
-	 */
-	private static function return_direct_filesystem_error() {
-		return new WP_Error(
-			'no_direct_file_access',
-			sprintf(
-				__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
-				'<strong>',
-				'</strong>',
-				'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
-			)
-		);
 	}
 
 
