@@ -444,7 +444,7 @@ class OCDI_Helpers {
 
 			// Write error to log file and send an AJAX response with the error.
 			self::log_error_and_send_ajax_response(
-				__( 'Please upload XML file for content import. If you want to import widgets only, please use Widget Importer & Exporter plugin.', 'pt-ocdi' ),
+				__( 'Please upload XML file for content import. If you want to import widgets or customizer settings only, please use Widget Importer & Exporter or the Customizer Export/Import plugin.', 'pt-ocdi' ),
 				$log_file_path,
 				esc_html__( 'Upload files', 'pt-ocdi' )
 			);
