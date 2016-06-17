@@ -3,7 +3,7 @@
 **Tags:** import, content, demo, data, widgets, settings  
 **Requires at least:** 4.0.0  
 **Tested up to:** 4.5  
-**Stable tag:** 1.1.2  
+**Stable tag:** 1.1.3  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -173,10 +173,10 @@ This happens, because your hosting server is using a very old version of PHP. Th
 
 ### 1.1.3 ###
 
-*Release Date - 18 June 2016*
+*Release Date - 17 June 2016*
 
 * Updated plugin design,
-* Changed the plugin page setup filter name from `pt-ocdi/plugin-page-setup` to `pt-ocdi/plugin_page_setup` (mind the underscore characters instead of dashes),
+* Changed the plugin page setup filter name from `pt-ocdi/plugin-page-setup` to `pt-ocdi/plugin_page_setup` (mind the underscore characters instead of dashes).
 
 ### 1.1.2 ###
 
