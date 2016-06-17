@@ -163,6 +163,7 @@ This happens, because your hosting server is using a very old version of PHP. Th
 
 *Release Date - 18 June 2016*
 
+* Updated plugin design,
 * Changed the plugin page setup filter name from `pt-ocdi/plugin-page-setup` to `pt-ocdi/plugin_page_setup` (mind the underscore characters instead of dashes),
 
 = 1.1.2 =
