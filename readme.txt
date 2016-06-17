@@ -146,7 +146,7 @@ function ocdi_plugin_page_setup( $default_settings ) {
 
 	return $default_settings;
 }
-add_filter( 'pt-ocdi/plugin-page-setup', 'ocdi_plugin_page_setup' );
+add_filter( 'pt-ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
 `
 
 = I can't activate the plugin, because of a fatal error, what can I do? =
@@ -159,6 +159,12 @@ This happens, because your hosting server is using a very old version of PHP. Th
 
 == Changelog ==
 
+= 1.1.3 =
+
+*Release Date - 18 June 2016*
+
+* Changed the plugin page setup filter name from `pt-ocdi/plugin-page-setup` to `pt-ocdi/plugin_page_setup` (mind the underscore characters instead of dashes),
+
 = 1.1.2 =
 
 *Release Date - 12 June 2016*
@@ -166,7 +172,7 @@ This happens, because your hosting server is using a very old version of PHP. Th
 * An 'import notice' field has been added to the predefined demo import settings. This notice is displayed above the import button (it also accepts HTML),
 * Now displays proper error message, if the file-system method is not set to "direct",
 * This plugin is now compatible with the new [Humanmade content importer plugin](https://github.com/humanmade/WordPress-Importer),
-* Added a filter to the plugin page creation, so that theme authors can now change the location of the plugin page (Demo data import) and some other parameters as well,
+* Added a filter to the plugin page creation, so that theme authors can now change the location of the plugin page (Demo data import) and some other parameters as well.
 
 
 = 1.1.1 =

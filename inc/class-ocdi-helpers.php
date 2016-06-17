@@ -314,7 +314,7 @@ class OCDI_Helpers {
 		}
 
 		// Get plugin page settings.
-		$plugin_page_setup = apply_filters( 'pt-ocdi/plugin-page-setup', array(
+		$plugin_page_setup = apply_filters( 'pt-ocdi/plugin_page_setup', array(
 				'parent_slug' => 'themes.php',
 				'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
 				'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
