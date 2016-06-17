@@ -157,6 +157,12 @@ You want to activate the plugin, but this error shows up:
 
 This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
 
+== Screenshots ==
+
+1. Example of multiple predefined demo imports, that a user can choose from.
+2. How the import page looks like, when only one demo import is predefined.
+3. Example of how the import page looks like, when no demo imports are predefined a.k.a manual import.
+
 == Changelog ==
 
 = 1.1.3 =
