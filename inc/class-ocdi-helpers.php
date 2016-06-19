@@ -511,7 +511,7 @@ class OCDI_Helpers {
 	public static function import_file_info( $selected_import_files ) {
 		return PHP_EOL .
 		sprintf(
-			__( 'MAX EXECUTION TIME = %s', 'pt-ocdi' ),
+			__( 'Initial max execution time = %s', 'pt-ocdi' ),
 			ini_get( 'max_execution_time' )
 		) . PHP_EOL .
 		sprintf(

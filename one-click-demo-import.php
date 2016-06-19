@@ -460,7 +460,7 @@ class PT_One_Click_Demo_Import {
 
 			// Add this message to log file.
 			$log_added = OCDI_Helpers::append_to_file(
-				$message . PHP_EOL . 'MAX EXECUTION TIME = ' . ini_get( 'max_execution_time' ),
+				$message . PHP_EOL . esc_html__( 'Max execution time after content import = ' , 'pt-ocdi' ) . ini_get( 'max_execution_time' ),
 				$this->log_file_path,
 				esc_html__( 'Importing content' , 'pt-ocdi' )
 			);

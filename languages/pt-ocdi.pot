@@ -2,7 +2,7 @@
 # This file is distributed under the GPL 2.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 1.1.2\n"
+"Project-Id-Version: One Click Demo Import 1.1.3\n"
 "Report-Msgid-Bugs-To: http://support.proteusthemes.com/\n"
 "POT-Creation-Date: 2016-05-14 09:53:17+00:00\n"
 "MIME-Version: 1.0\n"
@@ -119,7 +119,7 @@ msgid "The import files were successfully uploaded!"
 msgstr ""
 
 #: inc/class-ocdi-helpers.php:514
-msgid "MAX EXECUTION TIME = %s"
+msgid "Initial max execution time = %s"
 msgstr ""
 
 #: inc/class-ocdi-helpers.php:518
@@ -269,6 +269,10 @@ msgid ""
 "%1$sThe demo import has finished, but there were some import "
 "errors.%2$sMore details about the errors can be found in this %3$s%5$slog "
 "file%6$s%4$s%7$s"
+msgstr ""
+
+#: one-click-demo-import.php:463
+msgid "Max execution time after content import = "
 msgstr ""
 
 #: one-click-demo-import.php:465
