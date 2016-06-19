@@ -440,7 +440,7 @@ class PT_One_Click_Demo_Import {
 		// Disable import of authors.
 		add_filter( 'wxr_importer.pre_process.user', '__return_false' );
 
-		// Check, if we need to send another AJAX request.
+		// Check, if we need to send another AJAX request and set the importing author to the current user.
 		add_filter( 'wxr_importer.pre_process.post', array( $this, 'new_ajax_request_maybe' ) );
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
@@ -600,6 +600,11 @@ class PT_One_Click_Demo_Import {
 
 			wp_send_json( $response );
 		}
+
+		// Set importing author to the current user.
+		// Fixes the [WARNING] Could not find the author for ... log warning messages.
+		$current_user_obj    = wp_get_current_user();
+		$data['post_author'] = $current_user_obj->user_login;
 
 		return $data;
 	}
