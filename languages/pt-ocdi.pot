@@ -88,47 +88,51 @@ msgstr ""
 msgid "Your WordPress login credentials don't allow to use WP_Filesystem!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:411
+#: inc/class-ocdi-helpers.php:405
+msgid "One Click Demo Import - "
+msgstr ""
+
+#: inc/class-ocdi-helpers.php:441
 msgid ""
 "%sYour user role isn't high enough. You don't have permission to import "
 "demo data.%s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:447
+#: inc/class-ocdi-helpers.php:477
 msgid ""
 "Please upload XML file for content import. If you want to import widgets or "
 "customizer settings only, please use Widget Importer & Exporter or the "
 "Customizer Export/Import plugin."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:449 inc/class-ocdi-helpers.php:471
-#: inc/class-ocdi-helpers.php:490 inc/class-ocdi-helpers.php:498
+#: inc/class-ocdi-helpers.php:479 inc/class-ocdi-helpers.php:501
+#: inc/class-ocdi-helpers.php:520 inc/class-ocdi-helpers.php:528
 msgid "Upload files"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:467
+#: inc/class-ocdi-helpers.php:497
 msgid "Widget file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:486
+#: inc/class-ocdi-helpers.php:516
 msgid "Customizer file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:496
+#: inc/class-ocdi-helpers.php:526
 msgid "The import files were successfully uploaded!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:514
+#: inc/class-ocdi-helpers.php:544
 msgid "Initial max execution time = %s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:518
+#: inc/class-ocdi-helpers.php:548
 msgid ""
 "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = "
 "%4$s%1$sCustomizer file = %5$s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:522 inc/class-ocdi-helpers.php:523
+#: inc/class-ocdi-helpers.php:552 inc/class-ocdi-helpers.php:553
 msgid "not defined!"
 msgstr ""
 

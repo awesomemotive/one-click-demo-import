@@ -378,7 +378,37 @@ class OCDI_Helpers {
 		$upload_dir  = wp_upload_dir();
 		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
-		return $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . $start_date . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
+		$log_path = $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . $start_date . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
+
+		self::register_file_as_media_attachment( $log_path );
+
+		return $log_path;
+	}
+
+
+	/**
+	 * Register file as attachment to the Media page.
+	 *
+	 * @param string $log_path log file path.
+	 * @return void
+	 */
+	public static function register_file_as_media_attachment( $log_path ) {
+
+		// Check the type of file.
+		$log_mimes = array( 'txt' => 'text/plain' );
+		$filetype  = wp_check_filetype( basename( $log_path ), apply_filters( 'pt-ocdi/file_mimes', $log_mimes ) );
+
+		// Prepare an array of post data for the attachment.
+		$attachment = array(
+			'guid'           => self::get_log_url( $log_path ),
+			'post_mime_type' => $filetype['type'],
+			'post_title'     => apply_filters( 'pt-ocdi/attachment_prefix', esc_html__( 'One Click Demo Import - ', 'pt-ocdi' ) ) . preg_replace( '/\.[^.]+$/', '', basename( $log_path ) ),
+			'post_content'   => '',
+			'post_status'    => 'inherit',
+		);
+
+		// Insert the file as attachment in Media page.
+		$attach_id = wp_insert_attachment( $attachment, $log_path );
 	}
 
 
