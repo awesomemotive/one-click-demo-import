@@ -6,6 +6,8 @@
 
 The log file should be available in the *wp-admin -> Media* section. Check for any useful information.
 
+If you don't find the log file in the **Media** section, you can find them on your server. The log files used in the demo import will be saved to the default WordPress uploads directory. An example of that directory would be: `../wp-content/uploads/2016/07/`.
+
 ## General fall-back, if the plugin is not working ##
 
 You should try to import the content manually, with the original [WordPress importer](https://wordpress.org/plugins/wordpress-importer/) plugin. If that does not work, then try the **gzip trick** described bellow:
@@ -28,15 +30,16 @@ This happens, because your hosting server is using a very old version of PHP. Th
 You clicked on the "Import Demo Data" button and the response from the server was something along the lines of:
 
 > Server error 500
+
 > Internal server error (500)
 
 The best thing to do is to [enable the WordPress debug mode](https://codex.wordpress.org/Debugging_in_WordPress) and try the original [WordPress importer](https://wordpress.org/plugins/wordpress-importer/), with the same XML import file.
-So just set the `WP_DEBUG` constant to `true` in your *wp-config.php* file and try the original WP import plugin. You should get a more detailed description of what went wrong and you should contact your hosting company and ask them to look at this error.
+So just set the `WP_DEBUG` constant to `true` in your *wp-config.php* file and try the original WP import plugin. You should get a more detailed description of what went wrong and you should contact your hosting company and ask them to look at this error. After they solve your issue, you can use the One Click Demo Import plugin to import your content.
 
 ### Already experienced server errors: ###
 
-1. **missing PHP modules:**
+**1. missing PHP modules:**
 
 > Fatal error: Class 'DOMDocument' not found in .../wp-content/plugins/wordpress-importer/parsers.php on line 61
 
-That means, that your hosting server is missing one of a very common PHP modules and it has to be enabled before any import functionality will work on your site. The missing PHP modules are: php-xml or/and php-dom. Please contact your hosting company and ask them to install that for you. These are very common modules, so I don't know why they do not install them by default.
+That means, that your hosting server is missing one of a very common PHP modules and it has to be enabled before any import functionality will work on your site. The missing PHP modules are: **php-xml** or/and **php-dom**. Please contact your hosting company and ask them to install that for you. These are very common modules, so I don't know why they do not install them by default.
