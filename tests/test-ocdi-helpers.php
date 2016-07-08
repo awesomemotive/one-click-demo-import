@@ -88,19 +88,4 @@ class OCDIHelpersTest extends WP_UnitTestCase {
 		$expected_output = array();
 		$this->assertEquals( $expected_output, OCDI_Helpers::validate_import_file_info( $import_files ) );
 	}
-
-	function test_helper_download_import_files() {
-
-		// Test with empty file url. Should return WP_Error obj.
-		$import_files = array(
-			'import_file_name' => 'Import file',
-			'import_file_url'  => '',
-		);
-		$expected_output = new WP_Error(
-			'url_or_local_file_not_defined',
-			'"import_file_url" or "local_import_file" for <strong>Import file</strong> are not defined!'
-		);
-		$this->assertEquals( $expected_output , OCDI_Helpers::download_import_files( $import_files ) );
-
-	}
 }
