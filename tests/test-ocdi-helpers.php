@@ -97,8 +97,8 @@ class OCDIHelpersTest extends WP_UnitTestCase {
 			'import_file_url'  => '',
 		);
 		$expected_output = new WP_Error(
-			'url_not_defined',
-			'URL for <strong>Import file</strong> file is not defined!'
+			'url_or_local_file_not_defined',
+			'"import_file_url" or "local_import_file" for <strong>Import file</strong> are not defined!'
 		);
 		$this->assertEquals( $expected_output , OCDI_Helpers::download_import_files( $import_files ) );
 
