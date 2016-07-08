@@ -36,7 +36,7 @@ class OCDI_Helpers {
 	 * @return boolean
 	 */
 	private static function is_import_file_info_format_correct( $import_file_info ) {
-		if ( empty( $import_file_info['import_file_url'] ) || empty( $import_file_info['import_file_name'] ) ) {
+		if ( ( empty( $import_file_info['import_file_url'] ) && empty( $import_file_info['local_import_file'] ) ) || empty( $import_file_info['import_file_name'] ) ) {
 			return false;
 		}
 
@@ -54,28 +54,51 @@ class OCDI_Helpers {
 	public static function download_import_files( $import_file_info, $start_date = '' ) {
 
 		$downloaded_files = array();
+		$upload_dir       = wp_upload_dir();
+		$upload_path      = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
-		// Retrieve demo data content from the URL.
-		$demo_import_content = self::get_content_from_url( $import_file_info['import_file_url'], $import_file_info['import_file_name'] );
+		// ----- Set content file path -----
+		// Check if 'import_file_url' is not defined. That would mean a local file.
+		if ( empty( $import_file_info['import_file_url'] ) ) {
+			$local_import_file = trailingslashit( get_template_directory() ) . $import_file_info['local_import_file'];
+			if ( file_exists( $local_import_file ) ) {
+				$downloaded_files['content'] = $local_import_file;
+			}
+			else {
+				return new WP_Error(
+					'url_or_local_file_not_defined',
+					sprintf(
+						__( '"import_file_url" or "local_import_file" for %s%s%s are not defined!', 'pt-ocdi' ),
+						'<strong>',
+						$$import_file_info['import_file_name'],
+						'</strong>'
+					)
+				);
+			}
+		}
+		else {
 
-		// Return from this function if there was an error.
-		if ( is_wp_error( $demo_import_content ) ) {
-			return $demo_import_content;
+			// Retrieve demo data content from the URL.
+			$demo_import_content = self::get_content_from_url( $import_file_info['import_file_url'], $import_file_info['import_file_name'] );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $demo_import_content ) ) {
+				return $demo_import_content;
+			}
+
+			// Setup filename path to save the data content.
+			$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
+
+			// Write data content to the file and return the file path on successful write.
+			$downloaded_files['content'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['content'] ) ) {
+				return $downloaded_files['content'];
+			}
 		}
 
-		// Setup filename path to save the data content.
-		$upload_dir            = wp_upload_dir();
-		$upload_path           = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
-		$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
-
-		// Write data content to the file and return the file path on successful write.
-		$downloaded_files['content'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
-
-		// Return from this function if there was an error.
-		if ( is_wp_error( $downloaded_files['content'] ) ) {
-			return $downloaded_files['content'];
-		}
-
+		// ----- Set widget file path -----
 		// Get widgets file as well. If defined!
 		if ( ! empty( $import_file_info['import_widget_file_url'] ) ) {
 
@@ -98,7 +121,14 @@ class OCDI_Helpers {
 				return $downloaded_files['widgets'];
 			}
 		}
+		else if ( ! empty( $import_file_info['local_import_widget_file'] ) ) {
+			$local_widget_file = trailingslashit( get_template_directory() ) . $import_file_info['local_import_widget_file'];
+			if ( file_exists( $local_widget_file ) ) {
+				$downloaded_files['widgets'] = $local_widget_file;
+			}
+		}
 
+		// ----- Set customizer file path -----
 		// Get customizer import file as well. If defined!
 		if ( ! empty( $import_file_info['import_customizer_file_url'] ) ) {
 
@@ -119,6 +149,12 @@ class OCDI_Helpers {
 			// Return from this function if there was an error.
 			if ( is_wp_error( $downloaded_files['customizer'] ) ) {
 				return $downloaded_files['customizer'];
+			}
+		}
+		else if ( ! empty( $import_file_info['local_import_customizer_file'] ) ) {
+			$local_customizer_file = trailingslashit( get_template_directory() ) . $import_file_info['local_import_customizer_file'];
+			if ( file_exists( $local_customizer_file ) ) {
+				$downloaded_files['customizer'] = $local_customizer_file;
 			}
 		}
 
