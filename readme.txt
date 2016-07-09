@@ -3,7 +3,7 @@ Contributors: capuderg, cyman
 Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
 Tested up to: 4.5
-Stable tag: 1.1.3
+Stable tag: 1.2.0
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -208,6 +208,15 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 3. Example of how the import page looks like, when no demo imports are predefined a.k.a manual import.
 
 == Changelog ==
+
+= 1.2.0 =
+
+*Release Date - 9 July 2016*
+
+* Now also accepts predefined local import files (from theme folder),
+* Fixes PHP fatal error on plugin activation, for sites using PHP versions older then 5.3.2 (added admin error notice),
+* Register log file in *wp-admin -> Media*, so that it's easier to access,
+* No more "[WARNING] Could not find the author for ..." messages in the log file.
 
 = 1.1.3 =
 

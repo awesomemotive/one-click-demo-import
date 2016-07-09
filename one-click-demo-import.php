@@ -4,7 +4,7 @@
 Plugin Name: One Click Demo Import
 Plugin URI: https://wordpress.org/plugins/one-click-demo-import/
 Description: Import your content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
-Version: 1.1.3
+Version: 1.2.0
 Author: ProteusThemes
 Author URI: http://www.proteusthemes.com
 License: GPL3
@@ -35,7 +35,7 @@ if ( version_compare( phpversion(), '5.3.2', '<' ) ) {
 else {
 
 	// Current version of the plugin.
-	define( 'PT_OCDI_VERSION', '1.1.3' );
+	define( 'PT_OCDI_VERSION', '1.2.0' );
 
 	// Path/URL to root of this plugin, with trailing slash.
 	define( 'PT_OCDI_PATH', plugin_dir_path( __FILE__ ) );
