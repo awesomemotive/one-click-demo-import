@@ -60,9 +60,8 @@ class OCDI_Helpers {
 		// ----- Set content file path -----
 		// Check if 'import_file_url' is not defined. That would mean a local file.
 		if ( empty( $import_file_info['import_file_url'] ) ) {
-			$local_import_file = trailingslashit( get_template_directory() ) . $import_file_info['local_import_file'];
-			if ( file_exists( $local_import_file ) ) {
-				$downloaded_files['content'] = $local_import_file;
+			if ( file_exists( $import_file_info['local_import_file'] ) ) {
+				$downloaded_files['content'] = $import_file_info['local_import_file'];
 			}
 			else {
 				return new WP_Error(
@@ -122,9 +121,8 @@ class OCDI_Helpers {
 			}
 		}
 		else if ( ! empty( $import_file_info['local_import_widget_file'] ) ) {
-			$local_widget_file = trailingslashit( get_template_directory() ) . $import_file_info['local_import_widget_file'];
-			if ( file_exists( $local_widget_file ) ) {
-				$downloaded_files['widgets'] = $local_widget_file;
+			if ( file_exists( $import_file_info['local_import_widget_file'] ) ) {
+				$downloaded_files['widgets'] = $import_file_info['local_import_widget_file'];
 			}
 		}
 
@@ -152,9 +150,8 @@ class OCDI_Helpers {
 			}
 		}
 		else if ( ! empty( $import_file_info['local_import_customizer_file'] ) ) {
-			$local_customizer_file = trailingslashit( get_template_directory() ) . $import_file_info['local_import_customizer_file'];
-			if ( file_exists( $local_customizer_file ) ) {
-				$downloaded_files['customizer'] = $local_customizer_file;
+			if ( file_exists( $import_file_info['local_import_customizer_file'] ) ) {
+				$downloaded_files['customizer'] = $import_file_info['local_import_customizer_file'];
 			}
 		}
 
