@@ -40,29 +40,33 @@ msgid ""
 "import customizer settings for the same theme or a child theme."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:143
+#: inc/class-ocdi-helpers.php:70
+msgid "\"import_file_url\" or \"local_import_file\" for %s%s%s are not defined!"
+msgstr ""
+
+#: inc/class-ocdi-helpers.php:176
 msgid "URL for %s%s%s file is not defined!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:165
+#: inc/class-ocdi-helpers.php:198
 msgid ""
 "An error occurred while fetching %s%s%s file from the server!%sReason: %s - "
 "%s."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:205 inc/class-ocdi-helpers.php:249
+#: inc/class-ocdi-helpers.php:238 inc/class-ocdi-helpers.php:282
 msgid ""
 "An error occurred while writing file to your server! Tried to write a file "
 "to: %s%s."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:284
+#: inc/class-ocdi-helpers.php:317
 msgid ""
 "An error occurred while reading a file from your server! Tried reading file "
 "from path: %s%s."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:308
+#: inc/class-ocdi-helpers.php:341
 msgid ""
 "This WordPress page does not have %sdirect%s write file access. This plugin "
 "needs it in order to save the demo import xml file to the upload directory "
@@ -73,67 +77,194 @@ msgstr ""
 msgid "One Click Demo Import"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:320 one-click-demo-import.php:101
-#: one-click-demo-import.php:229
+#: inc/class-ocdi-helpers.php:353 inc/class-ocdi-main.php:84
+#: inc/class-ocdi-main.php:212
 msgid "Import Demo Data"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:332
+#: inc/class-ocdi-helpers.php:365
 msgid ""
 "An error occurred while retrieving reading/writing permissions to your "
 "server (could not retrieve WP filesystem credentials)!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:340
+#: inc/class-ocdi-helpers.php:373
 msgid "Your WordPress login credentials don't allow to use WP_Filesystem!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:405
+#: inc/class-ocdi-helpers.php:438
 msgid "One Click Demo Import - "
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:441
+#: inc/class-ocdi-helpers.php:474
 msgid ""
 "%sYour user role isn't high enough. You don't have permission to import "
 "demo data.%s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:477
+#: inc/class-ocdi-helpers.php:510
 msgid ""
 "Please upload XML file for content import. If you want to import widgets or "
 "customizer settings only, please use Widget Importer & Exporter or the "
 "Customizer Export/Import plugin."
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:479 inc/class-ocdi-helpers.php:501
-#: inc/class-ocdi-helpers.php:520 inc/class-ocdi-helpers.php:528
+#: inc/class-ocdi-helpers.php:512 inc/class-ocdi-helpers.php:534
+#: inc/class-ocdi-helpers.php:553 inc/class-ocdi-helpers.php:561
 msgid "Upload files"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:497
+#: inc/class-ocdi-helpers.php:530
 msgid "Widget file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:516
+#: inc/class-ocdi-helpers.php:549
 msgid "Customizer file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:526
+#: inc/class-ocdi-helpers.php:559
 msgid "The import files were successfully uploaded!"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:544
+#: inc/class-ocdi-helpers.php:577
 msgid "Initial max execution time = %s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:548
+#: inc/class-ocdi-helpers.php:581
 msgid ""
 "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = "
 "%4$s%1$sCustomizer file = %5$s"
 msgstr ""
 
-#: inc/class-ocdi-helpers.php:552 inc/class-ocdi-helpers.php:553
+#: inc/class-ocdi-helpers.php:585 inc/class-ocdi-helpers.php:586
 msgid "not defined!"
+msgstr ""
+
+#: inc/class-ocdi-main.php:108
+msgid ""
+"%sWarning: your server is using %sPHP safe mode%s. This means that you "
+"might experience server timeout errors.%s"
+msgstr ""
+
+#: inc/class-ocdi-main.php:122
+msgid ""
+"Importing demo data (post, pages, images, theme settings, ...) is the "
+"easiest way to setup your theme. It will allow you to quickly edit "
+"everything instead of creating content from scratch. When you import the "
+"data, the following things might happen:"
+msgstr ""
+
+#: inc/class-ocdi-main.php:126
+msgid ""
+"No existing posts, pages, categories, images, custom post types or any "
+"other data will be deleted or modified."
+msgstr ""
+
+#: inc/class-ocdi-main.php:127
+msgid "Posts, pages, images, widgets and menus will get imported."
+msgstr ""
+
+#: inc/class-ocdi-main.php:128
+msgid ""
+"Please click \"Import Demo Data\" button only once and wait, it can take a "
+"couple of minutes."
+msgstr ""
+
+#: inc/class-ocdi-main.php:133
+msgid "Before you begin, make sure all the required plugins are activated."
+msgstr ""
+
+#: inc/class-ocdi-main.php:147
+msgid ""
+"There are no predefined import files available in this theme. Please upload "
+"the import files manually!"
+msgstr ""
+
+#: inc/class-ocdi-main.php:152
+msgid "Choose a XML file for content import:"
+msgstr ""
+
+#: inc/class-ocdi-main.php:156
+msgid "Choose a WIE or JSON file for widget import:"
+msgstr ""
+
+#: inc/class-ocdi-main.php:156 inc/class-ocdi-main.php:160
+msgid "(*optional)"
+msgstr ""
+
+#: inc/class-ocdi-main.php:160
+msgid "Choose a DAT file for customizer import:"
+msgstr ""
+
+#: inc/class-ocdi-main.php:166
+msgid "Choose which demo you want to import:"
+msgstr ""
+
+#: inc/class-ocdi-main.php:188
+msgid "Import preview:"
+msgstr ""
+
+#: inc/class-ocdi-main.php:192 inc/class-ocdi-main.php:243
+msgid "No preview image defined for this import."
+msgstr ""
+
+#: inc/class-ocdi-main.php:216
+msgid "Importing, please wait!"
+msgstr ""
+
+#: inc/class-ocdi-main.php:300
+msgid "Manually uploaded files"
+msgstr ""
+
+#: inc/class-ocdi-main.php:317 inc/class-ocdi-main.php:328
+msgid "Downloaded files"
+msgstr ""
+
+#: inc/class-ocdi-main.php:324
+msgid "The import files for: %s were successfully downloaded!"
+msgstr ""
+
+#: inc/class-ocdi-main.php:334
+msgid "No import files specified!"
+msgstr ""
+
+#: inc/class-ocdi-main.php:381
+msgid ""
+"%1$s%3$sThat's it, all done!%4$s%2$sThe demo import has finished. Please "
+"check your page and make sure that everything has imported correctly. If it "
+"did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because "
+"it has done its job.%5$s"
+msgstr ""
+
+#: inc/class-ocdi-main.php:392
+msgid ""
+"%1$sThe demo import has finished, but there were some import "
+"errors.%2$sMore details about the errors can be found in this %3$s%5$slog "
+"file%6$s%4$s%7$s"
+msgstr ""
+
+#: inc/class-ocdi-main.php:446
+msgid "Max execution time after content import = "
+msgstr ""
+
+#: inc/class-ocdi-main.php:448
+msgid "Importing content"
+msgstr ""
+
+#: inc/class-ocdi-main.php:487 inc/class-ocdi-main.php:499
+msgid "Importing widgets"
+msgstr ""
+
+#: inc/class-ocdi-main.php:521 inc/class-ocdi-main.php:529
+msgid "Importing customizer settings"
+msgstr ""
+
+#: inc/class-ocdi-main.php:527
+msgid "Customizer settings import finished!"
+msgstr ""
+
+#: inc/class-ocdi-main.php:579
+msgid "Completed AJAX call number: "
 msgstr ""
 
 #: inc/class-ocdi-widget-importer.php:44
@@ -172,131 +303,12 @@ msgstr ""
 msgid "No results for widget import!"
 msgstr ""
 
-#: one-click-demo-import.php:125
+#: one-click-demo-import.php:29
 msgid ""
-"%sWarning: your server is using %sPHP safe mode%s. This means that you "
-"might experience server timeout errors.%s"
-msgstr ""
-
-#: one-click-demo-import.php:139
-msgid ""
-"Importing demo data (post, pages, images, theme settings, ...) is the "
-"easiest way to setup your theme. It will allow you to quickly edit "
-"everything instead of creating content from scratch. When you import the "
-"data, the following things might happen:"
-msgstr ""
-
-#: one-click-demo-import.php:143
-msgid ""
-"No existing posts, pages, categories, images, custom post types or any "
-"other data will be deleted or modified."
-msgstr ""
-
-#: one-click-demo-import.php:144
-msgid "Posts, pages, images, widgets and menus will get imported."
-msgstr ""
-
-#: one-click-demo-import.php:145
-msgid ""
-"Please click \"Import Demo Data\" button only once and wait, it can take a "
-"couple of minutes."
-msgstr ""
-
-#: one-click-demo-import.php:150
-msgid "Before you begin, make sure all the required plugins are activated."
-msgstr ""
-
-#: one-click-demo-import.php:164
-msgid ""
-"There are no predefined import files available in this theme. Please upload "
-"the import files manually!"
-msgstr ""
-
-#: one-click-demo-import.php:169
-msgid "Choose a XML file for content import:"
-msgstr ""
-
-#: one-click-demo-import.php:173
-msgid "Choose a WIE or JSON file for widget import:"
-msgstr ""
-
-#: one-click-demo-import.php:173 one-click-demo-import.php:177
-msgid "(*optional)"
-msgstr ""
-
-#: one-click-demo-import.php:177
-msgid "Choose a DAT file for customizer import:"
-msgstr ""
-
-#: one-click-demo-import.php:183
-msgid "Choose which demo you want to import:"
-msgstr ""
-
-#: one-click-demo-import.php:205
-msgid "Import preview:"
-msgstr ""
-
-#: one-click-demo-import.php:209 one-click-demo-import.php:260
-msgid "No preview image defined for this import."
-msgstr ""
-
-#: one-click-demo-import.php:233
-msgid "Importing, please wait!"
-msgstr ""
-
-#: one-click-demo-import.php:317
-msgid "Manually uploaded files"
-msgstr ""
-
-#: one-click-demo-import.php:334 one-click-demo-import.php:345
-msgid "Downloaded files"
-msgstr ""
-
-#: one-click-demo-import.php:341
-msgid "The import files for: %s were successfully downloaded!"
-msgstr ""
-
-#: one-click-demo-import.php:351
-msgid "No import files specified!"
-msgstr ""
-
-#: one-click-demo-import.php:398
-msgid ""
-"%1$s%3$sThat's it, all done!%4$s%2$sThe demo import has finished. Please "
-"check your page and make sure that everything has imported correctly. If it "
-"did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because "
-"it has done its job.%5$s"
-msgstr ""
-
-#: one-click-demo-import.php:409
-msgid ""
-"%1$sThe demo import has finished, but there were some import "
-"errors.%2$sMore details about the errors can be found in this %3$s%5$slog "
-"file%6$s%4$s%7$s"
-msgstr ""
-
-#: one-click-demo-import.php:463
-msgid "Max execution time after content import = "
-msgstr ""
-
-#: one-click-demo-import.php:465
-msgid "Importing content"
-msgstr ""
-
-#: one-click-demo-import.php:504 one-click-demo-import.php:516
-msgid "Importing widgets"
-msgstr ""
-
-#: one-click-demo-import.php:538 one-click-demo-import.php:546
-msgid "Importing customizer settings"
-msgstr ""
-
-#: one-click-demo-import.php:544
-msgid "Customizer settings import finished!"
-msgstr ""
-
-#: one-click-demo-import.php:596
-msgid "Completed AJAX call number: "
+"The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.3.2+%3$s to run "
+"properly. Please contact your hosting company and ask them to update the "
+"PHP version of your site to at least PHP 5.3.2.%4$s Your current version of "
+"PHP: %2$s%1$s%3$s"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
