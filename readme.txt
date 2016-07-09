@@ -33,14 +33,16 @@ Please refer to the official [GitHub repository](https://github.com/proteustheme
 == Installation ==
 
 **From your WordPress dashboard**
+
 1. Visit 'Plugins > Add New',
 2. Search for 'One Click Demo Import' and install the plugin,
 3. Activate 'One Click Demo Import' from your Plugins page.
 
 **From WordPress.org**
+
 1. Download 'One Click Demo Import'.
 2. Upload the 'one-click-demo-import' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
-Activate 'One Click Demo Import' from your Plugins page.
+3. Activate 'One Click Demo Import' from your Plugins page.
 
 **Once the plugin is activated you will find the actual import page in: Appearance -> Import Demo Data.**
 

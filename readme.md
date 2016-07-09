@@ -3,7 +3,7 @@
 **Tags:** import, content, demo, data, widgets, settings  
 **Requires at least:** 4.0.0  
 **Tested up to:** 4.5  
-**Stable tag:** 1.1.3  
+**Stable tag:** 1.2.0  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -33,14 +33,16 @@ Please refer to the official [GitHub repository](https://github.com/proteustheme
 ## Installation ##
 
 **From your WordPress dashboard**
+
 1. Visit 'Plugins > Add New',
 2. Search for 'One Click Demo Import' and install the plugin,
 3. Activate 'One Click Demo Import' from your Plugins page.
 
 **From WordPress.org**
+
 1. Download 'One Click Demo Import'.
 2. Upload the 'one-click-demo-import' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
-Activate 'One Click Demo Import' from your Plugins page.
+3. Activate 'One Click Demo Import' from your Plugins page.
 
 **Once the plugin is activated you will find the actual import page in: Appearance -> Import Demo Data.**
 
@@ -214,6 +216,15 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 
 ## Changelog ##
+
+### 1.2.0 ###
+
+*Release Date - 9 July 2016*
+
+* Now also accepts predefined local import files (from theme folder),
+* Fixes PHP fatal error on plugin activation, for sites using PHP versions older then 5.3.2 (added admin error notice),
+* Register log file in *wp-admin -> Media*, so that it's easier to access,
+* No more "[WARNING] Could not find the author for ..." messages in the log file.
 
 ### 1.1.3 ###
 
