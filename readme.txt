@@ -10,21 +10,21 @@ Import your demo content, widgets and theme settings with one click. Theme autho
 
 == Description ==
 
+The best feature of this plugin is, that theme authors can define import files in their themes and so all you (the user of the theme) have to do is click on the "Import Demo Data" button.
+
+**How do theme author define these files?** The answer is in the FAQ section.
+
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
 If the theme you are using does not have any predefined import files, then you will be presented with three file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import. You create that file using the [Widget Importer & Exporter](https://wordpress.org/plugins/widget-importer-exporter/) plugin. The third one is also optional and will import the customizer settings, select the DAT file which you can generate from [Customizer Export/Import](https://wordpress.org/plugins/customizer-export-import/) plugin (the customizer settings will be imported only if the export file was created from the same theme).
 
-This plugin is using the improved WP import that you can find here: https://github.com/humanmade/WordPress-Importer.
-
-The best feature of this plugin is, that theme authors can define import files in their themes and so all you (the user of the theme) have to do is click on the "Import Demo Data" button.
-
-**How do theme author define these files?** The answer is in the FAQ section.
+This plugin is using the improved WP import 2.0 that is still in development and can be found here: https://github.com/humanmade/WordPress-Importer.
 
 All progress of this plugin's work is logged in a log file in the default WP upload directory, together with the demo content and widgets import files used in the importing process.
 
 NOTE: This plugin is still a work in progress!
 
-NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is in the original WP Importer plugin).
+NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is in the original WP Importer plugin). All demo content will be imported under the current user.
 
 **Do you want to contribute?**
 
@@ -32,9 +32,17 @@ Please refer to the official [GitHub repository](https://github.com/proteustheme
 
 == Installation ==
 
-Upload the One Click Demo Import plugin to your WordPress site, Activate it, and that's it.
+**From your WordPress dashboard**
+1. Visit 'Plugins > Add New',
+2. Search for 'One Click Demo Import' and install the plugin,
+3. Activate 'One Click Demo Import' from your Plugins page.
 
-Once the plugin is activated you will find the actual import setting page under *Appearance -> Import Demo Data*.
+**From WordPress.org**
+1. Download 'One Click Demo Import'.
+2. Upload the 'one-click-demo-import' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
+Activate 'One Click Demo Import' from your Plugins page.
+
+**Once the plugin is activated you will find the actual import page in: Appearance -> Import Demo Data.**
 
 == Frequently Asked Questions ==
 
@@ -45,6 +53,8 @@ You will find the import page in *wp-admin -> Appearance -> Import Demo Data*.
 = Where are the demo import files and the log files saved? =
 
 The files used in the demo import will be saved to the default WordPress uploads directory. An example of that directory would be: `../wp-content/uploads/2016/03/`.
+
+The log file will also be registered in the *wp-admin -> Media* section, so you can access it easily.
 
 = How to predefine demo imports? =
 
@@ -178,6 +188,8 @@ add_filter( 'pt-ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
 `
 
 = I can't activate the plugin, because of a fatal error, what can I do? =
+
+*Update: since version 1.2.0, there is now a admin error notice, stating that the minimal PHP version required for this plugin is 5.3.2.*
 
 You want to activate the plugin, but this error shows up:
 
