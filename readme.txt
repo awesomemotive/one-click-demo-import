@@ -58,7 +58,7 @@ function ocdi_import_files() {
 			'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content.xml',
 			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets.json',
 			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer.dat',
-			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image1.json',
+			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
 			'import_notice'              => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
 		),
 		array(
@@ -66,7 +66,7 @@ function ocdi_import_files() {
 			'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content2.xml',
 			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets2.json',
 			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer2.dat',
-			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image2.json',
+			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
 			'import_notice'              => __( 'A special note for this import.', 'your-textdomain' ),
 		),
 	);
@@ -75,6 +75,34 @@ add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 `
 
 You can set content import, widgets, and customizer import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports.
+
+= What about using local import files (from theme folder)? =
+
+You have to use the same filter as in above example, but with a slightly different array keys: `local_*`. The values have to be absolute paths (not URLs) to your import files. To use local import files, that reside in your theme folder, please use the below code. Note: make sure your import files are readable!
+
+`
+function ocdi_import_files() {
+	return array(
+		array(
+			'import_file_name'             => 'Demo Import 1',
+			'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content.xml',
+			'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets.json',
+			'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer.dat',
+			'import_preview_image_url'     => 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
+			'import_notice'                => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
+		),
+		array(
+			'import_file_name'             => 'Demo Import 2',
+			'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content2.xml',
+			'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets2.json',
+			'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer2.dat',
+			'import_preview_image_url'     => 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
+			'import_notice'                => __( 'A special note for this import.', 'your-textdomain' ),
+		),
+	);
+}
+add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
+`
 
 = How to handle different "after import setups" depending on which predefined import was selected? =
 
