@@ -209,7 +209,7 @@ class PT_One_Click_Demo_Import {
 		</div>
 
 		<p>
-			<button class="ocdi__button  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+			<button class="ocdi__button button button-hero button-primary js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
 		</p>
 
 		<p class="ocdi__ajax-loader  js-ocdi-ajax-loader">
