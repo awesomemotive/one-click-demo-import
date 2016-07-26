@@ -1,98 +1,97 @@
-/* Plugin title */
-.ocdi__title span {
-	line-height: 30px;
-}
+/* Overriding WordPress native styles */
 
-/* AJAX loader */
-.ocdi__ajax-loader {
-	font-size: 1.5em;
-	display: none;
-}
+	.ocdi h2 {
+		text-align: inherit;
+	}
 
-.ocdi__ajax-loader .spinner {
-	display: inline-block;
-	float: none;
-	visibility: visible;
-	margin-bottom: 6px;
-}
+	.ocdi h2:first-child,
+	.ocdi h3:first-child {
+		margin-top: 0;
+	}
 
-/* Plugin intro text */
-.ocdi__intro-text {
-	width: calc( 100% - 46px );
-	background-color: #f5fafd;
-	margin: 10px 0;
-	padding: 10px 20px;
-	color: #0C518F;
-	border: 1px solid #cae0f3;
-	border-left: 5px solid #cae0f3;
-	clear: both;
-}
+	.ocdi hr {
+		margin: 2.62em 0;
+	}
 
-.ocdi__intro-text ul {
-	padding-left: 40px;
-	list-style-type: square;
-}
+	.feature-section + hr {
+		margin-top: 0;
+	}
+
+	#wpbody select {
+		height: auto;
+		padding: .62em;
+		line-height: inherit;
+	}
+
+	.ocdi .notice {
+		display: block !important;
+	}
 
 /* Plugin elements */
-.ocdi__demo-import-preview-image-message {
-	font-style: italic;
-}
 
-#ocdi__demo-import-preview-image,
-#ocdi__demo-import-files {
-	max-width: 100%;
-}
+	.ocdi__demo-import-files {
+		width: 100%;
+	}
+
+	.ocdi__demo-import-preview-image-message {
+		font-style: italic;
+	}
+
+
+/* Plugin title */
+
+	.ocdi__title:before {
+		width: auto;
+		height: auto;
+		font-size: inherit;
+	}
+
+/* Plugin intro text */
+
+	.ocdi__intro-text ul {
+		padding: 0 4%;
+		list-style-type: square;
+	}
 
 /* Plugin multi select import and Plugin file upload containers */
-.ocdi__single-file-upload-container,
-.ocdi__multi-select-import {
-	width: calc( 100% - 46px );
-	background-color: #ffffff;
-	margin: 10px 0;
-	padding: 20px;
-	border: 1px solid #e5e5e5;
-	border-left: 5px solid #e5e5e5;
-}
 
-.ocdi__single-file-upload-container {
-	margin: 0;
-	margin-bottom: -1px;
-}
-
-.ocdi__single-file-upload-container span {
-	color: #999999;
-	float: right;
-}
-
-.ocdi__single-file-upload-container h3,
-.ocdi__multi-select-import h3 {
-	margin-top: 0;
-}
-
-.ocdi__single-file-upload-container h3 {
-	margin-bottom: .5em;
-}
-
-@media (min-width: 992px) {
-	.ocdi__single-file-upload-container,
-	.ocdi__multi-select-import {
-		width: 65%;
+	.ocdi__file-upload,
+	.ocdi__multi-select-import,
+	.ocdi__demo-import-notice:not(:empty) {
+		padding: 4%;
+		margin: 1.62em 0;
+		background-color: #fff;
+		border: 1px solid #e5e5e5;
 	}
-}
 
-@media (min-width: 1200px) {
-	.ocdi__single-file-upload-container,
-	.ocdi__multi-select-import {
-		width: 50%;
+	.ocdi__file-upload {
+		margin: 0;
+		margin-bottom: -1px;
 	}
-}
 
-/* WP info notice */
-.notice-info {
-	border-left-color: #58acfa;
-}
+	.ocdi__file-upload span {
+		font-size: .81em;
+		font-weight: 400;
+		opacity: .66;
+	}
 
-/* WP warning notice */
-.notice-warning {
-	border-left-color: #ed9232;
-}
+/* Plugin button */
+
+	.ocdi__button-container {
+		margin-top: 1.62em;
+	}
+
+/* AJAX loader */
+
+	.ocdi__ajax-loader {
+		font-size: 1.5em;
+		display: none;
+	}
+
+	.ocdi__ajax-loader .spinner {
+		display: inline-block;
+		float: none;
+		visibility: visible;
+		margin-bottom: 6px;
+	}
+	
