@@ -47,12 +47,12 @@ jQuery( function ( $ ) {
 				$( '.js-ocdi-ajax-loader' ).hide();
 			}
 			else {
-				$( '.js-ocdi-ajax-response' ).append( '<div class="notice notice-error is-dismissible"><p>' + response + '</p></div>' );
+				$( '.js-ocdi-ajax-response' ).append( '<div class="notice  notice-error  is-dismissible"><p>' + response + '</p></div>' );
 				$( '.js-ocdi-ajax-loader' ).hide();
 			}
 		})
 		.fail( function( error ) {
-			$( '.js-ocdi-ajax-response' ).append( '<div class="notice notice-error is-dismissible"><p>Error: ' + error.statusText + ' (' + error.status + ')' + '</p></div>' );
+			$( '.js-ocdi-ajax-response' ).append( '<div class="notice  notice-error  is-dismissible"><p>Error: ' + error.statusText + ' (' + error.status + ')' + '</p></div>' );
 			$( '.js-ocdi-ajax-loader' ).hide();
 		});
 	}

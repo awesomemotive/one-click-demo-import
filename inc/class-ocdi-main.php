@@ -97,9 +97,9 @@ class PT_One_Click_Demo_Import {
 	public function display_plugin_page() {
 	?>
 
-	<div class="ocdi wrap about-wrap">
+	<div class="ocdi  wrap  about-wrap">
 
-		<h1 class="ocdi__title dashicons-before dashicons-download"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
+		<h1 class="ocdi__title  dashicons-before  dashicons-download"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
 
 		<?php
 
@@ -107,7 +107,7 @@ class PT_One_Click_Demo_Import {
 		if ( ini_get( 'safe_mode' ) ) {
 			printf(
 				esc_html__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
-				'<div class="notice notice-warning is-dismissible"><p>',
+				'<div class="notice  notice-warning  is-dismissible"><p>',
 				'<strong>',
 				'</strong>',
 				'</p></div>'
@@ -118,7 +118,7 @@ class PT_One_Click_Demo_Import {
 		ob_start();
 		?>
 
-		<div class="ocdi__intro-notice notice notice-warning is-dismissible">
+		<div class="ocdi__intro-notice  notice  notice-warning  is-dismissible">
 			<p><?php esc_html_e( 'Before you begin, make sure all the required plugins are activated.', 'pt-ocdi' ); ?></p>
 		</div>
 
@@ -153,7 +153,7 @@ class PT_One_Click_Demo_Import {
 
 		<?php if ( empty( $this->import_files ) ) : ?>
 
-			<div class="notice notice-info is-dismissible">
+			<div class="notice  notice-info  is-dismissible">
 				<p><?php esc_html_e( 'There are no predefined import files available in this theme. Please upload the import files manually!', 'pt-ocdi' ); ?></p>
 			</div>
 
@@ -209,7 +209,7 @@ class PT_One_Click_Demo_Import {
 
 					<p><?php esc_html_e( 'Import preview:', 'pt-ocdi' ); ?></p>
 
-					<p class="ocdi__demo-import-preview-image-message js-ocdi-preview-image-message"><?php
+					<p class="ocdi__demo-import-preview-image-message  js-ocdi-preview-image-message"><?php
 						if ( ! isset( $this->import_files[0]['import_preview_image_url'] ) ) {
 							esc_html_e( 'No preview image defined for this import.', 'pt-ocdi' );
 						}
@@ -226,21 +226,21 @@ class PT_One_Click_Demo_Import {
 
 		<?php endif; ?>
 
-		<div class="ocdi__demo-import-notice js-ocdi-demo-import-notice"><?php
+		<div class="ocdi__demo-import-notice  js-ocdi-demo-import-notice"><?php
 			if ( is_array( $this->import_files ) && ! empty( $this->import_files[0]['import_notice'] ) ) {
 				echo wp_kses_post( $this->import_files[0]['import_notice'] );
 			}
 		?></div>
 
 		<p class="ocdi__button-container">
-			<button class="ocdi__button button button-hero button-primary js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+			<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
 		</p>
 
-		<p class="ocdi__ajax-loader js-ocdi-ajax-loader">
+		<p class="ocdi__ajax-loader  js-ocdi-ajax-loader">
 			<span class="spinner"></span> <?php esc_html_e( 'Importing, please wait!', 'pt-ocdi' ); ?>
 		</p>
 
-		<div class="ocdi__response js-ocdi-ajax-response"></div>
+		<div class="ocdi__response  js-ocdi-ajax-response"></div>
 
 	</div>
 
