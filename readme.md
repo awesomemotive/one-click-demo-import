@@ -217,6 +217,13 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 ## Changelog ##
 
+### 1.3.0 ###
+
+*Release Date - 31 July 2016*
+
+* Import/plugin page re-design,
+
+
 ### 1.2.0 ###
 
 *Release Date - 9 July 2016*
