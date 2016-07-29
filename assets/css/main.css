@@ -60,7 +60,7 @@
 	.ocdi__demo-import-notice:not(:empty) {
 		padding: 4%;
 		margin: 1.62em 0;
-		background-color: #fff;
+		background-color: #ffffff;
 		border: 1px solid #e5e5e5;
 	}
 
@@ -71,7 +71,7 @@
 
 	.ocdi__file-upload span {
 		font-size: .81em;
-		font-weight: 400;
+		font-weight: normal;
 		opacity: .66;
 	}
 
@@ -94,4 +94,3 @@
 		visibility: visible;
 		margin-bottom: 6px;
 	}
-	
