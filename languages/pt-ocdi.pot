@@ -2,7 +2,7 @@
 # This file is distributed under the GPL 2.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 1.1.3\n"
+"Project-Id-Version: One Click Demo Import 1.2.0\n"
 "Report-Msgid-Bugs-To: http://support.proteusthemes.com/\n"
 "POT-Creation-Date: 2016-05-14 09:53:17+00:00\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgid "One Click Demo Import"
 msgstr ""
 
 #: inc/class-ocdi-helpers.php:353 inc/class-ocdi-main.php:84
-#: inc/class-ocdi-main.php:212
+#: inc/class-ocdi-main.php:236
 msgid "Import Demo Data"
 msgstr ""
 
@@ -140,95 +140,107 @@ msgstr ""
 msgid "not defined!"
 msgstr ""
 
-#: inc/class-ocdi-main.php:108
+#: inc/class-ocdi-main.php:109
 msgid ""
 "%sWarning: your server is using %sPHP safe mode%s. This means that you "
 "might experience server timeout errors.%s"
 msgstr ""
 
 #: inc/class-ocdi-main.php:122
-msgid ""
-"Importing demo data (post, pages, images, theme settings, ...) is the "
-"easiest way to setup your theme. It will allow you to quickly edit "
-"everything instead of creating content from scratch. When you import the "
-"data, the following things might happen:"
+msgid "Before you begin, make sure all the required plugins are activated."
 msgstr ""
 
-#: inc/class-ocdi-main.php:126
+#: inc/class-ocdi-main.php:128
+msgid ""
+"Importing demo data (post, pages, images, theme settings, ...) is the "
+"easiest way to setup your theme."
+msgstr ""
+
+#: inc/class-ocdi-main.php:129
+msgid ""
+"It will allow you to quickly edit everything instead of creating content "
+"from scratch."
+msgstr ""
+
+#: inc/class-ocdi-main.php:134
+msgid "When you import the data, the following things might happen:"
+msgstr ""
+
+#: inc/class-ocdi-main.php:137
 msgid ""
 "No existing posts, pages, categories, images, custom post types or any "
 "other data will be deleted or modified."
 msgstr ""
 
-#: inc/class-ocdi-main.php:127
+#: inc/class-ocdi-main.php:138
 msgid "Posts, pages, images, widgets and menus will get imported."
 msgstr ""
 
-#: inc/class-ocdi-main.php:128
+#: inc/class-ocdi-main.php:139
 msgid ""
 "Please click \"Import Demo Data\" button only once and wait, it can take a "
 "couple of minutes."
 msgstr ""
 
-#: inc/class-ocdi-main.php:133
-msgid "Before you begin, make sure all the required plugins are activated."
-msgstr ""
-
-#: inc/class-ocdi-main.php:147
+#: inc/class-ocdi-main.php:157
 msgid ""
 "There are no predefined import files available in this theme. Please upload "
 "the import files manually!"
 msgstr ""
 
-#: inc/class-ocdi-main.php:152
+#: inc/class-ocdi-main.php:162
+msgid "Manual demo files upload"
+msgstr ""
+
+#: inc/class-ocdi-main.php:165
 msgid "Choose a XML file for content import:"
 msgstr ""
 
-#: inc/class-ocdi-main.php:156
+#: inc/class-ocdi-main.php:170
 msgid "Choose a WIE or JSON file for widget import:"
 msgstr ""
 
-#: inc/class-ocdi-main.php:156 inc/class-ocdi-main.php:160
+#: inc/class-ocdi-main.php:170 inc/class-ocdi-main.php:175
 msgid "(*optional)"
 msgstr ""
 
-#: inc/class-ocdi-main.php:160
+#: inc/class-ocdi-main.php:175
 msgid "Choose a DAT file for customizer import:"
 msgstr ""
 
-#: inc/class-ocdi-main.php:166
+#: inc/class-ocdi-main.php:185
 msgid "Choose which demo you want to import:"
 msgstr ""
 
-#: inc/class-ocdi-main.php:188
+#: inc/class-ocdi-main.php:210
 msgid "Import preview:"
 msgstr ""
 
-#: inc/class-ocdi-main.php:192 inc/class-ocdi-main.php:243
+#: inc/class-ocdi-main.php:214 inc/class-ocdi-main.php:268
 msgid "No preview image defined for this import."
 msgstr ""
 
-#: inc/class-ocdi-main.php:216
+#: inc/class-ocdi-main.php:240
 msgid "Importing, please wait!"
 msgstr ""
 
-#: inc/class-ocdi-main.php:300
+#: inc/class-ocdi-main.php:325
 msgid "Manually uploaded files"
 msgstr ""
 
-#: inc/class-ocdi-main.php:317 inc/class-ocdi-main.php:328
+#: inc/class-ocdi-main.php:342 inc/class-ocdi-main.php:353
 msgid "Downloaded files"
 msgstr ""
 
-#: inc/class-ocdi-main.php:324
+#: inc/class-ocdi-main.php:349
 msgid "The import files for: %s were successfully downloaded!"
 msgstr ""
 
-#: inc/class-ocdi-main.php:334
+#: inc/class-ocdi-main.php:359
 msgid "No import files specified!"
 msgstr ""
 
-#: inc/class-ocdi-main.php:381
+#: inc/class-ocdi-main.php:406
 msgid ""
 "%1$s%3$sThat's it, all done!%4$s%2$sThe demo import has finished. Please "
 "check your page and make sure that everything has imported correctly. If it "
@@ -236,34 +248,34 @@ msgid ""
 "it has done its job.%5$s"
 msgstr ""
 
-#: inc/class-ocdi-main.php:392
+#: inc/class-ocdi-main.php:417
 msgid ""
 "%1$sThe demo import has finished, but there were some import "
 "errors.%2$sMore details about the errors can be found in this %3$s%5$slog "
 "file%6$s%4$s%7$s"
 msgstr ""
 
-#: inc/class-ocdi-main.php:446
+#: inc/class-ocdi-main.php:471
 msgid "Max execution time after content import = "
 msgstr ""
 
-#: inc/class-ocdi-main.php:448
+#: inc/class-ocdi-main.php:473
 msgid "Importing content"
 msgstr ""
 
-#: inc/class-ocdi-main.php:487 inc/class-ocdi-main.php:499
+#: inc/class-ocdi-main.php:512 inc/class-ocdi-main.php:524
 msgid "Importing widgets"
 msgstr ""
 
-#: inc/class-ocdi-main.php:521 inc/class-ocdi-main.php:529
+#: inc/class-ocdi-main.php:546 inc/class-ocdi-main.php:554
 msgid "Importing customizer settings"
 msgstr ""
 
-#: inc/class-ocdi-main.php:527
+#: inc/class-ocdi-main.php:552
 msgid "Customizer settings import finished!"
 msgstr ""
 
-#: inc/class-ocdi-main.php:579
+#: inc/class-ocdi-main.php:604
 msgid "Completed AJAX call number: "
 msgstr ""
 
