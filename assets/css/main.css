@@ -1,96 +1,95 @@
 /* Overriding WordPress native styles */
 
-	.ocdi h2 {
-		text-align: inherit;
-	}
+.ocdi h2 {
+	text-align: inherit;
+}
 
-	.ocdi h2:first-child,
-	.ocdi h3:first-child {
-		margin-top: 0;
-	}
+.ocdi h2:first-child,
+.ocdi h3:first-child {
+	margin-top: 0;
+}
 
-	.ocdi hr {
-		margin: 2.62em 0;
-	}
+.ocdi hr {
+	margin: 2.62em 0;
+}
 
-	.feature-section + hr {
-		margin-top: 0;
-	}
+.feature-section + hr {
+	margin-top: 0;
+}
 
-	#wpbody select {
-		height: auto;
-		padding: .62em;
-		line-height: inherit;
-	}
+#wpbody select {
+	height: auto;
+	padding: .62em;
+	line-height: inherit;
+}
 
-	.ocdi .notice {
-		display: block !important;
-	}
+.ocdi .notice {
+	display: block !important;
+}
 
 /* Plugin elements */
 
-	.ocdi__demo-import-files {
-		width: 100%;
-	}
+.ocdi__demo-import-files {
+	width: 100%;
+}
 
-	.ocdi__demo-import-preview-image-message {
-		font-style: italic;
-	}
-
+.ocdi__demo-import-preview-image-message {
+	font-style: italic;
+}
 
 /* Plugin title */
 
-	.ocdi__title:before {
-		width: auto;
-		height: auto;
-		font-size: inherit;
-	}
+.ocdi__title:before {
+	width: auto;
+	height: auto;
+	font-size: inherit;
+}
 
 /* Plugin intro text */
 
-	.ocdi__intro-text ul {
-		padding: 0 4%;
-		list-style-type: square;
-	}
+.ocdi__intro-text ul {
+	padding: 0 4%;
+	list-style-type: square;
+}
 
 /* Plugin multi select import and Plugin file upload containers */
 
-	.ocdi__file-upload,
-	.ocdi__multi-select-import,
-	.ocdi__demo-import-notice:not(:empty) {
-		padding: 4%;
-		margin: 1.62em 0;
-		background-color: #ffffff;
-		border: 1px solid #e5e5e5;
-	}
+.ocdi__file-upload,
+.ocdi__multi-select-import,
+.ocdi__demo-import-notice:not(:empty) {
+	padding: 4%;
+	margin: 1.62em 0;
+	background-color: #ffffff;
+	border: 1px solid #e5e5e5;
+}
 
-	.ocdi__file-upload {
-		margin: 0;
-		margin-bottom: -1px;
-	}
+.ocdi__file-upload {
+	margin: 0;
+	margin-bottom: -1px;
+}
 
-	.ocdi__file-upload span {
-		font-size: .81em;
-		font-weight: normal;
-		opacity: .66;
-	}
+.ocdi__file-upload span {
+	font-size: .81em;
+	font-weight: normal;
+	opacity: .66;
+}
 
 /* Plugin button */
 
-	.ocdi__button-container {
-		margin-top: 1.62em;
-	}
+.ocdi__button-container {
+	margin-top: 1.62em;
+}
 
 /* AJAX loader */
 
-	.ocdi__ajax-loader {
-		font-size: 1.5em;
-		display: none;
-	}
+.ocdi__ajax-loader {
+	font-size: 1.5em;
+	display: none;
+}
 
-	.ocdi__ajax-loader .spinner {
-		display: inline-block;
-		float: none;
-		visibility: visible;
-		margin-bottom: 6px;
-	}
+.ocdi__ajax-loader .spinner {
+	display: inline-block;
+	float: none;
+	visibility: visible;
+	margin-bottom: 6px;
+}
