@@ -41,9 +41,9 @@ else {
 	define( 'PT_OCDI_PATH', plugin_dir_path( __FILE__ ) );
 	define( 'PT_OCDI_URL', plugin_dir_url( __FILE__ ) );
 
-	// Require main plugin file.
-	require PT_OCDI_PATH . 'inc/class-ocdi-main.php';
+	// Composer autoloader.
+	require_once PT_OCDI_PATH . 'vendor/autoload.php';
 
 	// Instantiate the main plugin class *Singleton*.
-	$pt_one_click_demo_import = PT_One_Click_Demo_Import::getInstance();
+	$pt_one_click_demo_import = OCDI\OneClickDemoImport::getInstance();
 }

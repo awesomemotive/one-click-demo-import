@@ -5,7 +5,9 @@
  * @package ocdi
  */
 
-class OCDI_Importer {
+namespace OCDI;
+
+class Importer {
 
 	private $importer;
 
@@ -16,7 +18,7 @@ class OCDI_Importer {
 
 		// Set the WordPress Importer v2 as the importer used in this plugin.
 		// More: https://github.com/humanmade/WordPress-Importer.
-		$this->importer = new OCDI_WXR_Importer( $importer_options );
+		$this->importer = new WXRImporter( $importer_options );
 
 		// Set logger to the importer.
 		if ( ! empty( $logger ) ) {
@@ -28,11 +30,10 @@ class OCDI_Importer {
 	 * Include required files.
 	 */
 	private function include_required_files() {
-		if ( ! class_exists( 'WP_Importer' ) ) {
+		if ( ! class_exists( '\WP_Importer' ) ) {
 			defined( 'WP_LOAD_IMPORTERS' ) || define( 'WP_LOAD_IMPORTERS', true );
 			require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 		}
-		require PT_OCDI_PATH . 'inc/class-ocdi-wxr-importer.php';
 	}
 
 	/**

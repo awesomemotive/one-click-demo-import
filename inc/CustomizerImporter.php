@@ -8,7 +8,9 @@
  * @package ocdi
  */
 
-class OCDI_Customizer_Importer {
+namespace OCDI;
+
+class CustomizerImporter {
 
 	/**
 	 * Imports uploaded mods and calls WordPress core customize_save actions so
@@ -30,7 +32,7 @@ class OCDI_Customizer_Importer {
 
 		// Make sure we have an import file.
 		if ( ! file_exists( $import_file_path ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'missing_cutomizer_import_file',
 				sprintf(
 					esc_html__( 'The customizer import file is missing! File path: %s', 'pt-ocdi' ),
@@ -40,7 +42,7 @@ class OCDI_Customizer_Importer {
 		}
 
 		// Get the upload data.
-		$raw  = OCDI_Helpers::data_from_file( $import_file_path );
+		$raw = Helpers::data_from_file( $import_file_path );
 
 		// Make sure we got the data.
 		if ( is_wp_error( $raw ) ) {
@@ -51,13 +53,13 @@ class OCDI_Customizer_Importer {
 
 		// Data checks.
 		if ( ! is_array( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'customizer_import_data_error',
 				esc_html__( 'The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'pt-ocdi' )
 			);
 		}
 		if ( $data['template'] !== $template ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'customizer_import_wrong_theme',
 				esc_html__( 'The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'pt-ocdi' )
 			);
@@ -72,13 +74,12 @@ class OCDI_Customizer_Importer {
 		if ( isset( $data['options'] ) ) {
 
 			// Require modified customizer options class.
-			if ( ! class_exists( 'WP_Customize_Setting' ) ) {
+			if ( ! class_exists( '\WP_Customize_Setting' ) ) {
 				require_once ABSPATH . 'wp-includes/class-wp-customize-setting.php';
 			}
-			require PT_OCDI_PATH . 'inc/class-ocdi-customizer-option.php';
 
 			foreach ( $data['options'] as $option_key => $option_value ) {
-				$option = new OCDI_Customizer_Option( $wp_customize, $option_key, array(
+				$option = new CustomizerOption( $wp_customize, $option_key, array(
 					'default'    => '',
 					'type'       => 'option',
 					'capability' => 'edit_theme_options',
@@ -132,7 +133,7 @@ class OCDI_Customizer_Importer {
 	 * @return array An array of image data.
 	 */
 	private static function customizer_sideload_image( $file ) {
-		$data = new stdClass();
+		$data = new \stdClass();
 
 		if ( ! function_exists( 'media_handle_sideload' ) ) {
 			require_once( ABSPATH . 'wp-admin/includes/media.php' );

@@ -16,6 +16,11 @@
             }
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "OCDI\\": "inc/"
+        }
+    },
     "require": {
         "humanmade/WordPress-Importer": "dev-master"
     }

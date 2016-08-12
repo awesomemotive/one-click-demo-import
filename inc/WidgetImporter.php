@@ -8,7 +8,9 @@
  * @package ocdi
  */
 
-class OCDI_Widget_Importer {
+namespace OCDI;
+
+class WidgetImporter {
 
 	/**
 	 * Imports widgets from a json file.
@@ -39,14 +41,14 @@ class OCDI_Widget_Importer {
 
 		// File exists?
 		if ( ! file_exists( $file ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'widget_import_file_not_found',
 				__( 'Widget import file could not be found.', 'pt-ocdi' )
 			);
 		}
 
 		// Get file contents and decode.
-		$data = OCDI_Helpers::data_from_file( $file );
+		$data = Helpers::data_from_file( $file );
 
 		// Return from this function if there was an error.
 		if ( is_wp_error( $data ) ) {
@@ -71,7 +73,7 @@ class OCDI_Widget_Importer {
 
 		// Have valid data? If no data or could not decode.
 		if ( empty( $data ) || ! is_object( $data ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'corrupted_widget_import_data',
 				__( 'Widget import data could not be read. Please try a different file.', 'pt-ocdi' )
 			);

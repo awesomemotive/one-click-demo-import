@@ -1,16 +1,15 @@
 <?php
 
-// Require helpers file containing the helper functions.
-require_once dirname( __FILE__ ) . '/../inc/class-ocdi-helpers.php';
+namespace OCDI;
 
-class OCDIHelpersTest extends WP_UnitTestCase {
+class OCDIHelpersTest extends \WP_UnitTestCase {
 
 	function test_helper_validate_import_file_info() {
 
 		// Test empty array input
 		$import_files    = array();
 		$expected_output = array();
-		$this->assertEquals( $expected_output, OCDI_Helpers::validate_import_file_info( $import_files ) );
+		$this->assertEquals( $expected_output, Helpers::validate_import_file_info( $import_files ) );
 
 		// Test valid array
 		$import_files = array(
@@ -37,7 +36,7 @@ class OCDIHelpersTest extends WP_UnitTestCase {
 				'import_widget_file_url' => 'http://www.your_domain.com/ocdi/widgets2.json'
 			),
 		);
-		$this->assertEquals( $expected_output, OCDI_Helpers::validate_import_file_info( $import_files ) );
+		$this->assertEquals( $expected_output, Helpers::validate_import_file_info( $import_files ) );
 
 		// Test valid array with one invalid item
 		$import_files = array(
@@ -67,7 +66,7 @@ class OCDIHelpersTest extends WP_UnitTestCase {
 				'import_file_url'  => 'http://www.your_domain.com/ocdi/demo-content2.xml',
 			),
 		);
-		$this->assertEquals( $expected_output, OCDI_Helpers::validate_import_file_info( $import_files ) );
+		$this->assertEquals( $expected_output, Helpers::validate_import_file_info( $import_files ) );
 
 		// Test invalid array
 		$import_files = array(
@@ -86,6 +85,6 @@ class OCDIHelpersTest extends WP_UnitTestCase {
 			)
 		);
 		$expected_output = array();
-		$this->assertEquals( $expected_output, OCDI_Helpers::validate_import_file_info( $import_files ) );
+		$this->assertEquals( $expected_output, Helpers::validate_import_file_info( $import_files ) );
 	}
 }

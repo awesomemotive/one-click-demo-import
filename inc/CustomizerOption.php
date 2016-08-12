@@ -9,7 +9,9 @@
  * @package ocdi
  */
 
-final class OCDI_Customizer_Option extends WP_Customize_Setting {
+namespace OCDI;
+
+final class CustomizerOption extends \WP_Customize_Setting {
 
 	/**
 	 * Import an option value for this setting.

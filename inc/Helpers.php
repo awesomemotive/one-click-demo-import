@@ -5,10 +5,12 @@
  * @package ocdi
  */
 
+namespace OCDI;
+
 /**
  * Class with static helper functions.
  */
-class OCDI_Helpers {
+class Helpers {
 
 	/**
 	 * Filter through the array of import files and get rid of those who do not comply.
@@ -64,7 +66,7 @@ class OCDI_Helpers {
 				$downloaded_files['content'] = $import_file_info['local_import_file'];
 			}
 			else {
-				return new WP_Error(
+				return new \WP_Error(
 					'url_or_local_file_not_defined',
 					sprintf(
 						__( '"import_file_url" or "local_import_file" for %s%s%s are not defined!', 'pt-ocdi' ),
@@ -170,7 +172,7 @@ class OCDI_Helpers {
 
 		// Test if the URL to the file is defined.
 		if ( empty( $url ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'url_not_defined',
 				sprintf(
 					__( 'URL for %s%s%s file is not defined!', 'pt-ocdi' ),
@@ -192,7 +194,7 @@ class OCDI_Helpers {
 			// Collect the right format of error data (array or WP_Error).
 			$response_error = self::get_error_from_response( $response );
 
-			return new WP_Error(
+			return new \WP_Error(
 				'file_fetching_error',
 				sprintf(
 					__( 'An error occurred while fetching %s%s%s file from the server!%sReason: %s - %s.', 'pt-ocdi' ),
@@ -232,7 +234,7 @@ class OCDI_Helpers {
 		global $wp_filesystem;
 
 		if ( ! $wp_filesystem->put_contents( $file_path, $content ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'failed_writing_file_to_server',
 				sprintf(
 					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
@@ -276,7 +278,7 @@ class OCDI_Helpers {
 		$separator = PHP_EOL . '---' . $separator_text . '---' . PHP_EOL;
 
 		if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content . PHP_EOL ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'failed_writing_file_to_server',
 				sprintf(
 					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
@@ -311,7 +313,7 @@ class OCDI_Helpers {
 		$data = $wp_filesystem->get_contents( $file_path );
 
 		if ( ! $data ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'failed_reading_file_from_server',
 				sprintf(
 					__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'pt-ocdi' ),
@@ -335,7 +337,7 @@ class OCDI_Helpers {
 
 		// Check if the file-system method is 'direct', if not display an error.
 		if ( ! ( 'direct' === get_filesystem_method() ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'no_direct_file_access',
 				sprintf(
 					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
@@ -360,7 +362,7 @@ class OCDI_Helpers {
 		$demo_import_page_url = wp_nonce_url( $plugin_page_setup['parent_slug'] . '?page=' . $plugin_page_setup['menu_slug'], $plugin_page_setup['menu_slug'] );
 
 		if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
-			return new WP_error(
+			return new \WP_error(
 				'filesystem_credentials_could_not_be_retrieved',
 				__( 'An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
 			);
@@ -368,7 +370,7 @@ class OCDI_Helpers {
 
 		// Now we have credentials, try to get the wp_filesystem running.
 		if ( ! WP_Filesystem( $creds ) ) {
-			return new WP_Error(
+			return new \WP_Error(
 				'wrong_login_credentials',
 				__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
 			);

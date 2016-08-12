@@ -7,12 +7,14 @@
  * @package ocdi
  */
 
+namespace OCDI;
+
 // Include required files, if not already present (via separate plugin).
-if ( ! class_exists( 'WXR_Importer' ) ) {
+if ( ! class_exists( '\WXR_Importer' ) ) {
 	require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-wxr-importer.php';
 }
 
-class OCDI_WXR_Importer extends WXR_Importer {
+class WXRImporter extends \WXR_Importer {
 
 	public function __construct( $options = array() ) {
 		parent::__construct( $options );

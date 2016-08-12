@@ -5,17 +5,12 @@
  * @package ocdi
  */
 
-// Include files.
-require PT_OCDI_PATH . 'inc/class-ocdi-helpers.php';
-require PT_OCDI_PATH . 'inc/class-ocdi-importer.php';
-require PT_OCDI_PATH . 'inc/class-ocdi-widget-importer.php';
-require PT_OCDI_PATH . 'inc/class-ocdi-customizer-importer.php';
-require PT_OCDI_PATH . 'inc/class-ocdi-logger.php';
+namespace OCDI;
 
 /**
  * One Click Demo Import class, so we don't have to worry about namespaces.
  */
-class PT_One_Click_Demo_Import {
+class OneClickDemoImport {
 
 	/**
 	 * @var $instance the reference to *Singleton* instance of this class
@@ -290,7 +285,7 @@ class PT_One_Click_Demo_Import {
 		ini_set( 'memory_limit', apply_filters( 'pt-ocdi/import_memory_limit', '350M' ) );
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
-		OCDI_Helpers::verify_ajax_call();
+		Helpers::verify_ajax_call();
 
 		// Is this a new AJAX call to continue the previous import?
 		$use_existing_importer_data = $this->get_importer_data();
@@ -307,7 +302,7 @@ class PT_One_Click_Demo_Import {
 			$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
 
 			// Define log file path.
-			$this->log_file_path = OCDI_Helpers::get_log_path( $demo_import_start_time );
+			$this->log_file_path = Helpers::get_log_path( $demo_import_start_time );
 
 			// Get selected file index or set it to 0.
 			$this->selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
@@ -319,7 +314,7 @@ class PT_One_Click_Demo_Import {
 			if ( ! empty( $_FILES ) ) { // Using manual file uploads?
 
 				// Get paths for the uploaded files.
-				$this->selected_import_files = OCDI_Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
+				$this->selected_import_files = Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
 
 				// Set the name of the import files, because we used the uploaded files.
 				$this->import_files[ $this->selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'pt-ocdi' );
@@ -327,7 +322,7 @@ class PT_One_Click_Demo_Import {
 			elseif ( ! empty( $this->import_files[ $this->selected_index ] ) ) { // Use predefined import files from wp filter: pt-ocdi/import_files.
 
 				// Download the import files (content and widgets files) and save it to variable for later use.
-				$this->selected_import_files = OCDI_Helpers::download_import_files(
+				$this->selected_import_files = Helpers::download_import_files(
 					$this->import_files[ $this->selected_index ],
 					$demo_import_start_time
 				);
@@ -336,7 +331,7 @@ class PT_One_Click_Demo_Import {
 				if ( is_wp_error( $this->selected_import_files ) ) {
 
 					// Write error to log file and send an AJAX response with the error.
-					OCDI_Helpers::log_error_and_send_ajax_response(
+					Helpers::log_error_and_send_ajax_response(
 						$this->selected_import_files->get_error_message(),
 						$this->log_file_path,
 						esc_html__( 'Downloaded files', 'pt-ocdi' )
@@ -344,11 +339,11 @@ class PT_One_Click_Demo_Import {
 				}
 
 				// Add this message to log file.
-				$log_added = OCDI_Helpers::append_to_file(
+				$log_added = Helpers::append_to_file(
 					sprintf(
 						__( 'The import files for: %s were successfully downloaded!', 'pt-ocdi' ),
 						$this->import_files[ $this->selected_index ]['import_file_name']
-					) . OCDI_Helpers::import_file_info( $this->selected_import_files ),
+					) . Helpers::import_file_info( $this->selected_import_files ),
 					$this->log_file_path,
 					esc_html__( 'Downloaded files' , 'pt-ocdi' )
 				);
@@ -419,7 +414,7 @@ class PT_One_Click_Demo_Import {
 				'<br>',
 				'<strong>',
 				'</strong>',
-				'<a href="' . OCDI_Helpers::get_log_url( $this->log_file_path ) .'" target="_blank">',
+				'<a href="' . Helpers::get_log_url( $this->log_file_path ) .'" target="_blank">',
 				'</a>',
 				'</p></div>'
 			);
@@ -467,7 +462,7 @@ class PT_One_Click_Demo_Import {
 			$message = ob_get_clean();
 
 			// Add this message to log file.
-			$log_added = OCDI_Helpers::append_to_file(
+			$log_added = Helpers::append_to_file(
 				$message . PHP_EOL . esc_html__( 'Max execution time after content import = ' , 'pt-ocdi' ) . ini_get( 'max_execution_time' ),
 				$this->log_file_path,
 				esc_html__( 'Importing content' , 'pt-ocdi' )
@@ -493,7 +488,7 @@ class PT_One_Click_Demo_Import {
 		$results = array();
 
 		// Create an instance of the Widget Importer.
-		$widget_importer = new OCDI_Widget_Importer();
+		$widget_importer = new WidgetImporter();
 
 		// Import widgets.
 		if ( ! empty( $widget_import_file_path ) ) {
@@ -506,7 +501,7 @@ class PT_One_Click_Demo_Import {
 		if ( is_wp_error( $results ) ) {
 
 			// Write error to log file and send an AJAX response with the error.
-			OCDI_Helpers::log_error_and_send_ajax_response(
+			Helpers::log_error_and_send_ajax_response(
 				$results->get_error_message(),
 				$this->log_file_path,
 				esc_html__( 'Importing widgets', 'pt-ocdi' )
@@ -518,7 +513,7 @@ class PT_One_Click_Demo_Import {
 		$message = ob_get_clean();
 
 		// Add this message to log file.
-		$log_added = OCDI_Helpers::append_to_file(
+		$log_added = Helpers::append_to_file(
 			$message,
 			$this->log_file_path,
 			esc_html__( 'Importing widgets' , 'pt-ocdi' )
@@ -534,13 +529,13 @@ class PT_One_Click_Demo_Import {
 	private function import_customizer( $customizer_import_file_path ) {
 
 		// Try to import the customizer settings.
-		$results = OCDI_Customizer_Importer::import_customizer_options( $customizer_import_file_path );
+		$results = CustomizerImporter::import_customizer_options( $customizer_import_file_path );
 
 		// Check for errors.
 		if ( is_wp_error( $results ) ) {
 
 			// Write error to log file and send an AJAX response with the error.
-			OCDI_Helpers::log_error_and_send_ajax_response(
+			Helpers::log_error_and_send_ajax_response(
 				$results->get_error_message(),
 				$this->log_file_path,
 				esc_html__( 'Importing customizer settings', 'pt-ocdi' )
@@ -548,7 +543,7 @@ class PT_One_Click_Demo_Import {
 		}
 
 		// Add this message to log file.
-		$log_added = OCDI_Helpers::append_to_file(
+		$log_added = Helpers::append_to_file(
 			esc_html__( 'Customizer settings import finished!', 'pt-ocdi' ),
 			$this->log_file_path,
 			esc_html__( 'Importing customizer settings' , 'pt-ocdi' )
@@ -569,7 +564,7 @@ class PT_One_Click_Demo_Import {
 		$message = ob_get_clean();
 
 		// Add this message to log file.
-		$log_added = OCDI_Helpers::append_to_file(
+		$log_added = Helpers::append_to_file(
 			$message,
 			$this->log_file_path,
 			$action
@@ -600,7 +595,7 @@ class PT_One_Click_Demo_Import {
 			$message = ob_get_clean();
 
 			// Add message to log file.
-			$log_added = OCDI_Helpers::append_to_file(
+			$log_added = Helpers::append_to_file(
 				__( 'Completed AJAX call number: ' , 'pt-ocdi' ) . $this->ajax_call_number . PHP_EOL . $message,
 				$this->log_file_path,
 				''
@@ -665,7 +660,7 @@ class PT_One_Click_Demo_Import {
 	public function setup_plugin_with_filter_data() {
 
 		// Get info of import data files and filter it.
-		$this->import_files = OCDI_Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
+		$this->import_files = Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
 
 		// Importer options array.
 		$importer_options = apply_filters( 'pt-ocdi/importer_options', array(
@@ -678,10 +673,10 @@ class PT_One_Click_Demo_Import {
 		) );
 
 		// Configure logger instance and set it to the importer.
-		$this->logger            = new OCDI_Logger();
+		$this->logger            = new Logger();
 		$this->logger->min_level = $logger_options['logger_min_level'];
 
 		// Create importer instance with proper parameters.
-		$this->importer = new OCDI_Importer( $importer_options, $this->logger );
+		$this->importer = new Importer( $importer_options, $this->logger );
 	}
 }
