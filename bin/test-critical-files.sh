@@ -12,10 +12,14 @@ function testRequiredFiles {
 		readme.txt
 		assets/css/main.css
 		assets/js/main.js
-		inc/class-ocdi-helpers.php
-		inc/class-ocdi-importer.php
-		inc/class-ocdi-widget-importer.php
-		inc/class-ocdi-logger.php
+		inc/CustomizerImporter.php
+		inc/CustomizerOption.php
+		inc/Helpers.php
+		inc/Importer.php
+		inc/Logger.php
+		inc/OneClickDemoImport.php
+		inc/WidgetImporter.php
+		inc/WXRImporter.php
 		vendor/humanmade/WordPress-Importer/class-logger-cli.php
 		vendor/humanmade/WordPress-Importer/class-logger.php
 		vendor/humanmade/WordPress-Importer/class-wxr-importer.php
