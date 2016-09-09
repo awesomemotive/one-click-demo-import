@@ -147,7 +147,14 @@ class OneClickDemoImport {
 			)
 		);
 
-		$this->plugin_page = add_submenu_page( $plugin_page_setup['parent_slug'], $plugin_page_setup['page_title'], $plugin_page_setup['menu_title'], $plugin_page_setup['capability'], $plugin_page_setup['menu_slug'], array( $this, 'display_plugin_page' ) );
+		$this->plugin_page = add_submenu_page(
+			$plugin_page_setup['parent_slug'],
+			$plugin_page_setup['page_title'],
+			$plugin_page_setup['menu_title'],
+			$plugin_page_setup['capability'],
+			$plugin_page_setup['menu_slug'],
+			array( $this, 'display_plugin_page' )
+		);
 	}
 
 
