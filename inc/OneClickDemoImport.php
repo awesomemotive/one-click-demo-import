@@ -94,7 +94,7 @@ class OneClickDemoImport {
 	 *
 	 * @return PT_One_Click_Demo_Import the *Singleton* instance.
 	 */
-	public static function getInstance() {
+	public static function get_instance() {
 		if ( null === static::$instance ) {
 			static::$instance = new static();
 		}

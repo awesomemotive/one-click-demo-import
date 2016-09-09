@@ -38,7 +38,7 @@ class OCDI_Plugin {
 			require_once PT_OCDI_PATH . 'vendor/autoload.php';
 
 			// Instantiate the main plugin class *Singleton*.
-			$pt_one_click_demo_import = OCDI\OneClickDemoImport::getInstance();
+			$pt_one_click_demo_import = OCDI\OneClickDemoImport::get_instance();
 		}
 	}
 
