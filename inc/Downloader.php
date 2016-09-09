@@ -8,7 +8,6 @@
 namespace OCDI;
 
 class Downloader {
-
 	/**
 	 * Holds full path to where the files will be saved.
 	 *
@@ -52,7 +51,6 @@ class Downloader {
 	 * @return string|WP_Error, content from the URL or WP_Error object with error message.
 	 */
 	private function get_content_from_url( $url ) {
-
 		// Test if the URL to the file is defined.
 		if ( empty( $url ) ) {
 			return new \WP_Error(
@@ -69,7 +67,6 @@ class Downloader {
 
 		// Test if the get request was not successful.
 		if ( is_wp_error( $response ) || 200 !== $response['response']['code'] ) {
-
 			// Collect the right format of error data (array or WP_Error).
 			$response_error = $this->get_error_from_response( $response );
 

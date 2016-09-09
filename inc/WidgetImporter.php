@@ -11,14 +11,12 @@
 namespace OCDI;
 
 class WidgetImporter {
-
 	/**
 	 * Imports widgets from a json file.
 	 *
 	 * @param string $data_file path to json file with WordPress widget export data.
 	 */
 	public function import_widgets( $data_file ) {
-
 		// Get widgets data from file.
 		$data = $this->process_import_file( $data_file );
 
@@ -38,7 +36,6 @@ class WidgetImporter {
 	 * @return object $data decoded JSON string
 	 */
 	private function process_import_file( $file ) {
-
 		// File exists?
 		if ( ! file_exists( $file ) ) {
 			return new \WP_Error(
@@ -68,7 +65,6 @@ class WidgetImporter {
 	 * @return array $results
 	 */
 	private function import_data( $data ) {
-
 		global $wp_registered_sidebars;
 
 		// Have valid data? If no data or could not decode.
@@ -98,7 +94,6 @@ class WidgetImporter {
 
 		// Loop import data's sidebars.
 		foreach ( $data as $sidebar_id => $widgets ) {
-
 			// Skip inactive widgets (should not be in export file).
 			if ( 'wp_inactive_widgets' == $sidebar_id ) {
 				continue;
@@ -126,7 +121,6 @@ class WidgetImporter {
 
 			// Loop widgets.
 			foreach ( $widgets as $widget_instance_id => $widget ) {
-
 				$fail = false;
 
 				// Get id_base (remove -# from end) and instance ID number.
@@ -159,7 +153,6 @@ class WidgetImporter {
 
 				// Does widget with identical settings already exist in same sidebar?
 				if ( ! $fail && isset( $widget_instances[ $id_base ] ) ) {
-
 					// Get existing widgets in this sidebar.
 					$sidebars_widgets = get_option( 'sidebars_widgets' );
 					$sidebar_widgets  = isset( $sidebars_widgets[ $use_sidebar_id ] ) ? $sidebars_widgets[ $use_sidebar_id ] : array(); // Check Inactive if that's where will go.
@@ -167,7 +160,6 @@ class WidgetImporter {
 					// Loop widgets with ID base.
 					$single_widget_instances = ! empty( $widget_instances[ $id_base ] ) ? $widget_instances[ $id_base ] : array();
 					foreach ( $single_widget_instances as $check_id => $check_widget ) {
-
 						// Is widget in same sidebar and has identical settings?
 						if ( in_array( "$id_base-$check_id", $sidebar_widgets ) && (array) $widget == $check_widget ) {
 							$fail                = true;
@@ -181,7 +173,6 @@ class WidgetImporter {
 
 				// No failure.
 				if ( ! $fail ) {
-
 					// Add widget instance.
 					$single_widget_instances   = get_option( 'widget_' . $id_base ); // All instances for that widget ID base, get fresh every time.
 					$single_widget_instances   = ! empty( $single_widget_instances ) ? $single_widget_instances : array( '_multiwidget' => 1 ); // Start fresh if have to.
@@ -265,7 +256,6 @@ class WidgetImporter {
 	 * @return array $available_widgets, Widget information
 	 */
 	private function available_widgets() {
-
 		global $wp_registered_widget_controls;
 
 		$widget_controls   = $wp_registered_widget_controls;
@@ -288,7 +278,6 @@ class WidgetImporter {
 	 * @param array $results widget import results.
 	 */
 	public function format_results_for_log( $results ) {
-
 		if ( empty( $results ) ) {
 			esc_html_e( 'No results for widget import!', 'pt-ocdi' );
 		}

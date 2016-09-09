@@ -11,7 +11,6 @@
 namespace OCDI;
 
 class CustomizerImporter {
-
 	/**
 	 * Imports uploaded mods and calls WordPress core customize_save actions so
 	 * themes that hook into them can act before mods are saved to the database.
@@ -23,7 +22,6 @@ class CustomizerImporter {
 	 * @return void|WP_Error
 	 */
 	public static function import_customizer_options( $import_file_path ) {
-
 		// Setup global vars.
 		global $wp_customize;
 
@@ -72,7 +70,6 @@ class CustomizerImporter {
 
 		// Import custom options.
 		if ( isset( $data['options'] ) ) {
-
 			// Require modified customizer options class.
 			if ( ! class_exists( '\WP_Customize_Setting' ) ) {
 				require_once ABSPATH . 'wp-includes/class-wp-customize-setting.php';
@@ -89,10 +86,8 @@ class CustomizerImporter {
 			}
 		}
 
-		// Loop through the mods.
+		// Loop through the mods and save the mods.
 		foreach ( $data['mods'] as $key => $val ) {
-
-			// Save the mod.
 			set_theme_mod( $key, $val );
 		}
 	}
@@ -141,7 +136,6 @@ class CustomizerImporter {
 			require_once( ABSPATH . 'wp-admin/includes/image.php' );
 		}
 		if ( ! empty( $file ) ) {
-
 			// Set variables for storage, fix file filename for query strings.
 			preg_match( '/[^\?]+\.(jpe?g|jpe|gif|png)\b/i', $file, $matches );
 			$file_array = array();

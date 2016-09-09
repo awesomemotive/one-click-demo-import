@@ -11,7 +11,6 @@ namespace OCDI;
  * Class with static helper functions.
  */
 class Helpers {
-
 	/**
 	 * Filter through the array of import files and get rid of those who do not comply.
 	 *
@@ -140,7 +139,6 @@ class Helpers {
 	 * @return string|WP_Error path to the saved file or WP_Error object with error message.
 	 */
 	public static function write_to_file( $content, $file_path ) {
-
 		// Verify WP file-system credentials.
 		$verified_credentials = self::check_wp_filesystem_credentials();
 
@@ -176,7 +174,6 @@ class Helpers {
 	 * @return boolean|WP_Error, path to the saved file or WP_Error object with error message.
 	 */
 	public static function append_to_file( $content, $file_path, $separator_text = '' ) {
-
 		// Verify WP file-system credentials.
 		$verified_credentials = self::check_wp_filesystem_credentials();
 
@@ -217,7 +214,6 @@ class Helpers {
 	 * @return string $data, content of the file or WP_Error object with error message.
 	 */
 	public static function data_from_file( $file_path ) {
-
 		// Verify WP file-system credentials.
 		$verified_credentials = self::check_wp_filesystem_credentials();
 
@@ -252,7 +248,6 @@ class Helpers {
 	 * @return boolean|WP_Error
 	 */
 	private static function check_wp_filesystem_credentials() {
-
 		// Check if the file-system method is 'direct', if not display an error.
 		if ( ! ( 'direct' === get_filesystem_method() ) ) {
 			return new \WP_Error(
@@ -305,7 +300,6 @@ class Helpers {
 	 * @return string, path to the log file
 	 */
 	public static function get_log_path( $start_date = '' ) {
-
 		$upload_dir  = wp_upload_dir();
 		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
@@ -324,7 +318,6 @@ class Helpers {
 	 * @return void
 	 */
 	public static function register_file_as_media_attachment( $log_path ) {
-
 		// Check the type of file.
 		$log_mimes = array( 'txt' => 'text/plain' );
 		$filetype  = wp_check_filetype( basename( $log_path ), apply_filters( 'pt-ocdi/file_mimes', $log_mimes ) );
@@ -350,7 +343,6 @@ class Helpers {
 	 * @return string, url to the log file.
 	 */
 	public static function get_log_url( $log_path ) {
-
 		$upload_dir = wp_upload_dir();
 		$upload_url = apply_filters( 'pt-ocdi/upload_file_url', trailingslashit( $upload_dir['url'] ) );
 
@@ -362,7 +354,6 @@ class Helpers {
 	 * Check if the AJAX call is valid.
 	 */
 	public static function verify_ajax_call() {
-
 		check_ajax_referer( 'ocdi-ajax-verification', 'security' );
 
 		// Check if user has the WP capability to import data.
@@ -386,7 +377,6 @@ class Helpers {
 	 * @return array of paths to the content import and widget import files.
 	 */
 	public static function process_uploaded_files( $uploaded_files, $log_file_path ) {
-
 		// Variable holding the paths to the uploaded files.
 		$selected_import_files = array();
 
@@ -402,7 +392,6 @@ class Helpers {
 		$customizer_file_info  = wp_handle_upload( $_FILES['customizer_file'], $upload_overrides );
 
 		if ( empty( $content_file_info['file'] ) || isset( $content_file_info['error'] ) ) {
-
 			// Write error to log file and send an AJAX response with the error.
 			self::log_error_and_send_ajax_response(
 				__( 'Please upload XML file for content import. If you want to import widgets or customizer settings only, please use Widget Importer & Exporter or the Customizer Export/Import plugin.', 'pt-ocdi' ),
@@ -416,12 +405,10 @@ class Helpers {
 
 		// Process widget import file.
 		if ( $widget_file_info && ! isset( $widget_file_info['error'] ) ) {
-
 			// Set uploaded widget file.
 			$selected_import_files['widgets'] = $widget_file_info['file'];
 		}
 		else {
-
 			// Add this error to log file.
 			$log_added = self::append_to_file(
 				sprintf(
@@ -435,12 +422,10 @@ class Helpers {
 
 		// Process Customizer import file.
 		if ( $customizer_file_info && ! isset( $customizer_file_info['error'] ) ) {
-
 			// Set uploaded widget file.
 			$selected_import_files['customizer'] = $customizer_file_info['file'];
 		}
 		else {
-
 			// Add this error to log file.
 			$log_added = self::append_to_file(
 				sprintf(
@@ -494,7 +479,6 @@ class Helpers {
 	 * @param string $separator title separating the old and new content.
 	 */
 	public static function log_error_and_send_ajax_response( $error_text, $log_file_path, $separator = '' ) {
-
 		// Add this error to log file.
 		$log_added = self::append_to_file(
 			$error_text,

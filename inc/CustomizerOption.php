@@ -12,7 +12,6 @@
 namespace OCDI;
 
 final class CustomizerOption extends \WP_Customize_Setting {
-
 	/**
 	 * Import an option value for this setting.
 	 *

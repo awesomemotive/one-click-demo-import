@@ -109,7 +109,6 @@ class OneClickDemoImport {
 	 * *Singleton* via the `new` operator from outside of this class.
 	 */
 	protected function __construct() {
-
 		// Actions.
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
@@ -167,7 +166,6 @@ class OneClickDemoImport {
 	 * @param string $hook holds info on which admin page you are currently loading.
 	 */
 	public function admin_enqueue_scripts( $hook ) {
-
 		// Enqueue the scripts only on the plugin page.
 		if ( $this->plugin_page === $hook ) {
 			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery', 'jquery-form' ), PT_OCDI_VERSION );
@@ -198,7 +196,6 @@ class OneClickDemoImport {
 	 * 6. after import setup (optional)
 	 */
 	public function import_demo_data_ajax_callback() {
-
 		// Try to update PHP memory limit (so that it does not run out of it).
 		ini_set( 'memory_limit', apply_filters( 'pt-ocdi/import_memory_limit', '350M' ) );
 
@@ -209,7 +206,6 @@ class OneClickDemoImport {
 		$use_existing_importer_data = $this->get_importer_data();
 
 		if ( ! $use_existing_importer_data ) {
-
 			// Set the AJAX call number.
 			$this->ajax_call_number = empty( $this->ajax_call_number ) ? 0 : $this->ajax_call_number;
 
@@ -230,7 +226,6 @@ class OneClickDemoImport {
 			 * Manually uploaded import files or predefined import files via filter: pt-ocdi/import_files
 			 */
 			if ( ! empty( $_FILES ) ) { // Using manual file uploads?
-
 				// Get paths for the uploaded files.
 				$this->selected_import_files = Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
 
@@ -247,7 +242,6 @@ class OneClickDemoImport {
 
 				// Check Errors.
 				if ( is_wp_error( $this->selected_import_files ) ) {
-
 					// Write error to log file and send an AJAX response with the error.
 					Helpers::log_error_and_send_ajax_response(
 						$this->selected_import_files->get_error_message(),
@@ -267,7 +261,6 @@ class OneClickDemoImport {
 				);
 			}
 			else {
-
 				// Send JSON Error response to the AJAX call.
 				wp_send_json( esc_html__( 'No import files specified!', 'pt-ocdi' ) );
 			}
@@ -284,7 +277,6 @@ class OneClickDemoImport {
 		 */
 		$action = 'pt-ocdi/before_widgets_import';
 		if ( ( false !== has_action( $action ) ) && empty( $this->frontend_error_messages ) ) {
-
 			// Run the before_widgets_import action to setup other settings.
 			$this->do_import_action( $action, $this->import_files[ $this->selected_index ] );
 		}
@@ -308,7 +300,6 @@ class OneClickDemoImport {
 		 */
 		$action = 'pt-ocdi/after_import';
 		if ( ( false !== has_action( $action ) ) && empty( $this->frontend_error_messages ) ) {
-
 			// Run the after_import action to setup other settings.
 			$this->do_import_action( $action, $this->import_files[ $this->selected_index ] );
 		}
@@ -348,7 +339,6 @@ class OneClickDemoImport {
 	 * @param string $import_file_path path to the import file.
 	 */
 	private function import_content( $import_file_path ) {
-
 		$this->microtime = microtime( true );
 
 		// This should be replaced with multiple AJAX calls (import in smaller chunks)
@@ -401,7 +391,6 @@ class OneClickDemoImport {
 	 * @param string $widget_import_file_path path to the widget import file.
 	 */
 	private function import_widgets( $widget_import_file_path ) {
-
 		// Widget import results.
 		$results = array();
 
@@ -410,14 +399,12 @@ class OneClickDemoImport {
 
 		// Import widgets.
 		if ( ! empty( $widget_import_file_path ) ) {
-
 			// Import widgets and return result.
 			$results = $widget_importer->import_widgets( $widget_import_file_path );
 		}
 
 		// Check for errors.
 		if ( is_wp_error( $results ) ) {
-
 			// Write error to log file and send an AJAX response with the error.
 			Helpers::log_error_and_send_ajax_response(
 				$results->get_error_message(),
@@ -445,13 +432,11 @@ class OneClickDemoImport {
 	 * @param string $customizer_import_file_path path to the customizer import file.
 	 */
 	private function import_customizer( $customizer_import_file_path ) {
-
 		// Try to import the customizer settings.
 		$results = CustomizerImporter::import_customizer_options( $customizer_import_file_path );
 
 		// Check for errors.
 		if ( is_wp_error( $results ) ) {
-
 			// Write error to log file and send an AJAX response with the error.
 			Helpers::log_error_and_send_ajax_response(
 				$results->get_error_message(),
@@ -476,7 +461,6 @@ class OneClickDemoImport {
 	 * @param array  $selected_import with information about the selected import.
 	 */
 	private function do_import_action( $action, $selected_import ) {
-
 		ob_start();
 			do_action( $action, $selected_import );
 		$message = ob_get_clean();
@@ -576,7 +560,6 @@ class OneClickDemoImport {
 	 * Get data from filters, after the theme has loaded and instantiate the importer.
 	 */
 	public function setup_plugin_with_filter_data() {
-
 		// Get info of import data files and filter it.
 		$this->import_files = Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
 

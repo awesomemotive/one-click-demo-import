@@ -15,7 +15,11 @@ if ( ! class_exists( '\WXR_Importer' ) ) {
 }
 
 class WXRImporter extends \WXR_Importer {
-
+	/**
+	 * Constructor method.
+	 *
+	 * @param array $options Importer options.
+	 */
 	public function __construct( $options = array() ) {
 		parent::__construct( $options );
 

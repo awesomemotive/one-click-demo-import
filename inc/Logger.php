@@ -16,7 +16,6 @@ if ( ! class_exists( '\WP_Importer_Logger_CLI' ) ) {
 }
 
 class Logger extends \WP_Importer_Logger_CLI {
-
 	/**
 	 * Variable for front-end error display.
 	 *
@@ -34,7 +33,6 @@ class Logger extends \WP_Importer_Logger_CLI {
 	 * @param array  $context context to the log message.
 	 */
 	public function log( $level, $message, array $context = array() ) {
-
 		// Save error messages for front-end display.
 		$this->error_output( $level, $message, $context = array() );
 

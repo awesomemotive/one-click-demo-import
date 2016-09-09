@@ -8,7 +8,6 @@
 namespace OCDI;
 
 class Importer {
-
 	/**
 	 * The importer class object used for importing content.
 	 *
@@ -17,7 +16,6 @@ class Importer {
 	private $importer;
 
 	public function __construct( $importer_options = array(), $logger = null ) {
-
 		// Include files that are needed for WordPress Importer v2.
 		$this->include_required_files();
 
