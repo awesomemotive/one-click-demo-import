@@ -54,10 +54,8 @@ class Helpers {
 	 * @return array|WP_Error array of paths to the downloaded files or WP_Error object with error message.
 	 */
 	public static function download_import_files( $import_file_info, $start_date = '' ) {
-
 		$downloaded_files = array();
-		$upload_dir       = wp_upload_dir();
-		$upload_path      = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+		$downloader       = new Downloader();
 
 		// ----- Set content file path -----
 		// Check if 'import_file_url' is not defined. That would mean a local file.
@@ -71,27 +69,18 @@ class Helpers {
 					sprintf(
 						__( '"import_file_url" or "local_import_file" for %s%s%s are not defined!', 'pt-ocdi' ),
 						'<strong>',
-						$$import_file_info['import_file_name'],
+						$import_file_info['import_file_name'],
 						'</strong>'
 					)
 				);
 			}
 		}
 		else {
+			// Set the filename string for content import file.
+			$content_filename = apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
 
-			// Retrieve demo data content from the URL.
-			$demo_import_content = self::get_content_from_url( $import_file_info['import_file_url'], $import_file_info['import_file_name'] );
-
-			// Return from this function if there was an error.
-			if ( is_wp_error( $demo_import_content ) ) {
-				return $demo_import_content;
-			}
-
-			// Setup filename path to save the data content.
-			$demo_import_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
-
-			// Write data content to the file and return the file path on successful write.
-			$downloaded_files['content'] = self::write_to_file( $demo_import_content, $demo_import_file_path );
+			// Download the content import file.
+			$downloaded_files['content'] = $downloader->download_file( $import_file_info['import_file_url'], $content_filename );
 
 			// Return from this function if there was an error.
 			if ( is_wp_error( $downloaded_files['content'] ) ) {
@@ -102,20 +91,11 @@ class Helpers {
 		// ----- Set widget file path -----
 		// Get widgets file as well. If defined!
 		if ( ! empty( $import_file_info['import_widget_file_url'] ) ) {
+			// Set the filename string for widgets import file.
+			$widget_filename = apply_filters( 'pt-ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
 
-			// Retrieve widget content from the URL.
-			$demo_import_widgets_content = self::get_content_from_url( $import_file_info['import_widget_file_url'], $import_file_info['import_file_name'] );
-
-			// Return from this function if there was an error.
-			if ( is_wp_error( $demo_import_widgets_content ) ) {
-				return $demo_import_widgets_content;
-			}
-
-			// Setup filename path to save the widget content.
-			$import_widgets_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
-
-			// Write widget content to the file and return the file path on successful write.
-			$downloaded_files['widgets'] = self::write_to_file( $demo_import_widgets_content, $import_widgets_file_path );
+			// Download the widgets import file.
+			$downloaded_files['widgets'] = $downloader->download_file( $import_file_info['import_widget_file_url'], $widget_filename );
 
 			// Return from this function if there was an error.
 			if ( is_wp_error( $downloaded_files['widgets'] ) ) {
@@ -131,20 +111,11 @@ class Helpers {
 		// ----- Set customizer file path -----
 		// Get customizer import file as well. If defined!
 		if ( ! empty( $import_file_info['import_customizer_file_url'] ) ) {
-
-			// Retrieve customizer content from the URL.
-			$demo_import_customizer_content = self::get_content_from_url( $import_file_info['import_customizer_file_url'], $import_file_info['import_file_name'] );
-
-			// Return from this function if there was an error.
-			if ( is_wp_error( $demo_import_customizer_content ) ) {
-				return $demo_import_customizer_content;
-			}
-
 			// Setup filename path to save the customizer content.
-			$import_customizer_file_path = $upload_path . apply_filters( 'pt-ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
+			$customizer_filename = apply_filters( 'pt-ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
 
-			// Write customizer content to the file and return the file path on successful write.
-			$downloaded_files['customizer'] = self::write_to_file( $demo_import_customizer_content, $import_customizer_file_path );
+			// Download the customizer import file.
+			$downloaded_files['customizer'] = $downloader->download_file( $import_file_info['import_customizer_file_url'], $customizer_filename );
 
 			// Return from this function if there was an error.
 			if ( is_wp_error( $downloaded_files['customizer'] ) ) {
@@ -158,59 +129,6 @@ class Helpers {
 		}
 
 		return $downloaded_files;
-	}
-
-
-	/**
-	 * Helper function: get content from an url.
-	 *
-	 * @param string $url URL to the content file.
-	 * @param string $file_name optional, name of the file (used in the error reports).
-	 * @return string|WP_Error, content from the URL or WP_Error object with error message
-	 */
-	private static function get_content_from_url( $url, $file_name = 'Import file' ) {
-
-		// Test if the URL to the file is defined.
-		if ( empty( $url ) ) {
-			return new \WP_Error(
-				'url_not_defined',
-				sprintf(
-					__( 'URL for %s%s%s file is not defined!', 'pt-ocdi' ),
-					'<strong>',
-					$file_name,
-					'</strong>'
-				)
-			);
-		}
-
-		// Get file content from the server.
-		$response = wp_remote_get(
-			$url,
-			array( 'timeout' => apply_filters( 'pt-ocdi/timeout_for_downloading_import_file', 20 ) )
-		);
-
-		if ( is_wp_error( $response ) || 200 !== $response['response']['code'] ) {
-
-			// Collect the right format of error data (array or WP_Error).
-			$response_error = self::get_error_from_response( $response );
-
-			return new \WP_Error(
-				'file_fetching_error',
-				sprintf(
-					__( 'An error occurred while fetching %s%s%s file from the server!%sReason: %s - %s.', 'pt-ocdi' ),
-					'<strong>',
-					$file_name,
-					'</strong>',
-					'<br>',
-					$response_error['error_code'],
-					$response_error['error_message']
-				) . '<br>' .
-				apply_filters( 'pt-ocdi/message_after_file_fetching_error', '' )
-			);
-		}
-
-		// Return content retrieved from the URL.
-		return wp_remote_retrieve_body( $response );
 	}
 
 
@@ -377,28 +295,6 @@ class Helpers {
 		}
 
 		return true;
-	}
-
-
-	/**
-	 * Helper function: get the right format of response errors
-	 *
-	 * @param array|WP_Error $response array or WP_Error.
-	 * @return array, with error code and error message.
-	 */
-	private static function get_error_from_response( $response ) {
-		$response_error = array();
-
-		if ( is_array( $response ) ) {
-			$response_error['error_code']    = $response['response']['code'];
-			$response_error['error_message'] = $response['response']['message'];
-		}
-		else {
-			$response_error['error_code']    = $response->get_error_code();
-			$response_error['error_message'] = $response->get_error_message();
-		}
-
-		return $response_error;
 	}
 
 

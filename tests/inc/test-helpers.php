@@ -2,7 +2,7 @@
 
 namespace OCDI;
 
-class OCDIHelpersTest extends \WP_UnitTestCase {
+class HelpersTest extends \WP_UnitTestCase {
 
 	function test_helper_validate_import_file_info() {
 
