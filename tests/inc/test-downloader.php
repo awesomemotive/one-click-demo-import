@@ -99,7 +99,6 @@ class DownloaderTest extends \WP_UnitTestCase {
 	 */
 	function test_get_content_from_url() {
 		// Empty URL parameter.
-		$expected_class  = \WP_Error::class;
 		$expected_code   = 'missing_url';
 		$method_response = \TestHelpers::invoke_method(
 			$this->downloader,
@@ -109,11 +108,10 @@ class DownloaderTest extends \WP_UnitTestCase {
 			)
 		);
 
-		$this->assertInstanceOf( $expected_class, $method_response );
+		$this->assertTrue( is_wp_error( $method_response ) );
 		$this->assertEquals( $expected_code, $method_response->get_error_code() );
 
 		// Invalid URL parameter.
-		$expected_class  = \WP_Error::class;
 		$expected_code   = 'download_error';
 		$method_response = \TestHelpers::invoke_method(
 			$this->downloader,
@@ -123,7 +121,7 @@ class DownloaderTest extends \WP_UnitTestCase {
 			)
 		);
 
-		$this->assertInstanceOf( $expected_class, $method_response );
+		$this->assertTrue( is_wp_error( $method_response ) );
 		$this->assertEquals( $expected_code, $method_response->get_error_code() );
 
 		// Valid URL parameter - a test file with the content of "test".
