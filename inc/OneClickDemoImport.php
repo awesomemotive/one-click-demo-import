@@ -168,7 +168,7 @@ class OneClickDemoImport {
 	public function admin_enqueue_scripts( $hook ) {
 		// Enqueue the scripts only on the plugin page.
 		if ( $this->plugin_page === $hook ) {
-			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery', 'jquery-form' ), PT_OCDI_VERSION );
+			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery' ), PT_OCDI_VERSION );
 
 			wp_localize_script( 'ocdi-main-js', 'ocdi',
 				array(
