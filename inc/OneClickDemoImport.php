@@ -11,16 +11,82 @@ namespace OCDI;
  * One Click Demo Import class, so we don't have to worry about namespaces.
  */
 class OneClickDemoImport {
-
 	/**
-	 * @var $instance the reference to *Singleton* instance of this class
+	 * The instance *Singleton* of this class
+	 *
+	 * @var object
 	 */
 	private static $instance;
 
 	/**
-	 * Private variables used throughout the plugin.
+	 * The instance of the OCDI\Importer class.
+	 *
+	 * @var object
 	 */
-	private $importer, $plugin_page, $import_files, $logger, $log_file_path, $selected_index, $selected_import_files, $microtime, $frontend_error_messages, $ajax_call_number;
+	private $importer;
+
+	/**
+	 * The resulting page's hook_suffix, or false if the user does not have the capability required.
+	 *
+	 * @var boolean or string
+	 */
+	private $plugin_page;
+
+	/**
+	 * Holds the verified import files.
+	 *
+	 * @var array
+	 */
+	private $import_files;
+
+	/**
+	 * The instance of the OCDI\Logger class.
+	 *
+	 * @var object
+	 */
+	private $logger;
+
+	/**
+	 * The path of the log file
+	 *
+	 * @var string
+	 */
+	private $log_file_path;
+
+	/**
+	 * The index of the `import_files` array (which import files was selected).
+	 *
+	 * @var int
+	 */
+	private $selected_index;
+
+	/**
+	 * The paths of the actual import files to be used in the import.
+	 *
+	 * @var array
+	 */
+	private $selected_import_files;
+
+	/**
+	 * Time in milliseconds, marking the beginning of the import.
+	 *
+	 * @var float
+	 */
+	private $microtime;
+
+	/**
+	 * Holds any error messages, that should be printed out at the end of the import.
+	 *
+	 * @var string
+	 */
+	private $frontend_error_messages;
+
+	/**
+	 * A counter of how many AJAX calls have been made.
+	 *
+	 * @var int
+	 */
+	private $ajax_call_number;
 
 
 	/**

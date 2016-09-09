@@ -19,6 +19,8 @@ class Logger extends \WP_Importer_Logger_CLI {
 
 	/**
 	 * Variable for front-end error display.
+	 *
+	 * @var string
 	 */
 	public $error_output = '';
 
