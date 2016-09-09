@@ -16,34 +16,73 @@ Text Domain: pt-ocdi
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 /**
- * Display admin error message if PHP version is older than 5.3.2.
- * Otherwise execute the main plugin class.
+ * Main plugin class with initialization tasks.
  */
-if ( version_compare( phpversion(), '5.3.2', '<' ) ) {
+class OCDI_Plugin {
+	/**
+	 * Constructor for this class.
+	 */
+	public function __construct() {
+		/**
+		 * Display admin error message if PHP version is older than 5.3.2.
+		 * Otherwise execute the main plugin class.
+		 */
+		if ( version_compare( phpversion(), '5.3.2', '<' ) ) {
+			add_action( 'admin_notices', array( $this, 'old_php_admin_error_notice' ) );
+		}
+		else {
+			// Set plugin constants.
+			$this->set_plugin_constants();
+
+			// Composer autoloader.
+			require_once PT_OCDI_PATH . 'vendor/autoload.php';
+
+			// Instantiate the main plugin class *Singleton*.
+			$pt_one_click_demo_import = OCDI\OneClickDemoImport::getInstance();
+		}
+	}
+
 
 	/**
 	 * Display an admin error notice when PHP is older the version 5.3.2.
 	 * Hook it to the 'admin_notices' action.
 	 */
-	function ocdi_old_php_admin_error_notice() {
+	public function old_php_admin_error_notice() {
 		$message = sprintf( esc_html__( 'The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.3.2+%3$s to run properly. Please contact your hosting company and ask them to update the PHP version of your site to at least PHP 5.3.2.%4$s Your current version of PHP: %2$s%1$s%3$s', 'pt-ocdi' ), phpversion(), '<strong>', '</strong>', '<br>' );
 
 		printf( '<div class="notice notice-error"><p>%1$s</p></div>', wp_kses_post( $message ) );
 	}
-	add_action( 'admin_notices', 'ocdi_old_php_admin_error_notice' );
+
+
+	/**
+	 * Set plugin constants.
+	 *
+	 * Path/URL to root of this plugin, with trailing slash and plugin version.
+	 */
+	private function set_plugin_constants() {
+		// Path/URL to root of this plugin, with trailing slash.
+		if ( ! defined( 'PT_OCDI_PATH' ) ) {
+			define( 'PT_OCDI_PATH', plugin_dir_path( __FILE__ ) );
+		}
+		if ( ! defined( 'PT_OCDI_URL' ) ) {
+			define( 'PT_OCDI_URL', plugin_dir_url( __FILE__ ) );
+		}
+
+		// Action hook to set the plugin version constant.
+		add_action( 'admin_init', array( $this, 'set_plugin_version_constant' ) );
+	}
+
+
+	/**
+	 * Set plugin version constant -> PT_OCDI_VERSION.
+	 */
+	public function set_plugin_version_constant() {
+		if ( ! defined( 'PT_OCDI_VERSION' ) ) {
+			$plugin_data = get_plugin_data( __FILE__ );
+			define( 'PT_OCDI_VERSION', $plugin_data['Version'] );
+		}
+	}
 }
-else {
 
-	// Current version of the plugin.
-	define( 'PT_OCDI_VERSION', '1.2.0' );
-
-	// Path/URL to root of this plugin, with trailing slash.
-	define( 'PT_OCDI_PATH', plugin_dir_path( __FILE__ ) );
-	define( 'PT_OCDI_URL', plugin_dir_url( __FILE__ ) );
-
-	// Composer autoloader.
-	require_once PT_OCDI_PATH . 'vendor/autoload.php';
-
-	// Instantiate the main plugin class *Singleton*.
-	$pt_one_click_demo_import = OCDI\OneClickDemoImport::getInstance();
-}
+// Instantiate the plugin class.
+$ocdi_plugin = new OCDI_Plugin();
