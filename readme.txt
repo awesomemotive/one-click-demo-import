@@ -241,7 +241,7 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 *Release Date - 1 October 2016*
 
-* Import/plugin page re-design. Now using "WP like" design (thanks to Oliver Juhas).
+* Import/plugin page re-design. Updated the plugin page styles to match WordPress (thanks to Oliver Juhas).
 
 
 = 1.2.0 =
