@@ -88,6 +88,32 @@ add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 
 You can set content import, widgets, and customizer import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports.
 
+= How to automatically assign "Front page", "Posts page" and menu locations after the importer is done? =
+
+You can do that, with the `pt-ocdi/after_import` action hook. The code would look something like this:
+
+`
+function ocdi_after_import_setup() {
+	// Assign menus to their locations.
+	$main_menu = get_term_by( 'name', 'Main Menu', 'nav_menu' );
+
+	set_theme_mod( 'nav_menu_locations', array(
+			'main-menu' => $main_menu->term_id,
+		)
+	);
+
+	// Assign front page and posts page (blog page).
+	$front_page_id = get_page_by_title( 'Home' );
+	$blog_page_id  = get_page_by_title( 'Blog' );
+
+	update_option( 'show_on_front', 'page' );
+	update_option( 'page_on_front', $front_page_id->ID );
+	update_option( 'page_for_posts', $blog_page_id->ID );
+
+}
+add_action( 'pt-ocdi/after_import', 'ocdi_after_import_setup' );
+`
+
 = What about using local import files (from theme folder)? =
 
 You have to use the same filter as in above example, but with a slightly different array keys: `local_*`. The values have to be absolute paths (not URLs) to your import files. To use local import files, that reside in your theme folder, please use the below code. Note: make sure your import files are readable!
@@ -213,9 +239,9 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 = 1.3.0 =
 
-*Release Date - 31 July 2016*
+*Release Date - 1 October 2016*
 
-* Import/plugin page re-design,
+* Import/plugin page re-design. Now using "WP like" design (thanks to Oliver Juhas).
 
 
 = 1.2.0 =
