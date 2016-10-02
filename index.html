@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>One click demo import WP plugin by proteusthemes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">One click demo import WP plugin</h1>
+      <h2 class="project-tagline">&#39;coz you want the demo content ready in no time</h2>
+      <a href="https://github.com/proteusthemes/one-click-demo-import" class="btn">View on GitHub</a>
+      <a href="https://github.com/proteusthemes/one-click-demo-import/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/proteusthemes/one-click-demo-import/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="one-click-demo-import" class="anchor" href="#one-click-demo-import" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>One Click Demo Import</h1>
+
+<p><strong>Contributors:</strong> capuderg, cyman<br>
+<strong>Tags:</strong> import, content, demo, data, widgets, settings<br>
+<strong>Requires at least:</strong> 4.0.0<br>
+<strong>Tested up to:</strong> 4.5<br>
+<strong>Stable tag:</strong> 1.2.0<br>
+<strong>License:</strong> GPLv3 or later  </p>
+
+<p>Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.</p>
+
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Description</h2>
+
+<p>The best feature of this plugin is, that theme authors can define import files in their themes and so all you (the user of the theme) have to do is click on the "Import Demo Data" button.</p>
+
+<p><strong>How do theme author define these files?</strong> The answer is in the FAQ section.</p>
+
+<p>This plugin will create a submenu page under Appearance with the title <strong>Import demo data</strong>.</p>
+
+<p>If the theme you are using does not have any predefined import files, then you will be presented with three file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import. You create that file using the <a href="https://wordpress.org/plugins/widget-importer-exporter/">Widget Importer &amp; Exporter</a> plugin. The third one is also optional and will import the customizer settings, select the DAT file which you can generate from <a href="https://wordpress.org/plugins/customizer-export-import/">Customizer Export/Import</a> plugin (the customizer settings will be imported only if the export file was created from the same theme).</p>
+
+<p>This plugin is using the improved WP import 2.0 that is still in development and can be found here: <a href="https://github.com/humanmade/WordPress-Importer">https://github.com/humanmade/WordPress-Importer</a>.</p>
+
+<p>All progress of this plugin's work is logged in a log file in the default WP upload directory, together with the demo content and widgets import files used in the importing process.</p>
+
+<p>NOTE: This plugin is still a work in progress!</p>
+
+<p>NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is in the original WP Importer plugin). All demo content will be imported under the current user.</p>
+
+<p><strong>Do you want to contribute?</strong></p>
+
+<p>Please refer to the official <a href="https://github.com/proteusthemes/one-click-demo-import">GitHub repository</a> of this plugin.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p><strong>From your WordPress dashboard</strong></p>
+
+<ol>
+<li>Visit 'Plugins &gt; Add New',</li>
+<li>Search for 'One Click Demo Import' and install the plugin,</li>
+<li>Activate 'One Click Demo Import' from your Plugins page.</li>
+</ol>
+
+<p><strong>From WordPress.org</strong></p>
+
+<ol>
+<li>Download 'One Click Demo Import'.</li>
+<li>Upload the 'one-click-demo-import' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)</li>
+<li>Activate 'One Click Demo Import' from your Plugins page.</li>
+</ol>
+
+<p><strong>Once the plugin is activated you will find the actual import page in: Appearance -&gt; Import Demo Data.</strong></p>
+
+<h2>
+<a id="frequently-asked-questions" class="anchor" href="#frequently-asked-questions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Frequently Asked Questions</h2>
+
+<h3>
+<a id="i-have-activated-the-plugin-where-is-the-import-demo-data-page" class="anchor" href="#i-have-activated-the-plugin-where-is-the-import-demo-data-page" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>I have activated the plugin. Where is the "Import Demo Data" page?</h3>
+
+<p>You will find the import page in <em>wp-admin -&gt; Appearance -&gt; Import Demo Data</em>.</p>
+
+<h3>
+<a id="where-are-the-demo-import-files-and-the-log-files-saved" class="anchor" href="#where-are-the-demo-import-files-and-the-log-files-saved" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Where are the demo import files and the log files saved?</h3>
+
+<p>The files used in the demo import will be saved to the default WordPress uploads directory. An example of that directory would be: <code>../wp-content/uploads/2016/03/</code>.</p>
+
+<p>The log file will also be registered in the <em>wp-admin -&gt; Media</em> section, so you can access it easily.</p>
+
+<h3>
+<a id="how-to-predefine-demo-imports" class="anchor" href="#how-to-predefine-demo-imports" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to predefine demo imports?</h3>
+
+<p>This question is for theme authors. To predefine demo imports, you just have to add the following code structure, with your own values to your theme (using the <code>pt-ocdi/import_files</code> filter):</p>
+
+<pre><code>function ocdi_import_files() {
+    return array(
+        array(
+            'import_file_name'           =&gt; 'Demo Import 1',
+            'import_file_url'            =&gt; 'http://www.your_domain.com/ocdi/demo-content.xml',
+            'import_widget_file_url'     =&gt; 'http://www.your_domain.com/ocdi/widgets.json',
+            'import_customizer_file_url' =&gt; 'http://www.your_domain.com/ocdi/customizer.dat',
+            'import_preview_image_url'   =&gt; 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
+            'import_notice'              =&gt; __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
+        ),
+        array(
+            'import_file_name'           =&gt; 'Demo Import 2',
+            'import_file_url'            =&gt; 'http://www.your_domain.com/ocdi/demo-content2.xml',
+            'import_widget_file_url'     =&gt; 'http://www.your_domain.com/ocdi/widgets2.json',
+            'import_customizer_file_url' =&gt; 'http://www.your_domain.com/ocdi/customizer2.dat',
+            'import_preview_image_url'   =&gt; 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
+            'import_notice'              =&gt; __( 'A special note for this import.', 'your-textdomain' ),
+        ),
+    );
+}
+add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
+</code></pre>
+
+<p>You can set content import, widgets, and customizer import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports.</p>
+
+<h3>
+<a id="how-to-automatically-assign-front-page-posts-page-and-menu-locations-after-the-importer-is-done" class="anchor" href="#how-to-automatically-assign-front-page-posts-page-and-menu-locations-after-the-importer-is-done" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to automatically assign "Front page", "Posts page" and menu locations after the importer is done?</h3>
+
+<p>You can do that, with the <code>pt-ocdi/after_import</code> action hook. The code would look something like this:</p>
+
+<pre><code>function ocdi_after_import_setup() {
+    // Assign menus to their locations.
+    $main_menu = get_term_by( 'name', 'Main Menu', 'nav_menu' );
+
+    set_theme_mod( 'nav_menu_locations', array(
+            'main-menu' =&gt; $main_menu-&gt;term_id,
+        )
+    );
+
+    // Assign front page and posts page (blog page).
+    $front_page_id = get_page_by_title( 'Home' );
+    $blog_page_id  = get_page_by_title( 'Blog' );
+
+    update_option( 'show_on_front', 'page' );
+    update_option( 'page_on_front', $front_page_id-&gt;ID );
+    update_option( 'page_for_posts', $blog_page_id-&gt;ID );
+
+}
+add_action( 'pt-ocdi/after_import', 'ocdi_after_import_setup' );
+</code></pre>
+
+<h3>
+<a id="what-about-using-local-import-files-from-theme-folder" class="anchor" href="#what-about-using-local-import-files-from-theme-folder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What about using local import files (from theme folder)?</h3>
+
+<p>You have to use the same filter as in above example, but with a slightly different array keys: <code>local_*</code>. The values have to be absolute paths (not URLs) to your import files. To use local import files, that reside in your theme folder, please use the below code. Note: make sure your import files are readable!</p>
+
+<pre><code>function ocdi_import_files() {
+    return array(
+        array(
+            'import_file_name'             =&gt; 'Demo Import 1',
+            'local_import_file'            =&gt; trailingslashit( get_template_directory() ) . 'ocdi/demo-content.xml',
+            'local_import_widget_file'     =&gt; trailingslashit( get_template_directory() ) . 'ocdi/widgets.json',
+            'local_import_customizer_file' =&gt; trailingslashit( get_template_directory() ) . 'ocdi/customizer.dat',
+            'import_preview_image_url'     =&gt; 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
+            'import_notice'                =&gt; __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
+        ),
+        array(
+            'import_file_name'             =&gt; 'Demo Import 2',
+            'local_import_file'            =&gt; trailingslashit( get_template_directory() ) . 'ocdi/demo-content2.xml',
+            'local_import_widget_file'     =&gt; trailingslashit( get_template_directory() ) . 'ocdi/widgets2.json',
+            'local_import_customizer_file' =&gt; trailingslashit( get_template_directory() ) . 'ocdi/customizer2.dat',
+            'import_preview_image_url'     =&gt; 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
+            'import_notice'                =&gt; __( 'A special note for this import.', 'your-textdomain' ),
+        ),
+    );
+}
+add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
+</code></pre>
+
+<h3>
+<a id="how-to-handle-different-after-import-setups-depending-on-which-predefined-import-was-selected" class="anchor" href="#how-to-handle-different-after-import-setups-depending-on-which-predefined-import-was-selected" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to handle different "after import setups" depending on which predefined import was selected?</h3>
+
+<p>This question might be asked by a theme author wanting to implement different after import setups for multiple predefined demo imports. Lets say we have predefined two demo imports with the following names: 'Demo Import 1' and 'Demo Import 2', the code for after import setup would be (using the <code>pt-ocdi/after_import</code> filter):</p>
+
+<pre><code>function ocdi_after_import( $selected_import ) {
+    echo "This will be displayed on all after imports!";
+
+    if ( 'Demo Import 1' === $selected_import['import_file_name'] ) {
+        echo "This will be displayed only on after import if user selects Demo Import 1";
+
+        // Set logo in customizer
+        set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo1.png' );
+    }
+    elseif ( 'Demo Import 2' === $selected_import['import_file_name'] ) {
+        echo "This will be displayed only on after import if user selects Demo Import 2";
+
+        // Set logo in customizer
+        set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo2.png' );
+    }
+}
+add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
+</code></pre>
+
+<h3>
+<a id="can-i-add-some-code-before-the-widgets-get-imported" class="anchor" href="#can-i-add-some-code-before-the-widgets-get-imported" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Can I add some code before the widgets get imported?</h3>
+
+<p>Of course you can, use the <code>pt-ocdi/before_widgets_import</code> action. You can also target different predefined demo imports like in the example above. Here is a simple example code of the <code>pt-ocdi/before_widgets_import</code> action:</p>
+
+<pre><code>function ocdi_before_widgets_import( $selected_import ) {
+    echo "Add your code here that will be executed before the widgets get imported!";
+}
+add_action( 'pt-ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
+</code></pre>
+
+<h3>
+<a id="im-a-theme-author-and-i-want-to-change-the-plugin-intro-text-how-can-i-do-that" class="anchor" href="#im-a-theme-author-and-i-want-to-change-the-plugin-intro-text-how-can-i-do-that" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>I'm a theme author and I want to change the plugin intro text, how can I do that?</h3>
+
+<p>You can change the plugin intro text by using the <code>pt-ocdi/plugin_intro_text</code> filter:</p>
+
+<pre><code>function ocdi_plugin_intro_text( $default_text ) {
+    $default_text .= '&lt;div class="ocdi__intro-text"&gt;This is a custom text added to this plugin intro text.&lt;/div&gt;';
+
+    return $default_text;
+}
+add_filter( 'pt-ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
+</code></pre>
+
+<p>To add some text in a separate "box", you should wrap your text in a div with a class of 'ocdi__intro-text', like in the code example above.</p>
+
+<h3>
+<a id="how-to-disable-generation-of-smaller-images-thumbnails-during-the-content-import" class="anchor" href="#how-to-disable-generation-of-smaller-images-thumbnails-during-the-content-import" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to disable generation of smaller images (thumbnails) during the content import</h3>
+
+<p>This will greatly improve the time needed to import the content (images), but only the original sized images will be imported. You can disable it with a filter, so just add this code to your theme function.php file:</p>
+
+<p><code>add_filter( 'pt-ocdi/regenerate_thumbnails_in_content_import', '__return_false' );</code></p>
+
+<h3>
+<a id="how-to-change-the-location-title-and-other-parameters-of-the-plugin-page" class="anchor" href="#how-to-change-the-location-title-and-other-parameters-of-the-plugin-page" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to change the location, title and other parameters of the plugin page?</h3>
+
+<p>As a theme author you do not like the location of the "Import Demo Data" plugin page in <em>Appearance -&gt; Import Demo Data</em>? You can change that with the filter below. Apart from the location, you can also change the title or the page/menu and some other parameters as well.</p>
+
+<pre><code>function ocdi_plugin_page_setup( $default_settings ) {
+    $default_settings['parent_slug'] = 'themes.php';
+    $default_settings['page_title']  = esc_html__( 'One Click Demo Import' , 'pt-ocdi' );
+    $default_settings['menu_title']  = esc_html__( 'Import Demo Data' , 'pt-ocdi' );
+    $default_settings['capability']  = 'import';
+    $default_settings['menu_slug']   = 'pt-one-click-demo-import';
+
+    return $default_settings;
+}
+add_filter( 'pt-ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
+</code></pre>
+
+<h3>
+<a id="i-cant-activate-the-plugin-because-of-a-fatal-error-what-can-i-do" class="anchor" href="#i-cant-activate-the-plugin-because-of-a-fatal-error-what-can-i-do" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>I can't activate the plugin, because of a fatal error, what can I do?</h3>
+
+<p><em>Update: since version 1.2.0, there is now a admin error notice, stating that the minimal PHP version required for this plugin is 5.3.2.</em></p>
+
+<p>You want to activate the plugin, but this error shows up:</p>
+
+<p><em>Plugin could not be activated because it triggered a fatal error</em></p>
+
+<p>This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least <strong>5.3.x</strong>, but we recommend version <em>5.6.x</em>. Please contact your hosting company and ask them to update the PHP version for your site.</p>
+
+<h3>
+<a id="issues-with-the-import-that-we-can-fix-in-the-plugin" class="anchor" href="#issues-with-the-import-that-we-can-fix-in-the-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issues with the import, that we can fix in the plugin</h3>
+
+<p>Please visit this <a href="https://github.com/proteusthemes/one-click-demo-import/blob/master/docs/import-problems.md">docs page</a>, for more answers to issues with importing data.</p>
+
+<h2>
+<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshots</h2>
+
+<h3>
+<a id="1-example-of-multiple-predefined-demo-imports-that-a-user-can-choose-from" class="anchor" href="#1-example-of-multiple-predefined-demo-imports-that-a-user-can-choose-from" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Example of multiple predefined demo imports, that a user can choose from.</h3>
+
+<p><img src="http://ps.w.org/one-click-demo-import/assets/screenshot-1.png" alt="Example of multiple predefined demo imports, that a user can choose from."></p>
+
+<h3>
+<a id="2-how-the-import-page-looks-like-when-only-one-demo-import-is-predefined" class="anchor" href="#2-how-the-import-page-looks-like-when-only-one-demo-import-is-predefined" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. How the import page looks like, when only one demo import is predefined.</h3>
+
+<p><img src="http://ps.w.org/one-click-demo-import/assets/screenshot-2.png" alt="How the import page looks like, when only one demo import is predefined."></p>
+
+<h3>
+<a id="3-example-of-how-the-import-page-looks-like-when-no-demo-imports-are-predefined-aka-manual-import" class="anchor" href="#3-example-of-how-the-import-page-looks-like-when-no-demo-imports-are-predefined-aka-manual-import" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Example of how the import page looks like, when no demo imports are predefined a.k.a manual import.</h3>
+
+<p><img src="http://ps.w.org/one-click-demo-import/assets/screenshot-3.png" alt="Example of how the import page looks like, when no demo imports are predefined a.k.a manual import."></p>
+
+<h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changelog</h2>
+
+<h3>
+<a id="130" class="anchor" href="#130" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.3.0</h3>
+
+<p><em>Release Date - 1 October 2016</em></p>
+
+<ul>
+<li>Import/plugin page re-design. Updated the plugin page styles to match WordPress (thanks to Oliver Juhas).</li>
+</ul>
+
+<h3>
+<a id="120" class="anchor" href="#120" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.2.0</h3>
+
+<p><em>Release Date - 9 July 2016</em></p>
+
+<ul>
+<li>Now also accepts predefined local import files (from theme folder),</li>
+<li>Fixes PHP fatal error on plugin activation, for sites using PHP versions older then 5.3.2 (added admin error notice),</li>
+<li>Register log file in <em>wp-admin -&gt; Media</em>, so that it's easier to access,</li>
+<li>No more "[WARNING] Could not find the author for ..." messages in the log file.</li>
+</ul>
+
+<h3>
+<a id="113" class="anchor" href="#113" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.1.3</h3>
+
+<p><em>Release Date - 17 June 2016</em></p>
+
+<ul>
+<li>Updated plugin design,</li>
+<li>Changed the plugin page setup filter name from <code>pt-ocdi/plugin-page-setup</code> to <code>pt-ocdi/plugin_page_setup</code> (mind the underscore characters instead of dashes).</li>
+</ul>
+
+<h3>
+<a id="112" class="anchor" href="#112" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.1.2</h3>
+
+<p><em>Release Date - 12 June 2016</em></p>
+
+<ul>
+<li>An 'import notice' field has been added to the predefined demo import settings. This notice is displayed above the import button (it also accepts HTML),</li>
+<li>Now displays proper error message, if the file-system method is not set to "direct",</li>
+<li>This plugin is now compatible with the new <a href="https://github.com/humanmade/WordPress-Importer">Humanmade content importer plugin</a>,</li>
+<li>Added a filter to the plugin page creation, so that theme authors can now change the location of the plugin page (Demo data import) and some other parameters as well.</li>
+</ul>
+
+<h3>
+<a id="111" class="anchor" href="#111" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.1.1</h3>
+
+<p><em>Release Date - 22 May 2016</em></p>
+
+<ul>
+<li>Preview import images can now be defined for multiple predefined import files (check FAQ "How to predefine demo imports?" for more info),</li>
+<li>You can now also import customizer settings.</li>
+</ul>
+
+<h3>
+<a id="110" class="anchor" href="#110" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.1.0</h3>
+
+<p><em>Release Date - 14 May 2016</em></p>
+
+<ul>
+<li>Content import now imports in multiple AJAX calls, so there should be no more server timeout errors,</li>
+<li>The setting for generation of multiple image sizes in the content import is again enabled by default,</li>
+<li>Plugin textdomain was loaded, so that translations can be made.</li>
+</ul>
+
+<h3>
+<a id="103" class="anchor" href="#103" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.0.3</h3>
+
+<p><em>Release Date - 27 April 2016</em></p>
+
+<ul>
+<li>Added filter to enable image regeneration,</li>
+<li>Added filter to change the plugin intro text,</li>
+<li>Added action to execute custom code before widget import,</li>
+<li>Disabled author imports.</li>
+</ul>
+
+<h3>
+<a id="102" class="anchor" href="#102" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.0.2</h3>
+
+<p><em>Release Date - 15 April 2016</em></p>
+
+<ul>
+<li>Monkey fix for WP version 4.5. - disabled generation of multiple image sizes in the content import.</li>
+</ul>
+
+<h3>
+<a id="101" class="anchor" href="#101" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.0.1</h3>
+
+<p><em>Release Date - 2 April 2016</em></p>
+
+<p>Small code fixes:</p>
+
+<ul>
+<li>Fixed undefined variable bug,</li>
+<li>Fixed naming of downloaded files and their filters.</li>
+</ul>
+
+<h3>
+<a id="100" class="anchor" href="#100" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.0.0</h3>
+
+<p><em>Release Date - 25 March 2016</em></p>
+
+<ul>
+<li>Initial release!</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/proteusthemes/one-click-demo-import">One click demo import WP plugin</a> is maintained by <a href="https://github.com/proteusthemes">proteusthemes</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
