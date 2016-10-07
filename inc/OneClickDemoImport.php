@@ -259,7 +259,7 @@ class OneClickDemoImport {
 		 * 3. Before widgets import setup.
 		 */
 		$action = 'pt-ocdi/before_widgets_import';
-		if ( ( false !== has_action( $action ) ) && empty( $this->frontend_error_messages ) ) {
+		if ( false !== has_action( $action ) ) {
 			// Run the before_widgets_import action to setup other settings.
 			$this->do_import_action( $action, $this->import_files[ $this->selected_index ] );
 		}
@@ -267,7 +267,7 @@ class OneClickDemoImport {
 		/**
 		 * 4. Import widgets.
 		 */
-		if ( ! empty( $this->selected_import_files['widgets'] ) && empty( $this->frontend_error_messages ) ) {
+		if ( ! empty( $this->selected_import_files['widgets'] ) ) {
 			// Import the widgets.
 			WidgetImporter::import( $this->selected_import_files['widgets'] );
 		}
@@ -275,7 +275,7 @@ class OneClickDemoImport {
 		/**
 		 * 5. Import customize options.
 		 */
-		if ( ! empty( $this->selected_import_files['customizer'] ) && empty( $this->frontend_error_messages ) ) {
+		if ( ! empty( $this->selected_import_files['customizer'] ) ) {
 			CustomizerImporter::import( $this->selected_import_files['customizer'] );
 		}
 
@@ -283,7 +283,7 @@ class OneClickDemoImport {
 		 * 6. After import setup.
 		 */
 		$action = 'pt-ocdi/after_import';
-		if ( ( false !== has_action( $action ) ) && empty( $this->frontend_error_messages ) ) {
+		if ( ( false !== has_action( $action ) ) ) {
 			// Run the after_import action to setup other settings.
 			$this->do_import_action( $action, $this->import_files[ $this->selected_index ] );
 		}
