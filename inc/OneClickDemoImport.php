@@ -255,38 +255,19 @@ class OneClickDemoImport {
 		 */
 		$this->frontend_error_messages .= $this->importer->import_content( $this->selected_import_files['content'] );
 
-		/**
-		 * 3. Before widgets import setup.
-		 */
-		$action = 'pt-ocdi/before_widgets_import';
-		if ( false !== has_action( $action ) ) {
-			// Run the before_widgets_import action to setup other settings.
-			$this->do_import_action( $action, $this->import_files[ $this->selected_index ] );
-		}
+		// Register all default actions (widget, customizer import and other actions to the 'pt-ocdi/execute' action hook).
+		$import_actions = new ImportActions();
 
 		/**
-		 * 4. Import widgets.
+		 * Execute the actions hooked to the 'pt-ocdi/execute' action:
+		 *
+		 * 1. Import content (with priority 10).
+		 * 2. Before widgets import setup (with priority 20).
+		 * 3. Import widgets (with priority 30).
+		 * 4. Import customize options (with priority 40).
+		 * 5. After import setup (with priority 50).
 		 */
-		if ( ! empty( $this->selected_import_files['widgets'] ) ) {
-			// Import the widgets.
-			WidgetImporter::import( $this->selected_import_files['widgets'] );
-		}
-
-		/**
-		 * 5. Import customize options.
-		 */
-		if ( ! empty( $this->selected_import_files['customizer'] ) ) {
-			CustomizerImporter::import( $this->selected_import_files['customizer'] );
-		}
-
-		/**
-		 * 6. After import setup.
-		 */
-		$action = 'pt-ocdi/after_import';
-		if ( ( false !== has_action( $action ) ) ) {
-			// Run the after_import action to setup other settings.
-			$this->do_import_action( $action, $this->import_files[ $this->selected_index ] );
-		}
+		do_action( 'pt-ocdi/execute', $this->selected_import_files, $this->import_files, $this->selected_index );
 
 		// Display final messages (success or error messages).
 		if ( empty( $this->frontend_error_messages ) ) {
@@ -314,26 +295,6 @@ class OneClickDemoImport {
 		}
 
 		wp_send_json( $response );
-	}
-
-
-	/**
-	 * Setup other things in the passed wp action.
-	 *
-	 * @param string $action the action name to be executed.
-	 * @param array  $selected_import with information about the selected import.
-	 */
-	private function do_import_action( $action, $selected_import ) {
-		ob_start();
-			do_action( $action, $selected_import );
-		$message = ob_get_clean();
-
-		// Add this message to log file.
-		$log_added = Helpers::append_to_file(
-			$message,
-			$this->log_file_path,
-			$action
-		);
 	}
 
 
