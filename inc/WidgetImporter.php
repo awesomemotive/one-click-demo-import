@@ -12,13 +12,51 @@ namespace OCDI;
 
 class WidgetImporter {
 	/**
+	 * Import widgets from WIE or JSON file.
+	 *
+	 * @param string $widget_import_file_path path to the widget import file.
+	 */
+	public static function import( $widget_import_file_path ) {
+		$results       = array();
+		$ocdi          = OneClickDemoImport::get_instance();
+		$log_file_path = $ocdi->get_log_file_path();
+
+		// Import widgets and return result.
+		if ( ! empty( $widget_import_file_path ) ) {
+			$results = self::import_widgets( $widget_import_file_path );
+		}
+
+		// Check for errors.
+		if ( is_wp_error( $results ) ) {
+			// Write error to log file and send an AJAX response with the error.
+			Helpers::log_error_and_send_ajax_response(
+				$results->get_error_message(),
+				$log_file_path,
+				esc_html__( 'Importing widgets', 'pt-ocdi' )
+			);
+		}
+
+		ob_start();
+			self::format_results_for_log( $results );
+		$message = ob_get_clean();
+
+		// Add this message to log file.
+		$log_added = Helpers::append_to_file(
+			$message,
+			$log_file_path,
+			esc_html__( 'Importing widgets' , 'pt-ocdi' )
+		);
+	}
+
+
+	/**
 	 * Imports widgets from a json file.
 	 *
 	 * @param string $data_file path to json file with WordPress widget export data.
 	 */
-	public function import_widgets( $data_file ) {
+	private static function import_widgets( $data_file ) {
 		// Get widgets data from file.
-		$data = $this->process_import_file( $data_file );
+		$data = self::process_import_file( $data_file );
 
 		// Return from this function if there was an error.
 		if ( is_wp_error( $data ) ) {
@@ -26,7 +64,7 @@ class WidgetImporter {
 		}
 
 		// Import the widget data and save the results.
-		return $this->import_data( $data );
+		return self::import_data( $data );
 	}
 
 	/**
@@ -35,7 +73,7 @@ class WidgetImporter {
 	 * @param string $file path to json file.
 	 * @return object $data decoded JSON string
 	 */
-	private function process_import_file( $file ) {
+	private static function process_import_file( $file ) {
 		// File exists?
 		if ( ! file_exists( $file ) ) {
 			return new \WP_Error(
@@ -64,7 +102,7 @@ class WidgetImporter {
 	 * @param object $data JSON widget data.
 	 * @return array $results
 	 */
-	private function import_data( $data ) {
+	private static function import_data( $data ) {
 		global $wp_registered_sidebars;
 
 		// Have valid data? If no data or could not decode.
@@ -80,7 +118,7 @@ class WidgetImporter {
 		$data = apply_filters( 'pt-ocdi/before_widgets_import_data', $data );
 
 		// Get all available widgets site supports.
-		$available_widgets = $this->available_widgets();
+		$available_widgets = self::available_widgets();
 
 		// Get all existing widget instances.
 		$widget_instances = array();
@@ -255,7 +293,7 @@ class WidgetImporter {
 	 * @global array $wp_registered_widget_controls
 	 * @return array $available_widgets, Widget information
 	 */
-	private function available_widgets() {
+	private static function available_widgets() {
 		global $wp_registered_widget_controls;
 
 		$widget_controls   = $wp_registered_widget_controls;
@@ -277,7 +315,7 @@ class WidgetImporter {
 	 *
 	 * @param array $results widget import results.
 	 */
-	public function format_results_for_log( $results ) {
+	private static function format_results_for_log( $results ) {
 		if ( empty( $results ) ) {
 			esc_html_e( 'No results for widget import!', 'pt-ocdi' );
 		}

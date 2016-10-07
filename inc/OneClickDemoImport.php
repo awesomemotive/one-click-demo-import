@@ -268,7 +268,8 @@ class OneClickDemoImport {
 		 * 4. Import widgets.
 		 */
 		if ( ! empty( $this->selected_import_files['widgets'] ) && empty( $this->frontend_error_messages ) ) {
-			$this->import_widgets( $this->selected_import_files['widgets'] );
+			// Import the widgets.
+			WidgetImporter::import( $this->selected_import_files['widgets'] );
 		}
 
 		/**
@@ -313,47 +314,6 @@ class OneClickDemoImport {
 		}
 
 		wp_send_json( $response );
-	}
-
-
-	/**
-	 * Import widgets from WIE or JSON file.
-	 *
-	 * @param string $widget_import_file_path path to the widget import file.
-	 */
-	private function import_widgets( $widget_import_file_path ) {
-		// Widget import results.
-		$results = array();
-
-		// Create an instance of the Widget Importer.
-		$widget_importer = new WidgetImporter();
-
-		// Import widgets.
-		if ( ! empty( $widget_import_file_path ) ) {
-			// Import widgets and return result.
-			$results = $widget_importer->import_widgets( $widget_import_file_path );
-		}
-
-		// Check for errors.
-		if ( is_wp_error( $results ) ) {
-			// Write error to log file and send an AJAX response with the error.
-			Helpers::log_error_and_send_ajax_response(
-				$results->get_error_message(),
-				$this->log_file_path,
-				esc_html__( 'Importing widgets', 'pt-ocdi' )
-			);
-		}
-
-		ob_start();
-			$widget_importer->format_results_for_log( $results );
-		$message = ob_get_clean();
-
-		// Add this message to log file.
-		$log_added = Helpers::append_to_file(
-			$message,
-			$this->log_file_path,
-			esc_html__( 'Importing widgets' , 'pt-ocdi' )
-		);
 	}
 
 
