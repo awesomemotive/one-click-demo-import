@@ -127,11 +127,11 @@
 
 	<?php endif; ?>
 
-	<?php if ( is_array( $this->import_files ) && ! empty( $this->import_files[0]['import_notice'] ) ) : ?>
-		<div class="ocdi__demo-import-notice  js-ocdi-demo-import-notice">
-			<?php echo wp_kses_post( $this->import_files[0]['import_notice'] ); ?>
-		</div>
-	<?php endif; ?>
+	<div class="ocdi__demo-import-notice  js-ocdi-demo-import-notice"><?php
+		if ( is_array( $this->import_files ) && ! empty( $this->import_files[0]['import_notice'] ) ) {
+			echo wp_kses_post( $this->import_files[0]['import_notice'] );
+		}
+	?></div>
 
 	<p class="ocdi__button-container">
 		<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
