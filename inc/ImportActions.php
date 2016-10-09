@@ -15,10 +15,12 @@ class ImportActions {
 	 * @param array $selected_import Selected import data.
 	 */
 	public function __construct( $selected_import ) {
-		add_action( 'pt-ocdi/execute', array( $this, 'before_widget_import_action' ), 20, 3 );
-		add_action( 'pt-ocdi/execute', array( $this, 'widgets_import' ), 30, 3 );
-		add_action( 'pt-ocdi/execute', array( $this, 'customizer_import' ), 40, 3 );
-		add_action( 'pt-ocdi/execute', array( $this, 'after_import_action' ), 50, 3 );
+		add_action( 'pt-ocdi/before_content_import_execution', array( $this, 'before_content_import_action' ), 10, 3 );
+
+		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 3 );
+		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'widgets_import' ), 20, 3 );
+		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'customizer_import' ), 30, 3 );
+		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'after_import_action' ), 40, 3 );
 	}
 
 
@@ -47,6 +49,18 @@ class ImportActions {
 		if ( ! empty( $selected_import_files['customizer'] ) ) {
 			CustomizerImporter::import( $selected_import_files['customizer'] );
 		}
+	}
+
+
+	/**
+	 * Execute the action: 'pt-ocdi/before_content_import'.
+	 *
+	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer).
+	 * @param array $import_files          The filtered import files defined in `pt-ocdi/import_files` filter.
+	 * @param int   $selected_index        Selected index of import.
+	 */
+	public function before_content_import_action( $selected_import_files, $import_files, $selected_index ) {
+		$this->do_import_action( 'pt-ocdi/before_content_import', $import_files[ $selected_index ] );
 	}
 
 

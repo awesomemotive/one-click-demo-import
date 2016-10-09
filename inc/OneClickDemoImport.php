@@ -67,6 +67,13 @@ class OneClickDemoImport {
 	 */
 	private $frontend_error_messages;
 
+	/**
+	 * Was the before content import already triggered?
+	 *
+	 * @var boolean
+	 */
+	private $before_import_executed = false;
+
 
 	/**
 	 * Returns the *Singleton* instance of this class.
@@ -250,24 +257,39 @@ class OneClickDemoImport {
 		}
 
 		/**
+		 * Register all default actions (before content import, widget, customizer import and other actions)
+		 * to the 'before_content_import_execution' and the 'pt-ocdi/after_content_import_execution' action hook.
+		 */
+		$import_actions = new ImportActions();
+
+		if ( ! $this->before_import_executed ) {
+			$this->before_import_executed = true;
+
+			/**
+			 * Execute the actions hooked to the 'pt-ocdi/before_content_import_execution' action:
+			 *
+			 * Default actions:
+			 * 1. Before content import WP action (with priority 10).
+			 */
+			do_action( 'pt-ocdi/before_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+		}
+
+		/**
 		 * 2. Import content.
 		 * Returns any errors greater then the "error" logger level, that will be displayed on front page.
 		 */
 		$this->frontend_error_messages .= $this->importer->import_content( $this->selected_import_files['content'] );
 
-		// Register all default actions (widget, customizer import and other actions to the 'pt-ocdi/execute' action hook).
-		$import_actions = new ImportActions();
-
 		/**
-		 * Execute the actions hooked to the 'pt-ocdi/execute' action:
+		 * Execute the actions hooked to the 'pt-ocdi/after_content_import_execution' action:
 		 *
-		 * 1. Import content (with priority 10).
-		 * 2. Before widgets import setup (with priority 20).
-		 * 3. Import widgets (with priority 30).
-		 * 4. Import customize options (with priority 40).
-		 * 5. After import setup (with priority 50).
+		 * Default actions:
+		 * 1. Before widgets import setup (with priority 10).
+		 * 2. Import widgets (with priority 20).
+		 * 3. Import customize options (with priority 30).
+		 * 4. After import setup (with priority 40).
 		 */
-		do_action( 'pt-ocdi/execute', $this->selected_import_files, $this->import_files, $this->selected_index );
+		do_action( 'pt-ocdi/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
 
 		// Display final messages (success or error messages).
 		if ( empty( $this->frontend_error_messages ) ) {
@@ -309,6 +331,7 @@ class OneClickDemoImport {
 			$this->log_file_path           = empty( $data['log_file_path'] ) ? '' : $data['log_file_path'];
 			$this->selected_index          = empty( $data['selected_index'] ) ? 0 : $data['selected_index'];
 			$this->selected_import_files   = empty( $data['selected_import_files'] ) ? array() : $data['selected_import_files'];
+			$this->before_import_executed  = empty( $data['before_import_executed'] ) ? false : $data['before_import_executed'];
 			$this->importer->set_importer_data( $data );
 
 			return true;
@@ -328,6 +351,7 @@ class OneClickDemoImport {
 			'log_file_path'           => $this->log_file_path,
 			'selected_index'          => $this->selected_index,
 			'selected_import_files'   => $this->selected_import_files,
+			'before_import_executed'  => $this->before_import_executed,
 		);
 	}
 
