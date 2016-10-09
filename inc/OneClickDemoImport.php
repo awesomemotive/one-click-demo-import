@@ -181,12 +181,10 @@ class OneClickDemoImport {
 
 	/**
 	 * Main AJAX callback function for:
-	 * 1. prepare import files (uploaded or predefined via filters)
-	 * 2. import content
-	 * 3. before widgets import setup (optional)
-	 * 4. import widgets (optional)
-	 * 5. import customizer options (optional)
-	 * 6. after import setup (optional)
+	 * 1). prepare import files (uploaded or predefined via filters)
+	 * 2). execute 'before content import' actions (before import WP action)
+	 * 3). import content
+	 * 4). execute 'after content import' actions (before widget import WP action, widget import, customizer import, after import WP action)
 	 */
 	public function import_demo_data_ajax_callback() {
 		// Try to update PHP memory limit (so that it does not run out of it).
@@ -212,7 +210,7 @@ class OneClickDemoImport {
 			$this->selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
 
 			/**
-			 * 1. Prepare import files.
+			 * 1). Prepare import files.
 			 * Manually uploaded import files or predefined import files via filter: pt-ocdi/import_files
 			 */
 			if ( ! empty( $_FILES ) ) { // Using manual file uploads?
@@ -266,28 +264,28 @@ class OneClickDemoImport {
 			$this->before_import_executed = true;
 
 			/**
-			 * Execute the actions hooked to the 'pt-ocdi/before_content_import_execution' action:
+			 * 2). Execute the actions hooked to the 'pt-ocdi/before_content_import_execution' action:
 			 *
 			 * Default actions:
-			 * 1. Before content import WP action (with priority 10).
+			 * 1 - Before content import WP action (with priority 10).
 			 */
 			do_action( 'pt-ocdi/before_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
 		}
 
 		/**
-		 * 2. Import content.
+		 * 3). Import content.
 		 * Returns any errors greater then the "error" logger level, that will be displayed on front page.
 		 */
 		$this->frontend_error_messages .= $this->importer->import_content( $this->selected_import_files['content'] );
 
 		/**
-		 * Execute the actions hooked to the 'pt-ocdi/after_content_import_execution' action:
+		 * 4). Execute the actions hooked to the 'pt-ocdi/after_content_import_execution' action:
 		 *
 		 * Default actions:
-		 * 1. Before widgets import setup (with priority 10).
-		 * 2. Import widgets (with priority 20).
-		 * 3. Import customize options (with priority 30).
-		 * 4. After import setup (with priority 40).
+		 * 1 - Before widgets import setup (with priority 10).
+		 * 2 - Import widgets (with priority 20).
+		 * 3 - Import customize options (with priority 30).
+		 * 4 - After import setup (with priority 40).
 		 */
 		do_action( 'pt-ocdi/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
 
