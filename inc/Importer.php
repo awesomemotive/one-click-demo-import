@@ -1,6 +1,6 @@
 <?php
 /**
- * Class for declaring the importer used in the One Click Demo Import plugin
+ * Class for declaring the content importer used in the One Click Demo Import plugin
  *
  * @package ocdi
  */
@@ -158,8 +158,6 @@ class Importer {
 
 		// We should make a new ajax call, if the time is right.
 		if ( $time > apply_filters( 'pt-ocdi/time_for_one_ajax_call', 25 ) ) {
-			$this->set_current_importer_data();
-
 			$response = array(
 				'status'  => 'newAJAX',
 				'message' => 'Time for new AJAX request!: ' . $time,
@@ -168,6 +166,11 @@ class Importer {
 			// Add any output to the log file and clear the buffers.
 			$message = ob_get_clean();
 
+			// Add any error messages to the frontend_error_messages variable in OCDI main class.
+			if ( ! empty( $message ) ) {
+				$this->ocdi->append_to_frontend_error_messages( $message );
+			}
+
 			// Add message to log file.
 			$log_added = Helpers::append_to_file(
 				__( 'New AJAX call!' , 'pt-ocdi' ) . PHP_EOL . $message,
@@ -175,6 +178,10 @@ class Importer {
 				''
 			);
 
+			// Set the current importer stat, so it can be continued on the next AJAX call.
+			$this->set_current_importer_data();
+
+			// Send the request for a new AJAX call.
 			wp_send_json( $response );
 		}
 

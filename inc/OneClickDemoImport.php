@@ -270,7 +270,7 @@ class OneClickDemoImport {
 		 * 3). Import content.
 		 * Returns any errors greater then the "error" logger level, that will be displayed on front page.
 		 */
-		$this->frontend_error_messages .= $this->importer->import_content( $this->selected_import_files['content'] );
+		$this->append_to_frontend_error_messages( $this->importer->import_content( $this->selected_import_files['content'] ) );
 
 		/**
 		 * 4). Execute the actions hooked to the 'pt-ocdi/after_content_import_execution' action:
@@ -298,7 +298,7 @@ class OneClickDemoImport {
 			$response['message'] = $this->frontend_error_messages . '<br>';
 			$response['message'] .= sprintf(
 				__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
-				'<div class="notice  notice-error"><p>',
+				'<div class="notice  notice-warning"><p>',
 				'<br>',
 				'<strong>',
 				'</strong>',
@@ -355,6 +355,18 @@ class OneClickDemoImport {
 	 */
 	public function get_log_file_path() {
 		return $this->log_file_path;
+	}
+
+
+	/**
+	 * Setter function to append additional value to the private frontend_error_messages value.
+	 *
+	 * @param string $additional_value The additional value that will be appended to the existing frontend_error_messages.
+	 */
+	public function append_to_frontend_error_messages( $additional_value ) {
+		if ( ! empty( $additional_value ) ) {
+			$this->frontend_error_messages .= $additional_value . '<br>' ;
+		}
 	}
 
 
