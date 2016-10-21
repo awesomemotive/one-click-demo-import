@@ -26,26 +26,33 @@ class WidgetImporter {
 			$results = self::import_widgets( $widget_import_file_path );
 		}
 
-		// Check for errors.
+		// Check for errors, else write the results to the log file.
 		if ( is_wp_error( $results ) ) {
-			// Write error to log file and send an AJAX response with the error.
-			Helpers::log_error_and_send_ajax_response(
-				$results->get_error_message(),
+			$error_message = $results->get_error_message();
+
+			// Add any error messages to the frontend_error_messages variable in OCDI main class.
+			$ocdi->append_to_frontend_error_messages( $error_message );
+
+			// Write error to log file.
+			Helpers::append_to_file(
+				$error_message,
 				$log_file_path,
 				esc_html__( 'Importing widgets', 'pt-ocdi' )
 			);
 		}
+		else {
+			ob_start();
+				self::format_results_for_log( $results );
+			$message = ob_get_clean();
 
-		ob_start();
-			self::format_results_for_log( $results );
-		$message = ob_get_clean();
+			// Add this message to log file.
+			$log_added = Helpers::append_to_file(
+				$message,
+				$log_file_path,
+				esc_html__( 'Importing widgets' , 'pt-ocdi' )
+			);
+		}
 
-		// Add this message to log file.
-		$log_added = Helpers::append_to_file(
-			$message,
-			$log_file_path,
-			esc_html__( 'Importing widgets' , 'pt-ocdi' )
-		);
 	}
 
 
@@ -78,7 +85,7 @@ class WidgetImporter {
 		if ( ! file_exists( $file ) ) {
 			return new \WP_Error(
 				'widget_import_file_not_found',
-				__( 'Widget import file could not be found.', 'pt-ocdi' )
+				__( 'Error: Widget import file could not be found.', 'pt-ocdi' )
 			);
 		}
 
@@ -109,7 +116,7 @@ class WidgetImporter {
 		if ( empty( $data ) || ! is_object( $data ) ) {
 			return new \WP_Error(
 				'corrupted_widget_import_data',
-				__( 'Widget import data could not be read. Please try a different file.', 'pt-ocdi' )
+				__( 'Error: Widget import data could not be read. Please try a different file.', 'pt-ocdi' )
 			);
 		}
 
