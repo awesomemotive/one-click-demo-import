@@ -14,7 +14,7 @@ class ImportActions {
 	 *
 	 * @param array $selected_import Selected import data.
 	 */
-	public function __construct( $selected_import ) {
+	public function __construct() {
 		add_action( 'pt-ocdi/before_content_import_execution', array( $this, 'before_content_import_action' ), 10, 3 );
 
 		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 3 );

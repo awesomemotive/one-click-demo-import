@@ -254,12 +254,6 @@ class OneClickDemoImport {
 			}
 		}
 
-		/**
-		 * Register all default actions (before content import, widget, customizer import and other actions)
-		 * to the 'before_content_import_execution' and the 'pt-ocdi/after_content_import_execution' action hook.
-		 */
-		$import_actions = new ImportActions();
-
 		if ( ! $this->before_import_executed ) {
 			$this->before_import_executed = true;
 
@@ -378,6 +372,12 @@ class OneClickDemoImport {
 	public function setup_plugin_with_filter_data() {
 		// Get info of import data files and filter it.
 		$this->import_files = Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
+
+		/**
+		 * Register all default actions (before content import, widget, customizer import and other actions)
+		 * to the 'before_content_import_execution' and the 'pt-ocdi/after_content_import_execution' action hook.
+		 */
+		$import_actions = new ImportActions();
 
 		// Importer options array.
 		$importer_options = apply_filters( 'pt-ocdi/importer_options', array(
