@@ -101,7 +101,6 @@ class WidgetImporter {
 	}
 
 
-
 	/**
 	 * Import widget JSON data
 	 *
