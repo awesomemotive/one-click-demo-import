@@ -247,7 +247,9 @@ a {
 
 
 /* Custom OCDI styles */
-.ocdi-signup__container {
-  width: 50%;
-  margin: 0 auto;
+@media (min-width: 42em) {
+  .ocdi-signup__container {
+    width: 50%;
+    margin: 0 auto;
+  }
 }
