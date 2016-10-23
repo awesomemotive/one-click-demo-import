@@ -2,8 +2,8 @@
 **Contributors:** capuderg, cyman  
 **Tags:** import, content, demo, data, widgets, settings  
 **Requires at least:** 4.0.0  
-**Tested up to:** 4.5  
-**Stable tag:** 1.2.0  
+**Tested up to:** 4.6  
+**Stable tag:** 1.3.0  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -12,7 +12,12 @@ Import your demo content, widgets and theme settings with one click. Theme autho
 
 The best feature of this plugin is, that theme authors can define import files in their themes and so all you (the user of the theme) have to do is click on the "Import Demo Data" button.
 
-**How do theme author define these files?** The answer is in the FAQ section.
+> **Are you a theme author?**
+> Setup One Click Demo Imports for your theme and your users will thank you for it!
+>
+> [Follow this easy guide on how to setup this plugin for your themes!](http://proteusthemes.github.io/one-click-demo-import/)
+>
+> Also signup to the newsletter, so you we can inform you about any updates, changes or improvements.
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
