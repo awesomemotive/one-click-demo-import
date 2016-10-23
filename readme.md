@@ -17,7 +17,7 @@ The best feature of this plugin is, that theme authors can define import files i
 >
 > [Follow this easy guide on how to setup this plugin for your themes!](http://proteusthemes.github.io/one-click-demo-import/)
 >
-> Also signup to the newsletter, so you we can inform you about any updates, changes or improvements.
+> Also sign up to the newsletter, so we can inform you about any updates, changes or improvements.
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
@@ -230,7 +230,7 @@ You want to activate the plugin, but this error shows up:
 
 This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
 
-### Issues with the import, that we can fix in the plugin ###
+### Issues with the import, that we can't fix in the plugin ###
 
 Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-import/blob/master/docs/import-problems.md), for more answers to issues with importing data.
 
