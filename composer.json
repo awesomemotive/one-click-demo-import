@@ -7,16 +7,16 @@
         {
             "type": "package",
             "package": {
-                "name": "humanmade/WordPress-Importer",
+                "name": "proteusthemes/WordPress-Importer",
                 "version": "dev-master",
                 "dist": {
-                    "url": "https://github.com/humanmade/WordPress-Importer/archive/master.zip",
+                    "url": "https://github.com/proteusthemes/WordPress-Importer/archive/master.zip",
                     "type": "zip"
                 }
             }
         }
     ],
     "require": {
-        "humanmade/WordPress-Importer": "dev-master"
+        "proteusthemes/WordPress-Importer": "dev-master"
     }
 }

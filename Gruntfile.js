@@ -29,9 +29,9 @@ module.exports = function ( grunt ) {
 					'assets/**',
 					'inc/**',
 					'languages/**',
-					'vendor/humanmade/WordPress-Importer/class-logger-cli.php',
-					'vendor/humanmade/WordPress-Importer/class-logger.php',
-					'vendor/humanmade/WordPress-Importer/class-wxr-importer.php',
+					'vendor/proteusthemes/WordPress-Importer/class-logger-cli.php',
+					'vendor/proteusthemes/WordPress-Importer/class-logger.php',
+					'vendor/proteusthemes/WordPress-Importer/class-wxr-importer.php',
 				],
 				flatten: false
 			}

@@ -16,9 +16,9 @@ function testRequiredFiles {
 		inc/class-ocdi-importer.php
 		inc/class-ocdi-widget-importer.php
 		inc/class-ocdi-logger.php
-		vendor/humanmade/WordPress-Importer/class-logger-cli.php
-		vendor/humanmade/WordPress-Importer/class-logger.php
-		vendor/humanmade/WordPress-Importer/class-wxr-importer.php
+		vendor/proteusthemes/WordPress-Importer/class-logger-cli.php
+		vendor/proteusthemes/WordPress-Importer/class-logger.php
+		vendor/proteusthemes/WordPress-Importer/class-wxr-importer.php
 	)
 	requiredFolders=(
 		assets/js

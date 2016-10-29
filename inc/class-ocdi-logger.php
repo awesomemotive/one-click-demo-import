@@ -7,10 +7,10 @@
 
 // Include required files, if not already present (via separate plugin).
 if ( ! class_exists( 'WP_Importer_Logger' ) ) {
-	require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-logger.php';
+	require PT_OCDI_PATH . 'vendor/proteusthemes/WordPress-Importer/class-logger.php';
 }
 if ( ! class_exists( 'WP_Importer_Logger_CLI' ) ) {
-	require PT_OCDI_PATH . 'vendor/humanmade/WordPress-Importer/class-logger-cli.php';
+	require PT_OCDI_PATH . 'vendor/proteusthemes/WordPress-Importer/class-logger-cli.php';
 }
 
 class OCDI_Logger extends WP_Importer_Logger_CLI {

@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "984b6827d843e18ec40f36fbf86431fb",
-    "content-hash": "1ec01c4efbb4369910d945b92d76651f",
+    "hash": "c0c357ffcc12c33407ad5123c2ca4d89",
+    "content-hash": "a78aa517ad58b0bb57e24bafcf57cbe1",
     "packages": [
         {
-            "name": "humanmade/WordPress-Importer",
+            "name": "proteusthemes/WordPress-Importer",
             "version": "dev-master",
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/humanmade/WordPress-Importer/archive/master.zip",
+                "url": "https://github.com/proteusthemes/WordPress-Importer/archive/master.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -23,7 +23,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "humanmade/wordpress-importer": 20
+        "proteusthemes/wordpress-importer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
