@@ -41,6 +41,9 @@ else {
 	define( 'PT_OCDI_PATH', plugin_dir_path( __FILE__ ) );
 	define( 'PT_OCDI_URL', plugin_dir_url( __FILE__ ) );
 
+	// Composer autoloader.
+	require_once PT_OCDI_PATH . 'vendor/autoload.php';
+
 	// Require main plugin file.
 	require PT_OCDI_PATH . 'inc/class-ocdi-main.php';
 

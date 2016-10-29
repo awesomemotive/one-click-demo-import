@@ -4,19 +4,12 @@
     "license":      "GPL-3.0+",
     "type":         "project",
     "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "proteusthemes/WordPress-Importer",
-                "version": "dev-master",
-                "dist": {
-                    "url": "https://github.com/proteusthemes/WordPress-Importer/archive/master.zip",
-                    "type": "zip"
-                }
-            }
-        }
+      {
+        "type": "vcs",
+        "url":  "https://github.com/proteusthemes/WordPress-Importer.git"
+      }
     ],
     "require": {
-        "proteusthemes/WordPress-Importer": "dev-master"
+        "proteusthemes/wp-content-importer-v2": "^0.2.0"
     }
 }
