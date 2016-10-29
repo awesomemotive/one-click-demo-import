@@ -248,6 +248,13 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 ## Changelog ##
 
+### 1.4.0 ###
+
+*Release Date - 29 October 2016*
+
+* Add support for WP term meta data in content importer,
+* Fix the issue of having both plugins (OCDI and the new WP importer v2) activated at the same time.
+
 ### 1.3.0 ###
 
 *Release Date - 1 October 2016*
