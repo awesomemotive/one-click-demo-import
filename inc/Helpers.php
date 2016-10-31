@@ -16,7 +16,7 @@ class Helpers {
 	 *
 	 * @var string
 	 */
-	private static $demo_import_start_time = '';
+	public static $demo_import_start_time = '';
 
 	/**
 	 * Filter through the array of import files and get rid of those who do not comply.
