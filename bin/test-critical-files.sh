@@ -20,9 +20,10 @@ function testRequiredFiles {
 		inc/OneClickDemoImport.php
 		inc/WidgetImporter.php
 		inc/WXRImporter.php
-		vendor/humanmade/WordPress-Importer/class-logger-cli.php
-		vendor/humanmade/WordPress-Importer/class-logger.php
-		vendor/humanmade/WordPress-Importer/class-wxr-importer.php
+		vendor/proteusthemes/wp-content-importer-v2/src/WPImporterLoggerCLI.php
+		vendor/proteusthemes/wp-content-importer-v2/src/WPImporterLogger.php
+		vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php
+		vendor/proteusthemes/wp-content-importer-v2/src/WXRImportInfo.php
 	)
 	requiredFolders=(
 		assets/js

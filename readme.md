@@ -2,8 +2,8 @@
 **Contributors:** capuderg, cyman  
 **Tags:** import, content, demo, data, widgets, settings  
 **Requires at least:** 4.0.0  
-**Tested up to:** 4.5  
-**Stable tag:** 1.2.0  
+**Tested up to:** 4.6  
+**Stable tag:** 1.4.0  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -12,7 +12,12 @@ Import your demo content, widgets and theme settings with one click. Theme autho
 
 The best feature of this plugin is, that theme authors can define import files in their themes and so all you (the user of the theme) have to do is click on the "Import Demo Data" button.
 
-**How do theme author define these files?** The answer is in the FAQ section.
+> **Are you a theme author?**
+> Setup One Click Demo Imports for your theme and your users will thank you for it!
+>
+> [Follow this easy guide on how to setup this plugin for your themes!](http://proteusthemes.github.io/one-click-demo-import/)
+>
+> Also sign up to the newsletter, so we can inform you about any updates, changes or improvements.
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
@@ -225,7 +230,7 @@ You want to activate the plugin, but this error shows up:
 
 This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
 
-### Issues with the import, that we can fix in the plugin ###
+### Issues with the import, that we can't fix in the plugin ###
 
 Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-import/blob/master/docs/import-problems.md), for more answers to issues with importing data.
 
@@ -242,6 +247,13 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 
 ## Changelog ##
+
+### 1.4.0 ###
+
+*Release Date - 29 October 2016*
+
+* Add support for WP term meta data in content importer,
+* Fix the issue of having both plugins (OCDI and the new WP importer v2) activated at the same time.
 
 ### 1.3.0 ###
 
