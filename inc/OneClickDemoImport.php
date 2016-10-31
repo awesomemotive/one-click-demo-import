@@ -384,6 +384,7 @@ class OneClickDemoImport {
 		 * to the 'before_content_import_execution' and the 'pt-ocdi/after_content_import_execution' action hook.
 		 */
 		$import_actions = new ImportActions();
+		$import_actions->register_hooks();
 
 		// Importer options array.
 		$importer_options = apply_filters( 'pt-ocdi/importer_options', array(

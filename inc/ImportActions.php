@@ -10,11 +10,9 @@ namespace OCDI;
 
 class ImportActions {
 	/**
-	 * The construction method for this class.
-	 *
-	 * @param array $selected_import Selected import data.
+	 * Register all action hooks for this class.
 	 */
-	public function __construct() {
+	public function register_hooks() {
 		add_action( 'pt-ocdi/before_content_import_execution', array( $this, 'before_content_import_action' ), 10, 3 );
 
 		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 3 );
