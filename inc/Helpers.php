@@ -12,6 +12,13 @@ namespace OCDI;
  */
 class Helpers {
 	/**
+	 * Holds the date and time string for demo import and log file.
+	 *
+	 * @var string
+	 */
+	private static $demo_import_start_time = '';
+
+	/**
 	 * Filter through the array of import files and get rid of those who do not comply.
 	 *
 	 * @param  array $import_files list of arrays with import file details.
@@ -49,10 +56,9 @@ class Helpers {
 	 * Download import files. Content .xml and widgets .wie|.json files.
 	 *
 	 * @param  array  $import_file_info array with import file details.
-	 * @param  string $start_date string of date and time.
 	 * @return array|WP_Error array of paths to the downloaded files or WP_Error object with error message.
 	 */
-	public static function download_import_files( $import_file_info, $start_date = '' ) {
+	public static function download_import_files( $import_file_info ) {
 		$downloaded_files = array();
 		$downloader       = new Downloader();
 
@@ -76,7 +82,7 @@ class Helpers {
 		}
 		else {
 			// Set the filename string for content import file.
-			$content_filename = apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
+			$content_filename = apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
 
 			// Download the content import file.
 			$downloaded_files['content'] = $downloader->download_file( $import_file_info['import_file_url'], $content_filename );
@@ -91,7 +97,7 @@ class Helpers {
 		// Get widgets file as well. If defined!
 		if ( ! empty( $import_file_info['import_widget_file_url'] ) ) {
 			// Set the filename string for widgets import file.
-			$widget_filename = apply_filters( 'pt-ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+			$widget_filename = apply_filters( 'pt-ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
 
 			// Download the widgets import file.
 			$downloaded_files['widgets'] = $downloader->download_file( $import_file_info['import_widget_file_url'], $widget_filename );
@@ -111,7 +117,7 @@ class Helpers {
 		// Get customizer import file as well. If defined!
 		if ( ! empty( $import_file_info['import_customizer_file_url'] ) ) {
 			// Setup filename path to save the customizer content.
-			$customizer_filename = apply_filters( 'pt-ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . $start_date . apply_filters( 'pt-ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
+			$customizer_filename = apply_filters( 'pt-ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
 
 			// Download the customizer import file.
 			$downloaded_files['customizer'] = $downloader->download_file( $import_file_info['import_customizer_file_url'], $customizer_filename );
@@ -296,14 +302,13 @@ class Helpers {
 	/**
 	 * Get log file path
 	 *
-	 * @param string $start_date date|time|timestamp to use in the log filename.
 	 * @return string, path to the log file
 	 */
-	public static function get_log_path( $start_date = '' ) {
+	public static function get_log_path() {
 		$upload_dir  = wp_upload_dir();
 		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
-		$log_path = $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . $start_date . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
+		$log_path = $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
 
 		self::register_file_as_media_attachment( $log_path );
 
@@ -488,5 +493,13 @@ class Helpers {
 
 		// Send JSON Error response to the AJAX call.
 		wp_send_json( $error_text );
+	}
+
+
+	/**
+	 * Set the $demo_import_start_time class variable with the current date and time string.
+	 */
+	public static function set_demo_import_start_time() {
+		self::$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
 	}
 }

@@ -65,7 +65,7 @@ class OneClickDemoImport {
 	 *
 	 * @var string
 	 */
-	private $frontend_error_messages;
+	private $frontend_error_messages = '';
 
 	/**
 	 * Was the before content import already triggered?
@@ -197,14 +197,11 @@ class OneClickDemoImport {
 		$use_existing_importer_data = $this->set_existing_importer_data();
 
 		if ( ! $use_existing_importer_data ) {
-			// Error messages displayed on front page.
-			$this->frontend_error_messages = '';
-
 			// Create a date and time string to use for demo and log file names.
-			$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
+			Helpers::set_demo_import_start_time();
 
 			// Define log file path.
-			$this->log_file_path = Helpers::get_log_path( $demo_import_start_time );
+			$this->log_file_path = Helpers::get_log_path();
 
 			// Get selected file index or set it to 0.
 			$this->selected_index = empty( $_POST['selected'] ) ? 0 : absint( $_POST['selected'] );
@@ -222,11 +219,8 @@ class OneClickDemoImport {
 			}
 			elseif ( ! empty( $this->import_files[ $this->selected_index ] ) ) { // Use predefined import files from wp filter: pt-ocdi/import_files.
 
-				// Download the import files (content and widgets files) and save it to variable for later use.
-				$this->selected_import_files = Helpers::download_import_files(
-					$this->import_files[ $this->selected_index ],
-					$demo_import_start_time
-				);
+				// Download the import files (content, widgets and customizer files).
+				$this->selected_import_files = Helpers::download_import_files( $this->import_files[ $this->selected_index ] );
 
 				// Check Errors.
 				if ( is_wp_error( $this->selected_import_files ) ) {
