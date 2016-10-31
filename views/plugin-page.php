@@ -9,7 +9,7 @@
 
 <div class="ocdi  wrap  about-wrap">
 
-	<h1 class="ocdi__title  dashicons-before  dashicons-download"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
+	<h1 class="ocdi__title  dashicons-before  dashicons-upload"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
 
 	<?php
 
