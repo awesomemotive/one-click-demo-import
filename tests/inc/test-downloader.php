@@ -15,7 +15,6 @@ class DownloaderTest extends \WP_UnitTestCase {
 		// Default download path.
 		$upload_dir         = wp_upload_dir();
 		$this->default_path = trailingslashit( $upload_dir['path'] );
-
 	}
 
 	/**
