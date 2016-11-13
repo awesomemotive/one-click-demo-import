@@ -149,7 +149,7 @@ class OneClickDemoImport {
 	 * Output (HTML) is in another file.
 	 */
 	public function display_plugin_page() {
-		require_once PT_OCDI_PATH . 'views/plugin-page.php';
+		require_once PT_OCDI_PATH . 'views/plugin-page-multi-layout.php';
 	}
 
 

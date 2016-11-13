@@ -1,6 +1,7 @@
 jQuery( function ( $ ) {
 	'use strict';
 
+	// No or Single predefined demo import button click.
 	$( '.js-ocdi-import-data' ).on( 'click', function () {
 
 		// Reset response div content.
@@ -20,6 +21,24 @@ jQuery( function ( $ ) {
 		if ( $('#ocdi__customizer-file-upload').length ) {
 			data.append( 'customizer_file', $('#ocdi__customizer-file-upload')[0].files[0] );
 		}
+
+		// AJAX call to import everything (content, widgets, before/after setup)
+		ajaxCall( data );
+
+	});
+
+
+	// Multi Grid Layout import button click.
+	$( '.js-ocdi-mgl-import-data' ).on( 'click', function () {
+
+		// Reset response div content.
+		$( '.js-ocdi-ajax-response' ).empty();
+
+		// Prepare data for the AJAX call
+		var data = new FormData();
+		data.append( 'action', 'ocdi_import_demo_data' );
+		data.append( 'security', ocdi.ajax_nonce );
+		data.append( 'selected', $( this ).val() );
 
 		// AJAX call to import everything (content, widgets, before/after setup)
 		ajaxCall( data );
@@ -77,4 +96,41 @@ jQuery( function ( $ ) {
 		$( '.js-ocdi-demo-import-notice' ).html( currentImportNotice );
 	});
 
-});
+	// Multi Grid Layout category navigation.
+	$( '.js-ocdi-nav-link' ).on( 'click', function( event ) {
+		event.preventDefault();
+
+		// Remove 'active' class from the previous nav list items.
+		$( this ).parent().siblings().removeClass( 'active' );
+
+		// Add the 'active' class to this nav list item.
+		$( this ).parent().addClass( 'active' );
+
+		// Show all items if the 'hash' is equal to '#all'.
+		if ( '#all' === this.hash ) {
+			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item' ).show();
+		}
+		else {
+			// Hide all items.
+			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item' ).hide();
+
+			// Show just the ones that have the correct category data.
+			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item[data-category="' + this.hash.slice(1) + '"]' ).show();
+		}
+	} );
+
+
+	// Multi Grid Layout search functionality.
+	$( '.js-ocdi-mql-search' ).on( 'keyup', function( event ) {
+		if ( 0 < $(this).val().length ) {
+			// Hide all items.
+			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item' ).hide();
+
+			// Show just the ones that have a match on the import name.
+			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item[data-name*="' + $(this).val().toLowerCase() + '"]' ).show();
+		}
+		else {
+			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item' ).show();
+		}
+	} );
+} );

@@ -502,4 +502,27 @@ class Helpers {
 	public static function set_demo_import_start_time() {
 		self::$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
 	}
+
+
+	/**
+	 * Get the category list of all categories used in the predefined demo imports array.
+	 *
+	 * @param  array $demo_imports Array of demo import items (arrays).
+	 * @return array|boolean       List of all the categories or false if there aren't any.
+	 */
+	public static function get_demo_import_categories( $demo_imports ) {
+		$categories = array();
+
+		foreach ( $demo_imports as $item ) {
+			if ( ! empty( $item['category'] ) ) {
+				$categories[ sanitize_key( $item['category'] ) ] = $item['category'];
+			}
+		}
+
+		if ( empty( $categories ) ) {
+			return false;
+		}
+
+		return $categories;
+	}
 }
