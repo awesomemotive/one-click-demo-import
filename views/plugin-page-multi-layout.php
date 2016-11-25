@@ -5,6 +5,8 @@
  * @package ocdi
  */
 
+namespace OCDI;
+
 ?>
 
 <div class="ocdi  wrap  about-wrap">
@@ -106,7 +108,7 @@
 		<div class="ocdi__gl  js-ocdi-gl">
 		<?php
 			// Prepare navigation data.
-			$categories = OCDI\Helpers::get_demo_import_categories( $this->import_files );
+			$categories = Helpers::get_all_demo_import_categories( $this->import_files );
 		?>
 			<?php if ( ! empty( $categories ) ) : ?>
 				<div class="ocdi__gl-header  js-ocdi-gl-header">
@@ -135,7 +137,7 @@
 						}
 
 					?>
-					<div class="ocdi__gl-item js-ocdi-gl-item" data-category="<?php echo esc_attr( isset( $import_file['category'] ) ? sanitize_key( $import_file['category'] ) : '' ); ?>" data-name="<?php echo esc_attr( strtolower( $import_file['import_file_name'] ) ); ?>">
+					<div class="ocdi__gl-item js-ocdi-gl-item" data-categories="<?php echo esc_attr( Helpers::get_demo_import_item_categories( $import_file ) ); ?>" data-name="<?php echo esc_attr( strtolower( $import_file['import_file_name'] ) ); ?>">
 						<div class="ocdi__gl-item-image-container">
 							<?php if ( ! empty( $img_src ) ) : ?>
 								<img class="ocdi__gl-item-image" src="<?php echo esc_url( $img_src ) ?>">

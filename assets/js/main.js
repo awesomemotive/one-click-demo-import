@@ -75,7 +75,7 @@ jQuery( function ( $ ) {
 	});
 
 	/**
-	 * Grid Layout category navigation.
+	 * Grid Layout categories navigation.
 	 */
 	$( '.js-ocdi-nav-link' ).on( 'click', function( event ) {
 		event.preventDefault();
@@ -95,7 +95,7 @@ jQuery( function ( $ ) {
 			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).hide();
 
 			// Show just the ones that have the correct category data.
-			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item[data-category="' + this.hash.slice(1) + '"]' ).show();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item[data-categories*="' + this.hash.slice(1) + '"]' ).show();
 		}
 	} );
 

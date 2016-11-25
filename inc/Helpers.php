@@ -510,12 +510,14 @@ class Helpers {
 	 * @param  array $demo_imports Array of demo import items (arrays).
 	 * @return array|boolean       List of all the categories or false if there aren't any.
 	 */
-	public static function get_demo_import_categories( $demo_imports ) {
+	public static function get_all_demo_import_categories( $demo_imports ) {
 		$categories = array();
 
 		foreach ( $demo_imports as $item ) {
-			if ( ! empty( $item['category'] ) ) {
-				$categories[ sanitize_key( $item['category'] ) ] = $item['category'];
+			if ( ! empty( $item['categories'] ) && is_array( $item['categories'] ) ) {
+				foreach ( $item['categories'] as $category ) {
+					$categories[ sanitize_key( $category ) ] = $category;
+				}
 			}
 		}
 
@@ -524,5 +526,29 @@ class Helpers {
 		}
 
 		return $categories;
+	}
+
+
+	/**
+	 * Return the concatenated string of demo import item categories.
+	 * These should be separated by comma and sanitized properly.
+	 *
+	 * @param  array  $item The predefined demo import item data.
+	 * @return string       The concatenated string of categories.
+	 */
+	public static function get_demo_import_item_categories( $item ) {
+		$sanitized_categories = array();
+
+		if ( isset( $item['categories'] ) ) {
+			foreach ( $item['categories'] as $category ) {
+				$sanitized_categories[] = sanitize_key( $category );
+			}
+		}
+
+		if ( ! empty( $sanitized_categories ) ) {
+			return implode( ',', $sanitized_categories );
+		}
+
+		return false;
 	}
 }
