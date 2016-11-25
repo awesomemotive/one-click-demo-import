@@ -84,30 +84,46 @@
 			</div>
 		</div>
 
-	<?php elseif ( 1 < count( $this->import_files ) ) : ?>
+		<p class="ocdi__button-container">
+			<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+		</p>
 
-		<!-- OCDI multi grid layout -->
-		<div class="ocdi__mgl">
+	<?php elseif ( 1 === count( $this->import_files ) ) : ?>
+
+		<div class="ocdi__demo-import-notice  js-ocdi-demo-import-notice"><?php
+			if ( is_array( $this->import_files ) && ! empty( $this->import_files[0]['import_notice'] ) ) {
+				echo wp_kses_post( $this->import_files[0]['import_notice'] );
+			}
+		?></div>
+
+		<p class="ocdi__button-container">
+			<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+		</p>
+
+	<?php else : ?>
+
+		<!-- OCDI grid layout -->
+		<div class="ocdi__gl">
 		<?php
 			// Prepare navigation data.
 			$categories = OCDI\Helpers::get_demo_import_categories( $this->import_files );
 		?>
 			<?php if ( ! empty( $categories ) ) : ?>
-				<div class="ocdi__mgl-header">
-					<nav class="ocdi__mgl-navigation">
+				<div class="ocdi__gl-header">
+					<nav class="ocdi__gl-navigation">
 						<ul>
-							<li class="active"><a href="#all" class="ocdi__mgl-navigation-link  js-ocdi-nav-link"><?php esc_html_e( 'All', 'pt-ocdi' ); ?></a></li>
+							<li class="active"><a href="#all" class="ocdi__gl-navigation-link  js-ocdi-nav-link"><?php esc_html_e( 'All', 'pt-ocdi' ); ?></a></li>
 							<?php foreach ( $categories as $key => $name ) : ?>
-								<li><a href="#<?php echo esc_attr( $key ); ?>" class="ocdi__mgl-navigation-link  js-ocdi-nav-link"><?php echo esc_html( $name ); ?></a></li>
+								<li><a href="#<?php echo esc_attr( $key ); ?>" class="ocdi__gl-navigation-link  js-ocdi-nav-link"><?php echo esc_html( $name ); ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 					</nav>
-					<div clas="ocdi__mgl-search">
-						<input type="search" class="ocdi__mgl-search-input  js-ocdi-mql-search" name="ocdi-mgl-search" value="" placeholder="<?php esc_html_e( 'Search demos...', 'pt-ocdi' ); ?>">
+					<div clas="ocdi__gl-search">
+						<input type="search" class="ocdi__gl-search-input  js-ocdi-mql-search" name="ocdi-gl-search" value="" placeholder="<?php esc_html_e( 'Search demos...', 'pt-ocdi' ); ?>">
 					</div>
 				</div>
 			<?php endif; ?>
-			<div class="ocdi__mgl-item-container  wp-clearfix  js-ocdi-mgl-item-container">
+			<div class="ocdi__gl-item-container  wp-clearfix  js-ocdi-gl-item-container">
 				<?php foreach ( $this->import_files as $index => $import_file ) : ?>
 					<?php
 						// Prepare import item display data.
@@ -119,15 +135,17 @@
 						}
 
 					?>
-					<div class="ocdi__mgl-item js-ocdi-mgl-item" data-category="<?php echo esc_attr( isset( $import_file['category'] ) ? sanitize_key( $import_file['category'] ) : '' ); ?>" data-name="<?php echo esc_attr( strtolower( $import_file['import_file_name'] ) ); ?>">
-						<?php if ( ! empty( $img_src ) ) : ?>
-							<img class="ocdi__mgl-item-image" src="<?php echo esc_url( $img_src ) ?>">
-						<?php else : ?>
-							<div class="ocdi__mgl-item-image  ocdi__mgl-item-image--no-image"><?php esc_html_e( 'No preview image.', 'pt-ocdi' ); ?></div>
-						<?php endif; ?>
-						<div class="ocdi__mgl-item-footer">
-							<h4 class="ocdi__mgl-item-title"><?php echo esc_html( $import_file['import_file_name'] ); ?></h4>
-							<button class="ocdi__mgl-item-button  button  button-primary  js-ocdi-mgl-import-data" value="<?php echo esc_attr( $index ); ?>"><?php esc_html_e( 'Import', 'pt-ocdi' ); ?></button>
+					<div class="ocdi__gl-item js-ocdi-gl-item" data-category="<?php echo esc_attr( isset( $import_file['category'] ) ? sanitize_key( $import_file['category'] ) : '' ); ?>" data-name="<?php echo esc_attr( strtolower( $import_file['import_file_name'] ) ); ?>">
+						<div class="ocdi__gl-item-image-container">
+							<?php if ( ! empty( $img_src ) ) : ?>
+								<img class="ocdi__gl-item-image" src="<?php echo esc_url( $img_src ) ?>">
+							<?php else : ?>
+								<div class="ocdi__gl-item-image  ocdi__gl-item-image--no-image"><?php esc_html_e( 'No preview image.', 'pt-ocdi' ); ?></div>
+							<?php endif; ?>
+						</div>
+						<div class="ocdi__gl-item-footer">
+							<h4 class="ocdi__gl-item-title"><?php echo esc_html( $import_file['import_file_name'] ); ?></h4>
+							<button class="ocdi__gl-item-button  button  button-primary  js-ocdi-gl-import-data" value="<?php echo esc_attr( $index ); ?>"><?php esc_html_e( 'Import', 'pt-ocdi' ); ?></button>
 						</div>
 					</div>
 				<?php endforeach; ?>
@@ -135,16 +153,6 @@
 		</div>
 
 	<?php endif; ?>
-
-	<div class="ocdi__demo-import-notice  js-ocdi-demo-import-notice"><?php
-		if ( is_array( $this->import_files ) && ! empty( $this->import_files[0]['import_notice'] ) ) {
-			echo wp_kses_post( $this->import_files[0]['import_notice'] );
-		}
-	?></div>
-
-	<p class="ocdi__button-container">
-		<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
-	</p>
 
 	<p class="ocdi__ajax-loader  js-ocdi-ajax-loader">
 		<span class="spinner"></span> <?php esc_html_e( 'Importing, please wait!', 'pt-ocdi' ); ?>

@@ -28,8 +28,8 @@ jQuery( function ( $ ) {
 	});
 
 
-	// Multi Grid Layout import button click.
-	$( '.js-ocdi-mgl-import-data' ).on( 'click', function () {
+	// Grid Layout import button click.
+	$( '.js-ocdi-gl-import-data' ).on( 'click', function () {
 
 		// Reset response div content.
 		$( '.js-ocdi-ajax-response' ).empty();
@@ -96,7 +96,7 @@ jQuery( function ( $ ) {
 		$( '.js-ocdi-demo-import-notice' ).html( currentImportNotice );
 	});
 
-	// Multi Grid Layout category navigation.
+	// Grid Layout category navigation.
 	$( '.js-ocdi-nav-link' ).on( 'click', function( event ) {
 		event.preventDefault();
 
@@ -108,29 +108,29 @@ jQuery( function ( $ ) {
 
 		// Show all items if the 'hash' is equal to '#all'.
 		if ( '#all' === this.hash ) {
-			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item' ).show();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).show();
 		}
 		else {
 			// Hide all items.
-			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item' ).hide();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).hide();
 
 			// Show just the ones that have the correct category data.
-			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item[data-category="' + this.hash.slice(1) + '"]' ).show();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item[data-category="' + this.hash.slice(1) + '"]' ).show();
 		}
 	} );
 
 
-	// Multi Grid Layout search functionality.
+	// Grid Layout search functionality.
 	$( '.js-ocdi-mql-search' ).on( 'keyup', function( event ) {
 		if ( 0 < $(this).val().length ) {
 			// Hide all items.
-			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item' ).hide();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).hide();
 
 			// Show just the ones that have a match on the import name.
-			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item[data-name*="' + $(this).val().toLowerCase() + '"]' ).show();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item[data-name*="' + $(this).val().toLowerCase() + '"]' ).show();
 		}
 		else {
-			$( '.js-ocdi-mgl-item-container' ).find( '.js-ocdi-mgl-item' ).show();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).show();
 		}
 	} );
 } );
