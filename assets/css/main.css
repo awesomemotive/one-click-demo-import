@@ -279,3 +279,9 @@ h4.ocdi__gl-item-title {
 .ocdi__modal-image-container img {
 	width: 100%;
 }
+
+.ocdi__modal-notice.ocdi__demo-import-notice:not(:empty) {
+	border: 1px solid #e5e5e5;
+	border-left: 4px solid #00a0d2;
+	margin: 0.8em 0;
+}

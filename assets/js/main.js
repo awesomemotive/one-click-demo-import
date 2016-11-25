@@ -67,6 +67,8 @@ jQuery( function ( $ ) {
 		var $dialogContiner         = $( '#js-ocdi-modal-content' );
 		var currentFilePreviewImage = ocdi.import_files[ selectedImportID ]['import_preview_image_url'] || '';
 		var previewImageContent     = '';
+		var importNotice            = ocdi.import_files[ selectedImportID ]['import_notice'] || '';
+		var importNoticeContent     = '';
 
 		if ( '' === currentFilePreviewImage ) {
 			previewImageContent = '<p>' + ocdi.texts.missing_preview_image + '</p>';
@@ -75,11 +77,17 @@ jQuery( function ( $ ) {
 			previewImageContent = '<div class="ocdi__modal-image-container"><img src="' + currentFilePreviewImage + '" alt="' + ocdi.import_files[ selectedImportID ]['import_file_name'] + '"></div>'
 		}
 
+		// Prepare notice output.
+		if( '' !== importNotice ) {
+			importNoticeContent = '<div class="ocdi__modal-notice  ocdi__demo-import-notice">' + importNotice + '</div>';
+		}
+
 		// Populate the dialog content.
 		$dialogContiner.prop( 'title', ocdi.texts.dialog_title );
 		$dialogContiner.html(
 			'<p style="text-align: center;"><b>' + ocdi.import_files[ selectedImportID ]['import_file_name'] + '</b></p>' +
-			previewImageContent
+			previewImageContent +
+			importNoticeContent
 		);
 
 		$dialogContiner.dialog( {
