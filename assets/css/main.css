@@ -266,3 +266,16 @@ h4.ocdi__gl-item-title {
 		margin-right: 2%;
 	}
 }
+
+/* Grid layout modal window */
+
+.ocdi__modal-image-container {
+	width: 90%;
+	height: 180px;
+	margin: 0 5%;
+	overflow: hidden;
+}
+
+.ocdi__modal-image-container img {
+	width: 100%;
+}

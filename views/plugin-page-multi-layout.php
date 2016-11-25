@@ -152,6 +152,8 @@
 			</div>
 		</div>
 
+		<div id="js-ocdi-modal-content"></div>
+
 	<?php endif; ?>
 
 	<p class="ocdi__ajax-loader  js-ocdi-ajax-loader">

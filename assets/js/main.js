@@ -30,7 +30,22 @@ jQuery( function ( $ ) {
 
 	// Grid Layout import button click.
 	$( '.js-ocdi-gl-import-data' ).on( 'click', function () {
+		var selectedImportID = $( this ).val();
 
+		// If the import confirmation is enabled, then do that, else import straight away.
+		if ( ocdi.import_popup ) {
+			displayConfirmationPopup( selectedImportID );
+		}
+		else {
+			gridLayoutImport( selectedImportID );
+		}
+	});
+
+	/**
+	 * Prepare grid layout import data and execute the AJAX call.
+	 * @param int selectedImportID The selected import ID.
+	 */
+	function gridLayoutImport( selectedImportID ) {
 		// Reset response div content.
 		$( '.js-ocdi-ajax-response' ).empty();
 
@@ -38,21 +53,71 @@ jQuery( function ( $ ) {
 		var data = new FormData();
 		data.append( 'action', 'ocdi_import_demo_data' );
 		data.append( 'security', ocdi.ajax_nonce );
-		data.append( 'selected', $( this ).val() );
+		data.append( 'selected', selectedImportID );
 
 		// AJAX call to import everything (content, widgets, before/after setup)
 		ajaxCall( data );
+	}
 
-	});
+	/**
+	 * Display the confirmation popup.
+	 * @param int selectedImportID The selected import ID.
+	 */
+	function displayConfirmationPopup( selectedImportID ) {
+		var $dialogContiner         = $( '#js-ocdi-modal-content' );
+		var currentFilePreviewImage = ocdi.import_files[ selectedImportID ]['import_preview_image_url'] || '';
+		var previewImageContent     = '';
 
+		if ( '' === currentFilePreviewImage ) {
+			previewImageContent = '<p>' + ocdi.texts.missing_preview_image + '</p>';
+		}
+		else {
+			previewImageContent = '<div class="ocdi__modal-image-container"><img src="' + currentFilePreviewImage + '" alt="' + ocdi.import_files[ selectedImportID ]['import_file_name'] + '"></div>'
+		}
+
+		// Populate the dialog content.
+		$dialogContiner.prop( 'title', ocdi.texts.dialog_title );
+		$dialogContiner.html(
+			'<p style="text-align: center;"><b>' + ocdi.import_files[ selectedImportID ]['import_file_name'] + '</b></p>' +
+			previewImageContent
+		);
+
+		$dialogContiner.dialog( {
+			'dialogClass': 'wp-dialog',
+			'resizable':   false,
+			'height':      'auto',
+			'modal':       true,
+			'buttons':     [
+				{
+					text: ocdi.texts.dialog_no,
+					click: function() {
+							$(this).dialog('close');
+					}
+				},
+				{
+					text: ocdi.texts.dialog_yes,
+					class: 'button  button-primary',
+					click: function() {
+						$(this).dialog('close');
+						gridLayoutImport( selectedImportID );
+					}
+				}
+			]
+		} );
+	}
+
+	/**
+	 * The main AJAX call, which executes the import process.
+	 * @param FormData data The data to be passed to the AJAX call.
+	 */
 	function ajaxCall( data ) {
 		$.ajax({
-			method:     'POST',
-			url:        ocdi.ajax_url,
-			data:       data,
+			method:      'POST',
+			url:         ocdi.ajax_url,
+			data:        data,
 			contentType: false,
 			processData: false,
-			beforeSend: function() {
+			beforeSend:  function() {
 				$( '.js-ocdi-ajax-loader' ).show();
 			}
 		})
