@@ -103,13 +103,13 @@
 	<?php else : ?>
 
 		<!-- OCDI grid layout -->
-		<div class="ocdi__gl">
+		<div class="ocdi__gl  js-ocdi-gl">
 		<?php
 			// Prepare navigation data.
 			$categories = OCDI\Helpers::get_demo_import_categories( $this->import_files );
 		?>
 			<?php if ( ! empty( $categories ) ) : ?>
-				<div class="ocdi__gl-header">
+				<div class="ocdi__gl-header  js-ocdi-gl-header">
 					<nav class="ocdi__gl-navigation">
 						<ul>
 							<li class="active"><a href="#all" class="ocdi__gl-navigation-link  js-ocdi-nav-link"><?php esc_html_e( 'All', 'pt-ocdi' ); ?></a></li>

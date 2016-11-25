@@ -98,7 +98,7 @@
 
 /* AJAX loader */
 
-.ocdi__ajax-loader {
+p.ocdi__ajax-loader {
 	font-size: 1.5em;
 	display: none;
 }

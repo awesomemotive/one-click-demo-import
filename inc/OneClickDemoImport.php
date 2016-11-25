@@ -177,6 +177,7 @@ class OneClickDemoImport {
 						'dialog_title'          => esc_html__( 'Are you sure?', 'pt-ocdi' ),
 						'dialog_no'             => esc_html__( 'Cancel', 'pt-ocdi' ),
 						'dialog_yes'            => esc_html__( 'Yes, import!', 'pt-ocdi' ),
+						'selected_import_title' => esc_html__( 'Selected demo import:', 'pt-ocdi' ),
 					),
 				)
 			);
