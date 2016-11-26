@@ -551,4 +551,14 @@ class Helpers {
 
 		return false;
 	}
+
+
+	/**
+	 * Set the OCDI transient with the current importer data.
+	 *
+	 * @param array $data Data to be saved to the transient.
+	 */
+	public static function set_ocdi_import_data_transient( $data ) {
+		set_transient( 'ocdi_importer_data', $data, 0.1 * HOUR_IN_SECONDS );
+	}
 }

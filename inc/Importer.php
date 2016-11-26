@@ -139,9 +139,6 @@ class Importer {
 			$message = ob_get_clean();
 		}
 
-		// Delete content importer data for current import from DB.
-		delete_transient( 'ocdi_importer_data' );
-
 		// Return any error messages for the front page output (errors, critical, alert and emergency level messages only).
 		return $this->logger->error_output;
 	}
@@ -200,6 +197,6 @@ class Importer {
 	private function set_current_importer_data() {
 		$data = array_merge( $this->ocdi->get_current_importer_data(), $this->get_importer_data() );
 
-		set_transient( 'ocdi_importer_data', $data, 0.5 * HOUR_IN_SECONDS );
+		Helpers::set_ocdi_import_data_transient( $data );
 	}
 }

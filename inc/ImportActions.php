@@ -13,12 +13,18 @@ class ImportActions {
 	 * Register all action hooks for this class.
 	 */
 	public function register_hooks() {
+		// Before content import.
 		add_action( 'pt-ocdi/before_content_import_execution', array( $this, 'before_content_import_action' ), 10, 3 );
 
+		// After content import.
 		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 3 );
 		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'widgets_import' ), 20, 3 );
-		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'customizer_import' ), 30, 3 );
-		add_action( 'pt-ocdi/after_content_import_execution', array( $this, 'after_import_action' ), 40, 3 );
+
+		// Customizer import.
+		add_action( 'pt-ocdi/customizer_import_execution', array( $this, 'customizer_import' ), 10, 1 );
+
+		// After full import action.
+		add_action( 'pt-ocdi/after_all_import_execution', array( $this, 'after_import_action' ), 10, 3 );
 	}
 
 
@@ -43,7 +49,7 @@ class ImportActions {
 	 * @param array $import_files          The filtered import files defined in `pt-ocdi/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
-	public function customizer_import( $selected_import_files, $import_files, $selected_index ) {
+	public function customizer_import( $selected_import_files ) {
 		if ( ! empty( $selected_import_files['customizer'] ) ) {
 			CustomizerImporter::import( $selected_import_files['customizer'] );
 		}

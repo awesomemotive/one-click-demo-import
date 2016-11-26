@@ -99,6 +99,8 @@ class OneClickDemoImport {
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'wp_ajax_ocdi_import_demo_data', array( $this, 'import_demo_data_ajax_callback' ) );
+		add_action( 'wp_ajax_ocdi_import_customizer_data', array( $this, 'import_customizer_data_ajax_callback' ) );
+		add_action( 'wp_ajax_ocdi_after_import_data', array( $this, 'after_all_import_data_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 	}
@@ -202,7 +204,7 @@ class OneClickDemoImport {
 		Helpers::verify_ajax_call();
 
 		// Is this a new AJAX call to continue the previous import?
-		$use_existing_importer_data = $this->set_existing_importer_data();
+		$use_existing_importer_data = $this->use_existing_importer_data();
 
 		if ( ! $use_existing_importer_data ) {
 			// Create a date and time string to use for demo and log file names.
@@ -256,6 +258,9 @@ class OneClickDemoImport {
 			}
 		}
 
+		// Save the initial import data as a transient, so other import parts can use that data.
+		Helpers::set_ocdi_import_data_transient( $this->get_current_importer_data() );
+
 		if ( ! $this->before_import_executed ) {
 			$this->before_import_executed = true;
 
@@ -280,10 +285,84 @@ class OneClickDemoImport {
 		 * Default actions:
 		 * 1 - Before widgets import setup (with priority 10).
 		 * 2 - Import widgets (with priority 20).
-		 * 3 - Import customize options (with priority 30).
-		 * 4 - After import setup (with priority 40).
 		 */
 		do_action( 'pt-ocdi/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+
+		// Request the customizer import AJAX call.
+		if ( ! empty( $this->selected_import_files['customizer'] ) ) {
+			wp_send_json( array( 'status' => 'customizerAJAX' ) );
+		}
+
+		// Request the after all import AJAX call.
+		if ( false !== has_action( 'pt-ocdi/after_all_import_execution' ) ) {
+			wp_send_json( array( 'status' => 'afterAllImportAJAX' ) );
+		}
+
+		// Send a JSON response with final report.
+		$this->final_response();
+	}
+
+
+	/**
+	 * AJAX callback for importing the customizer data.
+	 * This request has the wp_customize set to 'on', so that the customizer hooks can be called
+	 * (they can only be called with the $wp_customize instance). But if the $wp_customize is defined,
+	 * then the widgets do not import correctly, that's why the customizer import has its own AJAX call.
+	 */
+	public function import_customizer_data_ajax_callback() {
+		// Verify if the AJAX call is valid (checks nonce and current_user_can).
+		Helpers::verify_ajax_call();
+
+		// Get existing import data.
+		if ( $this->use_existing_importer_data() ) {
+			/**
+			 * Execute the customizer import actions.
+			 *
+			 * Default actions:
+			 * 1 - Customizer import (with priority 10).
+			 */
+			do_action( 'pt-ocdi/customizer_import_execution', $this->selected_import_files );
+		}
+
+		// Request the after all import AJAX call.
+		if ( false !== has_action( 'pt-ocdi/after_all_import_execution' ) ) {
+			wp_send_json( array( 'status' => 'afterAllImportAJAX' ) );
+		}
+
+		// Send a JSON response with final report.
+		$this->final_response();
+	}
+
+
+	/**
+	 * AJAX callback for the after all import action.
+	 */
+	public function after_all_import_data_ajax_callback() {
+		// Verify if the AJAX call is valid (checks nonce and current_user_can).
+		Helpers::verify_ajax_call();
+
+		// Get existing import data.
+		if ( $this->use_existing_importer_data() ) {
+			/**
+			 * Execute the after all import actions.
+			 *
+			 * Default actions:
+			 * 1 - after_import action (with priority 10).
+			 */
+			do_action( 'pt-ocdi/after_all_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+		}
+
+		// Send a JSON response with final report.
+		$this->final_response();
+	}
+
+
+	/**
+	 * Send a JSON response with final report.
+	 */
+	private function final_response() {
+		// Delete importer data transient for current import.
+		delete_transient( 'ocdi_importer_data' );
 
 		// Display final messages (success or error messages).
 		if ( empty( $this->frontend_error_messages ) ) {
@@ -319,7 +398,7 @@ class OneClickDemoImport {
 	 *
 	 * @return boolean
 	 */
-	private function set_existing_importer_data() {
+	private function use_existing_importer_data() {
 		if ( $data = get_transient( 'ocdi_importer_data' ) ) {
 			$this->frontend_error_messages = empty( $data['frontend_error_messages'] ) ? '' : $data['frontend_error_messages'];
 			$this->log_file_path           = empty( $data['log_file_path'] ) ? '' : $data['log_file_path'];

@@ -123,10 +123,16 @@ class CustomizerImporter {
 			}
 		}
 
+		do_action( 'customize_save', $wp_customize );
+
 		// Loop through the mods and save the mods.
 		foreach ( $data['mods'] as $key => $val ) {
+			do_action( 'customize_save_' . $key, $wp_customize );
+
 			set_theme_mod( $key, $val );
 		}
+
+		do_action( 'customize_save_after', $wp_customize );
 	}
 
 	/**

@@ -228,8 +228,17 @@ jQuery( function ( $ ) {
 			}
 		})
 		.done( function( response ) {
-
 			if ( 'undefined' !== typeof response.status && 'newAJAX' === response.status ) {
+				ajaxCall( data );
+			}
+			else if ( 'undefined' !== typeof response.status && 'customizerAJAX' === response.status ) {
+				data.set( 'action', 'ocdi_import_customizer_data' );
+				data.set( 'wp_customize', 'on' );
+				ajaxCall( data );
+			}
+			else if ( 'undefined' !== typeof response.status && 'afterAllImportAJAX' === response.status ) {
+				data.set( 'action', 'ocdi_after_import_data' );
+				data.delete( 'wp_customize' );
 				ajaxCall( data );
 			}
 			else if ( 'undefined' !== typeof response.message ) {
