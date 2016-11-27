@@ -133,10 +133,18 @@ jQuery( function ( $ ) {
 		$( '.js-ocdi-ajax-response' ).empty();
 
 		// Hide all other import items.
-		$itemContainer.siblings( '.js-ocdi-gl-item' ).hide( 100 );
+		$itemContainer.siblings( '.js-ocdi-gl-item' ).fadeOut( 500 );
+
+		$itemContainer.animate({
+			opacity: 0
+		}, 500, 'swing', function () {
+			$itemContainer.animate({
+				opacity: 100
+			}, 500 )
+		});
 
 		// Hide the header with category navigation and search box.
-		$itemContainer.closest( '.js-ocdi-gl' ).find( '.js-ocdi-gl-header' ).hide( 100 );
+		$itemContainer.closest( '.js-ocdi-gl' ).find( '.js-ocdi-gl-header' ).fadeOut( 500 );
 
 		// Append a title for the selected demo import.
 		$itemContainer.parent().prepend( '<h3>' + ocdi.texts.selected_import_title + '</h3>' );
