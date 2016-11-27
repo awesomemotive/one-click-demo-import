@@ -133,6 +133,47 @@ class Helpers {
 			}
 		}
 
+		// ----- Set Redux file paths -----
+		// Get Redux import file as well. If defined!
+		if ( ! empty( $import_file_info['import_redux'] ) && is_array( $import_file_info['import_redux'] ) ) {
+			$redux_items = array();
+
+			// Setup filename paths to save the Redux content.
+			foreach ( $import_file_info['import_redux'] as $index => $redux_item ) {
+				$redux_filename = apply_filters( 'pt-ocdi/downloaded_redux_file_prefix', 'demo-redux-import-file_' ) . $index . '-' . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_redux_file_suffix_and_file_extension', '.json' );
+
+				// Download the Redux import file.
+				$file_path = $downloader->download_file( $redux_item['file_url'], $redux_filename );
+
+				// Return from this function if there was an error.
+				if ( is_wp_error( $file_path ) ) {
+					return $file_path;
+				}
+
+				$redux_items[] = array(
+					'option_name' => $redux_item['option_name'],
+					'file_path'   => $file_path,
+				);
+			}
+
+			// Download the Redux import file.
+			$downloaded_files['redux'] = $redux_items;
+		}
+		else if ( ! empty( $import_file_info['local_import_redux'] ) ) {
+
+			$redux_items = array();
+
+			// Setup filename paths to save the Redux content.
+			foreach ( $import_file_info['local_import_redux'] as $redux_item ) {
+				if ( file_exists( $redux_item['file_path'] ) ) {
+					$redux_items[] = $redux_item;
+				}
+			}
+
+			// Download the Redux import file.
+			$downloaded_files['redux'] = $redux_items;
+		}
+
 		return $downloaded_files;
 	}
 
@@ -395,6 +436,7 @@ class Helpers {
 		$content_file_info     = wp_handle_upload( $_FILES['content_file'], $upload_overrides );
 		$widget_file_info      = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
 		$customizer_file_info  = wp_handle_upload( $_FILES['customizer_file'], $upload_overrides );
+		$redux_file_info       = wp_handle_upload( $_FILES['redux_file'], $upload_overrides );
 
 		if ( empty( $content_file_info['file'] ) || isset( $content_file_info['error'] ) ) {
 			// Write error to log file and send an AJAX response with the error.
@@ -427,7 +469,7 @@ class Helpers {
 
 		// Process Customizer import file.
 		if ( $customizer_file_info && ! isset( $customizer_file_info['error'] ) ) {
-			// Set uploaded widget file.
+			// Set uploaded customizer file.
 			$selected_import_files['customizer'] = $customizer_file_info['file'];
 		}
 		else {
@@ -436,6 +478,37 @@ class Helpers {
 				sprintf(
 					__( 'Customizer file was not uploaded. Error: %s', 'pt-ocdi' ),
 					$customizer_file_info['error']
+				),
+				$log_file_path,
+				esc_html__( 'Upload files' , 'pt-ocdi' )
+			);
+		}
+
+		// Process Redux import file.
+		if ( $redux_file_info && ! isset( $redux_file_info['error'] ) ) {
+			if ( isset( $_POST['redux_option_name'] ) && empty( $_POST['redux_option_name'] ) ) {
+				// Write error to log file and send an AJAX response with the error.
+				self::log_error_and_send_ajax_response(
+					esc_html__( 'Missing Redux option name! Please also enter the Redux option name!', 'pt-ocdi' ),
+					$log_file_path,
+					esc_html__( 'Upload files', 'pt-ocdi' )
+				);
+			}
+
+			// Set uploaded Redux file.
+			$selected_import_files['redux'] = array(
+				array(
+					'option_name' => $_POST['redux_option_name'],
+					'file_path'   => $redux_file_info['file'],
+				),
+			);
+		}
+		else {
+			// Add this error to log file.
+			$log_added = self::append_to_file(
+				sprintf(
+					__( 'Redux file was not uploaded. Error: %s', 'pt-ocdi' ),
+					$redux_file_info['error']
 				),
 				$log_file_path,
 				esc_html__( 'Upload files' , 'pt-ocdi' )
@@ -466,12 +539,13 @@ class Helpers {
 			ini_get( 'max_execution_time' )
 		) . PHP_EOL .
 		sprintf(
-			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s', 'pt-ocdi' ),
+			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux file = %6$s', 'pt-ocdi' ),
 			PHP_EOL,
 			get_site_url(),
 			$selected_import_files['content'],
 			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets'],
-			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['customizer']
+			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['customizer'],
+			empty( $selected_import_files['redux'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : esc_html( 'Successfully saved!', 'pt-ocdi' )
 		);
 	}
 

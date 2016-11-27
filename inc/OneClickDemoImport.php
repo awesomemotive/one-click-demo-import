@@ -262,7 +262,7 @@ class OneClickDemoImport {
 			}
 		}
 
-		// Save the initial import data as a transient, so other import parts can use that data.
+		// Save the initial import data as a transient, so other import parts (in new AJAX calls) can use that data.
 		Helpers::set_ocdi_import_data_transient( $this->get_current_importer_data() );
 
 		if ( ! $this->before_import_executed ) {
@@ -289,8 +289,12 @@ class OneClickDemoImport {
 		 * Default actions:
 		 * 1 - Before widgets import setup (with priority 10).
 		 * 2 - Import widgets (with priority 20).
+		 * 3 - Import Redux data (with priority 30).
 		 */
 		do_action( 'pt-ocdi/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+
+		// Save the import data as a transient, so other import parts (in new AJAX calls) can use that data.
+		Helpers::set_ocdi_import_data_transient( $this->get_current_importer_data() );
 
 		// Request the customizer import AJAX call.
 		if ( ! empty( $this->selected_import_files['customizer'] ) ) {

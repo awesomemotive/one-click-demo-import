@@ -285,3 +285,8 @@ h4.ocdi__gl-item-title {
 	border-left: 4px solid #00a0d2;
 	margin: 0.8em 0;
 }
+
+/* Redux */
+.ocdi__redux-option-name-label {
+	margin-right: 5px;
+}

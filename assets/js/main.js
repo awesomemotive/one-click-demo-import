@@ -29,6 +29,10 @@ jQuery( function ( $ ) {
 		if ( $('#ocdi__customizer-file-upload').length ) {
 			data.append( 'customizer_file', $('#ocdi__customizer-file-upload')[0].files[0] );
 		}
+		if ( $('#ocdi__redux-file-upload').length ) {
+			data.append( 'redux_file', $('#ocdi__redux-file-upload')[0].files[0] );
+			data.append( 'redux_option_name', $('#ocdi__redux-option-name').val() );
+		}
 
 		// AJAX call to import everything (content, widgets, before/after setup)
 		ajaxCall( data );
