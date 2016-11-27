@@ -168,13 +168,17 @@ class OneClickDemoImport {
 
 			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery', 'jquery-ui-dialog' ), PT_OCDI_VERSION );
 
+			// Get theme data.
+			$theme = wp_get_theme();
+
 			wp_localize_script( 'ocdi-main-js', 'ocdi',
 				array(
-					'ajax_url'     => admin_url( 'admin-ajax.php' ),
-					'ajax_nonce'   => wp_create_nonce( 'ocdi-ajax-verification' ),
-					'import_files' => $this->import_files,
-					'import_popup' => apply_filters( 'pt-ocdi/enable_grid_layout_import_popup_confirmation', true ),
-					'texts'        => array(
+					'ajax_url'         => admin_url( 'admin-ajax.php' ),
+					'ajax_nonce'       => wp_create_nonce( 'ocdi-ajax-verification' ),
+					'import_files'     => $this->import_files,
+					'import_popup'     => apply_filters( 'pt-ocdi/enable_grid_layout_import_popup_confirmation', true ),
+					'theme_screenshot' => $theme->get_screenshot(),
+					'texts'            => array(
 						'missing_preview_image' => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
 						'dialog_title'          => esc_html__( 'Are you sure?', 'pt-ocdi' ),
 						'dialog_no'             => esc_html__( 'Cancel', 'pt-ocdi' ),

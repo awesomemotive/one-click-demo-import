@@ -162,7 +162,7 @@ jQuery( function ( $ ) {
 	 */
 	function displayConfirmationPopup( selectedImportID, $itemContainer ) {
 		var $dialogContiner         = $( '#js-ocdi-modal-content' );
-		var currentFilePreviewImage = ocdi.import_files[ selectedImportID ]['import_preview_image_url'] || '';
+		var currentFilePreviewImage = ocdi.import_files[ selectedImportID ]['import_preview_image_url'] || ocdi.theme_screenshot;
 		var previewImageContent     = '';
 		var importNotice            = ocdi.import_files[ selectedImportID ]['import_notice'] || '';
 		var importNoticeContent     = '';
@@ -182,7 +182,7 @@ jQuery( function ( $ ) {
 		// Populate the dialog content.
 		$dialogContiner.prop( 'title', ocdi.texts.dialog_title );
 		$dialogContiner.html(
-			'<p style="text-align: center;"><b>' + ocdi.import_files[ selectedImportID ]['import_file_name'] + '</b></p>' +
+			'<p class="ocdi__modal-item-title">' + ocdi.import_files[ selectedImportID ]['import_file_name'] + '</p>' +
 			previewImageContent +
 			importNoticeContent
 		);
