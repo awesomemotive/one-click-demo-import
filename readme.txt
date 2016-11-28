@@ -1,5 +1,5 @@
 === One Click Demo Import ===
-Contributors: capuderg, cyman
+Contributors: capuderg, cyman, Prelc
 Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
 Tested up to: 4.6
