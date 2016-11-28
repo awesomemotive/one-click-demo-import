@@ -92,14 +92,18 @@ jQuery( function ( $ ) {
 
 		// Show all items if the 'hash' is equal to '#all'.
 		if ( '#all' === this.hash ) {
-			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).show();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).fadeIn( 300 );
 		}
 		else {
 			// Hide all items.
-			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).hide();
+			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).fadeOut( 300 );
 
 			// Show just the ones that have the correct category data.
-			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item[data-categories*="' + this.hash.slice(1) + '"]' ).show();
+			var category = this.hash.slice(1);
+			setTimeout( function() {
+				$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item[data-categories*="' + category + '"]' ).fadeIn( 300 );
+			}, 310 );
+
 		}
 	} );
 
