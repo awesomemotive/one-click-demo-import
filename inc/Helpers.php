@@ -533,19 +533,23 @@ class Helpers {
 	 * @param array $selected_import_files array of selected import files.
 	 */
 	public static function import_file_info( $selected_import_files ) {
+		$redux_file_string = array_reduce( $selected_import_files['redux'], function( $string, $item ) {
+			return sprintf( '%1$s%2$s -> %3$s %4$s', $string, $item['option_name'], $item['file_path'], PHP_EOL );
+		}, '' );
+
 		return PHP_EOL .
 		sprintf(
 			__( 'Initial max execution time = %s', 'pt-ocdi' ),
 			ini_get( 'max_execution_time' )
 		) . PHP_EOL .
 		sprintf(
-			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux file = %6$s', 'pt-ocdi' ),
+			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s', 'pt-ocdi' ),
 			PHP_EOL,
 			get_site_url(),
 			$selected_import_files['content'],
 			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets'],
 			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['customizer'],
-			empty( $selected_import_files['redux'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : esc_html( 'Successfully saved!', 'pt-ocdi' )
+			empty( $selected_import_files['redux'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $redux_file_string
 		);
 	}
 
