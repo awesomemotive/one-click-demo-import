@@ -75,6 +75,12 @@ function ocdi_import_files() {
 			'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content.xml',
 			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets.json',
 			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer.dat',
+			'import_redux'               => array(
+				array(
+					'file_url'    => 'http://www.your_domain.com/ocdi/redux.json',
+					'option_name' => 'redux_option_name',
+				),
+			),
 			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
 			'import_notice'              => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
 		),
@@ -83,6 +89,16 @@ function ocdi_import_files() {
 			'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content2.xml',
 			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets2.json',
 			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer2.dat',
+			'import_redux'               => array(
+				array(
+					'file_url'    => 'http://www.your_domain.com/ocdi/redux.json',
+					'option_name' => 'redux_option_name',
+				),
+				array(
+					'file_url'    => 'http://www.your_domain.com/ocdi/redux2.json',
+					'option_name' => 'redux_option_name_2',
+				),
+			),
 			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
 			'import_notice'              => __( 'A special note for this import.', 'your-textdomain' ),
 		),
@@ -91,7 +107,7 @@ function ocdi_import_files() {
 add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 `
 
-You can set content import, widgets, and customizer import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports.
+You can set content import, widgets, customizer and Redux framework import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports.
 
 = How to automatically assign "Front page", "Posts page" and menu locations after the importer is done? =
 
@@ -131,6 +147,12 @@ function ocdi_import_files() {
 			'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content.xml',
 			'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets.json',
 			'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer.dat',
+			'local_import_redux'           => array(
+				array(
+					'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux.json',
+					'option_name' => 'redux_option_name',
+				),
+			),
 			'import_preview_image_url'     => 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
 			'import_notice'                => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
 		),
@@ -139,6 +161,16 @@ function ocdi_import_files() {
 			'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content2.xml',
 			'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets2.json',
 			'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer2.dat',
+			'local_import_redux'           => array(
+				array(
+					'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux.json',
+					'option_name' => 'redux_option_name',
+				),
+				array(
+					'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux2.json',
+					'option_name' => 'redux_option_name_2',
+				),
+			),
 			'import_preview_image_url'     => 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
 			'import_notice'                => __( 'A special note for this import.', 'your-textdomain' ),
 		),
