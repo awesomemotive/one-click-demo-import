@@ -18,6 +18,23 @@ class ReduxImporter {
 		$ocdi          = OneClickDemoImport::get_instance();
 		$log_file_path = $ocdi->get_log_file_path();
 
+		// Redux plugin is not active!
+		if ( ! class_exists( 'ReduxFrameworkPlugin' ) ) {
+			$error_message = esc_html__( 'The Redux plugin is not activated, so the Redux import was skipped!', 'pt-ocdi' );
+
+			// Add any error messages to the frontend_error_messages variable in OCDI main class.
+			$ocdi->append_to_frontend_error_messages( $error_message );
+
+			// Write error to log file.
+			Helpers::append_to_file(
+				$error_message,
+				$log_file_path,
+				esc_html__( 'Importing Redux settings' , 'pt-ocdi' )
+			);
+
+			return;
+		}
+
 		foreach ( $import_data as $redux_item ) {
 			$redux_options_raw_data = Helpers::data_from_file( $redux_item['file_path'] );
 

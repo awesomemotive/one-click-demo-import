@@ -56,27 +56,6 @@ jQuery( function ( $ ) {
 		}
 	});
 
-	/**
-	 * Switch preview images on select change event, but only if the img element .js-ocdi-preview-image exists.
-	 * Also switch the import notice (if it exists).
-	 */
-	$( '#ocdi__demo-import-files' ).on( 'change', function(){
-		if ( $( '.js-ocdi-preview-image' ).length ) {
-
-			// Attempt to change the image, else display message for missing image.
-			var currentFilePreviewImage = ocdi.import_files[ this.value ]['import_preview_image_url'] || '';
-			$( '.js-ocdi-preview-image' ).prop( 'src', currentFilePreviewImage );
-			$( '.js-ocdi-preview-image-message' ).html( '' );
-
-			if ( '' === currentFilePreviewImage ) {
-				$( '.js-ocdi-preview-image-message' ).html( ocdi.texts.missing_preview_image );
-			}
-		}
-
-		// Update import notice.
-		var currentImportNotice = ocdi.import_files[ this.value ]['import_notice'] || '';
-		$( '.js-ocdi-demo-import-notice' ).html( currentImportNotice );
-	});
 
 	/**
 	 * Grid Layout categories navigation.
@@ -111,7 +90,7 @@ jQuery( function ( $ ) {
 	/**
 	 * Grid Layout search functionality.
 	 */
-	$( '.js-ocdi-mql-search' ).on( 'keyup', function( event ) {
+	$( '.js-ocdi-gl-search' ).on( 'keyup', function( event ) {
 		if ( 0 < $(this).val().length ) {
 			// Hide all items.
 			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).hide();
