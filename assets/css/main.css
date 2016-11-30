@@ -282,6 +282,25 @@ h4.ocdi__gl-item-title {
 	}
 }
 
+/* Grid animations */
+@keyframes ocdi-fade {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+.ocdi-is-fadeout {
+	animation: ocdi-fade linear 200ms 1 forwards;
+}
+
+.ocdi-is-fadein {
+	animation: ocdi-fade linear 200ms 1 reverse forwards;
+}
+
 /* Grid layout modal window */
 
 .ocdi__modal-image-container {

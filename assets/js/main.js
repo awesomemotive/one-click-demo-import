@@ -60,31 +60,85 @@ jQuery( function ( $ ) {
 	/**
 	 * Grid Layout categories navigation.
 	 */
-	$( '.js-ocdi-nav-link' ).on( 'click', function( event ) {
-		event.preventDefault();
+	(function () {
+		// Cache selector to all items
+		var $items = $( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ),
+			fadeoutClass = 'ocdi-is-fadeout',
+			fadeinClass = 'ocdi-is-fadein',
+			animationDuration = 200;
 
-		// Remove 'active' class from the previous nav list items.
-		$( this ).parent().siblings().removeClass( 'active' );
+		// Hide all items.
+		var fadeOut = function () {
+			var dfd = jQuery.Deferred();
 
-		// Add the 'active' class to this nav list item.
-		$( this ).parent().addClass( 'active' );
+			$items
+				.addClass( fadeoutClass );
 
-		// Show all items if the 'hash' is equal to '#all'.
-		if ( '#all' === this.hash ) {
-			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).fadeIn( 300 );
-		}
-		else {
-			// Hide all items.
-			$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item' ).fadeOut( 300 );
-
-			// Show just the ones that have the correct category data.
-			var category = this.hash.slice(1);
 			setTimeout( function() {
-				$( '.js-ocdi-gl-item-container' ).find( '.js-ocdi-gl-item[data-categories*="' + category + '"]' ).fadeIn( 300 );
-			}, 310 );
+				$items
+					.removeClass( fadeoutClass )
+					.hide();
 
-		}
-	} );
+				dfd.resolve();
+			}, animationDuration );
+
+			return dfd.promise();
+		};
+
+		var fadeIn = function ( category, dfd ) {
+			var filter = category ? '[data-categories*="' + category + '"]' : 'div';
+
+			if ( 'all' === category ) {
+				filter = 'div';
+			}
+
+			$items
+				.filter( filter )
+				.show()
+				.addClass( 'ocdi-is-fadein' );
+
+			setTimeout( function() {
+				$items
+					.removeClass( fadeinClass );
+
+				dfd.resolve();
+			}, animationDuration );
+		};
+
+		var animate = function ( category ) {
+			var dfd = jQuery.Deferred();
+
+			var promise = fadeOut();
+
+			promise.done( function () {
+				fadeIn( category, dfd );
+			} );
+
+			return dfd;
+		};
+
+		$( '.js-ocdi-nav-link' ).on( 'click', function( event ) {
+			event.preventDefault();
+
+			// Remove 'active' class from the previous nav list items.
+			$( this ).parent().siblings().removeClass( 'active' );
+
+			// Add the 'active' class to this nav list item.
+			$( this ).parent().addClass( 'active' );
+
+			var category = this.hash.slice(1);
+
+			// show/hide the right items, based on category selected
+			var $container = $( '.js-ocdi-gl-item-container' );
+			$container.css( 'min-width', $container.outerHeight() );
+
+			var promise = animate( category );
+
+			promise.done( function () {
+				$container.removeAttr( 'style' );
+			} );
+		} );
+	}());
 
 
 	/**
@@ -126,7 +180,7 @@ jQuery( function ( $ ) {
 			opacity: 0
 		}, 500, 'swing', function () {
 			$itemContainer.animate({
-				opacity: 100
+				opacity: 1
 			}, 500 )
 		});
 
