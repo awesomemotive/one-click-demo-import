@@ -30,6 +30,7 @@ module.exports = function ( grunt ) {
 					'inc/**',
 					'languages/**',
 					'vendor/**',
+					'views/**',
 				],
 				flatten: false
 			}
