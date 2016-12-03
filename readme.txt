@@ -2,8 +2,8 @@
 Contributors: capuderg, cyman, Prelc
 Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
-Tested up to: 4.6
-Stable tag: 1.4.0
+Tested up to: 4.7
+Stable tag: 2.0.0
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -72,6 +72,7 @@ function ocdi_import_files() {
 	return array(
 		array(
 			'import_file_name'           => 'Demo Import 1',
+			'categories'                 => array( 'Category 1', 'Category 2' ),
 			'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content.xml',
 			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets.json',
 			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer.dat',
@@ -86,6 +87,7 @@ function ocdi_import_files() {
 		),
 		array(
 			'import_file_name'           => 'Demo Import 2',
+			'categories'                 => array( 'New category', 'Old category' ),
 			'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content2.xml',
 			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets2.json',
 			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer2.dat',
@@ -107,7 +109,7 @@ function ocdi_import_files() {
 add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 `
 
-You can set content import, widgets, customizer and Redux framework import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports.
+You can set content import, widgets, customizer and Redux framework import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports. Categories can be assigned to each demo import, so that they can be filtered easily.
 
 = How to automatically assign "Front page", "Posts page" and menu locations after the importer is done? =
 
@@ -144,6 +146,7 @@ function ocdi_import_files() {
 	return array(
 		array(
 			'import_file_name'             => 'Demo Import 1',
+			'categories'                   => array( 'Category 1', 'Category 2' ),
 			'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content.xml',
 			'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets.json',
 			'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer.dat',
@@ -158,6 +161,7 @@ function ocdi_import_files() {
 		),
 		array(
 			'import_file_name'             => 'Demo Import 2',
+			'categories'                   => array( 'New category', 'Old category' ),
 			'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content2.xml',
 			'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets2.json',
 			'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer2.dat',
@@ -252,6 +256,24 @@ function ocdi_plugin_page_setup( $default_settings ) {
 add_filter( 'pt-ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
 `
 
+= How to do something before the content import executes? =
+
+In version 2.0.0 there is a new action hook: `pt-ocdi/before_content_import`, which will let you hook before the content import starts. An example of the code would look like this:
+
+`
+function ocdi_before_content_import( $selected_import ) {
+	if ( 'Demo Import 1' === $selected_import['import_file_name'] ) {
+		// Here you can do stuff for the "Demo Import 1" before the content import starts.
+		echo "before import 1";
+	}
+	else {
+		// Here you can do stuff for all other imports before the content import starts.
+		echo "before import 2";
+	}
+}
+add_action( 'pt-ocdi/before_content_import', 'ocdi_before_content_import' );
+`
+
 = I can't activate the plugin, because of a fatal error, what can I do? =
 
 *Update: since version 1.2.0, there is now a admin error notice, stating that the minimal PHP version required for this plugin is 5.3.2.*
@@ -273,6 +295,19 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 3. Example of how the import page looks like, when no demo imports are predefined a.k.a manual import.
 
 == Changelog ==
+
+= 2.0.0 =
+
+*Release Date - 3 December 2016*
+
+* Add new layout for multiple predefined demo imports (a grid layout instead of the dropdown selector),
+* Add support for Redux framework import,
+* Change the code structure of the plugin (plugin rewrite, namespaces, autoloading),
+* Now the whole import (content, widgets, customizer, redux) goes through even if something goes wrong in the content import (before content import errors blocked further import),
+* Add `pt-ocdi/before_content_import` action hook, that theme authors can use to hook into before the content import starts,
+* Fix frontend error reporting through multiple AJAX calls,
+* Fix post formats (video/quote/gallery,...) not importing,
+* Fix customizer import does not save some options (because of the missing WP actions).
 
 = 1.4.0 =
 
