@@ -309,7 +309,7 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 ### 2.0.0 ###
 
-*Release Date - 3 December 2016*
+*Release Date - 10 December 2016*
 
 * Add new layout for multiple predefined demo imports (a grid layout instead of the dropdown selector),
 * Add support for Redux framework import,
@@ -318,7 +318,7 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 * Add `pt-ocdi/before_content_import` action hook, that theme authors can use to hook into before the content import starts,
 * Fix frontend error reporting through multiple AJAX calls,
 * Fix post formats (video/quote/gallery,...) not importing,
-* Fix customizer import does not save some options (because of the missing WP actions).
+* Fix customizer import does not save some options (because of the missing WP actions - these can be enabled via a filter, more in the FAQ section).
 
 ### 1.4.0 ###
 
