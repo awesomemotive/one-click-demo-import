@@ -65,7 +65,7 @@ class OneClickDemoImport {
 	 *
 	 * @var string
 	 */
-	private $frontend_error_messages = '';
+	private $frontend_error_messages = array();
 
 	/**
 	 * Was the before content import already triggered?
@@ -279,7 +279,7 @@ class OneClickDemoImport {
 
 		/**
 		 * 3). Import content.
-		 * Returns any errors greater then the "error" logger level, that will be displayed on front page.
+		 * Returns any errors greater then the "warning" logger level, that will be displayed on front page.
 		 */
 		$this->append_to_frontend_error_messages( $this->importer->import_content( $this->selected_import_files['content'] ) );
 
@@ -384,7 +384,7 @@ class OneClickDemoImport {
 			);
 		}
 		else {
-			$response['message'] = $this->frontend_error_messages . '<br>';
+			$response['message'] = $this->frontend_error_messages_display() . '<br>';
 			$response['message'] .= sprintf(
 				__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
 				'<div class="notice  notice-warning"><p>',
@@ -408,7 +408,7 @@ class OneClickDemoImport {
 	 */
 	private function use_existing_importer_data() {
 		if ( $data = get_transient( 'ocdi_importer_data' ) ) {
-			$this->frontend_error_messages = empty( $data['frontend_error_messages'] ) ? '' : $data['frontend_error_messages'];
+			$this->frontend_error_messages = empty( $data['frontend_error_messages'] ) ? array() : $data['frontend_error_messages'];
 			$this->log_file_path           = empty( $data['log_file_path'] ) ? '' : $data['log_file_path'];
 			$this->selected_index          = empty( $data['selected_index'] ) ? 0 : $data['selected_index'];
 			$this->selected_import_files   = empty( $data['selected_import_files'] ) ? array() : $data['selected_import_files'];
@@ -452,10 +452,29 @@ class OneClickDemoImport {
 	 *
 	 * @param string $additional_value The additional value that will be appended to the existing frontend_error_messages.
 	 */
-	public function append_to_frontend_error_messages( $additional_value ) {
-		if ( ! empty( $additional_value ) ) {
-			$this->frontend_error_messages .= $additional_value . '<br>' ;
+	public function append_to_frontend_error_messages( $text ) {
+		if ( ! empty( $text ) && ! in_array( $text , $this->frontend_error_messages ) ) {
+			$this->frontend_error_messages[] = $text;
 		}
+	}
+
+
+	/**
+	 * Display the frontend error messages.
+	 *
+	 * @return string Text with HTML markup.
+	 */
+	public function frontend_error_messages_display() {
+		$output = '';
+
+		if ( ! empty( $this->frontend_error_messages ) ) {
+			foreach ( $this->frontend_error_messages as $line ) {
+				$output .= nl2br( $line );
+				$output .= '<br>';
+			}
+		}
+
+		return $output;
 	}
 
 
