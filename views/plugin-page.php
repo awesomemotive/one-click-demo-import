@@ -85,7 +85,7 @@ namespace OCDI;
 				<input id="ocdi__customizer-file-upload" type="file" name="customizer-file-upload">
 			</div>
 
-			<?php if ( class_exists( 'ReduxFrameworkPlugin' ) ) : ?>
+			<?php if ( class_exists( 'ReduxFramework' ) ) : ?>
 			<div class="ocdi__file-upload">
 				<h3><label for="redux-file-upload"><?php esc_html_e( 'Choose a JSON file for Redux import:', 'pt-ocdi' ); ?></label> <span><?php esc_html_e( '(*optional)', 'pt-ocdi' ); ?></span></h3>
 				<input id="ocdi__redux-file-upload" type="file" name="redux-file-upload">
