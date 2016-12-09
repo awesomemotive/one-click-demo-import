@@ -141,7 +141,7 @@ class OneClickDemoImport {
 			$plugin_page_setup['menu_title'],
 			$plugin_page_setup['capability'],
 			$plugin_page_setup['menu_slug'],
-			array( $this, 'display_plugin_page' )
+			apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) )
 		);
 	}
 
