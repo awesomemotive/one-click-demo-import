@@ -123,16 +123,25 @@ class CustomizerImporter {
 			}
 		}
 
-		do_action( 'customize_save', $wp_customize );
+		// Should the customizer import use the WP customize_save* hooks?
+		$use_wp_customize_save_hooks = apply_filters( 'pt-ocdi/enable_wp_customize_save_hooks', false );
+
+		if ( $use_wp_customize_save_hooks ) {
+			do_action( 'customize_save', $wp_customize );
+		}
 
 		// Loop through the mods and save the mods.
 		foreach ( $data['mods'] as $key => $val ) {
-			do_action( 'customize_save_' . $key, $wp_customize );
+			if ( $use_wp_customize_save_hooks ) {
+				do_action( 'customize_save_' . $key, $wp_customize );
+			}
 
 			set_theme_mod( $key, $val );
 		}
 
-		do_action( 'customize_save_after', $wp_customize );
+		if ( $use_wp_customize_save_hooks ) {
+			do_action( 'customize_save_after', $wp_customize );
+		}
 	}
 
 	/**
