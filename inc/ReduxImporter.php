@@ -19,7 +19,7 @@ class ReduxImporter {
 		$log_file_path = $ocdi->get_log_file_path();
 
 		// Redux plugin is not active!
-		if ( ! class_exists( 'ReduxFrameworkPlugin' ) ) {
+		if ( ! class_exists( 'ReduxFramework' ) ) {
 			$error_message = esc_html__( 'The Redux plugin is not activated, so the Redux import was skipped!', 'pt-ocdi' );
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
