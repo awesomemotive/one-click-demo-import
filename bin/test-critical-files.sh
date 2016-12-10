@@ -14,10 +14,13 @@ function testRequiredFiles {
 		assets/js/main.js
 		inc/CustomizerImporter.php
 		inc/CustomizerOption.php
+		inc/Downloader.php
 		inc/Helpers.php
+		inc/ImportActions.php
 		inc/Importer.php
 		inc/Logger.php
 		inc/OneClickDemoImport.php
+		inc/ReduxImporter.php
 		inc/WidgetImporter.php
 		inc/WXRImporter.php
 		vendor/proteusthemes/wp-content-importer-v2/src/WPImporterLoggerCLI.php
