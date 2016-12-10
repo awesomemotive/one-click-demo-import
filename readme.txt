@@ -274,7 +274,11 @@ add_action( 'pt-ocdi/before_content_import', 'ocdi_before_content_import' );
 
 = How can I enable the `customize_save*` wp action hooks in the customizer import? =
 
-It's easy, just add this to your theme: `add_action( 'pt-ocdi/enable_wp_customize_save_hooks', '__return_true' );`. This will enable the following WP hooks when importing the customizer data: `customize_save`, `customize_save_*`, `customize_save_after`.
+It's easy, just add this to your theme:
+
+`add_action( 'pt-ocdi/enable_wp_customize_save_hooks', '__return_true' );`
+
+This will enable the following WP hooks when importing the customizer data: `customize_save`, `customize_save_*`, `customize_save_after`.
 
 
 = I can't activate the plugin, because of a fatal error, what can I do? =
@@ -285,7 +289,7 @@ You want to activate the plugin, but this error shows up:
 
 *Plugin could not be activated because it triggered a fatal error*
 
-This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x*. Please contact your hosting company and ask them to update the PHP version for your site.
+This happens, because your hosting server is using a very old version of PHP. This plugin requires PHP version of at least **5.3.x**, but we recommend version *5.6.x* or better yet *7.x*. Please contact your hosting company and ask them to update the PHP version for your site.
 
 = Issues with the import, that we can't fix in the plugin =
 
