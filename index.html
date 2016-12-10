@@ -91,13 +91,14 @@
 			</h3>
 
 			<p>
-				There are three import files that you can prepare and use for your demo imports:
+				There are four import files that you can prepare and use for your demo imports:
 			</p>
 
 			<ul>
 				<li><strong>Content import</strong> - a normal WordPress content export file (XML format)</li>
-				<li><strong>Widgets import</strong> (optional) - create that file using the <a href="https://wordpress.org/plugins/widget-importer-exporter/">Widget Importer &amp; Exporter</a> plugin (JSON/WIE format)</li>
-				<li><strong>Customizer import</strong> (optional) - create that file using the <a href="https://wordpress.org/plugins/customizer-export-import/">Customizer Export/Import</a> plugin (DAT format)</li>
+				<li><strong>Widgets import</strong> (optional) - create that file using the <a href="https://wordpress.org/plugins/widget-importer-exporter/" target="_blank">Widget Importer &amp; Exporter</a> plugin (JSON/WIE format)</li>
+				<li><strong>Customizer import</strong> (optional) - create that file using the <a href="https://wordpress.org/plugins/customizer-export-import/" target="_blank">Customizer Export/Import</a> plugin (DAT format)</li>
+				<li><strong>Redux framework import</strong> (optional) - create that file using the <a href="https://wordpress.org/plugins/redux-framework/" target="_blank">Redux Framework</a> plugin (JSON format)</li>
 			</ul>
 			<small>Note: the customizer settings will be imported only if the export file was created from the same theme.</small>
 
@@ -112,17 +113,35 @@
   return array(
     array(
       'import_file_name'           =&gt; 'Demo Import 1',
+      'categories'                 =&gt; array( 'Category 1', 'Category 2' ),
       'import_file_url'            =&gt; 'http://www.your_domain.com/ocdi/demo-content.xml',
       'import_widget_file_url'     =&gt; 'http://www.your_domain.com/ocdi/widgets.json',
       'import_customizer_file_url' =&gt; 'http://www.your_domain.com/ocdi/customizer.dat',
+      'import_redux'               =&gt; array(
+        array(
+          'file_url'    =&gt; 'http://www.your_domain.com/ocdi/redux.json',
+          'option_name' =&gt; 'redux_option_name',
+        ),
+      ),
       'import_preview_image_url'   =&gt; 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
       'import_notice'              =&gt; __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
     ),
     array(
       'import_file_name'           =&gt; 'Demo Import 2',
+      'categories'                 =&gt; array( 'New category', 'Old category' ),
       'import_file_url'            =&gt; 'http://www.your_domain.com/ocdi/demo-content2.xml',
       'import_widget_file_url'     =&gt; 'http://www.your_domain.com/ocdi/widgets2.json',
       'import_customizer_file_url' =&gt; 'http://www.your_domain.com/ocdi/customizer2.dat',
+      'import_redux'               =&gt; array(
+        array(
+          'file_url'    =&gt; 'http://www.your_domain.com/ocdi/redux.json',
+          'option_name' =&gt; 'redux_option_name',
+        ),
+        array(
+          'file_url'    =&gt; 'http://www.your_domain.com/ocdi/redux2.json',
+          'option_name' =&gt; 'redux_option_name_2',
+        ),
+      ),
       'import_preview_image_url'   =&gt; 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
       'import_notice'              =&gt; __( 'A special note for this import.', 'your-textdomain' ),
     ),
@@ -131,7 +150,7 @@
 add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 </code></pre>
 
-			<p>You can set content import, widgets, and customizer import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports. The import notice can be used, to notify the user and is displayed before the <b>Import Demo Data</b> button.</p>
+			<p>You can set content import, widgets, customizer and Redux framework import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports. The import notice can be used, to notify the user and is displayed before the <b>Import Demo Data</b> button.</p>
 
 			<h3>
 				<a id="what-about-using-local-import-files-from-theme-folder" class="anchor" href="#what-about-using-local-import-files-from-theme-folder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
@@ -144,17 +163,35 @@ add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
   return array(
     array(
       'import_file_name'             =&gt; 'Demo Import 1',
+      'categories'                   =&gt; array( 'Category 1', 'Category 2' ),
       'local_import_file'            =&gt; trailingslashit( get_template_directory() ) . 'ocdi/demo-content.xml',
       'local_import_widget_file'     =&gt; trailingslashit( get_template_directory() ) . 'ocdi/widgets.json',
       'local_import_customizer_file' =&gt; trailingslashit( get_template_directory() ) . 'ocdi/customizer.dat',
+      'local_import_redux'           =&gt; array(
+        array(
+          'file_path'   =&gt; trailingslashit( get_template_directory() ) . 'ocdi/redux.json',
+          'option_name' =&gt; 'redux_option_name',
+        ),
+      ),
       'import_preview_image_url'     =&gt; 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
       'import_notice'                =&gt; __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
     ),
     array(
       'import_file_name'             =&gt; 'Demo Import 2',
+      'categories'                   =&gt; array( 'New category', 'Old category' ),
       'local_import_file'            =&gt; trailingslashit( get_template_directory() ) . 'ocdi/demo-content2.xml',
       'local_import_widget_file'     =&gt; trailingslashit( get_template_directory() ) . 'ocdi/widgets2.json',
       'local_import_customizer_file' =&gt; trailingslashit( get_template_directory() ) . 'ocdi/customizer2.dat',
+      'local_import_redux'           =&gt; array(
+        array(
+          'file_path'   =&gt; trailingslashit( get_template_directory() ) . 'ocdi/redux.json',
+          'option_name' =&gt; 'redux_option_name',
+        ),
+        array(
+          'file_path'   =&gt; trailingslashit( get_template_directory() ) . 'ocdi/redux2.json',
+          'option_name' =&gt; 'redux_option_name_2',
+        ),
+      ),
       'import_preview_image_url'     =&gt; 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
       'import_notice'                =&gt; __( 'A special note for this import.', 'your-textdomain' ),
     ),
@@ -183,7 +220,7 @@ add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 			</h3>
 
 			<p>
-				<img src="http://ps.w.org/one-click-demo-import/assets/screenshot-1.png" alt="Example of multiple predefined demo imports, that a user can choose from.">
+				<img src="http://ps.w.org/one-click-demo-import/assets/screenshot-1.png?rev=1551283" alt="Example of multiple predefined demo imports, that a user can choose from.">
 			</p>
 
 			<h3>
