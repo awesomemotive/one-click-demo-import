@@ -1,10 +1,10 @@
 # One Click Demo Import #
-**Contributors:** capuderg, cyman, Prelc  
-**Tags:** import, content, demo, data, widgets, settings  
-**Requires at least:** 4.0.0  
-**Tested up to:** 4.7  
-**Stable tag:** 2.0.0  
-**License:** GPLv3 or later  
+**Contributors:** capuderg, cyman, Prelc
+**Tags:** import, content, demo, data, widgets, settings
+**Requires at least:** 4.0.0
+**Tested up to:** 4.7
+**Stable tag:** 2.0.0
+**License:** GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
 
@@ -117,20 +117,20 @@ You can do that, with the `pt-ocdi/after_import` action hook. The code would loo
 	function ocdi_after_import_setup() {
 		// Assign menus to their locations.
 		$main_menu = get_term_by( 'name', 'Main Menu', 'nav_menu' );
-	
+
 		set_theme_mod( 'nav_menu_locations', array(
 				'main-menu' => $main_menu->term_id,
 			)
 		);
-	
+
 		// Assign front page and posts page (blog page).
 		$front_page_id = get_page_by_title( 'Home' );
 		$blog_page_id  = get_page_by_title( 'Blog' );
-	
+
 		update_option( 'show_on_front', 'page' );
 		update_option( 'page_on_front', $front_page_id->ID );
 		update_option( 'page_for_posts', $blog_page_id->ID );
-	
+
 	}
 	add_action( 'pt-ocdi/after_import', 'ocdi_after_import_setup' );
 
@@ -188,16 +188,16 @@ This question might be asked by a theme author wanting to implement different af
 
 	function ocdi_after_import( $selected_import ) {
 		echo "This will be displayed on all after imports!";
-	
+
 		if ( 'Demo Import 1' === $selected_import['import_file_name'] ) {
 			echo "This will be displayed only on after import if user selects Demo Import 1";
-	
+
 			// Set logo in customizer
 			set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo1.png' );
 		}
 		elseif ( 'Demo Import 2' === $selected_import['import_file_name'] ) {
 			echo "This will be displayed only on after import if user selects Demo Import 2";
-	
+
 			// Set logo in customizer
 			set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo2.png' );
 		}
@@ -223,7 +223,7 @@ You can change the plugin intro text by using the `pt-ocdi/plugin_intro_text` fi
 
 	function ocdi_plugin_intro_text( $default_text ) {
 		$default_text .= '<div class="ocdi__intro-text">This is a custom text added to this plugin intro text.</div>';
-	
+
 		return $default_text;
 	}
 	add_filter( 'pt-ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
@@ -248,7 +248,7 @@ As a theme author you do not like the location of the "Import Demo Data" plugin 
 		$default_settings['menu_title']  = esc_html__( 'Import Demo Data' , 'pt-ocdi' );
 		$default_settings['capability']  = 'import';
 		$default_settings['menu_slug']   = 'pt-one-click-demo-import';
-	
+
 		return $default_settings;
 	}
 	add_filter( 'pt-ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
@@ -298,7 +298,7 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 ## Screenshots ##
 
 ### 1. Example of multiple predefined demo imports, that a user can choose from. ###
-![Example of multiple predefined demo imports, that a user can choose from.](http://ps.w.org/one-click-demo-import/assets/screenshot-1.png)
+![Example of multiple predefined demo imports, that a user can choose from.](http://ps.w.org/one-click-demo-import/assets/screenshot-1.png?rev=1551283)
 
 ### 2. How the import page looks like, when only one demo import is predefined. ###
 ![How the import page looks like, when only one demo import is predefined.](http://ps.w.org/one-click-demo-import/assets/screenshot-2.png)
