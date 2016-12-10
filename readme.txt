@@ -2,7 +2,7 @@
 Contributors: capuderg, cyman, Prelc
 Tags: import, content, demo, data, widgets, settings
 Requires at least: 4.0.0
-Tested up to: 4.6
+Tested up to: 4.7
 Stable tag: 2.0.0
 License: GPLv3 or later
 
@@ -21,13 +21,11 @@ The best feature of this plugin is, that theme authors can define import files i
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
-If the theme you are using does not have any predefined import files, then you will be presented with three file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import. You create that file using the [Widget Importer & Exporter](https://wordpress.org/plugins/widget-importer-exporter/) plugin. The third one is also optional and will import the customizer settings, select the DAT file which you can generate from [Customizer Export/Import](https://wordpress.org/plugins/customizer-export-import/) plugin (the customizer settings will be imported only if the export file was created from the same theme).
+If the theme you are using does not have any predefined import files, then you will be presented with three file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import. You create that file using the [Widget Importer & Exporter](https://wordpress.org/plugins/widget-importer-exporter/) plugin. The third one is also optional and will import the customizer settings, select the DAT file which you can generate from [Customizer Export/Import](https://wordpress.org/plugins/customizer-export-import/) plugin (the customizer settings will be imported only if the export file was created from the same theme). The final one is optional as well and will import your Redux framework settings. You can generate the export json file with the [Redux framework](https://wordpress.org/plugins/redux-framework/) plugin.
 
 This plugin is using the improved WP import 2.0 that is still in development and can be found here: https://github.com/humanmade/WordPress-Importer.
 
-All progress of this plugin's work is logged in a log file in the default WP upload directory, together with the demo content and widgets import files used in the importing process.
-
-NOTE: This plugin is still a work in progress!
+All progress of this plugin's work is logged in a log file in the default WP upload directory, together with the demo import files used in the importing process.
 
 NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is in the original WP Importer plugin). All demo content will be imported under the current user.
 
