@@ -281,14 +281,19 @@ jQuery( function ( $ ) {
 				ajaxCall( data );
 			}
 			else if ( 'undefined' !== typeof response.status && 'customizerAJAX' === response.status ) {
-				data.set( 'action', 'ocdi_import_customizer_data' );
-				data.set( 'wp_customize', 'on' );
-				ajaxCall( data );
+				// Fix for data.set and data.delete, which they are not supported in some browsers.
+				var newData = new FormData();
+				newData.append( 'action', 'ocdi_import_customizer_data' );
+				newData.append( 'security', ocdi.ajax_nonce );
+				newData.append( 'wp_customize', 'on' );
+				ajaxCall( newData );
 			}
 			else if ( 'undefined' !== typeof response.status && 'afterAllImportAJAX' === response.status ) {
-				data.set( 'action', 'ocdi_after_import_data' );
-				data.delete( 'wp_customize' );
-				ajaxCall( data );
+				// Fix for data.set and data.delete, which they are not supported in some browsers.
+				var newData = new FormData();
+				newData.append( 'action', 'ocdi_after_import_data' );
+				newData.append( 'security', ocdi.ajax_nonce );
+				ajaxCall( newData );
 			}
 			else if ( 'undefined' !== typeof response.message ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
