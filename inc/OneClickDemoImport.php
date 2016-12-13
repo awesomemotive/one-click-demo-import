@@ -176,6 +176,7 @@ class OneClickDemoImport {
 					'ajax_url'         => admin_url( 'admin-ajax.php' ),
 					'ajax_nonce'       => wp_create_nonce( 'ocdi-ajax-verification' ),
 					'import_files'     => $this->import_files,
+					'wp_customize_on'  => apply_filters( 'pt-ocdi/enable_wp_customize_save_hooks', false ),
 					'import_popup'     => apply_filters( 'pt-ocdi/enable_grid_layout_import_popup_confirmation', true ),
 					'theme_screenshot' => $theme->get_screenshot(),
 					'texts'            => array(

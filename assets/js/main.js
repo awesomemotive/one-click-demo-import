@@ -285,7 +285,12 @@ jQuery( function ( $ ) {
 				var newData = new FormData();
 				newData.append( 'action', 'ocdi_import_customizer_data' );
 				newData.append( 'security', ocdi.ajax_nonce );
-				newData.append( 'wp_customize', 'on' );
+
+				// Set the wp_customize=on only if the plugin filter is set to true.
+				if ( true === ocdi.wp_customize_on ) {
+					newData.append( 'wp_customize', 'on' );
+				}
+
 				ajaxCall( newData );
 			}
 			else if ( 'undefined' !== typeof response.status && 'afterAllImportAJAX' === response.status ) {
