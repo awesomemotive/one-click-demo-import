@@ -3,7 +3,7 @@
 **Tags:** import, content, demo, data, widgets, settings  
 **Requires at least:** 4.0.0  
 **Tested up to:** 4.7  
-**Stable tag:** 2.0.1  
+**Stable tag:** 2.0.2  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -308,6 +308,12 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 
 ## Changelog ##
+
+### 2.0.2 ###
+
+*Release Date - 13 December 2016*
+
+* Fixed issue with customizer options import
 
 ### 2.0.1 ###
 
