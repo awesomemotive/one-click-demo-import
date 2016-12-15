@@ -186,6 +186,7 @@ class OneClickDemoImport {
 						'dialog_yes'            => esc_html__( 'Yes, import!', 'pt-ocdi' ),
 						'selected_import_title' => esc_html__( 'Selected demo import:', 'pt-ocdi' ),
 					),
+					'dialog_options' => apply_filters( 'pt-ocdi/confirmation_dialog_options', array() )
 				)
 			);
 
