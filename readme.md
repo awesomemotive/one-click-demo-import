@@ -281,6 +281,27 @@ It's easy, just add this to your theme:
 This will enable the following WP hooks when importing the customizer data: `customize_save`, `customize_save_*`, `customize_save_after`.
 
 
+### How to configure the multi grid layout import popup confirmation? ###
+
+If you want to disable the popup confirmation modal window, use this filter:
+
+`add_filter( 'pt-ocdi/enable_grid_layout_import_popup_confirmation', '__return_false' );`
+
+If you want to just change some options for the jQuery modal window we use for the popup confirmation, then use this filter:
+
+
+	function my_theme_ocdi_confirmation_dialog_options ( $options ) {
+		return array_merge( $options, array(
+			'width'       => 300,
+			'dialogClass' => 'wp-dialog',
+			'resizable'   => false,
+			'height'      => 'auto',
+			'modal'       => true,
+		) );
+	}
+	add_filter( 'pt-ocdi/confirmation_dialog_options', 'my_theme_ocdi_confirmation_dialog_options', 10, 1 );
+
+
 ### I can't activate the plugin, because of a fatal error, what can I do? ###
 
 *Update: since version 1.2.0, there is now a admin error notice, stating that the minimal PHP version required for this plugin is 5.3.2.*
@@ -309,17 +330,25 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 ## Changelog ##
 
+### 2.1.0 ###
+
+*Release Date - 8 January 2017*
+
+* Add grid layout import confirmation popup options filter,
+* Fix term meta data double import,
+* Fix WooCommerce product attributes import.
+
 ### 2.0.2 ###
 
 *Release Date - 13 December 2016*
 
-* Fixed issue with customizer options import
+* Fix issue with customizer options import
 
 ### 2.0.1 ###
 
 *Release Date - 12 December 2016*
 
-* Fixed issue with some browsers (Safari and IE) not supporting some FormData methods.
+* Fix issue with some browsers (Safari and IE) not supporting some FormData methods.
 
 ### 2.0.0 ###
 
