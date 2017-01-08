@@ -215,16 +215,17 @@ jQuery( function ( $ ) {
 		var previewImageContent     = '';
 		var importNotice            = ocdi.import_files[ selectedImportID ]['import_notice'] || '';
 		var importNoticeContent     = '';
-		var dialogOptions			= $.extend(
+		var dialogOptions           = $.extend(
 			{
-				'dialogClass' 	: 'wp-dialog',
-				'resizable'		: false,
-				'height' 		: 'auto',
-				'modal'			: true
+				'dialogClass': 'wp-dialog',
+				'resizable':   false,
+				'height':      'auto',
+				'modal':       true
 			},
 			ocdi.dialog_options,
 			{
-				'buttons':     [
+				'buttons':
+				[
 					{
 						text: ocdi.texts.dialog_no,
 						click: function() {
@@ -262,7 +263,7 @@ jQuery( function ( $ ) {
 			importNoticeContent
 		);
 
-
+		// Display the confirmation popup.
 		$dialogContiner.dialog( dialogOptions );
 	}
 
