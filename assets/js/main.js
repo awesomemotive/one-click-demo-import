@@ -215,6 +215,32 @@ jQuery( function ( $ ) {
 		var previewImageContent     = '';
 		var importNotice            = ocdi.import_files[ selectedImportID ]['import_notice'] || '';
 		var importNoticeContent     = '';
+		var dialogOptions			= $.extend(
+			{
+				'dialogClass' 	: 'wp-dialog',
+				'resizable'		: false,
+				'height' 		: 'auto',
+				'modal'			: true
+			},
+			ocdi.dialog_options,
+			{
+				'buttons':     [
+					{
+						text: ocdi.texts.dialog_no,
+						click: function() {
+							$(this).dialog('close');
+						}
+					},
+					{
+						text: ocdi.texts.dialog_yes,
+						class: 'button  button-primary',
+						click: function() {
+							$(this).dialog('close');
+							gridLayoutImport( selectedImportID, $itemContainer );
+						}
+					}
+				]
+			});
 
 		if ( '' === currentFilePreviewImage ) {
 			previewImageContent = '<p>' + ocdi.texts.missing_preview_image + '</p>';
@@ -236,28 +262,8 @@ jQuery( function ( $ ) {
 			importNoticeContent
 		);
 
-		$dialogContiner.dialog( {
-			'dialogClass': 'wp-dialog',
-			'resizable':   false,
-			'height':      'auto',
-			'modal':       true,
-			'buttons':     [
-				{
-					text: ocdi.texts.dialog_no,
-					click: function() {
-							$(this).dialog('close');
-					}
-				},
-				{
-					text: ocdi.texts.dialog_yes,
-					class: 'button  button-primary',
-					click: function() {
-						$(this).dialog('close');
-						gridLayoutImport( selectedImportID, $itemContainer );
-					}
-				}
-			]
-		} );
+
+		$dialogContiner.dialog( dialogOptions );
 	}
 
 	/**
