@@ -533,9 +533,13 @@ class Helpers {
 	 * @param array $selected_import_files array of selected import files.
 	 */
 	public static function import_file_info( $selected_import_files ) {
-		$redux_file_string = array_reduce( $selected_import_files['redux'], function( $string, $item ) {
-			return sprintf( '%1$s%2$s -> %3$s %4$s', $string, $item['option_name'], $item['file_path'], PHP_EOL );
-		}, '' );
+		$redux_file_string = '';
+
+		if ( ! empty( $selected_import_files['redux'] ) ) {
+			$redux_file_string = array_reduce( $selected_import_files['redux'], function( $string, $item ) {
+				return sprintf( '%1$s%2$s -> %3$s %4$s', $string, $item['option_name'], $item['file_path'], PHP_EOL );
+			}, '' );
+		}
 
 		return PHP_EOL .
 		sprintf(
@@ -549,7 +553,7 @@ class Helpers {
 			$selected_import_files['content'],
 			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets'],
 			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['customizer'],
-			empty( $selected_import_files['redux'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $redux_file_string
+			empty( $redux_file_string ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $redux_file_string
 		);
 	}
 
