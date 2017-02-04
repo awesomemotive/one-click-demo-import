@@ -3,7 +3,7 @@
 **Tags:** import, content, demo, data, widgets, settings  
 **Requires at least:** 4.0.0  
 **Tested up to:** 4.7  
-**Stable tag:** 2.0.2  
+**Stable tag:** 2.1.0  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -300,6 +300,15 @@ If you want to just change some options for the jQuery modal window we use for t
 		) );
 	}
 	add_filter( 'pt-ocdi/confirmation_dialog_options', 'my_theme_ocdi_confirmation_dialog_options', 10, 1 );
+
+
+### How can I disable the ProteusThemes branding notice after successful demo import? ###
+
+You can disable the branding notice with a WP filter. All you need to do is add this bit of code to your theme:
+
+`add_filter( 'pt-ocdi/disable_pt_branding', '__return_true' );`
+
+and the notice will not be displayed.
 
 
 ### I can't activate the plugin, because of a fatal error, what can I do? ###
