@@ -455,8 +455,17 @@ class OneClickDemoImport {
 	 * @param string $additional_value The additional value that will be appended to the existing frontend_error_messages.
 	 */
 	public function append_to_frontend_error_messages( $text ) {
-		if ( ! empty( $text ) && ! in_array( $text , $this->frontend_error_messages ) ) {
-			$this->frontend_error_messages[] = $text;
+		$lines = array();
+
+		if ( ! empty( $text ) ) {
+			$text = str_replace( '<br>', PHP_EOL, $text );
+			$lines = explode( PHP_EOL, $text );
+		}
+
+		foreach ( $lines as $line ) {
+			if ( ! empty( $line ) && ! in_array( $line , $this->frontend_error_messages ) ) {
+				$this->frontend_error_messages[] = $line;
+			}
 		}
 	}
 
@@ -471,7 +480,7 @@ class OneClickDemoImport {
 
 		if ( ! empty( $this->frontend_error_messages ) ) {
 			foreach ( $this->frontend_error_messages as $line ) {
-				$output .= nl2br( $line );
+				$output .= esc_html( $line );
 				$output .= '<br>';
 			}
 		}
