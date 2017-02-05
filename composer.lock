@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c7805bf2df645b361a840725ef2a5b8",
+    "content-hash": "d1b2b472fb3eb6d4eacb8cf9d72dddb8",
     "packages": [
         {
             "name": "proteusthemes/wp-content-importer-v2",
-            "version": "v0.4.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/proteusthemes/WordPress-Importer.git",
-                "reference": "811df4b9a3e8fb78d02bc1c146ca46f1611c29bd"
+                "reference": "12dec5c810950f7d58d5a11dd1420a57830a0b1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/proteusthemes/WordPress-Importer/zipball/811df4b9a3e8fb78d02bc1c146ca46f1611c29bd",
-                "reference": "811df4b9a3e8fb78d02bc1c146ca46f1611c29bd",
+                "url": "https://api.github.com/repos/proteusthemes/WordPress-Importer/zipball/12dec5c810950f7d58d5a11dd1420a57830a0b1f",
+                "reference": "12dec5c810950f7d58d5a11dd1420a57830a0b1f",
                 "shasum": ""
             },
             "type": "library",
@@ -45,9 +45,9 @@
                 "wp"
             ],
             "support": {
-                "source": "https://github.com/proteusthemes/WordPress-Importer/tree/v0.4.2"
+                "source": "https://github.com/proteusthemes/WordPress-Importer/tree/v0.4.3"
             },
-            "time": "2017-02-04T10:16:25+00:00"
+            "time": "2017-02-05T08:20:49+00:00"
         }
     ],
     "packages-dev": [],
