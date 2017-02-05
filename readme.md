@@ -339,6 +339,14 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 ## Changelog ##
 
+### 2.2.0 ###
+
+*Release Date - 5 February 2017*
+
+* Add ProteusThemes branding notice after successful import,
+* Fix after import error reporting (duplicate errors were shown),
+* Fix some undefined variables in the plugin, causing PHP notices.
+
 ### 2.1.0 ###
 
 *Release Date - 8 January 2017*
