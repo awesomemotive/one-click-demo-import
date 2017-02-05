@@ -141,17 +141,17 @@ msgstr ""
 msgid "The import files were successfully uploaded!"
 msgstr ""
 
-#: inc/Helpers.php:542
+#: inc/Helpers.php:546
 msgid "Initial max execution time = %s"
 msgstr ""
 
-#: inc/Helpers.php:546
+#: inc/Helpers.php:550
 msgid ""
 "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = "
 "%4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s"
 msgstr ""
 
-#: inc/Helpers.php:550 inc/Helpers.php:551 inc/Helpers.php:552
+#: inc/Helpers.php:554 inc/Helpers.php:555 inc/Helpers.php:556
 msgid "not defined!"
 msgstr ""
 
@@ -195,7 +195,19 @@ msgstr ""
 msgid "No import files specified!"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:380
+#: inc/OneClickDemoImport.php:382
+msgid ""
+"Just used One Click Demo Import plugin and it was awesome! Thanks "
+"@ProteusThemes! https://www.proteusthemes.com/"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:385
+msgid ""
+"%1$s%6$sWasn't this a great One Click Demo Import experience?%7$s Created "
+"and maintained by %3$sProteusThemes%4$s. %2$s%5$sClick to Tweet!%4$s%8$s"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:398
 msgid ""
 "%1$s%3$sThat's it, all done!%4$s%2$sThe demo import has finished. Please "
 "check your page and make sure that everything has imported correctly. If it "
@@ -203,7 +215,7 @@ msgid ""
 "it has done its job.%5$s"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:391
+#: inc/OneClickDemoImport.php:409
 msgid ""
 "%1$sThe demo import has finished, but there were some import "
 "errors.%2$sMore details about the errors can be found in this %3$s%5$slog "
