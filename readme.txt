@@ -22,7 +22,7 @@ The best feature of this plugin is, that theme authors can define import files i
 
 > **Are you a theme user?**
 >
-> Contact the author of your theme and [let them know about this pluing](http://proteusthemes.github.io/one-click-demo-import/theme-users.html). Theme authors can make any theme compatible with this plugin in 15 minutes and make it much more user-friendly.
+> Contact the author of your theme and [let them know about this plugin](http://proteusthemes.github.io/one-click-demo-import/theme-users.html). Theme authors can make any theme compatible with this plugin in 15 minutes and make it much more user-friendly.
 >
 > "[Where can I find the contact of the theme author?](http://proteusthemes.github.io/one-click-demo-import/theme-users.html)"
 
