@@ -57,6 +57,8 @@ While importing, smaller versions of images are being generated, which takes up 
 
 `add_filter( 'pt-ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
 
+If the import is complete and you used the above solution, please install this plugin: https://wordpress.org/plugins/regenerate-thumbnails/ and run it in Tools -> Regen. Thumbnails. This will then create the smaller versions of images, that we skipped in the import.
+
 After the import, you should remove the added code from the functions.php file.
 
 ### Check your server settings ###
