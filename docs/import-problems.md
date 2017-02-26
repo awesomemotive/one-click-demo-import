@@ -41,6 +41,7 @@ There are two things you can do. You can change some One Click Demo Import setti
 The most intensive task in the demo import is the image import process, which takes the most time and server memory. So, you can do two things to solve this issue:
 
 **Change the default time of one AJAX call**
+
 Plugin default is 25 seconds. Add this code at the end of your theme functions.php file:
 
 	function ocdi_change_time_of_single_ajax_call() {
@@ -51,6 +52,7 @@ Plugin default is 25 seconds. Add this code at the end of your theme functions.p
 This will "slice" the requests to smaller chunks and it might bypass the low server settings (timeouts and memory per request).
 
 **Disable the generation of smaller images during the import**
+
 While importing, smaller versions of images are being generated, which takes up a lot of server memory, so you can disable that in the plugin with a line of code. Add this code at the end of your theme functions.php file:
 
 `add_filter( 'pt-ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
@@ -58,11 +60,12 @@ While importing, smaller versions of images are being generated, which takes up 
 After the import, you should remove the added code from the functions.php file.
 
 ### Check your server settings ###
-upload_max_filesize (256M)
-max_input_time (300)
-memory_limit (256M)
-max_execution_time (300)
-post_max_size (512M)
+
+- upload_max_filesize (256M)
+- max_input_time (300)
+- memory_limit (256M)
+- max_execution_time (300)
+- post_max_size (512M)
 
 These defaults are not perfect and it depends on how large of an import you are making. So the bigger the import, the higher the numbers should be.
 
