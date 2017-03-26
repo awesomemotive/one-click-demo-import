@@ -340,6 +340,13 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 == Changelog ==
 
+= 2.2.1 =
+
+*Release Date - 26 March 2017*
+
+* Fix image importing error for server compressed files,
+* Fix remapping of featured images.
+
 = 2.2.0 =
 
 *Release Date - 5 February 2017*
