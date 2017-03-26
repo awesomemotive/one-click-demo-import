@@ -379,7 +379,7 @@ class OneClickDemoImport {
 			$response['message'] = '';
 
 			if ( ! apply_filters( 'pt-ocdi/disable_pt_branding', false ) ) {
-				$twitter_status = esc_html__( 'Just used One Click Demo Import plugin and it was awesome! Thanks @ProteusThemes! https://www.proteusthemes.com/', 'pt-ocdi' );
+				$twitter_status = esc_html__( 'Just used One Click Demo Import plugin and it was awesome! Thanks @ProteusThemes! #OCDI https://www.proteusthemes.com/', 'pt-ocdi' );
 
 				$response['message'] .= sprintf(
 					__( '%1$s%6$sWasn\'t this a great One Click Demo Import experience?%7$s Created and maintained by %3$sProteusThemes%4$s. %2$s%5$sClick to Tweet!%4$s%8$s', 'pt-ocdi' ),
