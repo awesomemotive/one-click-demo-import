@@ -2,7 +2,7 @@
 # This file is distributed under the GPL 2.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 2.1.0\n"
+"Project-Id-Version: One Click Demo Import 2.2.1\n"
 "Report-Msgid-Bugs-To: http://support.proteusthemes.com/\n"
 "POT-Creation-Date: 2016-05-14 09:53:17+00:00\n"
 "MIME-Version: 1.0\n"
@@ -198,7 +198,7 @@ msgstr ""
 #: inc/OneClickDemoImport.php:382
 msgid ""
 "Just used One Click Demo Import plugin and it was awesome! Thanks "
-"@ProteusThemes! https://www.proteusthemes.com/"
+"@ProteusThemes! #OCDI https://www.proteusthemes.com/"
 msgstr ""
 
 #: inc/OneClickDemoImport.php:385
