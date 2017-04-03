@@ -345,7 +345,8 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 *Release Date - 3 April 2017*
 
 * Fix image importing error for server compressed files,
-* Fix remapping of featured images.
+* Fix remapping of featured images,
+* Fix custom post type existing posts check (no more multiple imports for custom post types).
 
 = 2.2.0 =
 
