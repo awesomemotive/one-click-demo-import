@@ -23,7 +23,7 @@ class OneClickDemoImport {
 	 *
 	 * @var object
 	 */
-	private $importer;
+	public $importer;
 
 	/**
 	 * The resulting page's hook_suffix, or false if the user does not have the capability required.
@@ -78,7 +78,7 @@ class OneClickDemoImport {
 	/**
 	 * Returns the *Singleton* instance of this class.
 	 *
-	 * @return PT_One_Click_Demo_Import the *Singleton* instance.
+	 * @return OneClickDemoImport the *Singleton* instance.
 	 */
 	public static function get_instance() {
 		if ( null === static::$instance ) {
