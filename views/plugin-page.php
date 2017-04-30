@@ -11,9 +11,13 @@ namespace OCDI;
 
 <div class="ocdi  wrap  about-wrap">
 
-	<h1 class="ocdi__title  dashicons-before  dashicons-upload"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
-
+	<?php ob_start(); ?>
+		<h1 class="ocdi__title  dashicons-before  dashicons-upload"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
 	<?php
+	$plugin_title = ob_get_clean();
+
+	// Display the plugin title (can be replaced with custom title text through the filter below).
+	echo wp_kses_post( apply_filters( 'pt-ocdi/plugin_page_title', $plugin_title ) );
 
 	// Display warrning if PHP safe mode is enabled, since we wont be able to change the max_execution_time.
 	if ( ini_get( 'safe_mode' ) ) {
