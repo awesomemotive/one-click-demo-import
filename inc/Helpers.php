@@ -44,7 +44,7 @@ class Helpers {
 	 * @return boolean
 	 */
 	private static function is_import_file_info_format_correct( $import_file_info ) {
-		if ( ( empty( $import_file_info['import_file_url'] ) && empty( $import_file_info['local_import_file'] ) ) || empty( $import_file_info['import_file_name'] ) ) {
+		if ( empty( $import_file_info['import_file_name'] ) ) {
 			return false;
 		}
 
@@ -59,25 +59,19 @@ class Helpers {
 	 * @return array|WP_Error array of paths to the downloaded files or WP_Error object with error message.
 	 */
 	public static function download_import_files( $import_file_info ) {
-		$downloaded_files = array();
-		$downloader       = new Downloader();
+		$downloaded_files = array(
+			'content'    => '',
+			'widgets'    => '',
+			'customizer' => '',
+			'redux'      => '',
+		);
+		$downloader = new Downloader();
 
 		// ----- Set content file path -----
 		// Check if 'import_file_url' is not defined. That would mean a local file.
 		if ( empty( $import_file_info['import_file_url'] ) ) {
 			if ( file_exists( $import_file_info['local_import_file'] ) ) {
 				$downloaded_files['content'] = $import_file_info['local_import_file'];
-			}
-			else {
-				return new \WP_Error(
-					'url_or_local_file_not_defined',
-					sprintf(
-						__( '"import_file_url" or "local_import_file" for %s%s%s are not defined!', 'pt-ocdi' ),
-						'<strong>',
-						$import_file_info['import_file_name'],
-						'</strong>'
-					)
-				);
 			}
 		}
 		else {
@@ -424,7 +418,12 @@ class Helpers {
 	 */
 	public static function process_uploaded_files( $uploaded_files, $log_file_path ) {
 		// Variable holding the paths to the uploaded files.
-		$selected_import_files = array();
+		$selected_import_files = array(
+			'content'    => '',
+			'widgets'    => '',
+			'customizer' => '',
+			'redux'      => '',
+		);
 
 		// Upload settings to disable form and type testing for AJAX uploads.
 		$upload_overrides = array(
@@ -438,17 +437,22 @@ class Helpers {
 		$customizer_file_info  = wp_handle_upload( $_FILES['customizer_file'], $upload_overrides );
 		$redux_file_info       = wp_handle_upload( $_FILES['redux_file'], $upload_overrides );
 
-		if ( empty( $content_file_info['file'] ) || isset( $content_file_info['error'] ) ) {
-			// Write error to log file and send an AJAX response with the error.
-			self::log_error_and_send_ajax_response(
-				__( 'Please upload XML file for content import. If you want to import widgets or customizer settings only, please use Widget Importer & Exporter or the Customizer Export/Import plugin.', 'pt-ocdi' ),
+		// Process content import file.
+		if ( $content_file_info && ! isset( $content_file_info['error'] ) ) {
+			// Set uploaded content file.
+			$selected_import_files['content'] = $content_file_info['file'];
+		}
+		else {
+			// Add this error to log file.
+			$log_added = self::append_to_file(
+				sprintf(
+					__( 'Content file was not uploaded. Error: %s', 'pt-ocdi' ),
+					$widget_file_info['error']
+				),
 				$log_file_path,
-				esc_html__( 'Upload files', 'pt-ocdi' )
+				esc_html__( 'Upload files' , 'pt-ocdi' )
 			);
 		}
-
-		// Set uploaded content file.
-		$selected_import_files['content'] = $content_file_info['file'];
 
 		// Process widget import file.
 		if ( $widget_file_info && ! isset( $widget_file_info['error'] ) ) {
@@ -550,7 +554,7 @@ class Helpers {
 			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s', 'pt-ocdi' ),
 			PHP_EOL,
 			get_site_url(),
-			$selected_import_files['content'],
+			empty( $selected_import_files['content'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['content'],
 			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets'],
 			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['customizer'],
 			empty( $redux_file_string ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $redux_file_string

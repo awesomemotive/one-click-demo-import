@@ -80,18 +80,18 @@ namespace OCDI;
 			</div>
 
 			<div class="ocdi__file-upload">
-				<h3><label for="widget-file-upload"><?php esc_html_e( 'Choose a WIE or JSON file for widget import:', 'pt-ocdi' ); ?></label> <span><?php esc_html_e( '(*optional)', 'pt-ocdi' ); ?></span></h3>
+				<h3><label for="widget-file-upload"><?php esc_html_e( 'Choose a WIE or JSON file for widget import:', 'pt-ocdi' ); ?></label></h3>
 				<input id="ocdi__widget-file-upload" type="file" name="widget-file-upload">
 			</div>
 
 			<div class="ocdi__file-upload">
-				<h3><label for="customizer-file-upload"><?php esc_html_e( 'Choose a DAT file for customizer import:', 'pt-ocdi' ); ?></label> <span><?php esc_html_e( '(*optional)', 'pt-ocdi' ); ?></span></h3>
+				<h3><label for="customizer-file-upload"><?php esc_html_e( 'Choose a DAT file for customizer import:', 'pt-ocdi' ); ?></label></h3>
 				<input id="ocdi__customizer-file-upload" type="file" name="customizer-file-upload">
 			</div>
 
 			<?php if ( class_exists( 'ReduxFramework' ) ) : ?>
 			<div class="ocdi__file-upload">
-				<h3><label for="redux-file-upload"><?php esc_html_e( 'Choose a JSON file for Redux import:', 'pt-ocdi' ); ?></label> <span><?php esc_html_e( '(*optional)', 'pt-ocdi' ); ?></span></h3>
+				<h3><label for="redux-file-upload"><?php esc_html_e( 'Choose a JSON file for Redux import:', 'pt-ocdi' ); ?></label></h3>
 				<input id="ocdi__redux-file-upload" type="file" name="redux-file-upload">
 				<div>
 					<label for="redux-option-name" class="ocdi__redux-option-name-label"><?php esc_html_e( 'Enter the Redux option name:', 'pt-ocdi' ); ?></label>

@@ -280,10 +280,12 @@ class OneClickDemoImport {
 		}
 
 		/**
-		 * 3). Import content.
+		 * 3). Import content (if the content XML file is set for this import).
 		 * Returns any errors greater then the "warning" logger level, that will be displayed on front page.
 		 */
-		$this->append_to_frontend_error_messages( $this->importer->import_content( $this->selected_import_files['content'] ) );
+		if ( ! empty( $this->selected_import_files['content'] ) ) {
+			$this->append_to_frontend_error_messages( $this->importer->import_content( $this->selected_import_files['content'] ) );
+		}
 
 		/**
 		 * 4). Execute the actions hooked to the 'pt-ocdi/after_content_import_execution' action:
