@@ -96,11 +96,16 @@ class HelpersTest extends \WP_UnitTestCase {
 				'import_file_url'   => 'http://www.your_domain.com/ocdi/invalid-demo-content.xml',
 			),
 			array(
-				'import_file_name' => 'Invalid Demo import',
+				'import_file_name' => 'Valid demo import without any import files',
 				'import_file_link' => 'http://www.your_domain.com/ocdi/invalid-demo-content.xml',
 			)
 		);
-		$expected_output = array();
+		$expected_output = array(
+			array(
+				'import_file_name' => 'Valid demo import without any import files',
+				'import_file_link' => 'http://www.your_domain.com/ocdi/invalid-demo-content.xml',
+			)
+		);
 		$this->assertEquals( $expected_output, Helpers::validate_import_file_info( $import_files ) );
 	}
 
@@ -109,7 +114,7 @@ class HelpersTest extends \WP_UnitTestCase {
 	 * Test the is_import_file_info_format_correct method.
 	 */
 	function test_is_import_file_info_format_correct() {
-		// Both required parameters are empty (should return false).
+		// Required parameter are empty (should return false).
 		$import_file_info = array(
 			'import_file_url'  => '',
 			'import_file_name' => '',
@@ -123,7 +128,7 @@ class HelpersTest extends \WP_UnitTestCase {
 
 		$this->assertFalse( $actual );
 
-		// One required parameter (url) is empty (should return false).
+		// Required parameter (name) is defined (should return true).
 		$import_file_info = array(
 			'import_file_url'  => '',
 			'import_file_name' => 'Name',
@@ -135,26 +140,12 @@ class HelpersTest extends \WP_UnitTestCase {
 			array( $import_file_info )
 		);
 
-		$this->assertFalse( $actual );
+		$this->assertTrue( $actual );
 
-		// One required parameter (name) is empty (should return false).
+		// Required parameter (name) is empty (should return false).
 		$import_file_info = array(
 			'import_file_url'  => 'http://urlhere.com',
 			'import_file_name' => '',
-		);
-
-		$actual = \TestHelpers::invoke_method(
-			$this->helpers,
-			'is_import_file_info_format_correct',
-			array( $import_file_info )
-		);
-
-		$this->assertFalse( $actual );
-
-		// One required parameter (local file path) is empty (should return false).
-		$import_file_info = array(
-			'local_import_file' => '',
-			'import_file_name'  => 'Name',
 		);
 
 		$actual = \TestHelpers::invoke_method(
@@ -199,18 +190,22 @@ class HelpersTest extends \WP_UnitTestCase {
 	 * Test the download_import_files method.
 	 */
 	function test_download_import_files() {
-		// Both, import file URL and local path are empty, so a WP_Error should be returned.
+		// Both, import file URL and local path are empty, so an "empty" array should be returned.
 		$import_file_info = array(
 			'import_file_url'   => '',
 			'local_import_file' => '',
 			'import_file_name'  => 'Import name',
 		);
 
-		$expected = new \WP_Error( 'url_or_local_file_not_defined', '' );
-
+		$expected = array(
+			'content'    => '',
+			'widgets'    => '',
+			'customizer' => '',
+			'redux'      => '',
+		);
 		$actual = Helpers::download_import_files( $import_file_info );
 
-		$this->assertEquals( $expected->get_error_code(), $actual->get_error_code() );
+		$this->assertEquals( $expected, $actual );
 
 		// Local content import file path is set, so it should be returned in the "download" array.
 		$local_import_file_path = PT_OCDI_PATH . 'tests/data/import-files/content.xml';
@@ -222,6 +217,9 @@ class HelpersTest extends \WP_UnitTestCase {
 
 		$expected = array(
 			'content'    => $local_import_file_path,
+			'widgets'    => '',
+			'customizer' => '',
+			'redux'      => '',
 		);
 
 		$actual = Helpers::download_import_files( $import_file_info );
@@ -242,6 +240,7 @@ class HelpersTest extends \WP_UnitTestCase {
 			'content'    => $root_local_import_file_path . 'content.xml',
 			'widgets'    => $root_local_import_file_path . 'widgets.json',
 			'customizer' => $root_local_import_file_path . 'customizer.dat',
+			'redux'      => '',
 		);
 
 		$actual = Helpers::download_import_files( $import_file_info );
@@ -261,6 +260,9 @@ class HelpersTest extends \WP_UnitTestCase {
 
 		$expected = array(
 			'content' => $this->default_path . 'demo-content-import-file_' . Helpers::$demo_import_start_time . '.xml',
+			'widgets'    => '',
+			'customizer' => '',
+			'redux'      => '',
 		);
 
 		$actual = Helpers::download_import_files( $import_file_info );
@@ -280,6 +282,7 @@ class HelpersTest extends \WP_UnitTestCase {
 			'content'    => $this->default_path . 'demo-content-import-file_' . Helpers::$demo_import_start_time . '.xml',
 			'widgets'    => $this->default_path . 'demo-widgets-import-file_' . Helpers::$demo_import_start_time . '.json',
 			'customizer' => $this->default_path . 'demo-customizer-import-file_' . Helpers::$demo_import_start_time . '.dat',
+			'redux'      => '',
 		);
 
 		$actual = Helpers::download_import_files( $import_file_info );
