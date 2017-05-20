@@ -161,8 +161,11 @@ namespace OCDI;
 							<?php endif; ?>
 						</div>
 						<div class="ocdi__gl-item-footer">
-							<h4 class="ocdi__gl-item-title"><?php echo esc_html( $import_file['import_file_name'] ); ?></h4>
+							<h4 class="ocdi__gl-item-title" title="<?php echo esc_attr( $import_file['import_file_name'] ); ?>"><?php echo esc_html( $import_file['import_file_name'] ); ?></h4>
 							<button class="ocdi__gl-item-button  button  button-primary  js-ocdi-gl-import-data" value="<?php echo esc_attr( $index ); ?>"><?php esc_html_e( 'Import', 'pt-ocdi' ); ?></button>
+							<?php if ( ! empty( $import_file['preview_url'] ) ) : ?>
+								<a class="ocdi__gl-item-button  button" href="<?php echo esc_url( $import_file['preview_url'] ); ?>" target="_blank"><?php esc_html_e( 'Preview', 'pt-ocdi' ); ?></a>
+							<?php endif; ?>
 						</div>
 					</div>
 				<?php endforeach; ?>
