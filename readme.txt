@@ -344,6 +344,16 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 == Changelog ==
 
+= 2.3.0 =
+
+*Release Date - 28 May 2017*
+
+* Add preview button option to the predefined demo import items,
+* Add custom JS event trigger when the import process is completed,
+* Add custom filter for plugin page title,
+* Remove content import as a required import. Now you can make separate imports for customizer, widgets or redux options.
+* Fix custom menu widgets imports, the menus will now be set correctly.
+
 = 2.2.1 =
 
 *Release Date - 3 April 2017*
