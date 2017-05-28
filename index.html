@@ -130,6 +130,7 @@
       ),
       'import_preview_image_url'   =&gt; 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
       'import_notice'              =&gt; __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
+			'preview_url'                =&gt; 'http://www.your_domain.com/my-demo-1',
     ),
     array(
       'import_file_name'           =&gt; 'Demo Import 2',
@@ -149,13 +150,14 @@
       ),
       'import_preview_image_url'   =&gt; 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
       'import_notice'              =&gt; __( 'A special note for this import.', 'your-textdomain' ),
+			'preview_url'                =&gt; 'http://www.your_domain.com/my-demo-2',
     ),
   );
 }
 add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
 </code></pre>
 
-			<p>You can set content import, widgets, customizer and Redux framework import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports. The import notice can be used, to notify the user and is displayed before the <b>Import Demo Data</b> button.</p>
+			<p>You can set content import, widgets, customizer and Redux framework import files. You can also define a preview image and the preview URL, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports. The import notice can be used, to notify the user and is displayed before the <b>Import Demo Data</b> button.</p>
 
 			<h3>
 				<a id="what-about-using-local-import-files-from-theme-folder" class="anchor" href="#what-about-using-local-import-files-from-theme-folder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
@@ -180,6 +182,7 @@ add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
       ),
       'import_preview_image_url'     =&gt; 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
       'import_notice'                =&gt; __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
+			'preview_url'                  =&gt; 'http://www.your_domain.com/my-demo-1',
     ),
     array(
       'import_file_name'             =&gt; 'Demo Import 2',
@@ -199,6 +202,7 @@ add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
       ),
       'import_preview_image_url'     =&gt; 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
       'import_notice'                =&gt; __( 'A special note for this import.', 'your-textdomain' ),
+			'preview_url'                  =&gt; 'http://www.your_domain.com/my-demo-2',
     ),
   );
 }
