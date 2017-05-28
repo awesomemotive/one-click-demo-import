@@ -310,6 +310,9 @@ jQuery( function ( $ ) {
 			else if ( 'undefined' !== typeof response.message ) {
 				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
 				$( '.js-ocdi-ajax-loader' ).hide();
+
+				// Trigger custom event, when OCDI import is complete.
+				$( document ).trigger( 'ocdiImportComplete' );
 			}
 			else {
 				$( '.js-ocdi-ajax-response' ).append( '<div class="notice  notice-error  is-dismissible"><p>' + response + '</p></div>' );
