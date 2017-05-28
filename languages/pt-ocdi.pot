@@ -58,23 +58,19 @@ msgid ""
 "%6$s."
 msgstr ""
 
-#: inc/Helpers.php:75
-msgid "\"import_file_url\" or \"local_import_file\" for %s%s%s are not defined!"
-msgstr ""
-
-#: inc/Helpers.php:203 inc/Helpers.php:246
+#: inc/Helpers.php:197 inc/Helpers.php:240
 msgid ""
 "An error occurred while writing file to your server! Tried to write a file "
 "to: %s%s."
 msgstr ""
 
-#: inc/Helpers.php:280
+#: inc/Helpers.php:274
 msgid ""
 "An error occurred while reading a file from your server! Tried reading file "
 "from path: %s%s."
 msgstr ""
 
-#: inc/Helpers.php:303
+#: inc/Helpers.php:297
 msgid ""
 "This WordPress page does not have %sdirect%s write file access. This plugin "
 "needs it in order to save the demo import xml file to the upload directory "
@@ -85,73 +81,71 @@ msgstr ""
 msgid "One Click Demo Import"
 msgstr ""
 
-#: inc/Helpers.php:315 inc/OneClickDemoImport.php:132
+#: inc/Helpers.php:309 inc/OneClickDemoImport.php:132
 msgid "Import Demo Data"
 msgstr ""
 
-#: inc/Helpers.php:327
+#: inc/Helpers.php:321
 msgid ""
 "An error occurred while retrieving reading/writing permissions to your "
 "server (could not retrieve WP filesystem credentials)!"
 msgstr ""
 
-#: inc/Helpers.php:335
+#: inc/Helpers.php:329
 msgid "Your WordPress login credentials don't allow to use WP_Filesystem!"
 msgstr ""
 
-#: inc/Helpers.php:375
+#: inc/Helpers.php:369
 msgid "One Click Demo Import - "
 msgstr ""
 
-#: inc/Helpers.php:409
+#: inc/Helpers.php:403
 msgid ""
 "%sYour user role isn't high enough. You don't have permission to import "
 "demo data.%s"
 msgstr ""
 
-#: inc/Helpers.php:444
-msgid ""
-"Please upload XML file for content import. If you want to import widgets or "
-"customizer settings only, please use Widget Importer & Exporter or the "
-"Customizer Export/Import plugin."
+#: inc/Helpers.php:449
+msgid "Content file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:446 inc/Helpers.php:466 inc/Helpers.php:483
-#: inc/Helpers.php:494 inc/Helpers.php:514 inc/Helpers.php:522
+#: inc/Helpers.php:453 inc/Helpers.php:470 inc/Helpers.php:487
+#: inc/Helpers.php:498 inc/Helpers.php:518 inc/Helpers.php:526
 msgid "Upload files"
 msgstr ""
 
-#: inc/Helpers.php:462
+#: inc/Helpers.php:466
 msgid "Widget file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:479
+#: inc/Helpers.php:483
 msgid "Customizer file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:492
+#: inc/Helpers.php:496
 msgid "Missing Redux option name! Please also enter the Redux option name!"
 msgstr ""
 
-#: inc/Helpers.php:510
+#: inc/Helpers.php:514
 msgid "Redux file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:520
+#: inc/Helpers.php:524
 msgid "The import files were successfully uploaded!"
 msgstr ""
 
-#: inc/Helpers.php:546
+#: inc/Helpers.php:550
 msgid "Initial max execution time = %s"
 msgstr ""
 
-#: inc/Helpers.php:550
+#: inc/Helpers.php:554
 msgid ""
 "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = "
 "%4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s"
 msgstr ""
 
-#: inc/Helpers.php:554 inc/Helpers.php:555 inc/Helpers.php:556
+#: inc/Helpers.php:557 inc/Helpers.php:558 inc/Helpers.php:559
+#: inc/Helpers.php:560
 msgid "not defined!"
 msgstr ""
 
@@ -195,19 +189,19 @@ msgstr ""
 msgid "No import files specified!"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:382
+#: inc/OneClickDemoImport.php:384
 msgid ""
 "Just used One Click Demo Import plugin and it was awesome! Thanks "
 "@ProteusThemes! #OCDI https://www.proteusthemes.com/"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:385
+#: inc/OneClickDemoImport.php:387
 msgid ""
 "%1$s%6$sWasn't this a great One Click Demo Import experience?%7$s Created "
 "and maintained by %3$sProteusThemes%4$s. %2$s%5$sClick to Tweet!%4$s%8$s"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:398
+#: inc/OneClickDemoImport.php:400
 msgid ""
 "%1$s%3$sThat's it, all done!%4$s%2$sThe demo import has finished. Please "
 "check your page and make sure that everything has imported correctly. If it "
@@ -215,7 +209,7 @@ msgid ""
 "it has done its job.%5$s"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:409
+#: inc/OneClickDemoImport.php:411
 msgid ""
 "%1$sThe demo import has finished, but there were some import "
 "errors.%2$sMore details about the errors can be found in this %3$s%5$slog "
