@@ -177,12 +177,16 @@ p.ocdi__ajax-loader {
 }
 
 h4.ocdi__gl-item-title {
-	width: calc(100% - 140px);
+	width: 70%;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	display: inline-block;
 	margin: 6px 0 0 0;
+}
+
+.ocdi__gl-item-footer--with-preview h4.ocdi__gl-item-title {
+	width: calc(100% - 140px);
 }
 
 .ocdi__gl-item-button {
@@ -194,7 +198,8 @@ h4.ocdi__gl-item-title {
 }
 
 @media (max-width: 782px) {
-	h4.ocdi__gl-item-title {
+	h4.ocdi__gl-item-title,
+	.ocdi__gl-item-footer--with-preview h4.ocdi__gl-item-title {
 		width: 100%;
 		margin-bottom: 10px;
 	}
