@@ -83,3 +83,7 @@ So just set the `WP_DEBUG` constant to `true` in your *wp-config.php* file and t
 > Fatal error: Class 'DOMDocument' not found in .../wp-content/plugins/wordpress-importer/parsers.php on line 61
 
 That means, that your hosting server is missing one of a very common PHP modules and it has to be enabled before any import functionality will work on your site. The missing PHP modules are: **php-xml** or/and **php-dom**. Please contact your hosting company and ask them to install that for you. These are very common modules, so I don't know why they do not install them by default.
+
+> Fatal error:  Class 'XMLReader' not found in .../wp-content/plugins/one-click-demo-import/vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php on line 123
+
+Similarly as above, but this time the [XMLReader](http://php.net/manual/en/book.xmlreader.php) PHP module/extention is missing. Please contact your hosting company and ask them to install that for you. These are very common modules, so I don't know why they do not install them by default.
