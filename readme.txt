@@ -2,7 +2,7 @@
 Contributors: capuderg, cyman, Prelc
 Tags: import, content, demo, data, widgets, settings, redux, theme options
 Requires at least: 4.0.0
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: 2.3.0
 License: GPLv3 or later
 
