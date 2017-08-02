@@ -37,7 +37,7 @@ class OneClickDemoImport {
 	 *
 	 * @var array
 	 */
-	private $import_files;
+	public $import_files;
 
 	/**
 	 * The path of the log file.

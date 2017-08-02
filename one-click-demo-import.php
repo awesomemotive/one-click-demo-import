@@ -39,6 +39,11 @@ class OCDI_Plugin {
 
 			// Instantiate the main plugin class *Singleton*.
 			$pt_one_click_demo_import = OCDI\OneClickDemoImport::get_instance();
+
+			// Register WP CLI commands
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				WP_CLI::add_command( 'ocdi', 'OCDI\WPCLICommands' );
+			}
 		}
 	}
 
