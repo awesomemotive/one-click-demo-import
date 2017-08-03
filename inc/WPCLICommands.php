@@ -124,7 +124,6 @@ class WPCLICommands extends \WP_CLI_Command {
 
 		$predefined_index = absint( $predefined_index );
 
-
 		if ( ! array_key_exists( $predefined_index, $this->ocdi->import_files ) ) {
 			WP_CLI::warning( esc_html__( 'The supplied predefined index does not exist! Please take a look at the available predefined demo imports:', 'pt-ocdi' ) );
 
@@ -163,6 +162,18 @@ class WPCLICommands extends \WP_CLI_Command {
 
 		if ( ! empty( $import_files['customizer'] ) ) {
 			$this->import_customizer( $import_files['customizer'] );
+		}
+
+		$after_import_action = 'pt-ocdi/after_import';
+
+		if ( false !== has_action( $after_import_action ) ) {
+			WP_CLI::log( esc_html__( 'After import action execution...', 'pt-ocdi' ) );
+
+			ob_start();
+				do_action( $after_import_action, $selected_files );
+			$message = ob_get_clean();
+
+			Helpers::append_to_file( $message, $this->ocdi->log_file_path, $after_import_action );
 		}
 
 		WP_CLI::log( esc_html__( 'Predefined import finished!', 'pt-ocdi' ) );
