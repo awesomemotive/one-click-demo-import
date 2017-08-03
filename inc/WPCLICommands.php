@@ -153,10 +153,14 @@ class WPCLICommands extends \WP_CLI_Command {
 		WP_CLI::log( esc_html__( 'Importing...', 'pt-ocdi' ) );
 
 		if ( ! empty( $import_files['content'] ) ) {
+			$this->do_action( 'pt-ocdi/before_content_import_execution', $import_files, $this->ocdi->import_files, $predefined_index );
+
 			$this->import_content( $import_files['content'] );
 		}
 
 		if ( ! empty( $import_files['widgets'] ) ) {
+			$this->do_action( 'pt-ocdi/before_widgets_import', $import_files );
+
 			$this->import_widgets( $import_files['widgets'] );
 		}
 
@@ -164,17 +168,7 @@ class WPCLICommands extends \WP_CLI_Command {
 			$this->import_customizer( $import_files['customizer'] );
 		}
 
-		$after_import_action = 'pt-ocdi/after_import';
-
-		if ( false !== has_action( $after_import_action ) ) {
-			WP_CLI::log( esc_html__( 'After import action execution...', 'pt-ocdi' ) );
-
-			ob_start();
-				do_action( $after_import_action, $selected_files );
-			$message = ob_get_clean();
-
-			Helpers::append_to_file( $message, $this->ocdi->log_file_path, $after_import_action );
-		}
+		$this->do_action( 'pt-ocdi/after_all_import_execution', $import_files, $this->ocdi->import_files, $predefined_index );
 
 		WP_CLI::log( esc_html__( 'Predefined import finished!', 'pt-ocdi' ) );
 	}
@@ -276,6 +270,26 @@ class WPCLICommands extends \WP_CLI_Command {
 			}
 
 			$this->ocdi->frontend_error_messages = array();
+		}
+	}
+
+	/**
+	 * Run the registered actions.
+	 *
+	 * @param string $action            Name of the action.
+	 * @param array  $selected_files    Selected import files.
+	 * @param array  $all_import_files  All predefined demos.
+	 * @param null   $selected_index    Selected predefined index.
+	 */
+	private function do_action( $action, $import_files = array(), $all_import_files = array(), $selected_index = null ) {
+		if ( false !== has_action( $action ) ) {
+			WP_CLI::log( sprintf( esc_html__( 'Executing action: %s ...', 'pt-ocdi' ), $action ) );
+
+			ob_start();
+				do_action( $action, $import_files, $all_import_files, $selected_index );
+			$message = ob_get_clean();
+
+			Helpers::append_to_file( $message, $this->ocdi->log_file_path, $action );
 		}
 	}
 }
