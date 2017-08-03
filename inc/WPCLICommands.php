@@ -190,6 +190,8 @@ class WPCLICommands extends \WP_CLI_Command {
 
 		WP_CLI::log( 'Starting to import content...' );
 
+		Helpers::append_to_file( '', $this->ocdi->log_file_path, esc_html__( 'Importing content' , 'pt-ocdi' ) );
+
 		$this->ocdi->append_to_frontend_error_messages( $this->ocdi->importer->import_content( $content_import_file_path ) );
 
 		if( empty( $this->ocdi->frontend_error_messages ) ) {
