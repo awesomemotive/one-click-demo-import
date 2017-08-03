@@ -29,7 +29,7 @@ class WPCLICommands extends \WP_CLI_Command {
 	/**
 	 * List all predefined demo imports.
 	 */
-	public function list() {
+	public function list_predefined() {
 		if ( empty( $this->ocdi->import_files ) ) {
 			WP_CLI::error( esc_html__( 'There are no predefined demo imports for currently active theme!', 'pt-ocdi' ) );
 		}
@@ -64,7 +64,7 @@ class WPCLICommands extends \WP_CLI_Command {
 	 * : Customizer file (DAT), that will be used to import the customizer settings.
 	 *
 	 * [--predefined=<index>]
-	 * : The index of the predefined demo imports (use the 'list' command to check the predefined demo imports)
+	 * : The index of the predefined demo imports (use the 'list_predefined' command to check the predefined demo imports)
 	 */
 	public function import( $args, $assoc_args ) {
 		if ( ! $this->any_import_options_set( $assoc_args ) ) {
@@ -127,7 +127,7 @@ class WPCLICommands extends \WP_CLI_Command {
 		if ( ! array_key_exists( $predefined_index, $this->ocdi->import_files ) ) {
 			WP_CLI::warning( esc_html__( 'The supplied predefined index does not exist! Please take a look at the available predefined demo imports:', 'pt-ocdi' ) );
 
-			$this->list();
+			$this->list_predefined();
 
 			return false;
 		}
