@@ -192,7 +192,12 @@ class WPCLICommands extends \WP_CLI_Command {
 			return false;
 		}
 
-		WP_CLI::log( esc_html__( 'Starting to import content...', 'pt-ocdi' ) );
+		// Change the single AJAX call duration so the whole content import will be done in one go.
+		add_filter( 'pt-ocdi/time_for_one_ajax_call', function() {
+			return 3600;
+		} );
+
+		WP_CLI::log( esc_html__( 'Importing content (this might take a while)...', 'pt-ocdi' ) );
 
 		Helpers::append_to_file( '', $this->ocdi->log_file_path, esc_html__( 'Importing content' , 'pt-ocdi' ) );
 
@@ -225,7 +230,7 @@ class WPCLICommands extends \WP_CLI_Command {
 			return false;
 		}
 
-		WP_CLI::log( esc_html__( 'Starting to import widgets...', 'pt-ocdi' ) );
+		WP_CLI::log( esc_html__( 'Importing widgets...', 'pt-ocdi' ) );
 
 		WidgetImporter::import( $widgets_import_file_path );
 
@@ -256,7 +261,7 @@ class WPCLICommands extends \WP_CLI_Command {
 			return false;
 		}
 
-		WP_CLI::log( esc_html__( 'Starting to import customizer settings...', 'pt-ocdi' ) );
+		WP_CLI::log( esc_html__( 'Importing customizer settings...', 'pt-ocdi' ) );
 
 		CustomizerImporter::import( $customizer_import_file_path );
 
