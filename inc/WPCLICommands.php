@@ -36,13 +36,6 @@ class WPCLICommands extends \WP_CLI_Command {
 
 		WP_CLI::success( esc_html__( 'Here are the predefined demo imports:', 'pt-ocdi' ) );
 
-		$this->list_predefined_demos();
-	}
-
-	/**
-	 * List out all predefined demos in OCDI.
-	 */
-	private function list_predefined_demos() {
 		foreach ( $this->ocdi->import_files as $index => $import_file ) {
 			WP_CLI::log( sprintf(
 				'%d -> %s [content: %s, widgets: %s, customizer: %s, redux: %s]',
@@ -135,7 +128,7 @@ class WPCLICommands extends \WP_CLI_Command {
 		if ( ! array_key_exists( $predefined_index, $this->ocdi->import_files ) ) {
 			WP_CLI::warning( esc_html__( 'The supplied predefined index does not exist! Please take a look at the available predefined demo imports:', 'pt-ocdi' ) );
 
-			$this->list_predefined_demos();
+			$this->list();
 
 			return false;
 		}
