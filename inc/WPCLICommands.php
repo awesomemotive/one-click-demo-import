@@ -12,18 +12,38 @@ use WP_CLI;
 class WPCLICommands extends \WP_CLI_Command {
 
 	/**
-	 * List all predefined demos.
+	 * @var object Main OCDI class object.
 	 */
-	public function list( $args, $assoc_args ) {
-		$ocdi = OneClickDemoImport::get_instance();
+	private $ocdi;
 
-		if ( empty( $ocdi->import_files ) ) {
+	public function __construct() {
+		parent::__construct();
+
+		$this->ocdi = OneClickDemoImport::get_instance();
+
+		Helpers::set_demo_import_start_time();
+
+		$this->ocdi->log_file_path = Helpers::get_log_path();
+	}
+
+	/**
+	 * List all predefined demo imports.
+	 */
+	public function list() {
+		if ( empty( $this->ocdi->import_files ) ) {
 			WP_CLI::error( 'There are no predefined demo imports for currently active theme!' );
 		}
 
 		WP_CLI::success( 'Here are the predefined demo imports:' );
 
-		foreach ( $ocdi->import_files as $index => $import_file ) {
+		$this->list_predefined_demos();
+	}
+
+	/**
+	 * List out all predefined demos in OCDI.
+	 */
+	private function list_predefined_demos() {
+		foreach ( $this->ocdi->import_files as $index => $import_file ) {
 			WP_CLI::log( sprintf(
 				'%d -> %s [content: %s, widgets: %s, customizer: %s, redux: %s]',
 				$index,
@@ -36,5 +56,215 @@ class WPCLICommands extends \WP_CLI_Command {
 		}
 	}
 
+	/**
+	 * Import content/widgets/customizer settings with the OCDI plugin.
+	 *
+	 * ## OPTIONS
+	 *
+	 * [--content=<file>]
+	 * : Content file (XML), that will be used to import the content.
+	 *
+	 * [--widgets=<file>]
+	 * : Widgets file (JSON or WIE), that will be used to import the widgets.
+	 *
+	 * [--customizer=<file>]
+	 * : Customizer file (DAT), that will be used to import the customizer settings.
+	 *
+	 * [--predefined=<index>]
+	 * : The index of the predefined demo imports (use the 'list' command to check the predefined demo imports)
+	 */
+	public function import( $args, $assoc_args ) {
+		if ( ! $this->any_import_options_set( $assoc_args ) ) {
+			WP_CLI::error( 'At least one of the possible options should be set! Check them with --help' );
+		}
 
+		if ( isset( $assoc_args['predefined'] ) ) {
+			$this->import_predefined( $assoc_args['predefined'] );
+		}
+
+		if ( ! empty( $assoc_args['content'] ) ) {
+			$this->import_content( $assoc_args['content'] );
+		}
+
+		if ( ! empty( $assoc_args['widgets'] ) ) {
+			$this->import_widgets( $assoc_args['widgets'] );
+		}
+
+		if ( ! empty( $assoc_args['customizer'] ) ) {
+			$this->import_customizer( $assoc_args['customizer'] );
+		}
+	}
+
+	/**
+	 * Check if any of the possible options are set.
+	 *
+	 * @param array $options
+	 *
+	 * @return bool
+	 */
+	private function any_import_options_set( $options ) {
+		$possible_options = array(
+			'content',
+			'widgets',
+			'customizer',
+			'predefined',
+		);
+
+		foreach ( $possible_options as $option ) {
+			if ( array_key_exists( $option, $options ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Import the predefined demo content/widgets/customizer settings with OCDI.
+	 *
+	 * @param int $predefined_index Index of a OCDI predefined demo import.
+	 */
+	private function import_predefined( $predefined_index ) {
+		if ( ! is_numeric( $predefined_index ) ) {
+			WP_CLI::error( 'The "predefined" parameter should be a number (an index of the OCDI predefined demo import)!' );
+		}
+
+		$predefined_index = absint( $predefined_index );
+
+
+		if ( ! array_key_exists( $predefined_index, $this->ocdi->import_files ) ) {
+			WP_CLI::warning( 'The supplied predefined index does not exist! Please take a look at the available predefined demo imports:' );
+
+			$this->list_predefined_demos();
+
+			return false;
+		}
+
+		WP_CLI::log( 'Predefined demo import started! All other parameters will be ignored!' );
+
+		$selected_files = $this->ocdi->import_files[ $predefined_index ];
+
+		if ( ! empty( $selected_files['import_file_name'] ) ) {
+			WP_CLI::log( sprintf( 'Selected predefined demo import: %s', $selected_files['import_file_name'] ) );
+		}
+
+		WP_CLI::log( 'Preparing the demo import files...' );
+
+		$import_files =	Helpers::download_import_files( $selected_files );
+
+		if ( empty( $import_files ) ) {
+			WP_CLI::error( 'Demo import files could not be retrieved!' );
+		}
+
+		WP_CLI::log( 'Demo import files retrieved successfully!' );
+
+		WP_CLI::log( 'Importing...' );
+
+		if ( ! empty( $import_files['content'] ) ) {
+			$this->import_content( $import_files['content'] );
+		}
+
+		if ( ! empty( $import_files['widgets'] ) ) {
+			$this->import_widgets( $import_files['widgets'] );
+		}
+
+		if ( ! empty( $import_files['customizer'] ) ) {
+			$this->import_customizer( $import_files['customizer'] );
+		}
+
+		WP_CLI::log( 'Predefined import finished!' );
+	}
+
+	/**
+	 * Import the content with OCDI.
+	 *
+	 * @param string $relative_file_path Relative file path to the content import file.
+	 */
+	private function import_content( $relative_file_path ) {
+		$content_import_file_path = realpath( $relative_file_path );
+
+		if ( ! file_exists( $content_import_file_path ) ) {
+			WP_CLI::warning( 'Content import file provided does not exist! Skipping this import!' );
+			return false;
+		}
+
+		WP_CLI::log( 'Starting to import content...' );
+
+		$this->ocdi->append_to_frontend_error_messages( $this->ocdi->importer->import_content( $content_import_file_path ) );
+
+		if( empty( $this->ocdi->frontend_error_messages ) ) {
+			WP_CLI::success( 'Content import finished!' );
+		}
+		else {
+			WP_CLI::warning( 'There were some issues while importing the content!' );
+
+			foreach ( $this->ocdi->frontend_error_messages as $line ) {
+				WP_CLI::log( $line );
+			}
+
+			$this->ocdi->frontend_error_messages = array();
+		}
+	}
+
+	/**
+	 * Import the widgets with OCDI.
+	 *
+	 * @param string $relative_file_path Relative file path to the widgets import file.
+	 */
+	private function import_widgets( $relative_file_path ) {
+		$widgets_import_file_path = realpath( $relative_file_path );
+
+		if ( ! file_exists( $widgets_import_file_path ) ) {
+			WP_CLI::warning( 'Widgets import file provided does not exist! Skipping this import!' );
+			return false;
+		}
+
+		WP_CLI::log( 'Starting to import widgets...' );
+
+		WidgetImporter::import( $widgets_import_file_path );
+
+		if( empty( $this->ocdi->frontend_error_messages ) ) {
+			WP_CLI::success( 'Widgets imported successfully!' );
+		}
+		else {
+			WP_CLI::warning( 'There were some issues while importing widgets!' );
+
+			foreach ( $this->ocdi->frontend_error_messages as $line ) {
+				WP_CLI::log( $line );
+			}
+
+			$this->ocdi->frontend_error_messages = array();
+		}
+	}
+
+	/**
+	 * Import the customizer settings with OCDI.
+	 *
+	 * @param string $relative_file_path Relative file path to the customizer import file.
+	 */
+	private function import_customizer( $relative_file_path ) {
+		$customizer_import_file_path = realpath( $relative_file_path );
+
+		if ( ! file_exists( $customizer_import_file_path ) ) {
+			WP_CLI::warning( 'Customizer import file provided does not exist! Skipping this import!' );
+			return false;
+		}
+
+		WP_CLI::log( 'Starting to import customizer settings...' );
+
+		CustomizerImporter::import( $customizer_import_file_path );
+
+		if( empty( $this->ocdi->frontend_error_messages ) ) {
+			WP_CLI::success( 'Customizer settings imported successfully!' );
+		}
+		else {
+			WP_CLI::warning( 'There were some issues while importing customizer settings!' );
+
+			foreach ( $this->ocdi->frontend_error_messages as $line ) {
+				WP_CLI::log( $line );
+			}
+
+			$this->ocdi->frontend_error_messages = array();
+		}
+	}
 }
