@@ -31,10 +31,10 @@ class WPCLICommands extends \WP_CLI_Command {
 	 */
 	public function list() {
 		if ( empty( $this->ocdi->import_files ) ) {
-			WP_CLI::error( 'There are no predefined demo imports for currently active theme!' );
+			WP_CLI::error( esc_html__( 'There are no predefined demo imports for currently active theme!', 'pt-ocdi' ) );
 		}
 
-		WP_CLI::success( 'Here are the predefined demo imports:' );
+		WP_CLI::success( esc_html__( 'Here are the predefined demo imports:', 'pt-ocdi' ) );
 
 		$this->list_predefined_demos();
 	}
@@ -75,7 +75,7 @@ class WPCLICommands extends \WP_CLI_Command {
 	 */
 	public function import( $args, $assoc_args ) {
 		if ( ! $this->any_import_options_set( $assoc_args ) ) {
-			WP_CLI::error( 'At least one of the possible options should be set! Check them with --help' );
+			WP_CLI::error( esc_html__( 'At least one of the possible options should be set! Check them with --help', 'pt-ocdi' ) );
 		}
 
 		if ( isset( $assoc_args['predefined'] ) ) {
@@ -126,39 +126,39 @@ class WPCLICommands extends \WP_CLI_Command {
 	 */
 	private function import_predefined( $predefined_index ) {
 		if ( ! is_numeric( $predefined_index ) ) {
-			WP_CLI::error( 'The "predefined" parameter should be a number (an index of the OCDI predefined demo import)!' );
+			WP_CLI::error( esc_html__( 'The "predefined" parameter should be a number (an index of the OCDI predefined demo import)!', 'pt-ocdi' ) );
 		}
 
 		$predefined_index = absint( $predefined_index );
 
 
 		if ( ! array_key_exists( $predefined_index, $this->ocdi->import_files ) ) {
-			WP_CLI::warning( 'The supplied predefined index does not exist! Please take a look at the available predefined demo imports:' );
+			WP_CLI::warning( esc_html__( 'The supplied predefined index does not exist! Please take a look at the available predefined demo imports:', 'pt-ocdi' ) );
 
 			$this->list_predefined_demos();
 
 			return false;
 		}
 
-		WP_CLI::log( 'Predefined demo import started! All other parameters will be ignored!' );
+		WP_CLI::log( esc_html__( 'Predefined demo import started! All other parameters will be ignored!', 'pt-ocdi' ) );
 
 		$selected_files = $this->ocdi->import_files[ $predefined_index ];
 
 		if ( ! empty( $selected_files['import_file_name'] ) ) {
-			WP_CLI::log( sprintf( 'Selected predefined demo import: %s', $selected_files['import_file_name'] ) );
+			WP_CLI::log( sprintf( esc_html__( 'Selected predefined demo import: %s', 'pt-ocdi' ), $selected_files['import_file_name'] ) );
 		}
 
-		WP_CLI::log( 'Preparing the demo import files...' );
+		WP_CLI::log( esc_html__( 'Preparing the demo import files...', 'pt-ocdi' ) );
 
 		$import_files =	Helpers::download_import_files( $selected_files );
 
 		if ( empty( $import_files ) ) {
-			WP_CLI::error( 'Demo import files could not be retrieved!' );
+			WP_CLI::error( esc_html__( 'Demo import files could not be retrieved!', 'pt-ocdi' ) );
 		}
 
-		WP_CLI::log( 'Demo import files retrieved successfully!' );
+		WP_CLI::log( esc_html__( 'Demo import files retrieved successfully!', 'pt-ocdi' ) );
 
-		WP_CLI::log( 'Importing...' );
+		WP_CLI::log( esc_html__( 'Importing...', 'pt-ocdi' ) );
 
 		if ( ! empty( $import_files['content'] ) ) {
 			$this->import_content( $import_files['content'] );
@@ -172,7 +172,7 @@ class WPCLICommands extends \WP_CLI_Command {
 			$this->import_customizer( $import_files['customizer'] );
 		}
 
-		WP_CLI::log( 'Predefined import finished!' );
+		WP_CLI::log( esc_html__( 'Predefined import finished!', 'pt-ocdi' ) );
 	}
 
 	/**
@@ -184,21 +184,21 @@ class WPCLICommands extends \WP_CLI_Command {
 		$content_import_file_path = realpath( $relative_file_path );
 
 		if ( ! file_exists( $content_import_file_path ) ) {
-			WP_CLI::warning( 'Content import file provided does not exist! Skipping this import!' );
+			WP_CLI::warning( esc_html__( 'Content import file provided does not exist! Skipping this import!', 'pt-ocdi' ) );
 			return false;
 		}
 
-		WP_CLI::log( 'Starting to import content...' );
+		WP_CLI::log( esc_html__( 'Starting to import content...', 'pt-ocdi' ) );
 
 		Helpers::append_to_file( '', $this->ocdi->log_file_path, esc_html__( 'Importing content' , 'pt-ocdi' ) );
 
 		$this->ocdi->append_to_frontend_error_messages( $this->ocdi->importer->import_content( $content_import_file_path ) );
 
 		if( empty( $this->ocdi->frontend_error_messages ) ) {
-			WP_CLI::success( 'Content import finished!' );
+			WP_CLI::success( esc_html__( 'Content import finished!', 'pt-ocdi' ) );
 		}
 		else {
-			WP_CLI::warning( 'There were some issues while importing the content!' );
+			WP_CLI::warning( esc_html__( 'There were some issues while importing the content!', 'pt-ocdi' ) );
 
 			foreach ( $this->ocdi->frontend_error_messages as $line ) {
 				WP_CLI::log( $line );
@@ -217,19 +217,19 @@ class WPCLICommands extends \WP_CLI_Command {
 		$widgets_import_file_path = realpath( $relative_file_path );
 
 		if ( ! file_exists( $widgets_import_file_path ) ) {
-			WP_CLI::warning( 'Widgets import file provided does not exist! Skipping this import!' );
+			WP_CLI::warning( esc_html__( 'Widgets import file provided does not exist! Skipping this import!', 'pt-ocdi' ) );
 			return false;
 		}
 
-		WP_CLI::log( 'Starting to import widgets...' );
+		WP_CLI::log( esc_html__( 'Starting to import widgets...', 'pt-ocdi' ) );
 
 		WidgetImporter::import( $widgets_import_file_path );
 
 		if( empty( $this->ocdi->frontend_error_messages ) ) {
-			WP_CLI::success( 'Widgets imported successfully!' );
+			WP_CLI::success( esc_html__( 'Widgets imported successfully!', 'pt-ocdi' ) );
 		}
 		else {
-			WP_CLI::warning( 'There were some issues while importing widgets!' );
+			WP_CLI::warning( esc_html__( 'There were some issues while importing widgets!', 'pt-ocdi' ) );
 
 			foreach ( $this->ocdi->frontend_error_messages as $line ) {
 				WP_CLI::log( $line );
@@ -248,19 +248,19 @@ class WPCLICommands extends \WP_CLI_Command {
 		$customizer_import_file_path = realpath( $relative_file_path );
 
 		if ( ! file_exists( $customizer_import_file_path ) ) {
-			WP_CLI::warning( 'Customizer import file provided does not exist! Skipping this import!' );
+			WP_CLI::warning( esc_html__( 'Customizer import file provided does not exist! Skipping this import!', 'pt-ocdi' ) );
 			return false;
 		}
 
-		WP_CLI::log( 'Starting to import customizer settings...' );
+		WP_CLI::log( esc_html__( 'Starting to import customizer settings...', 'pt-ocdi' ) );
 
 		CustomizerImporter::import( $customizer_import_file_path );
 
 		if( empty( $this->ocdi->frontend_error_messages ) ) {
-			WP_CLI::success( 'Customizer settings imported successfully!' );
+			WP_CLI::success( esc_html__( 'Customizer settings imported successfully!', 'pt-ocdi' ) );
 		}
 		else {
-			WP_CLI::warning( 'There were some issues while importing customizer settings!' );
+			WP_CLI::warning( esc_html__( 'There were some issues while importing customizer settings!', 'pt-ocdi' ) );
 
 			foreach ( $this->ocdi->frontend_error_messages as $line ) {
 				WP_CLI::log( $line );
