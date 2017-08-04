@@ -42,7 +42,8 @@ class OCDI_Plugin {
 
 			// Register WP CLI commands
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
-				WP_CLI::add_command( 'ocdi', 'OCDI\WPCLICommands' );
+				WP_CLI::add_command( 'ocdi list', array( 'OCDI\WPCLICommands', 'list_predefined' ) );
+				WP_CLI::add_command( 'ocdi import', array( 'OCDI\WPCLICommands', 'import' ) );
 			}
 		}
 	}
