@@ -66,7 +66,6 @@ class Importer {
 	 */
 	private function include_required_files() {
 		if ( ! class_exists( '\WP_Importer' ) ) {
-			defined( 'WP_LOAD_IMPORTERS' ) || define( 'WP_LOAD_IMPORTERS', true );
 			require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 		}
 	}
