@@ -350,6 +350,13 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 ## Changelog ##
 
+### 2.4.0 ###
+
+*Release Date - 23 August 2017*
+
+* Add WP-CLI commands for importing with this plugin,
+* Fix conflict with WooCommerce importer
+
 ### 2.3.0 ###
 
 *Release Date - 28 May 2017*
