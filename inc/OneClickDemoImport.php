@@ -37,14 +37,14 @@ class OneClickDemoImport {
 	 *
 	 * @var array
 	 */
-	private $import_files;
+	public $import_files;
 
 	/**
 	 * The path of the log file.
 	 *
 	 * @var string
 	 */
-	private $log_file_path;
+	public $log_file_path;
 
 	/**
 	 * The index of the `import_files` array (which import files was selected).
@@ -65,7 +65,7 @@ class OneClickDemoImport {
 	 *
 	 * @var string
 	 */
-	private $frontend_error_messages = array();
+	public $frontend_error_messages = array();
 
 	/**
 	 * Was the before content import already triggered?

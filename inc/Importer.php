@@ -27,7 +27,7 @@ class Importer {
 	 *
 	 * @var object
 	 */
-	private $logger;
+	public $logger;
 
 	/**
 	 * The instance of the One Click Demo Import class.
