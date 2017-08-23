@@ -227,6 +227,24 @@ function ocdi_before_widgets_import( $selected_import ) {
 add_action( 'pt-ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
 `
 
+= How can I import via the WP-CLI? =
+
+In the 2.4.0 version of this pugin we added two WP-CLI commands:
+
+* `wp ocdi list` - Which will list any predefined demo imports currently active theme might have,
+* `wp ocdi import` - which has a few options that you can use to import the things you want (content/widgets/customizer/predefined demos). Let's look at these options below.
+
+`wp ocdi import` options:
+
+`wp ocdi import [--content=<file>] [--widgets=<file>] [--customizer=<file>] [--predefined=<index>]`
+
+* `--content=<file>` - will run the content import with the WP import file specified in the `<file>` parameter,
+* `--widgets=<file>` - will run the widgets import with the widgets import file specified in the `<file>` parameter,
+* `--customizer=<file>` - will run the customizer settings import with the customizer import file specified in the `<file>` parameter,
+* `--predefined=<index>` - will run the theme predefined import with the index of the predefined import in the `<index>` parameter (you can use the `wp ocdi list` command to check which index is used for each predefined demo import)
+
+The content, widgets and customizer options can be mixed and used at the same time. If the `predefined` option is set, then it will ignore all other options and import the predefined demo data.
+
 = I'm a theme author and I want to change the plugin intro text, how can I do that? =
 
 You can change the plugin intro text by using the `pt-ocdi/plugin_intro_text` filter:
