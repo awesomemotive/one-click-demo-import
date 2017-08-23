@@ -2,7 +2,7 @@
 # This file is distributed under the GPL 2.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 2.2.1\n"
+"Project-Id-Version: One Click Demo Import 2.4.0\n"
 "Report-Msgid-Bugs-To: http://support.proteusthemes.com/\n"
 "POT-Creation-Date: 2016-05-14 09:53:17+00:00\n"
 "MIME-Version: 1.0\n"
@@ -149,7 +149,7 @@ msgstr ""
 msgid "not defined!"
 msgstr ""
 
-#: inc/Importer.php:173
+#: inc/Importer.php:172
 msgid "New AJAX call!"
 msgstr ""
 
@@ -234,6 +234,114 @@ msgid ""
 "imported!"
 msgstr ""
 
+#: inc/WPCLICommands.php:34
+msgid "There are no predefined demo imports for currently active theme!"
+msgstr ""
+
+#: inc/WPCLICommands.php:37
+msgid "Here are the predefined demo imports:"
+msgstr ""
+
+#: inc/WPCLICommands.php:71
+msgid "At least one of the possible options should be set! Check them with --help"
+msgstr ""
+
+#: inc/WPCLICommands.php:122
+msgid ""
+"The \"predefined\" parameter should be a number (an index of the OCDI "
+"predefined demo import)!"
+msgstr ""
+
+#: inc/WPCLICommands.php:128
+msgid ""
+"The supplied predefined index does not exist! Please take a look at the "
+"available predefined demo imports:"
+msgstr ""
+
+#: inc/WPCLICommands.php:135
+msgid "Predefined demo import started! All other parameters will be ignored!"
+msgstr ""
+
+#: inc/WPCLICommands.php:140
+msgid "Selected predefined demo import: %s"
+msgstr ""
+
+#: inc/WPCLICommands.php:143
+msgid "Preparing the demo import files..."
+msgstr ""
+
+#: inc/WPCLICommands.php:148
+msgid "Demo import files could not be retrieved!"
+msgstr ""
+
+#: inc/WPCLICommands.php:151
+msgid "Demo import files retrieved successfully!"
+msgstr ""
+
+#: inc/WPCLICommands.php:153
+msgid "Importing..."
+msgstr ""
+
+#: inc/WPCLICommands.php:173
+msgid "Predefined import finished!"
+msgstr ""
+
+#: inc/WPCLICommands.php:185
+msgid "Content import file provided does not exist! Skipping this import!"
+msgstr ""
+
+#: inc/WPCLICommands.php:194
+msgid "Importing content (this might take a while)..."
+msgstr ""
+
+#: inc/WPCLICommands.php:196
+msgid "Importing content"
+msgstr ""
+
+#: inc/WPCLICommands.php:201
+msgid "Content import finished!"
+msgstr ""
+
+#: inc/WPCLICommands.php:204
+msgid "There were some issues while importing the content!"
+msgstr ""
+
+#: inc/WPCLICommands.php:223
+msgid "Widgets import file provided does not exist! Skipping this import!"
+msgstr ""
+
+#: inc/WPCLICommands.php:227
+msgid "Importing widgets..."
+msgstr ""
+
+#: inc/WPCLICommands.php:232
+msgid "Widgets imported successfully!"
+msgstr ""
+
+#: inc/WPCLICommands.php:235
+msgid "There were some issues while importing widgets!"
+msgstr ""
+
+#: inc/WPCLICommands.php:254
+msgid "Customizer import file provided does not exist! Skipping this import!"
+msgstr ""
+
+#: inc/WPCLICommands.php:258
+msgid "Importing customizer settings..."
+msgstr ""
+
+#: inc/WPCLICommands.php:263
+msgid "Customizer settings imported successfully!"
+msgstr ""
+
+#: inc/WPCLICommands.php:266
+msgid "There were some issues while importing customizer settings!"
+msgstr ""
+
+#: inc/WPCLICommands.php:286
+msgid "Executing action: %s ..."
+msgstr ""
+
 #: inc/WidgetImporter.php:40 inc/WidgetImporter.php:52
 msgid "Importing widgets"
 msgstr ""
@@ -274,7 +382,7 @@ msgstr ""
 msgid "No results for widget import!"
 msgstr ""
 
-#: one-click-demo-import.php:51
+#: one-click-demo-import.php:57
 msgid ""
 "The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.3.2+%3$s to run "
 "properly. Please contact your hosting company and ask them to update the "
