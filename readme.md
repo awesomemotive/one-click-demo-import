@@ -1,5 +1,5 @@
 # One Click Demo Import #
-**Contributors:** capuderg, cyman, Prelc  
+**Contributors:** capuderg, cyman, Prelc, proteusthemes  
 **Tags:** import, content, demo, data, widgets, settings, redux, theme options  
 **Requires at least:** 4.0.0  
 **Tested up to:** 4.9  
