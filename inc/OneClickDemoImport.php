@@ -74,12 +74,12 @@ class OneClickDemoImport {
 	 */
 	private $before_import_executed = false;
 
-    /**
-     * Make plugin page options available to other methods.
-     *
-     * @var array
-     */
-    private $plugin_page_setup = array();
+  /**
+   * Make plugin page options available to other methods.
+   *
+   * @var array
+   */
+  private $plugin_page_setup = array();
 
 	/**
 	 * Returns the *Singleton* instance of this class.
@@ -133,13 +133,12 @@ class OneClickDemoImport {
 	 */
 	public function create_plugin_page() {
 		$this->plugin_page_setup = apply_filters( 'pt-ocdi/plugin_page_setup', array(
-				'parent_slug' => 'themes.php',
-				'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
-				'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
-				'capability'  => 'import',
-				'menu_slug'   => 'pt-one-click-demo-import',
-			)
-		);
+			'parent_slug' => 'themes.php',
+			'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
+			'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
+			'capability'  => 'import',
+			'menu_slug'   => 'pt-one-click-demo-import',
+		) );
 
 		$this->plugin_page = add_submenu_page(
 			$this->plugin_page_setup['parent_slug'],
@@ -148,10 +147,9 @@ class OneClickDemoImport {
 			$this->plugin_page_setup['capability'],
 			$this->plugin_page_setup['menu_slug'],
 			apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) )
-        );
+		);
 
-        register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
-
+		register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
 	}
 
     
@@ -173,7 +171,7 @@ class OneClickDemoImport {
 		// Enqueue the scripts only on the plugin page.
 		if ( $this->plugin_page === $hook || ( 'admin.php' === $hook && $this->plugin_page_setup['menu_slug'] === esc_attr( $_GET['import'] ) ) ) {
 			wp_enqueue_script( 'jquery-ui-dialog' );
-            wp_enqueue_style( 'wp-jquery-ui-dialog' );
+			wp_enqueue_style( 'wp-jquery-ui-dialog' );
 
 			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery', 'jquery-ui-dialog' ), PT_OCDI_VERSION );
 
