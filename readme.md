@@ -368,6 +368,14 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 ## Changelog ##
 
+### 2.5.0 ###
+
+*Release Date - 8 January 2018*
+
+* Add OCDI as a WordPress import tool in Tools -> Import,
+* Add switching to the manual import, if the theme has predefined demo imports,
+* Fix text domain loading
+
 ### 2.4.0 ###
 
 *Release Date - 23 August 2017*
