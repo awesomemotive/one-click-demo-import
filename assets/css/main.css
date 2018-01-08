@@ -56,6 +56,11 @@
 	list-style-type: square;
 }
 
+/* Plugin switch import mode link*/
+.ocdi__import-mode-switch {
+	float: right;
+}
+
 /* Plugin multi select import and Plugin file upload containers */
 
 .ocdi__file-upload,

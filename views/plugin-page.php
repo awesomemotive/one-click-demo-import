@@ -7,6 +7,12 @@
 
 namespace OCDI;
 
+$predefined_themes = $this->import_files;
+
+if ( ! empty( $this->import_files ) && isset( $_GET['import-mode'] ) && 'manual' === $_GET['import-mode'] ) {
+	$predefined_themes = array();
+}
+
 ?>
 
 <div class="ocdi  wrap  about-wrap">
@@ -54,6 +60,14 @@ namespace OCDI;
 			<li><?php esc_html_e( 'Please click on the Import button only once and wait, it can take a couple of minutes.', 'pt-ocdi' ); ?></li>
 		</ul>
 
+		<?php if ( ! empty( $this->import_files ) ) : ?>
+			<?php if ( empty( $_GET['import-mode'] ) || 'manual' !== $_GET['import-mode'] ) : ?>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => $this->plugin_page_setup['menu_slug'], 'import-mode' => 'manual' ), admin_url( $this->plugin_page_setup['parent_slug'] ) ) ); ?>" class="ocdi__import-mode-switch"><?php esc_html_e( 'Switch to manual import!', 'pt-ocdi' ); ?></a>
+			<?php else : ?>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => $this->plugin_page_setup['menu_slug'] ), admin_url( $this->plugin_page_setup['parent_slug'] ) ) ); ?>" class="ocdi__import-mode-switch"><?php esc_html_e( 'Switch back to theme predefined imports!', 'pt-ocdi' ); ?></a>
+			<?php endif; ?>
+		<?php endif; ?>
+
 		<hr>
 	</div>
 
@@ -64,12 +78,13 @@ namespace OCDI;
 	echo wp_kses_post( apply_filters( 'pt-ocdi/plugin_intro_text', $plugin_intro_text ) );
 	?>
 
-
 	<?php if ( empty( $this->import_files ) ) : ?>
-
 		<div class="notice  notice-info  is-dismissible">
 			<p><?php esc_html_e( 'There are no predefined import files available in this theme. Please upload the import files manually!', 'pt-ocdi' ); ?></p>
 		</div>
+	<?php endif; ?>
+
+	<?php if ( empty( $predefined_themes ) ) : ?>
 
 		<div class="ocdi__file-upload-container">
 			<h2><?php esc_html_e( 'Manual demo files upload', 'pt-ocdi' ); ?></h2>
@@ -105,11 +120,11 @@ namespace OCDI;
 			<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
 		</p>
 
-	<?php elseif ( 1 === count( $this->import_files ) ) : ?>
+	<?php elseif ( 1 === count( $predefined_themes ) ) : ?>
 
 		<div class="ocdi__demo-import-notice  js-ocdi-demo-import-notice"><?php
-			if ( is_array( $this->import_files ) && ! empty( $this->import_files[0]['import_notice'] ) ) {
-				echo wp_kses_post( $this->import_files[0]['import_notice'] );
+			if ( is_array( $predefined_themes ) && ! empty( $predefined_themes[0]['import_notice'] ) ) {
+				echo wp_kses_post( $predefined_themes[0]['import_notice'] );
 			}
 		?></div>
 
@@ -123,7 +138,7 @@ namespace OCDI;
 		<div class="ocdi__gl  js-ocdi-gl">
 		<?php
 			// Prepare navigation data.
-			$categories = Helpers::get_all_demo_import_categories( $this->import_files );
+			$categories = Helpers::get_all_demo_import_categories( $predefined_themes );
 		?>
 			<?php if ( ! empty( $categories ) ) : ?>
 				<div class="ocdi__gl-header  js-ocdi-gl-header">
@@ -141,7 +156,7 @@ namespace OCDI;
 				</div>
 			<?php endif; ?>
 			<div class="ocdi__gl-item-container  wp-clearfix  js-ocdi-gl-item-container">
-				<?php foreach ( $this->import_files as $index => $import_file ) : ?>
+				<?php foreach ( $predefined_themes as $index => $import_file ) : ?>
 					<?php
 						// Prepare import item display data.
 						$img_src = isset( $import_file['import_preview_image_url'] ) ? $import_file['import_preview_image_url'] : '';
