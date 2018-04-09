@@ -87,3 +87,6 @@ That means, that your hosting server is missing one of a very common PHP modules
 > Fatal error:  Class 'XMLReader' not found in .../wp-content/plugins/one-click-demo-import/vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php on line 123
 
 Similarly as above, but this time the [XMLReader](http://php.net/manual/en/book.xmlreader.php) PHP module/extention is missing. Please contact your hosting company and ask them to install that for you. These are very common modules, so I don't know why they do not install them by default.
+
+## Server error 504 - Gateway timeout ##
+This means, that the server did not get a timely response and so it stopped with the current import. What you can try is to run the same import again. If you get the same error, you can try to run the same import a few times. A couple of import tries might finish the import till the end, becaue your server will be able to process the import data in smaller chunks.
