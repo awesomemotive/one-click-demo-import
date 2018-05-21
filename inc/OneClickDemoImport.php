@@ -134,8 +134,8 @@ class OneClickDemoImport {
 	public function create_plugin_page() {
 		$this->plugin_page_setup = apply_filters( 'pt-ocdi/plugin_page_setup', array(
 			'parent_slug' => 'themes.php',
-			'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
-			'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
+			'page_title'  => esc_html__( 'One Click Demo Import' , 'one-click-demo-import' ),
+			'menu_title'  => esc_html__( 'Import Demo Data' , 'one-click-demo-import' ),
 			'capability'  => 'import',
 			'menu_slug'   => 'pt-one-click-demo-import',
 		) );
@@ -152,7 +152,7 @@ class OneClickDemoImport {
 		register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
 	}
 
-    
+
 	/**
 	 * Plugin page display.
 	 * Output (HTML) is in another file.
@@ -187,11 +187,11 @@ class OneClickDemoImport {
 					'import_popup'     => apply_filters( 'pt-ocdi/enable_grid_layout_import_popup_confirmation', true ),
 					'theme_screenshot' => $theme->get_screenshot(),
 					'texts'            => array(
-						'missing_preview_image' => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
-						'dialog_title'          => esc_html__( 'Are you sure?', 'pt-ocdi' ),
-						'dialog_no'             => esc_html__( 'Cancel', 'pt-ocdi' ),
-						'dialog_yes'            => esc_html__( 'Yes, import!', 'pt-ocdi' ),
-						'selected_import_title' => esc_html__( 'Selected demo import:', 'pt-ocdi' ),
+						'missing_preview_image' => esc_html__( 'No preview image defined for this import.', 'one-click-demo-import' ),
+						'dialog_title'          => esc_html__( 'Are you sure?', 'one-click-demo-import' ),
+						'dialog_no'             => esc_html__( 'Cancel', 'one-click-demo-import' ),
+						'dialog_yes'            => esc_html__( 'Yes, import!', 'one-click-demo-import' ),
+						'selected_import_title' => esc_html__( 'Selected demo import:', 'one-click-demo-import' ),
 					),
 					'dialog_options' => apply_filters( 'pt-ocdi/confirmation_dialog_options', array() )
 				)
@@ -238,7 +238,7 @@ class OneClickDemoImport {
 				$this->selected_import_files = Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
 
 				// Set the name of the import files, because we used the uploaded files.
-				$this->import_files[ $this->selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'pt-ocdi' );
+				$this->import_files[ $this->selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'one-click-demo-import' );
 			}
 			elseif ( ! empty( $this->import_files[ $this->selected_index ] ) ) { // Use predefined import files from wp filter: pt-ocdi/import_files.
 
@@ -251,23 +251,23 @@ class OneClickDemoImport {
 					Helpers::log_error_and_send_ajax_response(
 						$this->selected_import_files->get_error_message(),
 						$this->log_file_path,
-						esc_html__( 'Downloaded files', 'pt-ocdi' )
+						esc_html__( 'Downloaded files', 'one-click-demo-import' )
 					);
 				}
 
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file(
 					sprintf(
-						__( 'The import files for: %s were successfully downloaded!', 'pt-ocdi' ),
+						__( 'The import files for: %s were successfully downloaded!', 'one-click-demo-import' ),
 						$this->import_files[ $this->selected_index ]['import_file_name']
 					) . Helpers::import_file_info( $this->selected_import_files ),
 					$this->log_file_path,
-					esc_html__( 'Downloaded files' , 'pt-ocdi' )
+					esc_html__( 'Downloaded files' , 'one-click-demo-import' )
 				);
 			}
 			else {
 				// Send JSON Error response to the AJAX call.
-				wp_send_json( esc_html__( 'No import files specified!', 'pt-ocdi' ) );
+				wp_send_json( esc_html__( 'No import files specified!', 'one-click-demo-import' ) );
 			}
 		}
 
@@ -388,10 +388,10 @@ class OneClickDemoImport {
 			$response['message'] = '';
 
 			if ( ! apply_filters( 'pt-ocdi/disable_pt_branding', false ) ) {
-				$twitter_status = esc_html__( 'Just used One Click Demo Import plugin and it was awesome! Thanks @ProteusThemes! #OCDI https://www.proteusthemes.com/', 'pt-ocdi' );
+				$twitter_status = esc_html__( 'Just used One Click Demo Import plugin and it was awesome! Thanks @ProteusThemes! #OCDI https://www.proteusthemes.com/', 'one-click-demo-import' );
 
 				$response['message'] .= sprintf(
-					__( '%1$s%6$sWasn\'t this a great One Click Demo Import experience?%7$s Created and maintained by %3$sProteusThemes%4$s. %2$s%5$sClick to Tweet!%4$s%8$s', 'pt-ocdi' ),
+					__( '%1$s%6$sWasn\'t this a great One Click Demo Import experience?%7$s Created and maintained by %3$sProteusThemes%4$s. %2$s%5$sClick to Tweet!%4$s%8$s', 'one-click-demo-import' ),
 					'<div class="notice  notice-info"><p>',
 					'<br>',
 					'<strong><a href="https://www.proteusthemes.com/" target="_blank">',
@@ -404,7 +404,7 @@ class OneClickDemoImport {
 			}
 
 			$response['message'] .= sprintf(
-				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
+				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'one-click-demo-import' ),
 				'<div class="notice  notice-success"><p>',
 				'<br>',
 				'<strong>',
@@ -415,7 +415,7 @@ class OneClickDemoImport {
 		else {
 			$response['message'] = $this->frontend_error_messages_display() . '<br>';
 			$response['message'] .= sprintf(
-				__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
+				__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'one-click-demo-import' ),
 				'<div class="notice  notice-warning"><p>',
 				'<br>',
 				'<strong>',
@@ -520,7 +520,7 @@ class OneClickDemoImport {
 	 * Load the plugin textdomain, so that translations can be made.
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain( 'pt-ocdi', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
+		load_plugin_textdomain( 'one-click-demo-import', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
 	}
 
 
