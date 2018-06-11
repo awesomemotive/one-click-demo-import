@@ -88,5 +88,12 @@ That means, that your hosting server is missing one of a very common PHP modules
 
 Similarly as above, but this time the [XMLReader](http://php.net/manual/en/book.xmlreader.php) PHP module/extention is missing. Please contact your hosting company and ask them to install that for you. These are very common modules, so I don't know why they do not install them by default.
 
+**2. no errors, but media import failing**
+
+If there are no errors in log file as well as no errors in the plugin importer screen or server logs, the issue might be a custom, changed WordPress installation. Some hosting providers install their own "improved" modified WordPress, with must-use plugins or other changes in the script. [We've received reports before (private link)](https://proteusthemes.zendesk.com/agent/tickets/11650) that the importer was not working due to these hosting provider "improvements":
+
+> Our hosting and domain provider is using their "better" wordpress edition, there are some plugins added as default, i don´t know what else.
+> This time i used just official wordpress and all was quick and smooth.
+
 ## Server error 504 - Gateway timeout ##
 This means, that the server did not get a timely response and so it stopped with the current import. What you can try is to run the same import again. If you get the same error, you can try to run the same import a few times. A couple of import tries might finish the import till the end, becaue your server will be able to process the import data in smaller chunks.
