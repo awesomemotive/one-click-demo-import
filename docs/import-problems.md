@@ -51,6 +51,8 @@ Plugin default is 25 seconds. Add this code at the end of your theme functions.p
 
 This will "slice" the requests to smaller chunks and it might bypass the low server settings (timeouts and memory per request).
 
+If you see that the 500 server error shows up, when the new AJAX request is being requested, then you can change the above nomber to something higher, like `return 180;`, to increase the single lenght of the AJAX request and that might resolve your issue.
+
 **Disable the generation of smaller images during the import**
 
 While importing, smaller versions of images are being generated, which takes up a lot of server memory, so you can disable that in the plugin with a line of code. Add this code at the end of your theme functions.php file:
