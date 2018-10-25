@@ -368,6 +368,12 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 ## Changelog ##
 
+### 2.5.1 ###
+
+*Release Date - 25 October 2018*
+
+* Fix missing translation strings
+
 ### 2.5.0 ###
 
 *Release Date - 8 January 2018*
