@@ -2,7 +2,7 @@
 # This file is distributed under the GPL 2.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 2.4.0\n"
+"Project-Id-Version: One Click Demo Import 2.5.1\n"
 "Report-Msgid-Bugs-To: http://support.proteusthemes.com/\n"
 "POT-Creation-Date: 2016-05-14 09:53:17+00:00\n"
 "MIME-Version: 1.0\n"
@@ -81,7 +81,8 @@ msgstr ""
 msgid "One Click Demo Import"
 msgstr ""
 
-#: inc/Helpers.php:309 inc/OneClickDemoImport.php:138
+#: inc/Helpers.php:309 inc/OneClickDemoImport.php:138 views/plugin-page.php:120
+#: views/plugin-page.php:132
 msgid "Import Demo Data"
 msgstr ""
 
@@ -388,6 +389,112 @@ msgid ""
 "properly. Please contact your hosting company and ask them to update the "
 "PHP version of your site to at least PHP 5.3.2.%4$s Your current version of "
 "PHP: %2$s%1$s%3$s"
+msgstr ""
+
+#: views/plugin-page.php:31
+msgid ""
+"%sWarning: your server is using %sPHP safe mode%s. This means that you "
+"might experience server timeout errors.%s"
+msgstr ""
+
+#: views/plugin-page.php:44
+msgid "Before you begin, make sure all the required plugins are activated."
+msgstr ""
+
+#: views/plugin-page.php:49
+msgid ""
+"Importing demo data (post, pages, images, theme settings, ...) is the "
+"easiest way to setup your theme."
+msgstr ""
+
+#: views/plugin-page.php:50
+msgid ""
+"It will allow you to quickly edit everything instead of creating content "
+"from scratch."
+msgstr ""
+
+#: views/plugin-page.php:55
+msgid "When you import the data, the following things might happen:"
+msgstr ""
+
+#: views/plugin-page.php:58
+msgid ""
+"No existing posts, pages, categories, images, custom post types or any "
+"other data will be deleted or modified."
+msgstr ""
+
+#: views/plugin-page.php:59
+msgid ""
+"Posts, pages, images, widgets, menus and other theme settings will get "
+"imported."
+msgstr ""
+
+#: views/plugin-page.php:60
+msgid ""
+"Please click on the Import button only once and wait, it can take a couple "
+"of minutes."
+msgstr ""
+
+#: views/plugin-page.php:65
+msgid "Switch to manual import!"
+msgstr ""
+
+#: views/plugin-page.php:67
+msgid "Switch back to theme predefined imports!"
+msgstr ""
+
+#: views/plugin-page.php:83
+msgid ""
+"There are no predefined import files available in this theme. Please upload "
+"the import files manually!"
+msgstr ""
+
+#: views/plugin-page.php:90
+msgid "Manual demo files upload"
+msgstr ""
+
+#: views/plugin-page.php:93
+msgid "Choose a XML file for content import:"
+msgstr ""
+
+#: views/plugin-page.php:98
+msgid "Choose a WIE or JSON file for widget import:"
+msgstr ""
+
+#: views/plugin-page.php:103
+msgid "Choose a DAT file for customizer import:"
+msgstr ""
+
+#: views/plugin-page.php:109
+msgid "Choose a JSON file for Redux import:"
+msgstr ""
+
+#: views/plugin-page.php:112
+msgid "Enter the Redux option name:"
+msgstr ""
+
+#: views/plugin-page.php:147
+msgid "All"
+msgstr ""
+
+#: views/plugin-page.php:154
+msgid "Search demos..."
+msgstr ""
+
+#: views/plugin-page.php:175
+msgid "No preview image."
+msgstr ""
+
+#: views/plugin-page.php:180
+msgid "Import"
+msgstr ""
+
+#: views/plugin-page.php:182
+msgid "Preview"
+msgstr ""
+
+#: views/plugin-page.php:195
+msgid "Importing, please wait!"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
