@@ -339,6 +339,37 @@ You can disable the branding notice with a WP filter. All you need to do is add 
 
 and the notice will not be displayed.
 
+= How can I pass Amazon S3 presigned URL's (temporary links) as external files ? =
+
+If you want to host your import content files on Amazon S3, but you want them to be publicly available, rather through an own API as presigned URL's (which expires) you can use the filter `pt-ocdi/pre_download_import_files` in which you can pass your own URL's, for example:
+
+```
+add_filter( 'pt-ocdi/pre_download_import_files', function( $import_file_info ){
+
+	// In this example `get_my_custom_urls` is supposedly making a `wp_remote_get` request, getting the urls from an API server where you're creating the presigned urls, [example here](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-presigned-url.html).
+	// This request should return an array containing all the 3 links - `import_file_url`, `import_widget_file_url`, `import_customizer_file_url`
+	$request = get_my_custom_urls( $import_file_info );
+
+	if ( !is_wp_error( $request ) )
+	{
+		if ( isset($request['data']) && is_array($request['data']) )
+		{
+			if( isset($request['data']['import_file_url']) && $import_file_url = $request['data']['import_file_url'] ){
+				$import_file_info['import_file_url'] = $import_file_url;
+			}
+			if( isset($request['data']['import_widget_file_url']) && $import_widget_file_url = $request['data']['import_widget_file_url'] ){
+				$import_file_info['import_widget_file_url'] = $import_widget_file_url;
+			}
+			if( isset($request['data']['import_customizer_file_url']) && $import_customizer_file_url = $request['data']['import_customizer_file_url'] ){
+				$import_file_info['import_customizer_file_url'] = $import_customizer_file_url;
+			}
+		}
+	}
+
+	return $import_file_info;
+
+} );
+```
 
 = I can't activate the plugin, because of a fatal error, what can I do? =
 

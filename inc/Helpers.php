@@ -67,6 +67,8 @@ class Helpers {
 		);
 		$downloader = new Downloader();
 
+		$import_file_info = apply_filters('pt-ocdi/pre_download_import_files', $import_file_info);
+
 		// ----- Set content file path -----
 		// Check if 'import_file_url' is not defined. That would mean a local file.
 		if ( empty( $import_file_info['import_file_url'] ) ) {
