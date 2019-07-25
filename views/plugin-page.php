@@ -13,6 +13,10 @@ if ( ! empty( $this->import_files ) && isset( $_GET['import-mode'] ) && 'manual'
 	$predefined_themes = array();
 }
 
+/**
+ * Hook for adding the custom plugin page header
+ */
+do_action( 'pt-ocdi/plugin_page_header' );
 ?>
 
 <div class="ocdi  wrap  about-wrap">
@@ -197,3 +201,9 @@ if ( ! empty( $this->import_files ) && isset( $_GET['import-mode'] ) && 'manual'
 
 	<div class="ocdi__response  js-ocdi-ajax-response"></div>
 </div>
+
+<?php
+/**
+ * Hook for adding the custom admin page footer
+ */
+do_action( 'pt-ocdi/plugin_page_footer' );
