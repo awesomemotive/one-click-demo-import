@@ -2,8 +2,8 @@
 **Contributors:** capuderg, cyman, Prelc, proteusthemes  
 **Tags:** import, content, demo, data, widgets, settings, redux, theme options  
 **Requires at least:** 4.0.0  
-**Tested up to:** 4.9  
-**Stable tag:** 2.5.1  
+**Tested up to:** 5.2.2  
+**Stable tag:** 2.5.2  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -398,6 +398,15 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 
 ## Changelog ##
+
+### 2.5.2 ###
+
+*Release Date - 29 July 2019*
+
+* Improved documentation and code sample
+* Added `pt-ocdi/pre_download_import_files` filter
+* Added two action hooks to plugin-page.php
+* Bumped `Tested up to` tag
 
 ### 2.5.1 ###
 
