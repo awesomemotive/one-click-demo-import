@@ -446,6 +446,9 @@ class OneClickDemoImport {
 		}
 
 		wp_send_json( $response );
+
+		wp_die();
+
 	}
 
 
