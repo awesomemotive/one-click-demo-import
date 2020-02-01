@@ -145,7 +145,7 @@ class OneClickDemoImport {
 		/**
 		 * ability to add menu page
 		 */
-		if( false === $this->plugin_page_setup['parent_slug'] ){
+		if( ! $this->plugin_page_setup['parent_slug'] ){
 			$this->plugin_page = add_menu_page(
 				$this->plugin_page_setup['page_title'],
 				$this->plugin_page_setup['menu_title'],
