@@ -138,16 +138,35 @@ class OneClickDemoImport {
 			'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
 			'capability'  => 'import',
 			'menu_slug'   => 'pt-one-click-demo-import',
+			'icon_url'    => '',
+			'position'    => null
 		) );
 
-		$this->plugin_page = add_submenu_page(
-			$this->plugin_page_setup['parent_slug'],
-			$this->plugin_page_setup['page_title'],
-			$this->plugin_page_setup['menu_title'],
-			$this->plugin_page_setup['capability'],
-			$this->plugin_page_setup['menu_slug'],
-			apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) )
-		);
+		/**
+		 * ability to add menu page
+		 */
+		if( false === $this->plugin_page_setup['parent_slug'] ){
+			$this->plugin_page = add_menu_page(
+				$this->plugin_page_setup['page_title'],
+				$this->plugin_page_setup['menu_title'],
+				$this->plugin_page_setup['capability'],
+				$this->plugin_page_setup['menu_slug'],
+				apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ),
+				$this->plugin_page_setup['icon_url'],
+				$this->plugin_page_setup['position']
+			);
+		} else{
+			$this->plugin_page = add_submenu_page(
+				$this->plugin_page_setup['parent_slug'],
+				$this->plugin_page_setup['page_title'],
+				$this->plugin_page_setup['menu_title'],
+				$this->plugin_page_setup['capability'],
+				$this->plugin_page_setup['menu_slug'],
+				apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) )
+			);
+		}
+
+
 
 		register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
 	}
