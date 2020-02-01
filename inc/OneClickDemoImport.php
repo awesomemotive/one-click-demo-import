@@ -152,7 +152,7 @@ class OneClickDemoImport {
 		register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
 	}
 
-    
+
 	/**
 	 * Plugin page display.
 	 * Output (HTML) is in another file.
@@ -403,18 +403,18 @@ class OneClickDemoImport {
 				);
 			}
 
-			$response['message'] .= sprintf(
+			$response['message'] .= apply_filters( 'pt-ocdi/response_message_success', sprintf(
 				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
 				'<div class="notice  notice-success"><p>',
 				'<br>',
 				'<strong>',
 				'</strong>',
 				'</p></div>'
-			);
+			));
 		}
 		else {
 			$response['message'] = $this->frontend_error_messages_display() . '<br>';
-			$response['message'] .= sprintf(
+			$response['message'] .= apply_filters( 'pt-ocdi/response_message_error', sprintf(
 				__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
 				'<div class="notice  notice-warning"><p>',
 				'<br>',
@@ -423,7 +423,7 @@ class OneClickDemoImport {
 				'<a href="' . Helpers::get_log_url( $this->log_file_path ) .'" target="_blank">',
 				'</a>',
 				'</p></div>'
-			);
+			));
 		}
 
 		wp_send_json( $response );
