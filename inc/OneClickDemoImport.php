@@ -422,27 +422,32 @@ class OneClickDemoImport {
 				);
 			}
 
-			$response['message'] .= apply_filters( 'pt-ocdi/response_message_success', sprintf(
-				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
-				'<div class="notice  notice-success"><p>',
-				'<br>',
-				'<strong>',
-				'</strong>',
-				'</p></div>'
-			));
-		}
-		else {
+			$response['message'] .= apply_filters( 'pt-ocdi/response_message_success',
+				sprintf(
+					'<div class="notice  notice-success"><p><strong>%1$s</strong><br/>',
+					apply_filters( 'pt-ocdi/response_message_success_title', esc_html__( 'That\'s it, all done!', 'pt-ocdi' ) )
+				) .
+				sprintf(
+					apply_filters( 'pt-ocdi/response_message_success_body', esc_html__( 'The demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %s plugin, because it has done its job.', 'pt-ocdi' ) ) . '</p></div>',
+					'<strong>' . esc_html__( 'One Click Demo Import', 'pt-ocdi' ) . '</strong>'
+				)
+			);
+		} else {
 			$response['message'] = $this->frontend_error_messages_display() . '<br>';
-			$response['message'] .= apply_filters( 'pt-ocdi/response_message_error', sprintf(
-				__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
-				'<div class="notice  notice-warning"><p>',
-				'<br>',
-				'<strong>',
-				'</strong>',
-				'<a href="' . Helpers::get_log_url( $this->log_file_path ) .'" target="_blank">',
-				'</a>',
-				'</p></div>'
-			));
+			$response['message'] .= apply_filters( 'pt-ocdi/response_message_error',
+				sprintf(
+					'<div class="notice  notice-warning"><p>%1$s<br/>',
+					apply_filters( 'pt-ocdi/response_message_error_title', esc_html__( 'The demo import has finished, but there were some import errors.', 'pt-ocdi' ) )
+				)
+				. sprintf(
+					apply_filters( 'pt-ocdi/response_message_error_body',
+						esc_html__( 'More details about the errors can be found in this %s', 'pt-ocdi' ),
+						Helpers::get_log_url( $this->log_file_path )
+					) . '</p></div>',
+					'<strong><a href="' . Helpers::get_log_url( $this->log_file_path ) . '" target="_blank">' . esc_html__( 'log file', 'pt-ocdi' ) . '</a></strong>'
+				)
+			);
+
 		}
 
 		wp_send_json( $response );
