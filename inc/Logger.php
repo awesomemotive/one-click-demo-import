@@ -7,7 +7,7 @@
 
 namespace OCDI;
 
-class Logger extends \ProteusThemes\WPContentImporter2\WPImporterLoggerCLI {
+class Logger extends \AwesomeMotive\WPContentImporter2\WPImporterLoggerCLI {
 	/**
 	 * Variable for front-end error display.
 	 *

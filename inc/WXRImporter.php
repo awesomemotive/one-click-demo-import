@@ -9,7 +9,7 @@
 
 namespace OCDI;
 
-class WXRImporter extends \ProteusThemes\WPContentImporter2\WXRImporter {
+class WXRImporter extends \AwesomeMotive\WPContentImporter2\WXRImporter {
 	/**
 	 * Constructor method.
 	 *

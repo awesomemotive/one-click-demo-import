@@ -1,29 +1,29 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c08162760062dba4507a24931b27fa0",
+    "content-hash": "bbf13f251ab2be80e27c2c5feb2bec4d",
     "packages": [
         {
-            "name": "proteusthemes/wp-content-importer-v2",
-            "version": "v0.4.7",
+            "name": "awesomemotive/wp-content-importer-v2",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/proteusthemes/WordPress-Importer.git",
-                "reference": "ec052cc8fdcde29b47b69599b2b430e7fb423c22"
+                "url": "https://github.com/awesomemotive/WordPress-Importer.git",
+                "reference": "a4a0b263eb8ca7f314a96bc158df9cee0b2434d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/proteusthemes/WordPress-Importer/zipball/ec052cc8fdcde29b47b69599b2b430e7fb423c22",
-                "reference": "ec052cc8fdcde29b47b69599b2b430e7fb423c22",
+                "url": "https://api.github.com/repos/awesomemotive/WordPress-Importer/zipball/a4a0b263eb8ca7f314a96bc158df9cee0b2434d9",
+                "reference": "a4a0b263eb8ca7f314a96bc158df9cee0b2434d9",
                 "shasum": ""
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "ProteusThemes\\WPContentImporter2\\": "src/"
+                    "AwesomeMotive\\WPContentImporter2\\": "src/"
                 }
             },
             "license": [
@@ -31,23 +31,31 @@
             ],
             "authors": [
                 {
-                    "name": "Contributors",
+                    "name": "Gregor Capuder",
+                    "email": "capuderg@gmail.com"
+                },
+                {
+                    "name": "Primoz Cigler",
+                    "email": "primoz@proteusnet.com"
+                },
+                {
+                    "name": "Humanmade contributors",
                     "homepage": "https://github.com/humanmade/WordPress-Importer/graphs/contributors"
                 }
             ],
-            "description": "WP content importer v2 forked from humanmade/wordpress-importer.",
+            "description": "Improved WP content importer used in OCDI plugin.",
             "keywords": [
+                "awesomemotive",
                 "content",
                 "import",
-                "proteusthemes",
                 "theme",
                 "wordpress",
                 "wp"
             ],
             "support": {
-                "source": "https://github.com/proteusthemes/WordPress-Importer/tree/v0.4.7"
+                "source": "https://github.com/awesomemotive/WordPress-Importer/tree/v3.0.0"
             },
-            "time": "2017-05-02T11:07:20+00:00"
+            "time": "2020-07-10T07:05:43+00:00"
         }
     ],
     "packages-dev": [],
@@ -57,5 +65,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

@@ -1,12 +1,12 @@
 {
-    "name":         "proteusthemes/one-click-demo-import",
-    "description":  "One Click Demo Import plugin by ProteusThemes.",
+    "name":         "awesomemotive/one-click-demo-import",
+    "description":  "One Click Demo Import plugin by AwesomeMotive.",
     "license":      "GPL-3.0+",
     "type":         "project",
     "repositories": [
       {
         "type": "vcs",
-        "url":  "https://github.com/proteusthemes/WordPress-Importer.git"
+        "url":  "https://github.com/awesomemotive/WordPress-Importer.git"
       }
     ],
     "autoload": {
@@ -15,6 +15,6 @@
         }
     },
     "require": {
-        "proteusthemes/wp-content-importer-v2": "^0.4.7"
+        "awesomemotive/wp-content-importer-v2": "^3.0.0"
     }
 }
