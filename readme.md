@@ -16,15 +16,13 @@ The best feature of this plugin is, that theme authors can define import files i
 >
 > Setup One Click Demo Imports for your theme and your users will thank you for it!
 >
-> [Follow this easy guide on how to setup this plugin for your themes!](http://proteusthemes.github.io/one-click-demo-import/)
->
-> Also [sign up to the newsletter](http://proteusthemes.github.io/one-click-demo-import/#ocdi-newsletter-signup), so we can inform you about any updates, changes or improvements.
+> [Follow this easy guide on how to setup this plugin for your themes!](http://awesomemotive.github.io/one-click-demo-import/)
 
 > **Are you a theme user?**
 >
-> Contact the author of your theme and [let them know about this plugin](http://proteusthemes.github.io/one-click-demo-import/theme-users.html). Theme authors can make any theme compatible with this plugin in 15 minutes and make it much more user-friendly.
+> Contact the author of your theme and [let them know about this plugin](http://awesomemotive.github.io/one-click-demo-import/theme-users.html). Theme authors can make any theme compatible with this plugin in 15 minutes and make it much more user-friendly.
 >
-> "[Where can I find the contact of the theme author?](http://proteusthemes.github.io/one-click-demo-import/theme-users.html)"
+> "[Where can I find the contact of the theme author?](http://awesomemotive.github.io/one-click-demo-import/theme-users.html)"
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
