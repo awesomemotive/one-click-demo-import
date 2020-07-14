@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbf13f251ab2be80e27c2c5feb2bec4d",
+    "content-hash": "964712c8e4692706e90d19761761c3b4",
     "packages": [
         {
             "name": "awesomemotive/wp-content-importer-v2",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/awesomemotive/WordPress-Importer.git",
-                "reference": "a4a0b263eb8ca7f314a96bc158df9cee0b2434d9"
+                "reference": "bba40cee2d30dcfc2b66a60303ee6b1a045d76fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/awesomemotive/WordPress-Importer/zipball/a4a0b263eb8ca7f314a96bc158df9cee0b2434d9",
-                "reference": "a4a0b263eb8ca7f314a96bc158df9cee0b2434d9",
+                "url": "https://api.github.com/repos/awesomemotive/WordPress-Importer/zipball/bba40cee2d30dcfc2b66a60303ee6b1a045d76fd",
+                "reference": "bba40cee2d30dcfc2b66a60303ee6b1a045d76fd",
                 "shasum": ""
             },
             "type": "library",
@@ -53,9 +53,9 @@
                 "wp"
             ],
             "support": {
-                "source": "https://github.com/awesomemotive/WordPress-Importer/tree/v3.0.0"
+                "source": "https://github.com/awesomemotive/WordPress-Importer/tree/master"
             },
-            "time": "2020-07-10T07:05:43+00:00"
+            "time": "2020-07-14T08:17:51+00:00"
         }
     ],
     "packages-dev": [],
