@@ -391,6 +391,13 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 == Changelog ==
 
+= 2.6.0 =
+
+*Release Date - 20 July 2020*
+
+* Fixed incorrect post and post meta import (unicode and other special characters were not escaped properly).
+* Fixed error (500 - internal error) for Widgets import on PHP 7.x.
+
 = 2.5.2 =
 
 *Release Date - 29 July 2019*
