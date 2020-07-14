@@ -433,11 +433,27 @@ class Helpers {
 			'test_type' => false,
 		);
 
-		// Handle demo content and widgets file upload.
-		$content_file_info     = wp_handle_upload( $_FILES['content_file'], $upload_overrides );
-		$widget_file_info      = wp_handle_upload( $_FILES['widget_file'], $upload_overrides );
-		$customizer_file_info  = wp_handle_upload( $_FILES['customizer_file'], $upload_overrides );
-		$redux_file_info       = wp_handle_upload( $_FILES['redux_file'], $upload_overrides );
+		// Error data if the demo file was not provided.
+		$file_not_provided_error = array(
+			'error' => esc_html__( 'No file provided.', 'pt-ocdi' )
+		);
+
+		// Handle demo file uploads.
+		$content_file_info = isset( $_FILES['content_file'] ) ?
+			wp_handle_upload( $_FILES['content_file'], $upload_overrides ) :
+			$file_not_provided_error;
+
+		$widget_file_info = isset( $_FILES['widget_file'] ) ?
+			wp_handle_upload( $_FILES['widget_file'], $upload_overrides ) :
+			$file_not_provided_error;
+
+		$customizer_file_info = isset( $_FILES['customizer_file'] ) ?
+			wp_handle_upload( $_FILES['customizer_file'], $upload_overrides ) :
+			$file_not_provided_error;
+
+		$redux_file_info = isset( $_FILES['customizer_file'] ) ?
+			wp_handle_upload( $_FILES['redux_file'], $upload_overrides ) :
+			$file_not_provided_error;
 
 		// Process content import file.
 		if ( $content_file_info && ! isset( $content_file_info['error'] ) ) {
@@ -449,7 +465,7 @@ class Helpers {
 			$log_added = self::append_to_file(
 				sprintf(
 					__( 'Content file was not uploaded. Error: %s', 'pt-ocdi' ),
-					$widget_file_info['error']
+					$content_file_info['error']
 				),
 				$log_file_path,
 				esc_html__( 'Upload files' , 'pt-ocdi' )
