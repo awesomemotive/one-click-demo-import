@@ -118,7 +118,9 @@ class Importer {
 		$this->microtime = microtime( true );
 
 		// Increase PHP max execution time. Just in case, even though the AJAX calls are only 25 sec long.
-		set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 300 ) );
+		if ( strpos( ini_get( 'disable_functions' ), 'set_time_limit' ) === false ) {
+			set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 300 ) );
+		}
 
 		// Disable import of authors.
 		add_filter( 'wxr_importer.pre_process.user', '__return_false' );

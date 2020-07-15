@@ -404,6 +404,7 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 * Fixed incorrect post and post meta import (unicode and other special characters were not escaped properly).
 * Fixed error (500 - internal error) for Widgets import on PHP 7.x.
 * Fixed PHP notices for manual demo import.
+* Fixed PHP warning if `set_time_limit` function is disabled.
 
 ### 2.5.2 ###
 
