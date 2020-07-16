@@ -399,6 +399,7 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 * Fixed error (500 - internal error) for Widgets import on PHP 7.x.
 * Fixed PHP notices for manual demo import.
 * Fixed PHP warning if `set_time_limit` function is disabled.
+* Fixed links for switching manual and predefined import modes.
 
 = 2.5.2 =
 

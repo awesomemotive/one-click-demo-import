@@ -66,9 +66,9 @@ do_action( 'pt-ocdi/plugin_page_header' );
 
 		<?php if ( ! empty( $this->import_files ) ) : ?>
 			<?php if ( empty( $_GET['import-mode'] ) || 'manual' !== $_GET['import-mode'] ) : ?>
-				<a href="<?php echo esc_url( add_query_arg( array( 'page' => $this->plugin_page_setup['menu_slug'], 'import-mode' => 'manual' ), admin_url( $this->plugin_page_setup['parent_slug'] ) ) ); ?>" class="ocdi__import-mode-switch"><?php esc_html_e( 'Switch to manual import!', 'pt-ocdi' ); ?></a>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => $this->plugin_page_setup['menu_slug'], 'import-mode' => 'manual' ), menu_page_url( $this->plugin_page_setup['parent_slug'], false ) ) ); ?>" class="ocdi__import-mode-switch"><?php esc_html_e( 'Switch to manual import!', 'pt-ocdi' ); ?></a>
 			<?php else : ?>
-				<a href="<?php echo esc_url( add_query_arg( array( 'page' => $this->plugin_page_setup['menu_slug'] ), admin_url( $this->plugin_page_setup['parent_slug'] ) ) ); ?>" class="ocdi__import-mode-switch"><?php esc_html_e( 'Switch back to theme predefined imports!', 'pt-ocdi' ); ?></a>
+				<a href="<?php echo esc_url( add_query_arg( array( 'page' => $this->plugin_page_setup['menu_slug'] ), menu_page_url( $this->plugin_page_setup['parent_slug'], false ) ) ); ?>" class="ocdi__import-mode-switch"><?php esc_html_e( 'Switch back to theme predefined imports!', 'pt-ocdi' ); ?></a>
 			<?php endif; ?>
 		<?php endif; ?>
 
