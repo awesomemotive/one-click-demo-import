@@ -401,6 +401,7 @@ Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-im
 
 *Release Date - 20 July 2020*
 
+* Improved code execution: not loading plugin code on frontend.
 * Fixed incorrect post and post meta import (unicode and other special characters were not escaped properly).
 * Fixed error (500 - internal error) for Widgets import on PHP 7.x.
 * Fixed PHP notices for manual demo import.

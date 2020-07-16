@@ -529,6 +529,10 @@ class OneClickDemoImport {
 	 * Get data from filters, after the theme has loaded and instantiate the importer.
 	 */
 	public function setup_plugin_with_filter_data() {
+		if ( ! ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) ) {
+			return;
+		}
+
 		// Get info of import data files and filter it.
 		$this->import_files = Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
 
