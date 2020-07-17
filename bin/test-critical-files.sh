@@ -24,10 +24,10 @@ function testRequiredFiles {
 		inc/WidgetImporter.php
 		inc/WXRImporter.php
 		inc/WPCLICommands.php
-		vendor/proteusthemes/wp-content-importer-v2/src/WPImporterLoggerCLI.php
-		vendor/proteusthemes/wp-content-importer-v2/src/WPImporterLogger.php
-		vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php
-		vendor/proteusthemes/wp-content-importer-v2/src/WXRImportInfo.php
+		vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php
+		vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php
+		vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php
+		vendor/awesomemotive/wp-content-importer-v2/src/WXRImportInfo.php
 	)
 	requiredFolders=(
 		assets/js
