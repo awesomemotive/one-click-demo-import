@@ -53,9 +53,9 @@ class OneClickDemoImportTest extends WP_UnitTestCase {
 		$this->assertFileExists( PT_OCDI_PATH . 'inc/OneClickDemoImport.php', 'Main file is missing!' );
 		$this->assertFileExists( PT_OCDI_PATH . 'inc/WidgetImporter.php', 'Widget importer file is missing!' );
 		$this->assertFileExists( PT_OCDI_PATH . 'inc/WXRImporter.php', 'WXRImporter file is missing!' );
-		$this->assertFileExists( PT_OCDI_PATH . 'vendor/proteusthemes/wp-content-importer-v2/src/WPImporterLogger.php', 'WP importer v2 logger file is missing!' );
-		$this->assertFileExists( PT_OCDI_PATH . 'vendor/proteusthemes/wp-content-importer-v2/src/WPImporterLoggerCLI.php', 'WP importer v2 logger CLI file is missing!' );
-		$this->assertFileExists( PT_OCDI_PATH . 'vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php', 'WP importer v2 main file is missing!' );
-		$this->assertFileExists( PT_OCDI_PATH . 'vendor/proteusthemes/wp-content-importer-v2/src/WXRImportInfo.php', 'WP importer v2 info class file is missing!' );
+		$this->assertFileExists( PT_OCDI_PATH . 'vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLogger.php', 'WP importer v2 logger file is missing!' );
+		$this->assertFileExists( PT_OCDI_PATH . 'vendor/awesomemotive/wp-content-importer-v2/src/WPImporterLoggerCLI.php', 'WP importer v2 logger CLI file is missing!' );
+		$this->assertFileExists( PT_OCDI_PATH . 'vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php', 'WP importer v2 main file is missing!' );
+		$this->assertFileExists( PT_OCDI_PATH . 'vendor/awesomemotive/wp-content-importer-v2/src/WXRImportInfo.php', 'WP importer v2 info class file is missing!' );
 	}
 }
