@@ -15,6 +15,6 @@
         }
     },
     "require": {
-        "awesomemotive/wp-content-importer-v2": "^3.0.2"
+        "awesomemotive/wp-content-importer-v2": "^3.0.3"
     }
 }
