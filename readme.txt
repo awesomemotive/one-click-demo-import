@@ -36,7 +36,7 @@ NOTE: There is no setting to "connect" authors from the demo import file to the 
 
 **Do you want to contribute?**
 
-Please refer to the official [GitHub repository](https://github.com/proteusthemes/one-click-demo-import) of this plugin.
+Please refer to the official [GitHub repository](https://github.com/awesomemotive/one-click-demo-import) of this plugin.
 
 == Installation ==
 
@@ -381,7 +381,7 @@ This happens, because your hosting server is using a very old version of PHP. Th
 
 = Issues with the import, that we can't fix in the plugin =
 
-Please visit this [docs page](https://github.com/proteusthemes/one-click-demo-import/blob/master/docs/import-problems.md), for more answers to issues with importing data.
+Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-import/blob/master/docs/import-problems.md), for more answers to issues with importing data.
 
 == Screenshots ==
 
