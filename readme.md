@@ -4,7 +4,7 @@
 **Requires at least:** 4.0  
 **Tested up to:** 5.4  
 **Requires PHP:** 5.3.2  
-**Stable tag:** 2.6.0  
+**Stable tag:** 2.6.1  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -397,6 +397,12 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 
 ## Changelog ##
+
+### 2.6.1 ###
+
+*Release Date - 21 July 2020*
+
+* Fixed Elementor import issues.
 
 ### 2.6.0 ###
 
