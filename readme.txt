@@ -1,8 +1,9 @@
 === One Click Demo Import ===
 Contributors: smub, proteusthemes
 Tags: import, content, demo, data, widgets, settings, redux, theme options
-Requires at least: 4.0.0
-Tested up to: 5.5.0
+Requires at least: 4.0
+Tested up to: 5.4
+Requires PHP: 5.3.2
 Stable tag: 2.6.0
 License: GPLv3 or later
 
