@@ -3,7 +3,7 @@
 **Tags:** import, content, demo, data, widgets, settings, redux, theme options  
 **Requires at least:** 4.0.0  
 **Tested up to:** 5.5.0  
-**Stable tag:** 2.5.2  
+**Stable tag:** 2.6.0  
 **License:** GPLv3 or later  
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -399,7 +399,7 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 ### 2.6.0 ###
 
-*Release Date - 20 July 2020*
+*Release Date - 21 July 2020*
 
 * Improved code execution: not loading plugin code on frontend.
 * Fixed incorrect post and post meta import (unicode and other special characters were not escaped properly).
