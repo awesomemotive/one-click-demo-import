@@ -1,5 +1,5 @@
 === One Click Demo Import ===
-Contributors: smub, proteusthemes
+Contributors: ocdi, smub, jaredatch, capuderg
 Tags: import, content, demo, data, widgets, settings, redux, theme options
 Requires at least: 4.0
 Tested up to: 5.4
