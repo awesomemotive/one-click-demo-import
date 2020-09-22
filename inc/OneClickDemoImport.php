@@ -133,11 +133,12 @@ class OneClickDemoImport {
 	 */
 	public function create_plugin_page() {
 		$this->plugin_page_setup = apply_filters( 'pt-ocdi/plugin_page_setup', array(
-			'parent_slug' => 'themes.php',
-			'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
-			'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
-			'capability'  => 'import',
-			'menu_slug'   => 'pt-one-click-demo-import',
+			'parent_slug'   => 'themes.php',
+			'page_title'    => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
+			'menu_title'    => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
+			'capability'    => 'import',
+			'menu_slug'     => 'pt-one-click-demo-import',
+			'menu_position' => null,
 		) );
 
 		$this->plugin_page = add_submenu_page(
@@ -146,7 +147,8 @@ class OneClickDemoImport {
 			$this->plugin_page_setup['menu_title'],
 			$this->plugin_page_setup['capability'],
 			$this->plugin_page_setup['menu_slug'],
-			apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) )
+			apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ),
+			$this->plugin_page_setup['menu_position']
 		);
 
 		register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
