@@ -67,7 +67,7 @@ class Helpers {
 		);
 		$downloader = new Downloader();
 
-		$import_file_info = apply_filters('pt-ocdi/pre_download_import_files', $import_file_info);
+		$import_file_info = self::apply_filters('ocdi/pre_download_import_files', $import_file_info);
 
 		// ----- Set content file path -----
 		// Check if 'import_file_url' is not defined. That would mean a local file.
@@ -78,7 +78,7 @@ class Helpers {
 		}
 		else {
 			// Set the filename string for content import file.
-			$content_filename = apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
+			$content_filename = self::apply_filters( 'ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
 
 			// Download the content import file.
 			$downloaded_files['content'] = $downloader->download_file( $import_file_info['import_file_url'], $content_filename );
@@ -93,7 +93,7 @@ class Helpers {
 		// Get widgets file as well. If defined!
 		if ( ! empty( $import_file_info['import_widget_file_url'] ) ) {
 			// Set the filename string for widgets import file.
-			$widget_filename = apply_filters( 'pt-ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+			$widget_filename = self::apply_filters( 'ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
 
 			// Download the widgets import file.
 			$downloaded_files['widgets'] = $downloader->download_file( $import_file_info['import_widget_file_url'], $widget_filename );
@@ -113,7 +113,7 @@ class Helpers {
 		// Get customizer import file as well. If defined!
 		if ( ! empty( $import_file_info['import_customizer_file_url'] ) ) {
 			// Setup filename path to save the customizer content.
-			$customizer_filename = apply_filters( 'pt-ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
+			$customizer_filename = self::apply_filters( 'ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
 
 			// Download the customizer import file.
 			$downloaded_files['customizer'] = $downloader->download_file( $import_file_info['import_customizer_file_url'], $customizer_filename );
@@ -136,7 +136,7 @@ class Helpers {
 
 			// Setup filename paths to save the Redux content.
 			foreach ( $import_file_info['import_redux'] as $index => $redux_item ) {
-				$redux_filename = apply_filters( 'pt-ocdi/downloaded_redux_file_prefix', 'demo-redux-import-file_' ) . $index . '-' . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_redux_file_suffix_and_file_extension', '.json' );
+				$redux_filename = self::apply_filters( 'ocdi/downloaded_redux_file_prefix', 'demo-redux-import-file_' ) . $index . '-' . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_redux_file_suffix_and_file_extension', '.json' );
 
 				// Download the Redux import file.
 				$file_path = $downloader->download_file( $redux_item['file_url'], $redux_filename );
@@ -305,7 +305,7 @@ class Helpers {
 		}
 
 		// Get plugin page settings.
-		$plugin_page_setup = apply_filters( 'pt-ocdi/plugin_page_setup', array(
+		$plugin_page_setup = self::apply_filters( 'ocdi/plugin_page_setup', array(
 				'parent_slug' => 'themes.php',
 				'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
 				'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
@@ -343,9 +343,9 @@ class Helpers {
 	 */
 	public static function get_log_path() {
 		$upload_dir  = wp_upload_dir();
-		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+		$upload_path = self::apply_filters( 'ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
-		$log_path = $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
+		$log_path = $upload_path . self::apply_filters( 'ocdi/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/log_file_suffix_and_file_extension', '.txt' );
 
 		self::register_file_as_media_attachment( $log_path );
 
@@ -362,13 +362,13 @@ class Helpers {
 	public static function register_file_as_media_attachment( $log_path ) {
 		// Check the type of file.
 		$log_mimes = array( 'txt' => 'text/plain' );
-		$filetype  = wp_check_filetype( basename( $log_path ), apply_filters( 'pt-ocdi/file_mimes', $log_mimes ) );
+		$filetype  = wp_check_filetype( basename( $log_path ), self::apply_filters( 'ocdi/file_mimes', $log_mimes ) );
 
 		// Prepare an array of post data for the attachment.
 		$attachment = array(
 			'guid'           => self::get_log_url( $log_path ),
 			'post_mime_type' => $filetype['type'],
-			'post_title'     => apply_filters( 'pt-ocdi/attachment_prefix', esc_html__( 'One Click Demo Import - ', 'pt-ocdi' ) ) . preg_replace( '/\.[^.]+$/', '', basename( $log_path ) ),
+			'post_title'     => self::apply_filters( 'ocdi/attachment_prefix', esc_html__( 'One Click Demo Import - ', 'pt-ocdi' ) ) . preg_replace( '/\.[^.]+$/', '', basename( $log_path ) ),
 			'post_content'   => '',
 			'post_status'    => 'inherit',
 		);
@@ -386,7 +386,7 @@ class Helpers {
 	 */
 	public static function get_log_url( $log_path ) {
 		$upload_dir = wp_upload_dir();
-		$upload_url = apply_filters( 'pt-ocdi/upload_file_url', trailingslashit( $upload_dir['url'] ) );
+		$upload_url = self::apply_filters( 'ocdi/upload_file_url', trailingslashit( $upload_dir['url'] ) );
 
 		return $upload_url . basename( $log_path );
 	}
@@ -604,7 +604,7 @@ class Helpers {
 	 * Set the $demo_import_start_time class variable with the current date and time string.
 	 */
 	public static function set_demo_import_start_time() {
-		self::$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
+		self::$demo_import_start_time = date( self::apply_filters( 'ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
 	}
 
 
@@ -664,5 +664,33 @@ class Helpers {
 	 */
 	public static function set_ocdi_import_data_transient( $data ) {
 		set_transient( 'ocdi_importer_data', $data, 0.1 * HOUR_IN_SECONDS );
+	}
+
+
+	/**
+	 * Backwards compatible apply_filters helper.
+	 * With 3.0 we changed the filter prefix from 'pt-ocdi/' to just 'ocdi/',
+	 * but we needed to make sure backwards compatibility is in place.
+	 * This method should be used for all apply_filters calls.
+	 *
+	 * @param string $hook         The filter hook name.
+	 * @param mixed  $default_data The default filter data.
+	 *
+	 * @return mixed|void
+	 */
+	public static function apply_filters( $hook, $default_data ) {
+		$new_data = apply_filters( $hook, $default_data );
+
+		if ( $new_data !== $default_data ) {
+			return $new_data;
+		}
+
+		$old_data = apply_filters( "pt-$hook", $default_data );
+
+		if ( $old_data !== $default_data ) {
+			return $old_data;
+		}
+
+		return $default_data;
 	}
 }

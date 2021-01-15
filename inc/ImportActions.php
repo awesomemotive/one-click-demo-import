@@ -28,7 +28,7 @@ class ImportActions {
 		add_action( 'pt-ocdi/after_all_import_execution', array( $this, 'after_import_action' ), 10, 3 );
 
 		// Special widget import cases.
-		if ( apply_filters( 'pt_ocdi/enable_custom_menu_widget_ids_fix', true ) ) {
+		if ( Helpers::apply_filters( 'ocdi/enable_custom_menu_widget_ids_fix', true ) ) {
 			add_action( 'pt-ocdi/widget_settings_array', array( $this, 'fix_custom_menu_widget_ids' ) );
 		}
 	}

@@ -132,7 +132,7 @@ class OneClickDemoImport {
 	 * Creates the plugin page and a submenu item in WP Appearance menu.
 	 */
 	public function create_plugin_page() {
-		$this->plugin_page_setup = apply_filters( 'pt-ocdi/plugin_page_setup', array(
+		$this->plugin_page_setup = Helpers::apply_filters( 'ocdi/plugin_page_setup', array(
 			'parent_slug' => 'themes.php',
 			'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
 			'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
@@ -146,10 +146,10 @@ class OneClickDemoImport {
 			$this->plugin_page_setup['menu_title'],
 			$this->plugin_page_setup['capability'],
 			$this->plugin_page_setup['menu_slug'],
-			apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) )
+			Helpers::apply_filters( 'ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) )
 		);
 
-		register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], apply_filters( 'pt-ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
+		register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], Helpers::apply_filters( 'ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
 	}
 
 	/**
@@ -182,8 +182,8 @@ class OneClickDemoImport {
 					'ajax_url'         => admin_url( 'admin-ajax.php' ),
 					'ajax_nonce'       => wp_create_nonce( 'ocdi-ajax-verification' ),
 					'import_files'     => $this->import_files,
-					'wp_customize_on'  => apply_filters( 'pt-ocdi/enable_wp_customize_save_hooks', false ),
-					'import_popup'     => apply_filters( 'pt-ocdi/enable_grid_layout_import_popup_confirmation', true ),
+					'wp_customize_on'  => Helpers::apply_filters( 'ocdi/enable_wp_customize_save_hooks', false ),
+					'import_popup'     => Helpers::apply_filters( 'ocdi/enable_grid_layout_import_popup_confirmation', true ),
 					'theme_screenshot' => $theme->get_screenshot(),
 					'texts'            => array(
 						'missing_preview_image' => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
@@ -192,7 +192,7 @@ class OneClickDemoImport {
 						'dialog_yes'            => esc_html__( 'Yes, import!', 'pt-ocdi' ),
 						'selected_import_title' => esc_html__( 'Selected demo import:', 'pt-ocdi' ),
 					),
-					'dialog_options' => apply_filters( 'pt-ocdi/confirmation_dialog_options', array() )
+					'dialog_options' => Helpers::apply_filters( 'ocdi/confirmation_dialog_options', array() )
 				)
 			);
 
@@ -210,7 +210,7 @@ class OneClickDemoImport {
 	 */
 	public function import_demo_data_ajax_callback() {
 		// Try to update PHP memory limit (so that it does not run out of it).
-		ini_set( 'memory_limit', apply_filters( 'pt-ocdi/import_memory_limit', '350M' ) );
+		ini_set( 'memory_limit', Helpers::apply_filters( 'ocdi/import_memory_limit', '350M' ) );
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		Helpers::verify_ajax_call();
@@ -386,7 +386,7 @@ class OneClickDemoImport {
 		if ( empty( $this->frontend_error_messages ) ) {
 			$response['message'] = '';
 
-			if ( ! apply_filters( 'pt-ocdi/disable_pt_branding', false ) ) {
+			if ( ! Helpers::apply_filters( 'ocdi/disable_pt_branding', false ) ) {
 				$twitter_status = esc_html__( 'Just used One Click Demo Import plugin and it was awesome! Thanks @ProteusThemes! #OCDI https://www.proteusthemes.com/', 'pt-ocdi' );
 
 				$response['message'] .= sprintf(
@@ -534,7 +534,7 @@ class OneClickDemoImport {
 		}
 
 		// Get info of import data files and filter it.
-		$this->import_files = Helpers::validate_import_file_info( apply_filters( 'pt-ocdi/import_files', array() ) );
+		$this->import_files = Helpers::validate_import_file_info( Helpers::apply_filters( 'ocdi/import_files', array() ) );
 
 		/**
 		 * Register all default actions (before content import, widget, customizer import and other actions)
@@ -544,12 +544,12 @@ class OneClickDemoImport {
 		$import_actions->register_hooks();
 
 		// Importer options array.
-		$importer_options = apply_filters( 'pt-ocdi/importer_options', array(
+		$importer_options = Helpers::apply_filters( 'ocdi/importer_options', array(
 			'fetch_attachments' => true,
 		) );
 
 		// Logger options for the logger used in the importer.
-		$logger_options = apply_filters( 'pt-ocdi/logger_options', array(
+		$logger_options = Helpers::apply_filters( 'ocdi/logger_options', array(
 			'logger_min_level' => 'warning',
 		) );
 

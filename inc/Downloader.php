@@ -62,7 +62,7 @@ class Downloader {
 		// Get file content from the server.
 		$response = wp_remote_get(
 			$url,
-			array( 'timeout' => apply_filters( 'pt-ocdi/timeout_for_downloading_import_file', 20 ) )
+			array( 'timeout' => Helpers::apply_filters( 'ocdi/timeout_for_downloading_import_file', 20 ) )
 		);
 
 		// Test if the get request was not successful.
@@ -81,7 +81,7 @@ class Downloader {
 					$response_error['error_code'],
 					$response_error['error_message']
 				) . '<br>' .
-				apply_filters( 'pt-ocdi/message_after_file_fetching_error', '' )
+				Helpers::apply_filters( 'ocdi/message_after_file_fetching_error', '' )
 			);
 		}
 
@@ -132,7 +132,7 @@ class Downloader {
 		}
 		else {
 			$upload_dir = wp_upload_dir();
-			$this->download_directory_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+			$this->download_directory_path = Helpers::apply_filters( 'ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 		}
 	}
 }

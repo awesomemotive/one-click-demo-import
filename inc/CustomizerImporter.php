@@ -101,7 +101,7 @@ class CustomizerImporter {
 		}
 
 		// Import images.
-		if ( apply_filters( 'pt-ocdi/customizer_import_images', true ) ) {
+		if ( Helpers::apply_filters( 'ocdi/customizer_import_images', true ) ) {
 			$data['mods'] = self::import_customizer_images( $data['mods'] );
 		}
 
@@ -124,7 +124,7 @@ class CustomizerImporter {
 		}
 
 		// Should the customizer import use the WP customize_save* hooks?
-		$use_wp_customize_save_hooks = apply_filters( 'pt-ocdi/enable_wp_customize_save_hooks', false );
+		$use_wp_customize_save_hooks = Helpers::apply_filters( 'ocdi/enable_wp_customize_save_hooks', false );
 
 		if ( $use_wp_customize_save_hooks ) {
 			do_action( 'customize_save', $wp_customize );

@@ -27,7 +27,7 @@ do_action( 'pt-ocdi/plugin_page_header' );
 	$plugin_title = ob_get_clean();
 
 	// Display the plugin title (can be replaced with custom title text through the filter below).
-	echo wp_kses_post( apply_filters( 'pt-ocdi/plugin_page_title', $plugin_title ) );
+	echo wp_kses_post( Helpers::apply_filters( 'ocdi/plugin_page_title', $plugin_title ) );
 
 	// Display warrning if PHP safe mode is enabled, since we wont be able to change the max_execution_time.
 	if ( ini_get( 'safe_mode' ) ) {
@@ -79,7 +79,7 @@ do_action( 'pt-ocdi/plugin_page_header' );
 	$plugin_intro_text = ob_get_clean();
 
 	// Display the plugin intro text (can be replaced with custom text through the filter below).
-	echo wp_kses_post( apply_filters( 'pt-ocdi/plugin_intro_text', $plugin_intro_text ) );
+	echo wp_kses_post( Helpers::apply_filters( 'ocdi/plugin_intro_text', $plugin_intro_text ) );
 	?>
 
 	<?php if ( empty( $this->import_files ) ) : ?>
