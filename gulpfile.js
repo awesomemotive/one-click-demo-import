@@ -4,12 +4,13 @@
 var gulp = require( 'gulp' ),
 	cached = require( 'gulp-cached' ),
 	sass = require( 'gulp-sass' ),
+	prefix = require( 'gulp-autoprefixer' ),
 	sourcemaps = require( 'gulp-sourcemaps' ),
 	rename = require( 'gulp-rename' ),
 	debug = require( 'gulp-debug' ),
 	uglify = require( 'gulp-uglify' ),
 	copy = require( 'gulp-copy' ),
-	readme = require('gulp-readme-to-markdown'),
+	readme = require( 'gulp-readme-to-markdown' ),
 	exec = require( 'child_process' ).exec;
 
 var plugin = {
@@ -68,6 +69,7 @@ gulp.task( 'css', function () {
 		.pipe( cached( 'processCSS' ) )
 		.pipe( sourcemaps.init() )
 		.pipe( sass( { outputStyle: 'expanded' } ).on( 'error', sass.logError ) )
+		.pipe( prefix() )
 		.pipe( rename( function ( path ) {
 			path.dirname = '/assets/css';
 			path.extname = '.css';
@@ -76,6 +78,7 @@ gulp.task( 'css', function () {
 		.pipe( gulp.dest( './' ) )
 		// Minified file.
 		.pipe( sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError ) )
+		.pipe( prefix() )
 		.pipe( rename( function ( path ) {
 			path.dirname = '/assets/css';
 			path.extname = '.min.css';

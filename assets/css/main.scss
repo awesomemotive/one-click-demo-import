@@ -83,7 +83,6 @@
 	&__demo-import-notice:not(:empty) {
 		border: 0;
 		border-left: 4px solid #00a0d2;
-		-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 		box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 	}
 
@@ -113,7 +112,6 @@
 	// New grid layout.
 	&__gl {
 		&-navigation li a {
-			-webkit-box-shadow: none;
 			box-shadow: none;
 		}
 
@@ -123,10 +121,7 @@
 			margin: 0 0 20px 0;
 			position: relative;
 			border: 1px solid #ddd;
-			-webkit-box-shadow: 0 1px 1px -1px rgba(0,0,0,0.1);
 			box-shadow: 0 1px 1px -1px rgba(0,0,0,0.1);
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
 			box-sizing: border-box;
 
 			&-image-container {
@@ -134,7 +129,6 @@
 				overflow: hidden;
 				position: relative;
 				-webkit-backface-visibility: hidden;
-				-webkit-transition: opacity 0.2s ease-in-out;
 				transition: opacity 0.2s ease-in-out;
 
 				&::after {
@@ -150,7 +144,6 @@
 				left: 0;
 				top: 0;
 				width: 100%;
-				-webkit-transition: opacity 0.2s ease-in-out;
 				transition: opacity 0.2s ease-in-out;
 
 				&--no-image {
@@ -168,7 +161,6 @@
 				height: 30px;
 				margin: 0;
 				padding: 10px;
-				-webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
 				box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
 				background: #ffffff;
 				background: rgba(255,255,255,0.65);
