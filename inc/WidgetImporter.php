@@ -120,7 +120,7 @@ class WidgetImporter {
 		}
 
 		// Hook before import.
-		do_action( 'pt-ocdi/widget_importer_before_widgets_import' );
+		Helpers::do_action( 'ocdi/widget_importer_before_widgets_import' );
 		$data = Helpers::apply_filters( 'ocdi/before_widgets_import_data', $data );
 
 		// Get all available widgets site supports.
@@ -268,7 +268,7 @@ class WidgetImporter {
 						'widget_id_num'     => $new_instance_id_number,
 						'widget_id_num_old' => $instance_id_number,
 					);
-					do_action( 'pt-ocdi/widget_importer_after_single_widget_import', $after_widget_import );
+					Helpers::do_action( 'ocdi/widget_importer_after_single_widget_import', $after_widget_import );
 
 					// Success message.
 					if ( $sidebar_available ) {
@@ -291,7 +291,7 @@ class WidgetImporter {
 		}
 
 		// Hook after import.
-		do_action( 'pt-ocdi/widget_importer_after_widgets_import' );
+		Helpers::do_action( 'ocdi/widget_importer_after_widgets_import' );
 
 		// Return results.
 		return Helpers::apply_filters( 'ocdi/widget_import_results', $results );

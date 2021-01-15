@@ -282,7 +282,7 @@ class OneClickDemoImport {
 			 * Default actions:
 			 * 1 - Before content import WP action (with priority 10).
 			 */
-			do_action( 'pt-ocdi/before_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+			Helpers::do_action( 'ocdi/before_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
 		}
 
 		/**
@@ -301,7 +301,7 @@ class OneClickDemoImport {
 		 * 2 - Import widgets (with priority 20).
 		 * 3 - Import Redux data (with priority 30).
 		 */
-		do_action( 'pt-ocdi/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+		Helpers::do_action( 'ocdi/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
 
 		// Save the import data as a transient, so other import parts (in new AJAX calls) can use that data.
 		Helpers::set_ocdi_import_data_transient( $this->get_current_importer_data() );
@@ -339,7 +339,7 @@ class OneClickDemoImport {
 			 * Default actions:
 			 * 1 - Customizer import (with priority 10).
 			 */
-			do_action( 'pt-ocdi/customizer_import_execution', $this->selected_import_files );
+			Helpers::do_action( 'ocdi/customizer_import_execution', $this->selected_import_files );
 		}
 
 		// Request the after all import AJAX call.
@@ -367,7 +367,7 @@ class OneClickDemoImport {
 			 * Default actions:
 			 * 1 - after_import action (with priority 10).
 			 */
-			do_action( 'pt-ocdi/after_all_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
+			Helpers::do_action( 'ocdi/after_all_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
 		}
 
 		// Send a JSON response with final report.

@@ -693,4 +693,22 @@ class Helpers {
 
 		return $default_data;
 	}
+
+	/**
+	 * Backwards compatible do_action helper.
+	 * With 3.0 we changed the action prefix from 'pt-ocdi/' to just 'ocdi/',
+	 * but we needed to make sure backwards compatibility is in place.
+	 * This method should be used for all do_action calls.
+	 *
+	 * @param string $hook   The action hook name.
+	 * @param mixed  ...$arg Optional. Additional arguments which are passed on to the
+	 *                       functions hooked to the action. Default empty.
+	 */
+	public static function do_action( $hook, ...$arg ) {
+		if ( has_action( $hook ) ) {
+			do_action( $hook, ...$arg );
+		} else if ( has_action( "pt-$hook" ) ) {
+			do_action( "pt-$hook", ...$arg );
+		}
+	}
 }

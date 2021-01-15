@@ -16,7 +16,7 @@ if ( ! empty( $this->import_files ) && isset( $_GET['import-mode'] ) && 'manual'
 /**
  * Hook for adding the custom plugin page header
  */
-do_action( 'pt-ocdi/plugin_page_header' );
+Helpers::do_action( 'ocdi/plugin_page_header' );
 ?>
 
 <div class="ocdi  wrap  about-wrap">
@@ -206,4 +206,4 @@ do_action( 'pt-ocdi/plugin_page_header' );
 /**
  * Hook for adding the custom admin page footer
  */
-do_action( 'pt-ocdi/plugin_page_footer' );
+Helpers::do_action( 'ocdi/plugin_page_footer' );
