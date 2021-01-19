@@ -56,6 +56,10 @@ jQuery( function ( $ ) {
 		}
 	});
 
+	$( document ).on( 'ready', function() {
+		$( '.js-ocdi-notice-wrapper' ).appendTo( '.js-ocdi-admin-notices-container' );
+	} );
+
 
 	/**
 	 * Grid Layout categories navigation.

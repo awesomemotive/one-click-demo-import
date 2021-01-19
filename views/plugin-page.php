@@ -19,10 +19,10 @@ if ( ! empty( $this->import_files ) && isset( $_GET['import-mode'] ) && 'manual'
 Helpers::do_action( 'ocdi/plugin_page_header' );
 ?>
 
-<div class="ocdi  wrap  about-wrap">
+<div class="ocdi">
 
 	<?php ob_start(); ?>
-		<h1 class="ocdi__title  dashicons-before  dashicons-upload"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
+		<h1 class="ocdi__title"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
 	<?php
 	$plugin_title = ob_get_clean();
 
@@ -39,7 +39,11 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			'</p></div>'
 		);
 	}
+	?>
 
+	<div class="ocdi__admin-notices js-ocdi-admin-notices-container"></div>
+
+	<?php
 	// Start output buffer for displaying the plugin intro text.
 	ob_start();
 	?>

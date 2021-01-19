@@ -109,6 +109,10 @@ class OneClickDemoImport {
 		add_action( 'wp_ajax_ocdi_after_import_data', array( $this, 'after_all_import_data_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_action( 'network_admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
+		add_action( 'user_admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
+		add_action( 'admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
+		add_action( 'all_admin_notices', array( $this, 'finish_notice_output_capturing' ), PHP_INT_MAX );
 	}
 
 
@@ -568,5 +572,31 @@ class OneClickDemoImport {
 	 */
 	public function get_plugin_page_setup() {
 		return $this->plugin_page_setup;
+	}
+
+	/**
+	 * Output the begining of the container div for all notices, but only on OCDI pages.
+	 */
+	public function start_notice_output_capturing() {
+		$screen = get_current_screen();
+
+		if ( false === strpos( $screen->base, $this->plugin_page_setup['menu_slug'] ) ) {
+			return;
+		}
+
+		echo '<div class="ocdi-notices-wrapper js-ocdi-notice-wrapper">';
+	}
+
+	/**
+	 * Output the ending of the container div for all notices, but only on OCDI pages.
+	 */
+	public function finish_notice_output_capturing() {
+		$screen = get_current_screen();
+
+		if ( false === strpos( $screen->base, $this->plugin_page_setup['menu_slug'] ) ) {
+			return;
+		}
+
+		echo '</div><!-- /.ocdi-notices-wrapper -->';
 	}
 }

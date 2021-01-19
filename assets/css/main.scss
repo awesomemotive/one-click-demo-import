@@ -18,6 +18,16 @@
 	.notice {
 		display: block !important;
 	}
+
+	&-notices-wrapper {
+		display: none;
+	}
+
+	&__admin-notices {
+		.ocdi-notices-wrapper {
+			display: block;
+		}
+	}
 }
 
 .feature-section + hr {
