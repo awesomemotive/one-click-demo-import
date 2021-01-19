@@ -74,12 +74,12 @@ class OneClickDemoImport {
 	 */
 	private $before_import_executed = false;
 
-  /**
-   * Make plugin page options available to other methods.
-   *
-   * @var array
-   */
-  private $plugin_page_setup = array();
+	/**
+	 * Make plugin page options available to other methods.
+	 *
+	 * @var array
+	 */
+	private $plugin_page_setup = array();
 
 	/**
 	 * Returns the *Singleton* instance of this class.
@@ -559,5 +559,14 @@ class OneClickDemoImport {
 
 		// Create importer instance with proper parameters.
 		$this->importer = new Importer( $importer_options, $logger );
+	}
+
+	/**
+	 * Getter for $plugin_page_setup.
+	 *
+	 * @return array
+	 */
+	public function get_plugin_page_setup() {
+		return $this->plugin_page_setup;
 	}
 }
