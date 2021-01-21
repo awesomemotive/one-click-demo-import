@@ -599,4 +599,19 @@ class OneClickDemoImport {
 
 		echo '</div><!-- /.ocdi-notices-wrapper -->';
 	}
+
+	/**
+	 * Get the URL of the plugin settings page.
+	 *
+	 * @return string
+	 */
+	public function get_plugin_settings_url( $query_parameters = [] ) {
+
+		$parameters = array_merge(
+			array( 'page' => $this->plugin_page_setup['menu_slug'] ),
+			$query_parameters
+		);
+
+		return add_query_arg( $parameters, menu_page_url( $this->plugin_page_setup['parent_slug'], false ) );
+	}
 }

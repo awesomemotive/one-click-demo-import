@@ -117,9 +117,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 				<div class="bottom-content">
 					<?php if ( ! empty( $this->import_files ) ) : ?>
 						<?php if ( empty( $_GET['import-mode'] ) || 'manual' !== $_GET['import-mode'] ) : ?>
-							<a href="<?php echo esc_url( add_query_arg( array( 'page' => $this->plugin_page_setup['menu_slug'], 'import-mode' => 'manual' ), menu_page_url( $this->plugin_page_setup['parent_slug'], false ) ) ); ?>" class="ocdi-import-mode-switch"><?php esc_html_e( 'Switch to Manual Import', 'pt-ocdi' ); ?></a>
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'import-mode' => 'manual' ) ) ); ?>" class="ocdi-import-mode-switch"><?php esc_html_e( 'Switch to Manual Import', 'pt-ocdi' ); ?></a>
 						<?php else : ?>
-							<a href="<?php echo esc_url( add_query_arg( array( 'page' => $this->plugin_page_setup['menu_slug'] ), menu_page_url( $this->plugin_page_setup['parent_slug'], false ) ) ); ?>" class="ocdi-import-mode-switch"><?php esc_html_e( 'Switch back to Theme Predefined Imports', 'pt-ocdi' ); ?></a>
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="ocdi-import-mode-switch"><?php esc_html_e( 'Switch back to Theme Predefined Imports', 'pt-ocdi' ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
 				</div>
@@ -128,34 +128,121 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 
 		<?php if ( empty( $predefined_themes ) ) : ?>
 
+			<hr>
+
 			<div class="ocdi__file-upload-container">
 				<h2><?php esc_html_e( 'Manual demo files upload', 'pt-ocdi' ); ?></h2>
 
-				<div class="ocdi__file-upload">
-					<h3><label for="content-file-upload"><?php esc_html_e( 'Choose a XML file for content import:', 'pt-ocdi' ); ?></label></h3>
-					<input id="ocdi__content-file-upload" type="file" name="content-file-upload">
-				</div>
+				<div class="ocdi__file-upload-container-items">
+					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
+						<div class="ocdi__card-content">
+							<label for="ocdi__content-file-upload">
+								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/content.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Content import icon', 'one-click-demo-import' ); ?>">
+								<h3><?php esc_html_e( 'Import Content', 'pt-ocdi' ); ?></h3>
+								<p><?php esc_html_e( 'Select an XML file to import.', 'pt-ocdi' ); ?></p>
+							</label>
+						</div>
+						<div class="ocdi__card-footer">
+							<label for="ocdi__content-file-upload" class="custom-file-upload-button">
+								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
+							</label>
+							<input id="ocdi__content-file-upload" type="file" name="content-file-upload">
+						</div>
+					</div>
 
-				<div class="ocdi__file-upload">
-					<h3><label for="widget-file-upload"><?php esc_html_e( 'Choose a WIE or JSON file for widget import:', 'pt-ocdi' ); ?></label></h3>
-					<input id="ocdi__widget-file-upload" type="file" name="widget-file-upload">
-				</div>
+					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
+						<div class="ocdi__card-content">
+							<label for="ocdi__widget-file-upload">
+								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/widgets.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Widgets import icon', 'one-click-demo-import' ); ?>">
+								<h3><?php esc_html_e( 'Import Widgets', 'pt-ocdi' ); ?></h3>
+								<p><?php esc_html_e( 'Select a JSON/WIE file to import.', 'pt-ocdi' ); ?></p>
+							</label>
+						</div>
+						<div class="ocdi__card-footer">
+							<label for="ocdi__widget-file-upload" class="custom-file-upload-button">
+								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
+							</label>
+							<input id="ocdi__widget-file-upload" type="file" name="widget-file-upload">
+						</div>
+					</div>
 
-				<div class="ocdi__file-upload">
-					<h3><label for="customizer-file-upload"><?php esc_html_e( 'Choose a DAT file for customizer import:', 'pt-ocdi' ); ?></label></h3>
-					<input id="ocdi__customizer-file-upload" type="file" name="customizer-file-upload">
-				</div>
+					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
+						<div class="ocdi__card-content">
+							<label for="ocdi__customizer-file-upload">
+								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Customizer import icon', 'one-click-demo-import' ); ?>">
+								<h3><?php esc_html_e( 'Import Customizer', 'pt-ocdi' ); ?></h3>
+								<p><?php esc_html_e( 'Select a DAT file to import.', 'pt-ocdi' ); ?></p>
+							</label>
+						</div>
+						<div class="ocdi__card-footer">
+							<label for="ocdi__customizer-file-upload" class="custom-file-upload-button">
+								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
+							</label>
+							<input id="ocdi__customizer-file-upload" type="file" name="customizer-file-upload">
+						</div>
+					</div>
 
-				<?php if ( class_exists( 'ReduxFramework' ) ) : ?>
-				<div class="ocdi__file-upload">
-					<h3><label for="redux-file-upload"><?php esc_html_e( 'Choose a JSON file for Redux import:', 'pt-ocdi' ); ?></label></h3>
-					<input id="ocdi__redux-file-upload" type="file" name="redux-file-upload">
-					<div>
-						<label for="redux-option-name" class="ocdi__redux-option-name-label"><?php esc_html_e( 'Enter the Redux option name:', 'pt-ocdi' ); ?></label>
-						<input id="ocdi__redux-option-name" type="text" name="redux-option-name">
+					<?php if ( class_exists( 'ReduxFramework' ) ) : ?>
+					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
+						<div class="ocdi__card-content">
+							<label for="ocdi__redux-file-upload">
+								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Redux import icon', 'one-click-demo-import' ); ?>">
+								<h3><?php esc_html_e( 'Import Redux', 'pt-ocdi' ); ?></h3>
+								<p><?php esc_html_e( 'Select a JSON file to import.', 'pt-ocdi' ); ?></p>
+							</label>
+							<div>
+								<label for="ocdi__redux-option-name" class="ocdi__redux-option-name-label"><?php esc_html_e( 'Enter the Redux option name:', 'pt-ocdi' ); ?></label>
+								<input id="ocdi__redux-option-name" type="text" name="redux-option-name">
+							</div>
+						</div>
+						<div class="ocdi__card-footer">
+							<label for="ocdi__redux-file-upload" class="custom-file-upload-button">
+								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
+							</label>
+							<input id="ocdi__redux-file-upload" type="file" name="redux-file-upload">
+						</div>
+					</div>
+					<?php endif; ?>
+
+					<div class="ocdi__recommended-plugins ocdi__card ocdi__card--three">
+						<div class="ocdi__card-content">
+							<label>
+								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/plugins.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Recommended plugins icon', 'one-click-demo-import' ); ?>">
+								<h3><?php esc_html_e( 'Recommended Plugins', 'pt-ocdi' ); ?></h3>
+								<p><?php esc_html_e( 'Install our recommended plugins.', 'pt-ocdi' ); ?></p>
+							</label>
+						</div>
+						<div class="ocdi__card-footer">
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'install-plugins' ) ) ); ?>" class="button"><?php esc_html_e( 'Install Plugins', 'one-click-demo-import' ); ?></a>
+						</div>
+					</div>
+
+					<div class="ocdi__create-demo-content ocdi__card ocdi__card--three">
+						<div class="ocdi__card-content">
+							<label>
+								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/copy.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Create demo content icon', 'one-click-demo-import' ); ?>">
+								<h3><?php esc_html_e( 'Create Demo Content', 'pt-ocdi' ); ?></h3>
+								<p><?php esc_html_e( 'Create useful content with a few clicks.', 'pt-ocdi' ); ?></p>
+							</label>
+						</div>
+						<div class="ocdi__card-footer">
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'create-demo-content' ) ) ); ?>" class="button"><?php esc_html_e( 'Install Plugins', 'one-click-demo-import' ); ?></a>
+						</div>
+					</div>
+
+					<div class="ocdi__create-landing-pages ocdi__card ocdi__card--three">
+						<div class="ocdi__card-content">
+							<label>
+								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/layout.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Create landing pages icon', 'one-click-demo-import' ); ?>">
+								<h3><?php esc_html_e( 'Create Landing Pages', 'pt-ocdi' ); ?></h3>
+								<p><?php esc_html_e( 'Create beautiful converting pages.', 'pt-ocdi' ); ?></p>
+							</label>
+						</div>
+						<div class="ocdi__card-footer">
+							<a href="#" class="button"><?php esc_html_e( 'Install Plugins', 'one-click-demo-import' ); ?></a>
+						</div>
 					</div>
 				</div>
-				<?php endif; ?>
 			</div>
 
 			<p class="ocdi__button-container">
