@@ -111,11 +111,16 @@
 			margin-right: 30px;
 
 			.screenshot {
-				border: 1px solid #CCD0D4;
 				box-sizing: border-box;
-				filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.07));
+
+				img {
+					border: 1px solid #CCD0D4;
+					filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.07));
+				}
 
 				&.blank {
+					border: 1px solid #CCD0D4;
+					filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.07));
 					min-height: 500px;
 					background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAALElEQVQYGWO8d+/efwYkoKioiMRjYGBC4WHhUK6A8T8QIJt8//59ZC493AAAQssKpBK4F5AAAAAASUVORK5CYII=);
 				}
