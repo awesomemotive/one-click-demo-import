@@ -213,8 +213,10 @@
 	&__file-upload,
 	&__multi-select-import,
 	&__demo-import-notice:not(:empty) {
-		padding: 4%;
-		margin: 1.62em 0;
+		padding: 20px;
+		margin: 30px 0;
+		font-size: 14px;
+		line-height: 19px;
 		background-color: #ffffff;
 		border: 1px solid #e5e5e5;
 	}
@@ -534,7 +536,7 @@
 	&-notice.ocdi__demo-import-notice:not(:empty) {
 		border: 1px solid #e5e5e5;
 		border-left: 4px solid #00a0d2;
-		margin: 1em 0 0;
+		margin: 20px 0 0;
 	}
 }
 
