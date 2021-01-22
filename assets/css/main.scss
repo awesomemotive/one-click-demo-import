@@ -84,6 +84,167 @@
 
 	&__content-container {
 		padding: 25px 30px;
+
+		&-content {
+			display: flex;
+
+			&--main {
+				flex: 1;
+				margin-right: 30px;
+				background: #ffffff;
+				box-sizing: border-box;
+				border: 1px solid #dddddd;
+				box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.07);
+			}
+
+			&--side {
+				width: 373px;
+
+				.ocdi__card-content {
+					padding: 0;
+				}
+
+				.screenshot {
+					height: 278px;
+
+					&.blank {
+						border: 1px solid #CCD0D4;
+						filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.07));
+						background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAALElEQVQYGWO8d+/efwYkoKioiMRjYGBC4WHhUK6A8T8QIJt8//59ZC493AAAQssKpBK4F5AAAAAASUVORK5CYII=);
+					}
+				}
+
+				.ocdi__card-footer {
+					padding: 15px;
+
+					h3 {
+						font-size: 16px;
+						line-height: 19px;
+						font-weight: 500;
+						margin: 0;
+					}
+				}
+
+				img {
+					width: 100%;
+				}
+			}
+
+			.ocdi-install-plugins-content-header {
+				padding: 30px;
+				border-bottom: 1px solid #dddddd;
+
+				h2 {
+					font-size: 22px;
+					line-height: 26px;
+					font-weight: normal;
+					margin: 0 0 6px 0;
+				}
+
+				p {
+					font-size: 16px;
+					line-height: 22px;
+					font-weight: 300;
+					color: #444444;
+					margin: 0 0 10px 0;
+
+					&:last-child {
+						margin: 0;
+					}
+				}
+			}
+
+			.ocdi-install-plugins-content-content {
+				.plugin-item {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					margin: 0 30px;
+					padding: 25px 0;
+					border-bottom: 1px solid #eeeeee;
+
+					&:last-child {
+						padding-bottom: 30px;
+						border-bottom: none;
+					}
+
+					label {
+						display: block;
+					}
+
+					h3 {
+						font-size: 18px;
+						line-height: 22px;
+						color: #444444;
+						font-weight: 500;
+						margin: 0 0 4px 0;
+					}
+
+					p {
+						font-size: 14px;
+						line-height: 17px;
+						color: #777777;
+						margin: 0 0 10px 0;
+
+						&:last-child {
+							margin: 0;
+						}
+					}
+
+					.plugin-item-checkbox {
+						.checkbox {
+							display: block;
+							background: #e6e6e6;
+							width: 32px;
+							height: 32px;
+							border-radius: 16px;
+
+							img {
+								display: none;
+								width: 20px;
+								height: 20px;
+								margin: 6px;
+							}
+						}
+
+						input[type=checkbox] {
+							display: none;
+						}
+
+						input[type=checkbox]:checked + .checkbox {
+							background: #64B450;
+
+							img {
+								display: inline-block;
+							}
+						}
+					}
+				}
+			}
+
+			.ocdi-install-plugins-content-footer {
+				padding: 30px;
+				background: #fafafa;
+				border-top: 1px solid #dddddd;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.button {
+					font-size: 16px;
+					line-height: 19px;
+					padding: 10px 18px;
+					display: flex;
+					align-items: center;
+
+					img {
+						width: 16px;
+						height: auto;
+						margin-right: 5px;
+					}
+				}
+			}
+		}
 	}
 
 	&__intro-text {

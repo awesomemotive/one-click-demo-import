@@ -21,20 +21,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 
 <div class="ocdi">
 
-	<?php ob_start(); ?>
-	<div class="ocdi__title-container">
-		<h1 class="ocdi__title-container-title"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
-		<a href="#">
-			<img class="ocdi__title-container-icon" src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/question-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Questionmark icon', 'one-click-demo-import' ); ?>">
-		</a>
-	</div>
-	<?php
-	$plugin_title = ob_get_clean();
-
-	// Display the plugin title (can be replaced with custom title text through the filter below).
-	echo wp_kses_post( Helpers::apply_filters( 'ocdi/plugin_page_title', $plugin_title ) );
-
-	?>
+	<?php echo wp_kses_post( ViewHelpers::plugin_header_output() ); ?>
 
 	<div class="ocdi__content-container">
 
@@ -84,7 +71,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 		<div class="ocdi__theme-about">
 			<div class="ocdi__theme-about-screenshots">
 				<?php if ( $theme->get_screenshot() ) : ?>
-				<div class="screenshot"><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" alt="<?php esc_attr_e( '', 'one-click-demo-import' ); ?>" /></div>
+				<div class="screenshot"><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" alt="<?php esc_attr_e( 'Theme screenshot', 'one-click-demo-import' ); ?>" /></div>
 				<?php else : ?>
 				<div class="screenshot blank"></div>
 				<?php endif; ?>

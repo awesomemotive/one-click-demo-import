@@ -161,6 +161,13 @@ class OneClickDemoImport {
 	 * Output (HTML) is in another file.
 	 */
 	public function display_plugin_page() {
+
+		if ( isset( $_GET['step'] ) && 'install-plugins' === $_GET['step'] ) {
+			require_once PT_OCDI_PATH . 'views/install-plugins.php';
+
+			return;
+		}
+
 		require_once PT_OCDI_PATH . 'views/plugin-page.php';
 	}
 
