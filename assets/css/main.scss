@@ -138,7 +138,8 @@
 				}
 			}
 
-			.ocdi-install-plugins-content-header {
+			.ocdi-install-plugins-content-header,
+			.ocdi-create-content-header {
 				padding: 30px;
 				border-bottom: 1px solid #dddddd;
 
@@ -162,8 +163,10 @@
 				}
 			}
 
-			.ocdi-install-plugins-content-content {
-				.plugin-item {
+			.ocdi-install-plugins-content-content,
+			.ocdi-create-content-content {
+				.plugin-item,
+				.content-item {
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
@@ -219,7 +222,8 @@
 						}
 					}
 
-					.plugin-item-checkbox {
+					.plugin-item-checkbox,
+					.content-item-checkbox {
 						.checkbox {
 							display: block;
 							background: #e6e6e6;
@@ -248,9 +252,28 @@
 						}
 					}
 				}
+
+				&-notice {
+					padding: 25px;
+					background: #E5F5FA;
+					border-radius: 6px;
+					margin: -10px 30px 30px 30px;
+
+					p {
+						font-size: 14px;
+						line-height: 24px;
+						color: #444444;
+						margin: 0 0 10px 0;
+
+						&:last-child {
+							margin-bottom: 0;
+						}
+					}
+				}
 			}
 
-			.ocdi-install-plugins-content-footer {
+			.ocdi-install-plugins-content-footer,
+			.ocdi-create-content-footer {
 				padding: 30px;
 				background: #fafafa;
 				border-top: 1px solid #dddddd;

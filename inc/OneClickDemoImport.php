@@ -162,6 +162,12 @@ class OneClickDemoImport {
 			return;
 		}
 
+		if ( isset( $_GET['step'] ) && 'create-content' === $_GET['step'] ) {
+			require_once PT_OCDI_PATH . 'views/create-content.php';
+
+			return;
+		}
+
 		require_once PT_OCDI_PATH . 'views/plugin-page.php';
 	}
 

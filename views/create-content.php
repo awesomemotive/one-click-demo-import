@@ -1,0 +1,111 @@
+<?php
+/**
+ * The create content page view.
+ *
+ * @package ocdi
+ */
+
+namespace OCDI;
+
+$content_items = array(
+	array(
+		'slug'             => 'about-page',
+		'name'             => esc_html__( 'About Page', 'one-click-demo-import' ),
+		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
+		'required_plugins' => array(),
+	),
+	array(
+		'slug'             => 'contact-page',
+		'name'             => esc_html__( 'Contact Page', 'one-click-demo-import' ),
+		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
+		'required_plugins' => array( 'wpforms-lite' ),
+	),
+	array(
+		'slug'             => 'faq-page',
+		'name'             => esc_html__( 'FAQ Page', 'one-click-demo-import' ),
+		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
+		'required_plugins' => array( 'google-analytics-for-wordpress' ),
+	),
+	array(
+		'slug'             => 'coming-soon-page',
+		'name'             => esc_html__( 'Coming Soon Page', 'one-click-demo-import' ),
+		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
+		'required_plugins' => array( 'coming-soon', 'wpforms-lite' ),
+	),
+	array(
+		'slug'             => 'getting-started-page',
+		'name'             => esc_html__( 'Getting Started Page', 'one-click-demo-import' ),
+		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
+		'required_plugins' => array( 'all-in-one-seo-pack', 'google-analytics-for-wordpress', 'wpforms-lite' ),
+	),
+	array(
+		'slug'             => 'portfolio-page',
+		'name'             => esc_html__( 'Portfolio Page', 'one-click-demo-import' ),
+		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
+		'required_plugins' => array(),
+	),
+);
+
+?>
+
+<div class="ocdi ocdi--create-content">
+
+	<?php echo wp_kses_post( ViewHelpers::plugin_header_output() ); ?>
+
+	<div class="ocdi__content-container">
+
+		<div class="ocdi__admin-notices js-ocdi-admin-notices-container"></div>
+
+		<div class="ocdi__content-container-content">
+			<div class="ocdi__content-container-content--main">
+				<div class="ocdi-create-content">
+					<div class="ocdi-create-content-header">
+						<h2><?php esc_html_e( 'Create Demo Content', 'one-click-demo-import' ); ?></h2>
+						<p>
+							<?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh.', 'one-click-demo-import' ); ?>
+						</p>
+					</div>
+					<div class="ocdi-create-content-content">
+						<div>
+							<?php foreach ( $content_items as $item ) : ?>
+								<label class="content-item content-item-<?php echo esc_attr( $item['slug'] ); ?>" for="ocdi-<?php echo esc_attr( $item['slug'] ); ?>-content-item">
+									<div class="content-item-content">
+										<h3><?php echo esc_html( $item['name'] ); ?></h3>
+										<?php if ( ! empty( $item['description'] ) ) : ?>
+											<p>
+												<?php echo wp_kses_post( $item['description'] ); ?>
+											</p>
+										<?php endif; ?>
+										<div class="content-item-error js-ocdi-content-item-error"></div>
+										<div class="content-item-info js-ocdi-content-item-info"></div>
+									</div>
+									<span class="content-item-checkbox">
+										<input type="checkbox" id="ocdi-<?php echo esc_attr( $item['slug'] ); ?>-content-item" name="<?php echo esc_attr( $item['slug'] ); ?>">
+										<span class="checkbox">
+											<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
+										</span>
+									</span>
+								</label>
+							<?php endforeach; ?>
+						</div>
+
+						<div class="ocdi-create-content-content-notice">
+							<p>
+								<?php esc_html_e( 'The following plugins will be installed for free: ', 'one-click-demo-import' ); ?>
+								<span class="js-ocdi-create-content-install-plugins-list"></span>
+							</p>
+						</div>
+					</div>
+					<div class="ocdi-create-content-footer">
+						<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="button"><img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/long-arrow-alt-left-blue.svg' ); ?>" alt="<?php esc_attr_e( 'Back icon', 'one-click-demo-import' ); ?>"><span><?php esc_html_e( 'Go Back' , 'one-click-demo-import' ); ?></span></a>
+						<a href="#" class="button button-primary js-ocdi-create-content"><?php esc_html_e( 'Import' , 'one-click-demo-import' ); ?></a>
+					</div>
+				</div>
+			</div>
+			<div class="ocdi__content-container-content--side">
+				<?php echo wp_kses_post( ViewHelpers::small_theme_card() ); ?>
+			</div>
+		</div>
+
+	</div>
+</div>

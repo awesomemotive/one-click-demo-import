@@ -213,7 +213,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
-							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'create-demo-content' ) ) ); ?>" class="button"><?php esc_html_e( 'Install Plugins', 'one-click-demo-import' ); ?></a>
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'create-content' ) ) ); ?>" class="button"><?php esc_html_e( 'Create Content', 'one-click-demo-import' ); ?></a>
 						</div>
 					</div>
 
@@ -226,7 +226,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
-							<a href="#" class="button"><?php esc_html_e( 'Install Plugins', 'one-click-demo-import' ); ?></a>
+							<a href="#" class="button"><?php esc_html_e( 'Install Plugin', 'one-click-demo-import' ); ?></a>
 						</div>
 					</div>
 				</div>

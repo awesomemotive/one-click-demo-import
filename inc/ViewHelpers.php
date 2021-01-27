@@ -7,15 +7,11 @@
 
 namespace OCDI;
 
-/**
- * Class with static helper functions.
- */
 class ViewHelpers {
 	/**
-	 * Filter through the array of import files and get rid of those who do not comply.
+	 * The HTML output of the plugin page header.
 	 *
-	 * @param  array $import_files list of arrays with import file details.
-	 * @return array list of filtered arrays.
+	 * @return string HTML output.
 	 */
 	public static function plugin_header_output() {
 		ob_start(); ?>
@@ -30,5 +26,29 @@ class ViewHelpers {
 
 		// Display the plugin title (can be replaced with custom title text through the filter below).
 		return Helpers::apply_filters( 'ocdi/plugin_page_title', $plugin_title );
+	}
+
+	/**
+	 * The HTML output of a small card with theme screenshot and title.
+	 *
+	 * @return string HTML output.
+	 */
+	public static function small_theme_card() {
+		ob_start(); ?>
+		<div class="ocdi__card ocdi__card--theme">
+			<?php $theme = wp_get_theme(); ?>
+			<div class="ocdi__card-content">
+				<?php if ( $theme->get_screenshot() ) : ?>
+					<div class="screenshot"><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" alt="<?php esc_attr_e( 'Theme screenshot', 'one-click-demo-import' ); ?>" /></div>
+				<?php else : ?>
+					<div class="screenshot blank"></div>
+				<?php endif; ?>
+			</div>
+			<div class="ocdi__card-footer">
+				<h3><?php echo esc_html( $theme->name ); ?></h3>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }

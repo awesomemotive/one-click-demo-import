@@ -57,19 +57,7 @@ $plugin_installer = new PluginInstaller();
 				</div>
 			</div>
 			<div class="ocdi__content-container-content--side">
-				<div class="ocdi__card ocdi__card--theme">
-					<?php $theme = wp_get_theme(); ?>
-					<div class="ocdi__card-content">
-						<?php if ( $theme->get_screenshot() ) : ?>
-							<div class="screenshot"><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" alt="<?php esc_attr_e( 'Theme screenshot', 'one-click-demo-import' ); ?>" /></div>
-						<?php else : ?>
-							<div class="screenshot blank"></div>
-						<?php endif; ?>
-					</div>
-					<div class="ocdi__card-footer">
-						<h3><?php echo esc_html( $theme->name ); ?></h3>
-					</div>
-				</div>
+				<?php echo wp_kses_post( ViewHelpers::small_theme_card() ); ?>
 			</div>
 		</div>
 
