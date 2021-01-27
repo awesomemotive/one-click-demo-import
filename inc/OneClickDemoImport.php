@@ -202,6 +202,8 @@ class OneClickDemoImport {
 						'dialog_no'             => esc_html__( 'Cancel', 'pt-ocdi' ),
 						'dialog_yes'            => esc_html__( 'Yes, import!', 'pt-ocdi' ),
 						'selected_import_title' => esc_html__( 'Selected demo import:', 'pt-ocdi' ),
+						'installing'            => esc_html__( 'Installing...', 'one-click-demo-import' ),
+						'successful_import'     => esc_html__( 'Successfully Imported!', 'one-click-demo-import' ),
 					),
 					'dialog_options' => Helpers::apply_filters( 'ocdi/confirmation_dialog_options', array() )
 				)

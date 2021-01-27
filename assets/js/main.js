@@ -92,7 +92,10 @@ jQuery( function ( $ ) {
 					slug: slug,
 				},
 				beforeSend:  function() {
-					$( '.plugin-item-' + slug ).find( '.js-ocdi-plugin-item-info' ).append( '<p>Installing...</p>' );
+					var $currentPluginItem = $( '.plugin-item-' + slug );
+					$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
+					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).empty();
+					$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).append( '<p>' + ocdi.texts.installing + '</p>' );
 				}
 			})
 				.done( function( response ) {
@@ -104,16 +107,79 @@ jQuery( function ( $ ) {
 						$currentPluginItem.addClass( 'plugin-item--active' );
 						$currentPluginItem.find( 'input[type=checkbox]' ).prop( 'disabled', true );
 					} else {
-						$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>Error: ' + response.data + '</p>' );
+						$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + response.data + '</p>' );
 					}
 				})
 				.fail( function( error ) {
-					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>Error: ' + error.statusText + ' (' + error.status + ')</p>' );
+					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
 				})
 				.always( function() {
 					counter++;
 
 					if ( counter === pluginsToImport.length ) {
+						$button.removeClass( 'ocdi-button-disabled' );
+					}
+				} );
+		} );
+	} );
+
+
+	/**
+	 * Import the created content.
+	 */
+	$( '.js-ocdi-create-content' ).on( 'click', function() {
+		var $button = $( this );
+
+		if ( $button.hasClass( 'ocdi-button-disabled' ) ) {
+			return false;
+		}
+
+		var itemsToImport = $( '.ocdi-create-content-content .content-item input[type=checkbox]' ).serializeArray(),
+			counter = 0;
+
+		if ( itemsToImport.length === 0 ) {
+			return false;
+		}
+
+		$button.addClass( 'ocdi-button-disabled' );
+
+		itemsToImport.forEach( function( item ) {
+			var slug = item.name;
+
+			$.ajax({
+				method:      'POST',
+				url:         ocdi.ajax_url,
+				data:        {
+					action: 'ocdi_import_created_content',
+					security: ocdi.ajax_nonce,
+					slug: slug,
+				},
+				beforeSend:  function() {
+					var $currentItem = $( '.content-item-' + slug );
+					$currentItem.find( '.js-ocdi-content-item-info' ).empty();
+					$currentItem.find( '.js-ocdi-content-item-error' ).empty();
+					$currentItem.find( '.js-ocdi-content-item-info' ).append( '<p>' + ocdi.texts.importing + '</p>' );
+				}
+			})
+				.done( function( response ) {
+					var $currentItem = $( '.content-item-' + slug ),
+						$infoContainer = $currentItem.find( '.js-ocdi-content-item-info' );
+
+					$infoContainer.empty();
+
+					if ( response.success ) {
+						$infoContainer.append( '<p>' + ocdi.texts.successful_import + '</p>' );
+					} else {
+						$currentItem.find( '.js-ocdi-content-item-error' ).append( '<p>' + response.data + '</p>' );
+					}
+				})
+				.fail( function( error ) {
+					$currentPluginItem.find( '.js-ocdi-content-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
+				})
+				.always( function() {
+					counter++;
+
+					if ( counter === itemsToImport.length ) {
 						$button.removeClass( 'ocdi-button-disabled' );
 					}
 				} );
