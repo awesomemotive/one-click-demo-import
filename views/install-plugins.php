@@ -6,6 +6,8 @@
  */
 
 namespace OCDI;
+
+$plugin_installer = new PluginInstaller();
 ?>
 
 <div class="ocdi ocdi--install-plugins">
@@ -26,34 +28,27 @@ namespace OCDI;
 						</p>
 					</div>
 					<div class="ocdi-install-plugins-content-content">
-						<label class="plugin-item" for="ocdi-wpforms-plugin">
-							<div class="plugin-item-content">
-								<h3><?php esc_html_e( 'WPForms', 'one-click-demo-import' ); ?></h3>
-								<p>
-									<?php esc_html_e( 'Join 3,000,000+ professionals who build smarter forms and surveys with WPForms.', 'one-click-demo-import' ); ?>
-								</p>
-							</div>
-							<span class="plugin-item-checkbox">
-								<input type="checkbox" id="ocdi-wpforms-plugin" name="wpforms">
-								<span class="checkbox">
-									<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
+						<?php foreach ( $plugin_installer->get_partner_plugins() as $plugin ) : ?>
+							<?php $is_plugin_active = $plugin_installer->is_plugin_active( $plugin['slug'] ); ?>
+							<label class="plugin-item plugin-item-<?php echo esc_attr( $plugin['slug'] ); ?><?php echo $is_plugin_active ? ' plugin-item--active' : ''; ?>" for="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin">
+								<div class="plugin-item-content">
+									<h3><?php echo esc_html( $plugin['name'] ); ?></h3>
+									<?php if ( ! empty( $plugin['description'] ) ) : ?>
+										<p>
+											<?php echo wp_kses_post( $plugin['description'] ); ?>
+										</p>
+									<?php endif; ?>
+									<div class="plugin-item-error js-ocdi-plugin-item-error"></div>
+									<div class="plugin-item-info js-ocdi-plugin-item-info"></div>
+								</div>
+								<span class="plugin-item-checkbox">
+									<input type="checkbox" id="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin" name="<?php echo esc_attr( $plugin['slug'] ); ?>" <?php checked( ! empty( $plugin['preselected'] ) || $is_plugin_active ); ?><?php disabled( $is_plugin_active ) ?>>
+									<span class="checkbox">
+										<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
+									</span>
 								</span>
-							</span>
-						</label>
-						<label class="plugin-item" for="ocdi-aioseo-plugin">
-							<div class="plugin-item-content">
-								<h3><?php esc_html_e( 'All in One SEO Pack', 'one-click-demo-import' ); ?></h3>
-								<p>
-									<?php esc_html_e( 'Use All in One SEO Pack to optimize your WordPress site for SEO.', 'one-click-demo-import' ); ?>
-								</p>
-							</div>
-							<span class="plugin-item-checkbox">
-								<input type="checkbox" id="ocdi-aioseo-plugin" name="aioseo">
-								<span class="checkbox">
-									<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
-								</span>
-							</span>
-						</label>
+							</label>
+						<?php endforeach; ?>
 					</div>
 					<div class="ocdi-install-plugins-content-footer">
 						<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="button"><img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/long-arrow-alt-left-blue.svg' ); ?>" alt="<?php esc_attr_e( 'Back icon', 'one-click-demo-import' ); ?>"><span><?php esc_html_e( 'Go Back' , 'one-click-demo-import' ); ?></span></a>

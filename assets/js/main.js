@@ -62,6 +62,66 @@ jQuery( function ( $ ) {
 
 
 	/**
+	 * Install plugins event.
+	 */
+	$( '.js-ocdi-install-plugins' ).on( 'click', function() {
+		var $button = $( this );
+
+		if ( $button.hasClass( 'ocdi-button-disabled' ) ) {
+			return false;
+		}
+
+		var pluginsToImport = $( '.ocdi-install-plugins-content-content .plugin-item input[type=checkbox]' ).serializeArray(),
+			counter = 0;
+
+		if ( pluginsToImport.length === 0 ) {
+			return false;
+		}
+
+		$button.addClass( 'ocdi-button-disabled' );
+
+		pluginsToImport.forEach( function( plugin ) {
+			var slug = plugin.name;
+
+			$.ajax({
+				method:      'POST',
+				url:         ocdi.ajax_url,
+				data:        {
+					action: 'ocdi_install_plugin',
+					security: ocdi.ajax_nonce,
+					slug: slug,
+				},
+				beforeSend:  function() {
+					$( '.plugin-item-' + slug ).find( '.js-ocdi-plugin-item-info' ).append( '<p>Installing...</p>' );
+				}
+			})
+				.done( function( response ) {
+					var $currentPluginItem = $( '.plugin-item-' + slug );
+
+					$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
+
+					if ( response.success ) {
+						$currentPluginItem.addClass( 'plugin-item--active' );
+						$currentPluginItem.find( 'input[type=checkbox]' ).prop( 'disabled', true );
+					} else {
+						$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>Error: ' + response.data + '</p>' );
+					}
+				})
+				.fail( function( error ) {
+					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>Error: ' + error.statusText + ' (' + error.status + ')</p>' );
+				})
+				.always( function() {
+					counter++;
+
+					if ( counter === pluginsToImport.length ) {
+						$button.removeClass( 'ocdi-button-disabled' );
+					}
+				} );
+		} );
+	} );
+
+
+	/**
 	 * Grid Layout categories navigation.
 	 */
 	(function () {

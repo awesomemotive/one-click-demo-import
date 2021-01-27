@@ -70,44 +70,71 @@ class PluginInstaller {
 	}
 
 	/**
+	 * Get all partner plugins data.
+	 *
+	 * @return array[]
+	 */
+	public function get_partner_plugins() {
+		return array(
+			array(
+				'name'        => esc_html__( 'WPForms', 'one-click-demo-import' ),
+				'description' => esc_html__( 'Join 3,000,000+ professionals who build smarter forms and surveys with WPForms.', 'one-click-demo-import' ),
+				'slug'        => 'wpforms-lite',
+				'required'    => false,
+				'preselected' => true,
+			),
+			array(
+				'name'        => esc_html__( 'All in One SEO', 'one-click-demo-import' ),
+				'description' => esc_html__( 'Use All in One SEO Pack to optimize your WordPress site for SEO.', 'one-click-demo-import' ),
+				'slug'        => 'all-in-one-seo-pack',
+				'required'    => false,
+				'preselected' => true,
+			),
+			array(
+				'name'        => esc_html__( 'MonsterInsights', 'one-click-demo-import' ),
+				'description' => esc_html__( 'The #1 Google Analytics Plugin for WordPress that’s easy and powerful.', 'one-click-demo-import' ),
+				'slug'        => 'google-analytics-for-wordpress',
+				'required'    => false,
+				'preselected' => true,
+			),
+			array(
+				'name'        => esc_html__( 'Custom Landing Pages by SeedProd', 'one-click-demo-import' ),
+				'description' => esc_html__( 'Work on your site in private while visitors see a "Coming Soon" or "Maintenance Mode" page.', 'one-click-demo-import' ),
+				'slug'        => 'coming-soon',
+				'required'    => false,
+			),
+			array(
+				'name'        => esc_html__( 'Smash Balloon Social Photo Feed', 'one-click-demo-import' ),
+				'description' => esc_html__( 'Display beautifully clean, customizable, and responsive Instagram feeds.', 'one-click-demo-import' ),
+				'slug'        => 'instagram-feed',
+				'required'    => false,
+			),
+			array(
+				'name'        => esc_html__( 'WP Mail SMTP', 'one-click-demo-import' ),
+				'description' => esc_html__( 'Make email delivery easy for WordPress. Connect with SMTP, Gmail, Outlook, Mailgun, and more.', 'one-click-demo-import' ),
+				'slug'        => 'wp-mail-smtp',
+				'required'    => false,
+			),
+		);
+	}
+
+	/**
 	 * Set all registered plugins.
 	 * With our recommended plugins being set as defaults.
 	 */
 	public function set_plugins() {
-		$defaults = array(
-			array(
-				'name'     => esc_html__( 'WPForms', 'one-click-demo-import' ),
-				'slug'     => 'wpforms-lite',
-				'required' => false,
-			),
-			array(
-				'name'     => esc_html__( 'All in One SEO', 'one-click-demo-import' ),
-				'slug'     => 'all-in-one-seo-pack',
-				'required' => false,
-			),
-			array(
-				'name'     => esc_html__( 'MonsterInsights', 'one-click-demo-import' ),
-				'slug'     => 'google-analytics-for-wordpress',
-				'required' => false,
-			),
-			array(
-				'name'     => esc_html__( 'Custom Landing Pages by SeedProd', 'one-click-demo-import' ),
-				'slug'     => 'coming-soon',
-				'required' => false,
-			),
-			array(
-				'name'     => esc_html__( 'Smash Balloon Social Photo Feed', 'one-click-demo-import' ),
-				'slug'     => 'instagram-feed',
-				'required' => false,
-			),
-			array(
-				'name'     => esc_html__( 'WP Mail SMTP', 'one-click-demo-import' ),
-				'slug'     => 'wp-mail-smtp',
-				'required' => false,
-			),
-		);
+		$all_plugins = array_merge( $this->get_partner_plugins(), Helpers::apply_filters( 'ocdi/register_plugins', array() ) );
 
-		$this->plugins = array_merge( $defaults, Helpers::apply_filters( 'ocdi/register_plugins', array() ) );
+		$this->plugins = array_filter(
+			$all_plugins,
+			function ( $plugin ) {
+				if ( empty( $plugin['slug'] ) || empty( $plugin['name'] ) ) {
+					return false;
+				}
+
+				return true;
+			}
+		);
 	}
 
 	/**
@@ -122,7 +149,6 @@ class PluginInstaller {
 			wp_send_json_error( esc_html__( 'Could not install the plugin. You don\'t have permission to install plugins.', 'one-click-demo-import' ) );
 		}
 
-		$slug = ! empty( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : '';
 		$slug = ! empty( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : '';
 
 		if ( empty( $slug ) ) {
@@ -141,15 +167,11 @@ class PluginInstaller {
 		}
 
 		$ocdi  = OneClickDemoImport::get_instance();
-		$url   = esc_url_raw( add_query_arg( array( 'page' => $ocdi->get_plugin_page_setup()['menu_slug'] ), menu_page_url( $ocdi->get_plugin_page_setup()['parent_slug'], false ) ) );
+		$url   = esc_url_raw( $ocdi->get_plugin_settings_url() );
 		$creds = request_filesystem_credentials( $url, '', false, false, null );
 
 		// Check for file system permissions.
-		if ( false === $creds ) {
-			wp_send_json_error( esc_html__( 'Could not install the plugin. Don\'t have file permission.', 'one-click-demo-import' ) );
-		}
-
-		if ( ! WP_Filesystem( $creds ) ) {
+		if ( false === $creds || ! WP_Filesystem( $creds ) ) {
 			wp_send_json_error( esc_html__( 'Could not install the plugin. Don\'t have file permission.', 'one-click-demo-import' ) );
 		}
 
@@ -167,19 +189,18 @@ class PluginInstaller {
 			wp_send_json_error( $api->get_error_message() );
 		}
 
-		if ( ! class_exists( 'Plugin_Upgrader', false ) ) {
+		if ( ! class_exists( '\Plugin_Upgrader', false ) ) {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 		}
 
 		$skin_args = array(
 			'type'   => 'web',
-//			'nonce'  => $install_type . '-plugin_' . $slug,
 			'plugin' => '',
 			'api'    => $api,
 			'extra'  => $extra,
 		);
 
-		$upgrader = new Plugin_Upgrader( new Plugin_Installer_Skin( $skin_args ) );
+		$upgrader = new \Plugin_Upgrader( new PluginInstallerSkin( $skin_args ) );
 
 		$upgrader->install( $source );
 
@@ -287,23 +308,23 @@ class PluginInstaller {
 	}
 
 	/**
-	 * Helper function to extract the file path of the plugin file from the
+	 * Helper function to extract the plugin file path from the
 	 * plugin slug, if the plugin is installed.
 	 *
 	 * @param string $slug Plugin slug (typically folder name) as provided by the developer.
 	 *
-	 * @return string Either file path for plugin if installed, or just the plugin slug.
+	 * @return string|bool Either plugin file path for plugin if installed, or false.
 	 */
 	protected function get_plugin_basename_from_slug( $slug ) {
 		$keys = array_keys( $this->get_plugins() );
 
 		foreach ( $keys as $key ) {
-			if ( preg_match( '|^' . $slug . '/|', $key ) ) {
+			if ( preg_match( '/^' . $slug . '\//', $key ) ) {
 				return $key;
 			}
 		}
 
-		return $slug;
+		return false;
 	}
 
 	/**
@@ -327,6 +348,12 @@ class PluginInstaller {
 	 * @return bool True if active, false otherwise.
 	 */
 	public function is_plugin_active( $slug ) {
-		return is_plugin_active( $this->get_plugin_basename_from_slug( $slug ) );
+		$plugin_path = $this->get_plugin_basename_from_slug( $slug );
+
+		if ( empty( $plugin_path ) ) {
+			return false;
+		}
+
+		return is_plugin_active( $plugin_path );
 	}
 }

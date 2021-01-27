@@ -136,13 +136,7 @@ class OneClickDemoImport {
 	 * Creates the plugin page and a submenu item in WP Appearance menu.
 	 */
 	public function create_plugin_page() {
-		$this->plugin_page_setup = Helpers::apply_filters( 'ocdi/plugin_page_setup', array(
-			'parent_slug' => 'themes.php',
-			'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
-			'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
-			'capability'  => 'import',
-			'menu_slug'   => 'pt-one-click-demo-import',
-		) );
+		$this->plugin_page_setup = $this->get_plugin_page_setup_data();
 
 		$this->plugin_page = add_submenu_page(
 			$this->plugin_page_setup['parent_slug'],
@@ -570,6 +564,10 @@ class OneClickDemoImport {
 
 		// Create importer instance with proper parameters.
 		$this->importer = new Importer( $importer_options, $logger );
+
+		// Prepare registred plugins and register AJAX callbacks.
+		$plugin_installer = new PluginInstaller();
+		$plugin_installer->init();
 	}
 
 	/**
@@ -613,12 +611,36 @@ class OneClickDemoImport {
 	 * @return string
 	 */
 	public function get_plugin_settings_url( $query_parameters = [] ) {
+		if ( empty( $this->plugin_page_setup ) ) {
+			$this->plugin_page_setup = $this->get_plugin_page_setup_data();
+		}
 
 		$parameters = array_merge(
 			array( 'page' => $this->plugin_page_setup['menu_slug'] ),
 			$query_parameters
 		);
 
-		return add_query_arg( $parameters, menu_page_url( $this->plugin_page_setup['parent_slug'], false ) );
+		$url = menu_page_url( $this->plugin_page_setup['parent_slug'], false );
+
+		if ( empty( $url ) ) {
+			$url = self_admin_url( $this->plugin_page_setup['parent_slug'] );
+		}
+
+		return add_query_arg( $parameters, $url );
+	}
+
+	/**
+	 * Get the plugin page setup data.
+	 *
+	 * @return array
+	 */
+	public function get_plugin_page_setup_data() {
+		return Helpers::apply_filters( 'ocdi/plugin_page_setup', array(
+			'parent_slug' => 'themes.php',
+			'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
+			'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
+			'capability'  => 'import',
+			'menu_slug'   => 'pt-one-click-demo-import',
+		) );
 	}
 }

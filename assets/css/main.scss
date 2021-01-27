@@ -37,14 +37,22 @@
 		.update-nag,
 		#update-nag {
 			margin: 0 0 15px 0;
+
+			&:last-child {
+				margin-bottom: 30px;
+			}
 		}
 	}
 
 	&__admin-notices {
-		margin-bottom: 30px;
 		.ocdi-notices-wrapper {
 			display: block;
 		}
+	}
+
+	&-button-disabled {
+		opacity: 0.6 !important;
+		cursor: not-allowed !important;
 	}
 }
 
@@ -83,7 +91,7 @@
 	}
 
 	&__content-container {
-		padding: 25px 30px;
+		padding: 30px;
 
 		&-content {
 			display: flex;
@@ -162,6 +170,26 @@
 					margin: 0 30px;
 					padding: 25px 0;
 					border-bottom: 1px solid #eeeeee;
+
+					&--active {
+						opacity: 0.6;
+					}
+
+					&-content {
+						margin-right: 15px;
+					}
+
+					&-info {
+						p {
+							color: #00a0d2 !important;
+						}
+					}
+
+					&-error {
+						p {
+							color: #dc3232 !important;
+						}
+					}
 
 					&:last-child {
 						padding-bottom: 30px;
