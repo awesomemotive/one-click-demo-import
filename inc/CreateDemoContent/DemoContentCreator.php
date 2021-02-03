@@ -152,6 +152,25 @@ class DemoContentCreator {
 			wp_send_json_error( esc_html__( 'Could not import this page. Page slug is missing.', 'one-click-demo-import' ) );
 		}
 
+		// Install required plugins.
+		$content_item = $this->get_content_data( $slug );
+		$ocdi         = OneClickDemoImport::get_instance();
+		$refresh      = false;
+
+		if ( ! empty( $content_item['required_plugins'] ) ) {
+			foreach ( $content_item['required_plugins'] as $plugin_slug ) {
+				if ( ! $ocdi->plugin_installer->is_plugin_active( $plugin_slug ) ) {
+					$ocdi->plugin_installer->install_plugin( $plugin_slug );
+					$refresh = true;
+				}
+			}
+		}
+
+		if ( $refresh ) {
+			wp_send_json_success( [ 'refresh' => true ] );
+		}
+
+		// Import the pre-created page.
 		$error = $this->import_content( $slug );
 
 		if ( ! empty( $error ) ) {

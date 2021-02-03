@@ -26,6 +26,13 @@ class OneClickDemoImport {
 	public $importer;
 
 	/**
+	 * The instance of the OCDI\PluginInstaller class.
+	 *
+	 * @var PluginInstaller object
+	 */
+	public $plugin_installer;
+
+	/**
 	 * The resulting page's hook_suffix, or false if the user does not have the capability required.
 	 *
 	 * @var boolean or string
@@ -196,6 +203,7 @@ class OneClickDemoImport {
 					'wp_customize_on'  => Helpers::apply_filters( 'ocdi/enable_wp_customize_save_hooks', false ),
 					'import_popup'     => Helpers::apply_filters( 'ocdi/enable_grid_layout_import_popup_confirmation', true ),
 					'theme_screenshot' => $theme->get_screenshot(),
+					'missing_plugins'  => $this->plugin_installer->get_missing_plugins(),
 					'texts'            => array(
 						'missing_preview_image' => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
 						'dialog_title'          => esc_html__( 'Are you sure?', 'pt-ocdi' ),
@@ -206,7 +214,7 @@ class OneClickDemoImport {
 						'importing'             => esc_html__( 'Importing...', 'one-click-demo-import' ),
 						'successful_import'     => esc_html__( 'Successfully Imported!', 'one-click-demo-import' ),
 					),
-					'dialog_options' => Helpers::apply_filters( 'ocdi/confirmation_dialog_options', array() )
+					'dialog_options'   => Helpers::apply_filters( 'ocdi/confirmation_dialog_options', array() )
 				)
 			);
 
@@ -575,8 +583,8 @@ class OneClickDemoImport {
 		$this->importer = new Importer( $importer_options, $logger );
 
 		// Prepare registered plugins and register AJAX callbacks.
-		$plugin_installer = new PluginInstaller();
-		$plugin_installer->init();
+		$this->plugin_installer = new PluginInstaller();
+		$this->plugin_installer->init();
 
 		// Prepare registered pre-created demo content pages and the AJAX callback.
 		$demo_content_creator = new CreateDemoContent\DemoContentCreator();

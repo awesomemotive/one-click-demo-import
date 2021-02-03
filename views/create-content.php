@@ -43,7 +43,7 @@ $content_items        = $demo_content_creator->get_default_content();
 										<div class="content-item-info js-ocdi-content-item-info"></div>
 									</div>
 									<span class="content-item-checkbox">
-										<input type="checkbox" id="ocdi-<?php echo esc_attr( $item['slug'] ); ?>-content-item" name="<?php echo esc_attr( $item['slug'] ); ?>">
+										<input type="checkbox" id="ocdi-<?php echo esc_attr( $item['slug'] ); ?>-content-item" name="<?php echo esc_attr( $item['slug'] ); ?>" data-plugins="<?php echo esc_attr( implode( ',', $item['required_plugins'] ) ); ?>">
 										<span class="checkbox">
 											<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
 										</span>
@@ -52,7 +52,7 @@ $content_items        = $demo_content_creator->get_default_content();
 							<?php endforeach; ?>
 						</div>
 
-						<div class="ocdi-create-content-content-notice">
+						<div class="ocdi-create-content-content-notice js-ocdi-create-content-install-plugins-notice">
 							<p>
 								<?php esc_html_e( 'The following plugins will be installed for free: ', 'one-click-demo-import' ); ?>
 								<span class="js-ocdi-create-content-install-plugins-list"></span>

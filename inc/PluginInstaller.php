@@ -166,12 +166,8 @@ class PluginInstaller {
 			wp_send_json_success( esc_html__( 'Plugin was already installed! We activated it for you.', 'one-click-demo-import' ) );
 		}
 
-		$ocdi  = OneClickDemoImport::get_instance();
-		$url   = esc_url_raw( $ocdi->get_plugin_settings_url() );
-		$creds = request_filesystem_credentials( $url, '', false, false, null );
-
 		// Check for file system permissions.
-		if ( false === $creds || ! WP_Filesystem( $creds ) ) {
+		if ( ! $this->filesystem_permissions_allowed() ) {
 			wp_send_json_error( esc_html__( 'Could not install the plugin. Don\'t have file permission.', 'one-click-demo-import' ) );
 		}
 
@@ -236,6 +232,100 @@ class PluginInstaller {
 		}
 
 		wp_send_json_error( esc_html__( 'Could not install the plugin. WP Plugin installer could not retrieve plugin information.', 'one-click-demo-import' ) );
+	}
+
+	/**
+	 * Direct plugin install, without AJAX responses.
+	 *
+	 * @param string $slug The registered plugin slug to install.
+	 *
+	 * @return bool
+	 */
+	public function install_plugin( $slug ) {
+		if ( empty( $slug ) ) {
+			return false;
+		}
+
+		// Check if the plugin is already installed and activated.
+		if ( $this->is_plugin_active( $slug ) ) {
+			return true;
+		}
+
+		// Activate the plugin if the plugin is already installed.
+		if ( $this->is_plugin_installed( $slug ) ) {
+			activate_plugin( $this->get_plugin_basename_from_slug( $slug ) );
+			return true;
+		}
+
+		// Check for file system permissions.
+		if ( ! $this->filesystem_permissions_allowed() ) {
+			return false;
+		}
+
+		// Do not allow WordPress to search/download translations, as this will break JS output.
+		remove_action( 'upgrader_process_complete', [ 'Language_Pack_Upgrader', 'async_upgrade' ], 20 );
+
+		// Prep variables for Plugin_Installer_Skin class.
+		$extra         = array();
+		$extra['slug'] = $slug; // Needed for potentially renaming of directory name.
+		$source        = $this->get_download_url( $slug );
+		$api           = empty( $this->get_plugin_data( $slug )['source'] ) ? $this->get_plugins_api( $slug ) : null;
+		$api           = ( false !== $api ) ? $api : null;
+
+		if ( ! empty( $api ) && is_wp_error( $api ) ) {
+			return false;
+		}
+
+		if ( ! class_exists( '\Plugin_Upgrader', false ) ) {
+			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		}
+
+		$skin_args = array(
+			'type'   => 'web',
+			'plugin' => '',
+			'api'    => $api,
+			'extra'  => $extra,
+		);
+
+		$upgrader = new \Plugin_Upgrader( new PluginInstallerSkinSilent( $skin_args ) );
+
+		$upgrader->install( $source );
+
+		// Flush the cache and return the newly installed plugin basename.
+		wp_cache_flush();
+
+		if ( $upgrader->plugin_info() ) {
+			Helpers::do_action( 'ocdi/plugin_intaller_before_plugin_activation', $slug );
+
+			// Activate the plugin silently.
+			$activated = activate_plugin( $upgrader->plugin_info() );
+
+			Helpers::do_action( 'ocdi/plugin_intaller_after_plugin_activation', $slug );
+
+			if ( ! is_wp_error( $activated ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Helper function to check for the filesystem permissions.
+	 *
+	 * @return bool
+	 */
+	private function filesystem_permissions_allowed() {
+		$ocdi  = OneClickDemoImport::get_instance();
+		$url   = esc_url_raw( $ocdi->get_plugin_settings_url() );
+		$creds = request_filesystem_credentials( $url, '', false, false, null );
+
+		// Check for file system permissions.
+		if ( false === $creds || ! WP_Filesystem( $creds ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -357,8 +447,6 @@ class PluginInstaller {
 	 * @return bool True if installed, false otherwise.
 	 */
 	public function is_plugin_installed( $slug ) {
-		$installed_plugins = $this->get_plugins(); // Retrieve a list of all installed plugins (WP cached).
-
 		return ( ! empty( $this->get_plugin_basename_from_slug( $slug ) ) );
 	}
 
@@ -377,5 +465,22 @@ class PluginInstaller {
 		}
 
 		return is_plugin_active( $plugin_path );
+	}
+
+	/**
+	 * Get the list of plugins (with their data) of all non-active and non-installed registered plugins.
+	 *
+	 * @return array
+	 */
+	public function get_missing_plugins() {
+		$missing = [];
+
+		foreach ( $this->plugins as $plugin_data ) {
+			if ( ! $this->is_plugin_active( $plugin_data['slug'] ) ) {
+				$missing[] = $plugin_data;
+			}
+		}
+
+		return $missing;
 	}
 }

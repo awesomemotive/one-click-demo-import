@@ -148,46 +148,34 @@ jQuery( function ( $ ) {
 		itemsToImport.forEach( function( item ) {
 			var slug = item.name;
 
-			$.ajax({
-				method:      'POST',
-				url:         ocdi.ajax_url,
-				data:        {
-					action: 'ocdi_import_created_content',
-					security: ocdi.ajax_nonce,
-					slug: slug,
-				},
-				beforeSend:  function() {
-					var $currentItem = $( '.content-item-' + slug );
-					$currentItem.find( '.js-ocdi-content-item-info' ).empty();
-					$currentItem.find( '.js-ocdi-content-item-error' ).empty();
-					$currentItem.find( '.js-ocdi-content-item-info' ).append( '<p>' + ocdi.texts.importing + '</p>' );
-				}
-			})
-				.done( function( response ) {
-					var $currentItem = $( '.content-item-' + slug ),
-						$infoContainer = $currentItem.find( '.js-ocdi-content-item-info' );
-
-					$infoContainer.empty();
-
-					if ( response.success ) {
-						$infoContainer.append( '<p>' + ocdi.texts.successful_import + '</p>' );
-					} else {
-						$currentItem.find( '.js-ocdi-content-item-error' ).append( '<p>' + response.data + '</p>' );
-					}
-				})
-				.fail( function( error ) {
-					var $currentItem = $( '.content-item-' + slug );
-					$currentItem.find( '.js-ocdi-content-item-info' ).empty();
-					$currentItem.find( '.js-ocdi-content-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
-				})
-				.always( function() {
-					counter++;
-
-					if ( counter === itemsToImport.length ) {
-						$button.removeClass( 'ocdi-button-disabled' );
-					}
-				} );
+			createDemoContentAjaxCall( slug );
 		} );
+	} );
+
+	/**
+	 * Update "plugins to be installed" notice on Create Demo Content page.
+	 */
+	$( document ).on( 'change', '.ocdi--create-content .content-item input[type=checkbox]', function( event ) {
+		var $checkboxes = $( '.ocdi--create-content .content-item input[type=checkbox]' ),
+			$missingPluginNotice = $( '.js-ocdi-create-content-install-plugins-notice' ),
+			missingPlugins = [];
+
+		$checkboxes.each( function() {
+			var $checkbox = $( this );
+			if ( $checkbox.is( ':checked' ) ) {
+				missingPlugins = missingPlugins.concat( getMissingPluginNamesFromImportContentPageItem( $checkbox.data( 'plugins' ) ) );
+			}
+		} );
+
+		missingPlugins = missingPlugins.filter( onlyUnique ).join( ', ' );
+
+		if ( missingPlugins.length > 0 ) {
+			$missingPluginNotice.find( '.js-ocdi-create-content-install-plugins-list' ).text( missingPlugins );
+			$missingPluginNotice.show();
+		} else {
+			$missingPluginNotice.find( '.js-ocdi-create-content-install-plugins-list' ).text( '' );
+			$missingPluginNotice.hide();
+		}
 	} );
 
 
@@ -457,5 +445,93 @@ jQuery( function ( $ ) {
 			$( '.js-ocdi-ajax-response' ).append( '<div class="notice  notice-error  is-dismissible"><p>Error: ' + error.statusText + ' (' + error.status + ')' + '</p></div>' );
 			$( '.js-ocdi-ajax-loader' ).hide();
 		});
+	}
+
+	/**
+	 * Get the missing required plugin names for the Create Demo Content "plugins to install" notice.
+	 *
+	 * @param requiredPluginSlugs
+	 *
+	 * @returns {[]}
+	 */
+	function getMissingPluginNamesFromImportContentPageItem( requiredPluginSlugs ) {
+		var requiredPluginSlugs = requiredPluginSlugs.split( ',' ),
+			pluginList = [];
+
+		ocdi.missing_plugins.forEach( function( plugin ) {
+			if ( requiredPluginSlugs.indexOf( plugin.slug ) !== -1 ) {
+				pluginList.push( plugin.name )
+			}
+		} );
+
+		return pluginList;
+	}
+
+	/**
+	 * Unique array helper function.
+	 *
+	 * @param value
+	 * @param index
+	 * @param self
+	 *
+	 * @returns {boolean}
+	 */
+	function onlyUnique( value, index, self ) {
+		return self.indexOf( value ) === index;
+	}
+
+	/**
+	 * The main AJAX call for the create demo content page.
+	 *
+	 * @param slug The pre-created demo content slug.
+	 */
+	function createDemoContentAjaxCall( slug ) {
+		$.ajax({
+			method:      'POST',
+			url:         ocdi.ajax_url,
+			data:        {
+				action: 'ocdi_import_created_content',
+				security: ocdi.ajax_nonce,
+				slug: slug,
+			},
+			beforeSend:  function() {
+				var $currentItem = $( '.content-item-' + slug );
+				$currentItem.find( '.js-ocdi-content-item-info' ).empty();
+				$currentItem.find( '.js-ocdi-content-item-error' ).empty();
+				$currentItem.find( '.js-ocdi-content-item-info' ).append( '<p>' + ocdi.texts.importing + '</p>' );
+			}
+		})
+			.done( function( response ) {
+				if ( response.data && response.data.refresh ) {
+					createDemoContentAjaxCall( slug );
+				}
+
+				var $currentItem = $( '.content-item-' + slug ),
+					$infoContainer = $currentItem.find( '.js-ocdi-content-item-info' );
+
+				$infoContainer.empty();
+
+				if ( response.success ) {
+					$infoContainer.append( '<p>' + ocdi.texts.successful_import + '</p>' );
+				} else {
+					$currentItem.find( '.js-ocdi-content-item-error' ).append( '<p>' + response.data + '</p>' );
+				}
+			})
+			.fail( function( error ) {
+				var $currentItem = $( '.content-item-' + slug );
+				$currentItem.find( '.js-ocdi-content-item-info' ).empty();
+				$currentItem.find( '.js-ocdi-content-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
+			})
+			.always( function( response ) {
+				if ( response.data && response.data.refresh ) {
+					return;
+				}
+
+				counter++;
+
+				if ( counter === itemsToImport.length ) {
+					$button.removeClass( 'ocdi-button-disabled' );
+				}
+			} );
 	}
 } );
