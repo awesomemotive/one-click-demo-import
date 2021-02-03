@@ -44,6 +44,11 @@ class PluginInstaller {
 		if ( $slug === 'all-in-one-seo-pack' ) {
 			update_option( 'aioseo_activation_redirect', true );
 		}
+
+		// Disable the WP Mail SMTP redirect after plugin activation.
+		if ( $slug === 'wp-mail-smtp' ) {
+			update_option( 'wp_mail_smtp_activation_prevent_redirect', true );
+		}
 	}
 
 	/**
