@@ -149,7 +149,7 @@ class PluginInstaller {
 			wp_send_json_error( esc_html__( 'Could not install the plugin. You don\'t have permission to install plugins.', 'one-click-demo-import' ) );
 		}
 
-		$slug = ! empty( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : '';
+		$slug = ! empty( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
 
 		if ( empty( $slug ) ) {
 			wp_send_json_error( esc_html__( 'Could not install the plugin. Plugin slug is missing.', 'one-click-demo-import' ) );
@@ -182,7 +182,7 @@ class PluginInstaller {
 		$extra         = array();
 		$extra['slug'] = $slug; // Needed for potentially renaming of directory name.
 		$source        = $this->get_download_url( $slug );
-		$api           = empty( $this->plugins[ $slug ]['source'] ) ? $this->get_plugins_api( $slug ) : null;
+		$api           = empty( $this->get_plugin_data( $slug )['source'] ) ? $this->get_plugins_api( $slug ) : null;
 		$api           = ( false !== $api ) ? $api : null;
 
 		if ( ! empty( $api ) && is_wp_error( $api ) ) {
@@ -239,6 +239,26 @@ class PluginInstaller {
 	}
 
 	/**
+	 * Get the data of a registered plugin via the slug.
+	 *
+	 * @param string $slug The plugin slug.
+	 *
+	 * @return array
+	 */
+	public function get_plugin_data( $slug ) {
+		$data = [];
+
+		foreach ( $this->plugins as $plugin ) {
+			if ( $plugin['slug'] === $slug ) {
+				$data = $plugin;
+				break;
+			}
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Get the download URL for a plugin.
 	 *
 	 * @param  string $slug Plugin slug.
@@ -246,8 +266,10 @@ class PluginInstaller {
 	 * @return string Plugin download URL.
 	 */
 	public function get_download_url( $slug ) {
-		if ( ! empty( $this->plugins[ $slug ]['source'] ) ) {
-			return $this->plugins[ $slug ]['source'];
+		$plugin_data = $this->get_plugin_data( $slug );
+
+		if ( ! empty( $plugin_data['source'] ) ) {
+			return $plugin_data['source'];
 		}
 
 		return $this->get_wp_repo_download_url( $slug );

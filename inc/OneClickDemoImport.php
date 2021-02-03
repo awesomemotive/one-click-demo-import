@@ -203,6 +203,7 @@ class OneClickDemoImport {
 						'dialog_yes'            => esc_html__( 'Yes, import!', 'pt-ocdi' ),
 						'selected_import_title' => esc_html__( 'Selected demo import:', 'pt-ocdi' ),
 						'installing'            => esc_html__( 'Installing...', 'one-click-demo-import' ),
+						'importing'             => esc_html__( 'Importing...', 'one-click-demo-import' ),
 						'successful_import'     => esc_html__( 'Successfully Imported!', 'one-click-demo-import' ),
 					),
 					'dialog_options' => Helpers::apply_filters( 'ocdi/confirmation_dialog_options', array() )
@@ -573,9 +574,13 @@ class OneClickDemoImport {
 		// Create importer instance with proper parameters.
 		$this->importer = new Importer( $importer_options, $logger );
 
-		// Prepare registred plugins and register AJAX callbacks.
+		// Prepare registered plugins and register AJAX callbacks.
 		$plugin_installer = new PluginInstaller();
 		$plugin_installer->init();
+
+		// Prepare registered pre-created demo content pages and the AJAX callback.
+		$demo_content_creator = new CreateDemoContent\DemoContentCreator();
+		$demo_content_creator->init();
 	}
 
 	/**

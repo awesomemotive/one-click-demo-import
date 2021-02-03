@@ -7,45 +7,8 @@
 
 namespace OCDI;
 
-$content_items = array(
-	array(
-		'slug'             => 'about-page',
-		'name'             => esc_html__( 'About Page', 'one-click-demo-import' ),
-		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
-		'required_plugins' => array(),
-	),
-	array(
-		'slug'             => 'contact-page',
-		'name'             => esc_html__( 'Contact Page', 'one-click-demo-import' ),
-		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
-		'required_plugins' => array( 'wpforms-lite' ),
-	),
-	array(
-		'slug'             => 'faq-page',
-		'name'             => esc_html__( 'FAQ Page', 'one-click-demo-import' ),
-		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
-		'required_plugins' => array( 'google-analytics-for-wordpress' ),
-	),
-	array(
-		'slug'             => 'coming-soon-page',
-		'name'             => esc_html__( 'Coming Soon Page', 'one-click-demo-import' ),
-		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
-		'required_plugins' => array( 'coming-soon', 'wpforms-lite' ),
-	),
-	array(
-		'slug'             => 'getting-started-page',
-		'name'             => esc_html__( 'Getting Started Page', 'one-click-demo-import' ),
-		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
-		'required_plugins' => array( 'all-in-one-seo-pack', 'google-analytics-for-wordpress', 'wpforms-lite' ),
-	),
-	array(
-		'slug'             => 'portfolio-page',
-		'name'             => esc_html__( 'Portfolio Page', 'one-click-demo-import' ),
-		'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
-		'required_plugins' => array(),
-	),
-);
-
+$demo_content_creator = new CreateDemoContent\DemoContentCreator();
+$content_items        = $demo_content_creator->get_default_content();
 ?>
 
 <div class="ocdi ocdi--create-content">

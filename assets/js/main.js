@@ -111,6 +111,8 @@ jQuery( function ( $ ) {
 					}
 				})
 				.fail( function( error ) {
+					var $currentPluginItem = $( '.plugin-item-' + slug );
+					$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
 					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
 				})
 				.always( function() {
@@ -174,7 +176,9 @@ jQuery( function ( $ ) {
 					}
 				})
 				.fail( function( error ) {
-					$currentPluginItem.find( '.js-ocdi-content-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
+					var $currentItem = $( '.content-item-' + slug );
+					$currentItem.find( '.js-ocdi-content-item-info' ).empty();
+					$currentItem.find( '.js-ocdi-content-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
 				})
 				.always( function() {
 					counter++;
