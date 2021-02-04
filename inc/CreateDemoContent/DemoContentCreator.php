@@ -130,8 +130,6 @@ class DemoContentCreator {
 		if ( empty( $update_page ) ) {
 			wp_send_json_error( esc_html__( 'Could not complete the import process for this page. Could not update the imported page with correct WPForms form ID.', 'one-click-demo-import' ) );
 		}
-
-		update_post_meta( $contact_page->ID, 'ocdi_precreated_demo_updated', 'yes' );
 	}
 
 	/**
