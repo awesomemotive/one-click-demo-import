@@ -71,8 +71,7 @@ jQuery( function ( $ ) {
 			return false;
 		}
 
-		var pluginsToImport = $( '.ocdi-install-plugins-content-content .plugin-item input[type=checkbox]' ).serializeArray(),
-			counter = 0;
+		var pluginsToImport = $( '.ocdi-install-plugins-content-content .plugin-item input[type=checkbox]' ).serializeArray();
 
 		if ( pluginsToImport.length === 0 ) {
 			return false;
@@ -80,49 +79,7 @@ jQuery( function ( $ ) {
 
 		$button.addClass( 'ocdi-button-disabled' );
 
-		pluginsToImport.forEach( function( plugin ) {
-			var slug = plugin.name;
-
-			$.ajax({
-				method:      'POST',
-				url:         ocdi.ajax_url,
-				data:        {
-					action: 'ocdi_install_plugin',
-					security: ocdi.ajax_nonce,
-					slug: slug,
-				},
-				beforeSend:  function() {
-					var $currentPluginItem = $( '.plugin-item-' + slug );
-					$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
-					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).empty();
-					$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).append( '<p>' + ocdi.texts.installing + '</p>' );
-				}
-			})
-				.done( function( response ) {
-					var $currentPluginItem = $( '.plugin-item-' + slug );
-
-					$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
-
-					if ( response.success ) {
-						$currentPluginItem.addClass( 'plugin-item--active' );
-						$currentPluginItem.find( 'input[type=checkbox]' ).prop( 'disabled', true );
-					} else {
-						$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + response.data + '</p>' );
-					}
-				})
-				.fail( function( error ) {
-					var $currentPluginItem = $( '.plugin-item-' + slug );
-					$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
-					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
-				})
-				.always( function() {
-					counter++;
-
-					if ( counter === pluginsToImport.length ) {
-						$button.removeClass( 'ocdi-button-disabled' );
-					}
-				} );
-		} );
+		installPluginsAjaxCall( pluginsToImport, 0, $button );
 	} );
 
 
@@ -481,7 +438,61 @@ jQuery( function ( $ ) {
 	}
 
 	/**
-	 * The main AJAX call for the create demo content page.
+	 * The AJAX call for installing selected plugins.
+	 *
+	 * @param {Object[]}  plugins The array of plugin objects with name and value pairs.
+	 * @param {int}    counter The index of the plugin to import from the list above.
+	 * @param {Object} $button jQuery object of the submit button.
+	 */
+	function installPluginsAjaxCall( plugins, counter, $button ) {
+		var plugin = plugins[ counter ],
+			slug = plugin.name;
+
+		$.ajax({
+			method:      'POST',
+			url:         ocdi.ajax_url,
+			data:        {
+				action: 'ocdi_install_plugin',
+				security: ocdi.ajax_nonce,
+				slug: slug,
+			},
+			beforeSend:  function() {
+				var $currentPluginItem = $( '.plugin-item-' + slug );
+				$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
+				$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).empty();
+				$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).append( '<p>' + ocdi.texts.installing + '</p>' );
+			}
+		})
+			.done( function( response ) {
+				var $currentPluginItem = $( '.plugin-item-' + slug );
+
+				$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
+
+				if ( response.success ) {
+					$currentPluginItem.addClass( 'plugin-item--active' );
+					$currentPluginItem.find( 'input[type=checkbox]' ).prop( 'disabled', true );
+				} else {
+					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + response.data + '</p>' );
+				}
+			})
+			.fail( function( error ) {
+				var $currentPluginItem = $( '.plugin-item-' + slug );
+				$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
+				$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
+			})
+			.always( function() {
+				counter++;
+
+				if ( counter === plugins.length ) {
+					$button.removeClass( 'ocdi-button-disabled' );
+				} else {
+					installPluginsAjaxCall( plugins, counter, $button );
+				}
+			} );
+	}
+
+	/**
+	 * The AJAX call for importing content on the create demo content page.
 	 *
 	 * @param slug The pre-created demo content slug.
 	 */
