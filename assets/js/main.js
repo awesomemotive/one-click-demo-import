@@ -108,6 +108,49 @@ jQuery( function ( $ ) {
 		createDemoContentAjaxCall( itemsToImport, 0, $button );
 	} );
 
+
+	/**
+	 * Install the SeedProd plugin.
+	 */
+	$( '.js-ocdi-install-coming-soon-plugin' ).on( 'click', function( event ) {
+		event.preventDefault();
+
+		var $button = $( this ),
+			slug = 'coming-soon';
+
+		if ( $button.hasClass( 'ocdi-button-disabled' ) ) {
+			return false;
+		}
+
+		$button.addClass( 'ocdi-button-disabled' );
+
+		$.ajax({
+			method:      'POST',
+			url:         ocdi.ajax_url,
+			data:        {
+				action: 'ocdi_install_plugin',
+				security: ocdi.ajax_nonce,
+				slug: slug,
+			},
+			beforeSend: function() {
+				$button.text( ocdi.texts.installing );
+			}
+		})
+			.done( function( response ) {
+				if ( response.success ) {
+					alert( ocdi.texts.successfully_installed );
+					$button.text( ocdi.texts.installed );
+				} else {
+					alert( response.data );
+					$button.removeClass( 'ocdi-button-disabled' );
+				}
+			})
+			.fail( function( error ) {
+				alert( error.statusText + ' (' + error.status + ')' );
+				$button.removeClass( 'ocdi-button-disabled' );
+			})
+	} );
+
 	/**
 	 * Update "plugins to be installed" notice on Create Demo Content page.
 	 */

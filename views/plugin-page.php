@@ -226,7 +226,13 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
-							<a href="#" class="button"><?php esc_html_e( 'Install Plugin', 'one-click-demo-import' ); ?></a>
+							<?php
+								$plugin_installer = new PluginInstaller();
+								$seedprod_active = $plugin_installer->is_plugin_active( 'coming-soon' );
+							?>
+							<a href="#" class="button js-ocdi-install-coming-soon-plugin<?php echo empty( $seedprod_active ) ? '' : ' ocdi-button-disabled'; ?>">
+								<?php echo empty( $seedprod_active ) ? esc_html__( 'Install Plugin', 'one-click-demo-import' ) : esc_html__( 'Installed', 'one-click-demo-import' ); ?>
+							</a>
 						</div>
 					</div>
 				</div>
