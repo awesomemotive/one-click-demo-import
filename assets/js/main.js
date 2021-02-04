@@ -64,7 +64,9 @@ jQuery( function ( $ ) {
 	/**
 	 * Install plugins event.
 	 */
-	$( '.js-ocdi-install-plugins' ).on( 'click', function() {
+	$( '.js-ocdi-install-plugins' ).on( 'click', function( event ) {
+		event.preventDefault();
+
 		var $button = $( this );
 
 		if ( $button.hasClass( 'ocdi-button-disabled' ) ) {
@@ -86,15 +88,16 @@ jQuery( function ( $ ) {
 	/**
 	 * Import the created content.
 	 */
-	$( '.js-ocdi-create-content' ).on( 'click', function() {
+	$( '.js-ocdi-create-content' ).on( 'click', function( event ) {
+		event.preventDefault();
+
 		var $button = $( this );
 
 		if ( $button.hasClass( 'ocdi-button-disabled' ) ) {
 			return false;
 		}
 
-		var itemsToImport = $( '.ocdi-create-content-content .content-item input[type=checkbox]' ).serializeArray(),
-			counter = 0;
+		var itemsToImport = $( '.ocdi-create-content-content .content-item input[type=checkbox]' ).serializeArray();
 
 		if ( itemsToImport.length === 0 ) {
 			return false;
@@ -102,11 +105,7 @@ jQuery( function ( $ ) {
 
 		$button.addClass( 'ocdi-button-disabled' );
 
-		itemsToImport.forEach( function( item ) {
-			var slug = item.name;
-
-			createDemoContentAjaxCall( slug );
-		} );
+		createDemoContentAjaxCall( itemsToImport, 0, $button );
 	} );
 
 	/**
@@ -440,9 +439,9 @@ jQuery( function ( $ ) {
 	/**
 	 * The AJAX call for installing selected plugins.
 	 *
-	 * @param {Object[]}  plugins The array of plugin objects with name and value pairs.
-	 * @param {int}    counter The index of the plugin to import from the list above.
-	 * @param {Object} $button jQuery object of the submit button.
+	 * @param {Object[]} plugins The array of plugin objects with name and value pairs.
+	 * @param {int}      counter The index of the plugin to import from the list above.
+	 * @param {Object}   $button jQuery object of the submit button.
 	 */
 	function installPluginsAjaxCall( plugins, counter, $button ) {
 		var plugin = plugins[ counter ],
@@ -494,9 +493,14 @@ jQuery( function ( $ ) {
 	/**
 	 * The AJAX call for importing content on the create demo content page.
 	 *
-	 * @param slug The pre-created demo content slug.
+	 * @param {Object[]} items The array of content item objects with name and value pairs.
+	 * @param {int}      counter The index of the plugin to import from the list above.
+	 * @param {Object}   $button jQuery object of the submit button.
 	 */
-	function createDemoContentAjaxCall( slug ) {
+	function createDemoContentAjaxCall( items, counter, $button ) {
+		var item = items[ counter ],
+			slug = item.name;
+
 		$.ajax({
 			method:      'POST',
 			url:         ocdi.ajax_url,
@@ -514,7 +518,7 @@ jQuery( function ( $ ) {
 		})
 			.done( function( response ) {
 				if ( response.data && response.data.refresh ) {
-					createDemoContentAjaxCall( slug );
+					createDemoContentAjaxCall( items, counter, $button );
 				}
 
 				var $currentItem = $( '.content-item-' + slug ),
@@ -540,8 +544,10 @@ jQuery( function ( $ ) {
 
 				counter++;
 
-				if ( counter === itemsToImport.length ) {
+				if ( counter === items.length ) {
 					$button.removeClass( 'ocdi-button-disabled' );
+				} else {
+					createDemoContentAjaxCall( items, counter, $button );
 				}
 			} );
 	}
