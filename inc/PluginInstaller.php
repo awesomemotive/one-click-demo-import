@@ -130,16 +130,19 @@ class PluginInstaller {
 	public function set_plugins() {
 		$all_plugins = array_merge( $this->get_partner_plugins(), Helpers::apply_filters( 'ocdi/register_plugins', array() ) );
 
-		$this->plugins = array_filter(
-			$all_plugins,
-			function ( $plugin ) {
-				if ( empty( $plugin['slug'] ) || empty( $plugin['name'] ) ) {
-					return false;
-				}
+		$this->plugins = $this->filter_plugins( $all_plugins );
+	}
 
-				return true;
-			}
-		);
+	/**
+	 * Get all theme registered plugins.
+	 * With our 3 top recommended plugins being set as defaults.
+	 */
+	public function get_theme_plugins() {
+		$default_plugins = array_slice( $this->get_partner_plugins(), 0, 3 );
+
+		$theme_plugins = array_merge( $default_plugins, Helpers::apply_filters( 'ocdi/register_plugins', array() ) );
+
+		return $this->filter_plugins( $theme_plugins );
 	}
 
 	/**
@@ -494,5 +497,27 @@ class PluginInstaller {
 		}
 
 		return $missing;
+	}
+
+	/**
+	 * Return only plugins with required attributes:
+	 * - name
+	 * - slug
+	 *
+	 * @param array $plugins The array of plugin's data.
+	 *
+	 * @return array
+	 */
+	private function filter_plugins( $plugins ) {
+		return array_filter(
+			$plugins,
+			function ( $plugin ) {
+				if ( empty( $plugin['slug'] ) || empty( $plugin['name'] ) ) {
+					return false;
+				}
+
+				return true;
+			}
+		);
 	}
 }
