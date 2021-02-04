@@ -167,7 +167,7 @@ class PluginInstaller {
 
 		// Activate the plugin if the plugin is already installed.
 		if ( $this->is_plugin_installed( $slug ) ) {
-			activate_plugin( $this->get_plugin_basename_from_slug( $slug ) );
+			$this->activate_plugin( $this->get_plugin_basename_from_slug( $slug ), $slug );
 			wp_send_json_success( esc_html__( 'Plugin was already installed! We activated it for you.', 'one-click-demo-import' ) );
 		}
 
@@ -209,13 +209,7 @@ class PluginInstaller {
 		wp_cache_flush();
 
 		if ( $upgrader->plugin_info() ) {
-
-			Helpers::do_action( 'ocdi/plugin_intaller_before_plugin_activation', $slug );
-
-			// Activate the plugin silently.
-			$activated = activate_plugin( $upgrader->plugin_info() );
-
-			Helpers::do_action( 'ocdi/plugin_intaller_after_plugin_activation', $slug );
+			$activated = $this->activate_plugin( $upgrader->plugin_info(), $slug );
 
 			if ( ! is_wp_error( $activated ) ) {
 				wp_send_json_success(
@@ -258,7 +252,7 @@ class PluginInstaller {
 
 		// Activate the plugin if the plugin is already installed.
 		if ( $this->is_plugin_installed( $slug ) ) {
-			activate_plugin( $this->get_plugin_basename_from_slug( $slug ) );
+			$this->activate_plugin( $this->get_plugin_basename_from_slug( $slug ), $slug );
 			return true;
 		}
 
@@ -300,12 +294,7 @@ class PluginInstaller {
 		wp_cache_flush();
 
 		if ( $upgrader->plugin_info() ) {
-			Helpers::do_action( 'ocdi/plugin_intaller_before_plugin_activation', $slug );
-
-			// Activate the plugin silently.
-			$activated = activate_plugin( $upgrader->plugin_info() );
-
-			Helpers::do_action( 'ocdi/plugin_intaller_after_plugin_activation', $slug );
+			$activated = $this->activate_plugin( $upgrader->plugin_info(), $slug );
 
 			if ( ! is_wp_error( $activated ) ) {
 				return true;
@@ -313,6 +302,24 @@ class PluginInstaller {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Activate the plugin with the before and after hooks.
+	 *
+	 * @param string $plugin_filename The plugin's basename(example: wpforms/wpforms.php).
+	 * @param string $slug            The plugin's slug.
+	 *
+	 * @return null|WP_Error Null on success, WP_Error on invalid file.
+	 */
+	private function activate_plugin( $plugin_filename, $slug ) {
+		Helpers::do_action( 'ocdi/plugin_intaller_before_plugin_activation', $slug );
+
+		$activated = activate_plugin( $plugin_filename );
+
+		Helpers::do_action( 'ocdi/plugin_intaller_after_plugin_activation', $slug );
+
+		return $activated;
 	}
 
 	/**
