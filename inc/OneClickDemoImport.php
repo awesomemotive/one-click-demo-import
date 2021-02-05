@@ -175,6 +175,12 @@ class OneClickDemoImport {
 			return;
 		}
 
+		if ( isset( $_GET['step'] ) && 'import' === $_GET['step'] ) {
+			require_once PT_OCDI_PATH . 'views/import.php';
+
+			return;
+		}
+
 		require_once PT_OCDI_PATH . 'views/plugin-page.php';
 	}
 
@@ -204,6 +210,7 @@ class OneClickDemoImport {
 					'import_popup'     => Helpers::apply_filters( 'ocdi/enable_grid_layout_import_popup_confirmation', true ),
 					'theme_screenshot' => $theme->get_screenshot(),
 					'missing_plugins'  => $this->plugin_installer->get_missing_plugins(),
+					'import_page_url'  => $this->get_plugin_settings_url( [ 'step' => 'import' ] ),
 					'texts'            => array(
 						'missing_preview_image'  => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
 						'dialog_title'           => esc_html__( 'Are you sure?', 'pt-ocdi' ),

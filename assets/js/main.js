@@ -285,43 +285,13 @@ jQuery( function ( $ ) {
 	 */
 
 	/**
-	 * Prepare grid layout import data and execute the AJAX call.
+	 * Redirect to the import page for the theme plugin installation step.
 	 *
 	 * @param int selectedImportID The selected import ID.
 	 * @param obj $itemContainer The jQuery selected item container object.
 	 */
 	function gridLayoutImport( selectedImportID, $itemContainer ) {
-		// Reset response div content.
-		$( '.js-ocdi-ajax-response' ).empty();
-
-		// Hide all other import items.
-		$itemContainer.siblings( '.js-ocdi-gl-item' ).fadeOut( 500 );
-
-		$itemContainer.animate({
-			opacity: 0
-		}, 500, 'swing', function () {
-			$itemContainer.animate({
-				opacity: 1
-			}, 500 )
-		});
-
-		// Hide the header with category navigation and search box.
-		$itemContainer.closest( '.js-ocdi-gl' ).find( '.js-ocdi-gl-header' ).fadeOut( 500 );
-
-		// Append a title for the selected demo import.
-		$itemContainer.parent().prepend( '<h3>' + ocdi.texts.selected_import_title + '</h3>' );
-
-		// Remove the import button of the selected item.
-		$itemContainer.find( '.js-ocdi-gl-import-data' ).remove();
-
-		// Prepare data for the AJAX call
-		var data = new FormData();
-		data.append( 'action', 'ocdi_import_demo_data' );
-		data.append( 'security', ocdi.ajax_nonce );
-		data.append( 'selected', selectedImportID );
-
-		// AJAX call to import everything (content, widgets, before/after setup)
-		ajaxCall( data );
+		window.location.href = ocdi.import_page_url + '&import=' + selectedImportID;
 	}
 
 	/**

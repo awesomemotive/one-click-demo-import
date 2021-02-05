@@ -33,7 +33,9 @@ $content_items        = $demo_content_creator->get_default_content();
 							<?php foreach ( $content_items as $item ) : ?>
 								<label class="content-item content-item-<?php echo esc_attr( $item['slug'] ); ?>" for="ocdi-<?php echo esc_attr( $item['slug'] ); ?>-content-item">
 									<div class="content-item-content">
-										<h3><?php echo esc_html( $item['name'] ); ?></h3>
+										<div class="content-item-content-title">
+											<h3><?php echo esc_html( $item['name'] ); ?></h3>
+										</div>
 										<?php if ( ! empty( $item['description'] ) ) : ?>
 											<p>
 												<?php echo wp_kses_post( $item['description'] ); ?>

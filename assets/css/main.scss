@@ -54,6 +54,24 @@
 		opacity: 0.6 !important;
 		cursor: not-allowed !important;
 	}
+
+	&-content-notice {
+		padding: 25px;
+		background: #E5F5FA;
+		border-radius: 6px;
+		margin: 30px;
+
+		p {
+			font-size: 14px;
+			line-height: 24px;
+			color: #444444;
+			margin: 0 0 10px 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
 }
 
 .feature-section + hr {
@@ -180,6 +198,27 @@
 
 					&-content {
 						margin-right: 15px;
+
+						&-title {
+							display: flex;
+							align-items: center;
+							margin: 0 0 4px 0;
+
+							span {
+								margin-left: 5px;
+								background-color: #FFB900;
+								width: 16px;
+								height: 16px;
+								border-radius: 8px;
+								margin-top: -1px;
+
+								img {
+									width: 10px;
+									height: 10px;
+									margin: 3px;
+								}
+							}
+						}
 					}
 
 					&-info {
@@ -208,7 +247,7 @@
 						line-height: 22px;
 						color: #444444;
 						font-weight: 500;
-						margin: 0 0 4px 0;
+						margin: 0;
 					}
 
 					p {
@@ -225,17 +264,26 @@
 					.plugin-item-checkbox,
 					.content-item-checkbox {
 						.checkbox {
+							position: relative;
 							display: block;
 							background: #e6e6e6;
 							width: 32px;
 							height: 32px;
 							border-radius: 16px;
 
-							img {
+							.ocdi-check-icon {
 								display: none;
 								width: 20px;
 								height: 20px;
 								margin: 6px;
+							}
+
+							.ocdi-lock-icon {
+								position: absolute;
+								width: 14px;
+								height: auto;
+								bottom: -4px;
+								right: -2px;
 							}
 						}
 
@@ -246,7 +294,7 @@
 						input[type=checkbox]:checked + .checkbox {
 							background: #64B450;
 
-							img {
+							.ocdi-check-icon {
 								display: inline-block;
 							}
 						}

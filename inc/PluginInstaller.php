@@ -138,11 +138,74 @@ class PluginInstaller {
 	 * With our 3 top recommended plugins being set as defaults.
 	 */
 	public function get_theme_plugins() {
-		$default_plugins = array_slice( $this->get_partner_plugins(), 0, 3 );
+		$default_plugins = $this->get_top_partner_plugins();
 
 		$theme_plugins = array_merge( $default_plugins, Helpers::apply_filters( 'ocdi/register_plugins', array() ) );
 
 		return $this->filter_plugins( $theme_plugins );
+	}
+
+	/**
+	 * Get the top 3 partner plugins if they are not already activated.
+	 *
+	 * @return array
+	 */
+	private function get_top_partner_plugins() {
+		$installed_plugins = $this->get_plugins();
+		$contact_form      = [
+			'wpforms-lite/wpforms.php',
+			'wpforms/wpforms.php',
+			'formidable/formidable.php',
+			'formidable/formidable-pro.php',
+			'gravityforms/gravityforms.php',
+			'ninja-forms/ninja-forms.php',
+		];
+		$seo               = [
+			'all-in-one-seo-pack/all_in_one_seo_pack.php',
+			'all-in-one-seo-pack-pro/all_in_one_seo_pack.php',
+			'wordpress-seo/wp-seo.php',
+			'wordpress-seo-premium/wp-seo-premium.php',
+			'seo-by-rank-math/rank-math.php',
+			'seo-by-rank-math-pro/rank-math-pro.php',
+		];
+		$google_analytics  = [
+			'google-analytics-for-wordpress/googleanalytics.php',
+			'exactmetrics-premium/exactmetrics-premium.php',
+			'google-analytics-dashboard-for-wp/gadwp.php',
+		];
+
+		$plugins = array_slice( $this->get_partner_plugins(), 0, 3 );
+
+		return array_filter(
+			$plugins,
+			function ( $plugin ) use ( $installed_plugins, $contact_form, $seo, $google_analytics ) {
+				if ( empty( $plugin['slug'] ) || empty( $plugin['name'] ) ) {
+					return false;
+				}
+
+				if ( 'wpforms-lite' === $plugin['slug'] ) {
+					foreach ( $installed_plugins as $basename => $plugin_info ) {
+						if ( in_array( $basename, $contact_form, true ) ) {
+							return false;
+						}
+					}
+				} elseif ( 'all-in-one-seo-pack' === $plugin['slug'] ) {
+					foreach ( $installed_plugins as $basename => $plugin_info ) {
+						if ( in_array( $basename, $seo, true ) ) {
+							return false;
+						}
+					}
+				} elseif ( 'google-analytics-for-wordpress' === $plugin['slug'] ) {
+					foreach ( $installed_plugins as $basename => $plugin_info ) {
+						if ( in_array( $basename, $google_analytics, true ) ) {
+							return false;
+						}
+					}
+				}
+
+				return true;
+			}
+		);
 	}
 
 	/**

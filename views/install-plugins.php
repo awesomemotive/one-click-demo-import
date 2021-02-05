@@ -32,7 +32,9 @@ $plugin_installer = new PluginInstaller();
 							<?php $is_plugin_active = $plugin_installer->is_plugin_active( $plugin['slug'] ); ?>
 							<label class="plugin-item plugin-item-<?php echo esc_attr( $plugin['slug'] ); ?><?php echo $is_plugin_active ? ' plugin-item--active' : ''; ?>" for="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin">
 								<div class="plugin-item-content">
-									<h3><?php echo esc_html( $plugin['name'] ); ?></h3>
+									<div class="plugin-item-content-title">
+										<h3><?php echo esc_html( $plugin['name'] ); ?></h3>
+									</div>
 									<?php if ( ! empty( $plugin['description'] ) ) : ?>
 										<p>
 											<?php echo wp_kses_post( $plugin['description'] ); ?>
