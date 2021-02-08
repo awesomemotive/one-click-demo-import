@@ -60,6 +60,14 @@ jQuery( function ( $ ) {
 		$( '.js-ocdi-notice-wrapper' ).appendTo( '.js-ocdi-admin-notices-container' );
 	} );
 
+	/**
+	 * Prevent a required plugin checkbox from changeing state.
+	 */
+	$( '.ocdi-install-plugins-content-content .plugin-item.plugin-item--required input[type=checkbox]' ).on( 'click', function( event ) {
+		event.preventDefault();
+
+		return false;
+	} );
 
 	/**
 	 * Install plugins event.
@@ -73,15 +81,40 @@ jQuery( function ( $ ) {
 			return false;
 		}
 
-		var pluginsToImport = $( '.ocdi-install-plugins-content-content .plugin-item input[type=checkbox]' ).serializeArray();
+		var pluginsToInstall = $( '.ocdi-install-plugins-content-content .plugin-item input[type=checkbox]' ).serializeArray();
 
-		if ( pluginsToImport.length === 0 ) {
+		if ( pluginsToInstall.length === 0 ) {
 			return false;
 		}
 
 		$button.addClass( 'ocdi-button-disabled' );
 
-		installPluginsAjaxCall( pluginsToImport, 0, $button );
+		installPluginsAjaxCall( pluginsToInstall, 0, $button, false );
+	} );
+
+	/**
+	 * Install plugins before importing event.
+	 */
+	$( '.js-ocdi-install-plugins-before-import' ).on( 'click', function( event ) {
+		event.preventDefault();
+
+		var $button = $( this );
+
+		if ( $button.hasClass( 'ocdi-button-disabled' ) ) {
+			return false;
+		}
+
+		var pluginsToInstall = $( '.ocdi-install-plugins-content-content .plugin-item:not(.plugin-item--disabled) input[type=checkbox]' ).serializeArray();
+
+		if ( pluginsToInstall.length === 0 ) {
+			startImport( getUrlParameter( 'import' ) );
+
+			return false;
+		}
+
+		$button.addClass( 'ocdi-button-disabled' );
+
+		installPluginsAjaxCall( pluginsToInstall, 0, $button, true );
 	} );
 
 
@@ -371,7 +404,8 @@ jQuery( function ( $ ) {
 			contentType: false,
 			processData: false,
 			beforeSend:  function() {
-				$( '.js-ocdi-ajax-loader' ).show();
+				$( '.js-ocdi-install-plugins-content' ).hide();
+				$( '.js-ocdi-importing' ).show();
 			}
 		})
 		.done( function( response ) {
@@ -399,20 +433,32 @@ jQuery( function ( $ ) {
 				ajaxCall( newData );
 			}
 			else if ( 'undefined' !== typeof response.message ) {
-				$( '.js-ocdi-ajax-response' ).append( '<p>' + response.message + '</p>' );
-				$( '.js-ocdi-ajax-loader' ).hide();
+				$( '.js-ocdi-ajax-response' ).append( response.message );
+
+				if ( 'undefined' !== typeof response.title ) {
+					$( '.js-ocdi-ajax-response-title' ).html( response.title );
+				}
+
+				if ( 'undefined' !== typeof response.subtitle ) {
+					$( '.js-ocdi-ajax-response-subtitle' ).html( response.subtitle );
+				}
+
+				$( '.js-ocdi-importing' ).hide();
+				$( '.js-ocdi-imported' ).show();
 
 				// Trigger custom event, when OCDI import is complete.
 				$( document ).trigger( 'ocdiImportComplete' );
 			}
 			else {
 				$( '.js-ocdi-ajax-response' ).append( '<div class="notice  notice-error  is-dismissible"><p>' + response + '</p></div>' );
-				$( '.js-ocdi-ajax-loader' ).hide();
+				$( '.js-ocdi-importing' ).hide();
+				$( '.js-ocdi-imported' ).show();
 			}
 		})
 		.fail( function( error ) {
 			$( '.js-ocdi-ajax-response' ).append( '<div class="notice  notice-error  is-dismissible"><p>Error: ' + error.statusText + ' (' + error.status + ')' + '</p></div>' );
-			$( '.js-ocdi-ajax-loader' ).hide();
+			$( '.js-ocdi-importing' ).hide();
+			$( '.js-ocdi-imported' ).show();
 		});
 	}
 
@@ -452,11 +498,12 @@ jQuery( function ( $ ) {
 	/**
 	 * The AJAX call for installing selected plugins.
 	 *
-	 * @param {Object[]} plugins The array of plugin objects with name and value pairs.
-	 * @param {int}      counter The index of the plugin to import from the list above.
-	 * @param {Object}   $button jQuery object of the submit button.
+	 * @param {Object[]} plugins   The array of plugin objects with name and value pairs.
+	 * @param {int}      counter   The index of the plugin to import from the list above.
+	 * @param {Object}   $button   jQuery object of the submit button.
+	 * @param {bool}     runImport If the import should be run after plugin installation.
 	 */
-	function installPluginsAjaxCall( plugins, counter, $button ) {
+	function installPluginsAjaxCall( plugins, counter, $button , runImport ) {
 		var plugin = plugins[ counter ],
 			slug = plugin.name;
 
@@ -497,8 +544,13 @@ jQuery( function ( $ ) {
 
 				if ( counter === plugins.length ) {
 					$button.removeClass( 'ocdi-button-disabled' );
+
+					if ( runImport ) {
+						startImport( getUrlParameter( 'import' ) );
+					}
+
 				} else {
-					installPluginsAjaxCall( plugins, counter, $button );
+					installPluginsAjaxCall( plugins, counter, $button, runImport );
 				}
 			} );
 	}
@@ -563,5 +615,43 @@ jQuery( function ( $ ) {
 					createDemoContentAjaxCall( items, counter, $button );
 				}
 			} );
+	}
+
+
+	/**
+	 * Get the parameter value from the URL.
+	 *
+	 * @param param
+	 * @returns {boolean|string}
+	 */
+	function getUrlParameter( param ) {
+		var sPageURL = window.location.search.substring( 1 ),
+			sURLVariables = sPageURL.split( '&' ),
+			sParameterName,
+			i;
+
+		for ( i = 0; i < sURLVariables.length; i++ ) {
+			sParameterName = sURLVariables[ i ].split( '=' );
+
+			if ( sParameterName[0] === param ) {
+				return typeof sParameterName[1] === undefined ? true : decodeURIComponent( sParameterName[1] );
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Run the predefined imporrt.
+	 */
+	function startImport( selected ) {
+		// Prepare data for the AJAX call
+		var data = new FormData();
+		data.append( 'action', 'ocdi_import_demo_data' );
+		data.append( 'security', ocdi.ajax_nonce );
+		data.append( 'selected', selected );
+
+		// AJAX call to import everything (content, widgets, before/after setup)
+		ajaxCall( data );
 	}
 } );

@@ -21,7 +21,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 
 		<div class="ocdi__content-container-content">
 			<div class="ocdi__content-container-content--main">
-				<div class="ocdi-install-plugins-content">
+				<div class="ocdi-install-plugins-content js-ocdi-install-plugins-content">
 					<div class="ocdi-install-plugins-content-header">
 						<h2><?php esc_html_e( 'Before We Import Your Demo', 'one-click-demo-import' ); ?></h2>
 						<p>
@@ -38,7 +38,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 						<?php else : ?>
 							<?php foreach ( $theme_plugins as $plugin ) : ?>
 								<?php $is_plugin_active = $plugin_installer->is_plugin_active( $plugin['slug'] ); ?>
-								<label class="plugin-item plugin-item-<?php echo esc_attr( $plugin['slug'] ); ?><?php echo $is_plugin_active ? ' plugin-item--active' : ''; ?>" for="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin">
+								<label class="plugin-item plugin-item-<?php echo esc_attr( $plugin['slug'] ); ?><?php echo $is_plugin_active ? ' plugin-item--active' : ''; ?><?php echo ! empty( $plugin['required'] ) ? ' plugin-item--required' : ''; ?>" for="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin">
 									<div class="plugin-item-content">
 										<div class="plugin-item-content-title">
 											<h3><?php echo esc_html( $plugin['name'] ); ?></h3>
@@ -57,7 +57,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 										<div class="plugin-item-info js-ocdi-plugin-item-info"></div>
 									</div>
 									<span class="plugin-item-checkbox">
-										<input type="checkbox" id="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin" name="<?php echo esc_attr( $plugin['slug'] ); ?>" <?php checked( ! empty( $plugin['preselected'] ) || ! empty( $plugin['required'] ) || $is_plugin_active ); ?><?php disabled( $is_plugin_active || ! empty( $plugin['required'] ) ) ?>>
+										<input type="checkbox" id="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin" name="<?php echo esc_attr( $plugin['slug'] ); ?>" <?php checked( ! empty( $plugin['preselected'] ) || ! empty( $plugin['required'] ) || $is_plugin_active ); ?><?php disabled( $is_plugin_active ); ?>>
 										<span class="checkbox">
 											<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" class="ocdi-check-icon" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
 											<?php if ( ! empty( $plugin['required'] ) ) : ?>
@@ -71,12 +71,42 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 					</div>
 					<div class="ocdi-install-plugins-content-footer">
 						<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="button"><img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/long-arrow-alt-left-blue.svg' ); ?>" alt="<?php esc_attr_e( 'Back icon', 'one-click-demo-import' ); ?>"><span><?php esc_html_e( 'Go Back' , 'one-click-demo-import' ); ?></span></a>
-						<a href="#" class="button button-primary js-ocdi-install-plugins"><?php esc_html_e( 'Continue & Import' , 'one-click-demo-import' ); ?></a>
+						<a href="#" class="button button-primary js-ocdi-install-plugins-before-import"><?php esc_html_e( 'Continue & Import' , 'one-click-demo-import' ); ?></a>
+					</div>
+				</div>
+
+				<div class="ocdi-importing js-ocdi-importing">
+					<div class="ocdi-importing-header">
+						<h2><?php esc_html_e( 'Importing Demo' , 'one-click-demo-import' ); ?></h2>
+						<p><?php esc_html_e( 'Please sit tight while we import your demo content.' , 'one-click-demo-import' ); ?></p>
+					</div>
+					<div class="ocdi-importing-content">
+						<img class="ocdi-importing-content-importing" src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/importing.svg' ); ?>" alt="<?php esc_attr_e( 'Importing animation', 'one-click-demo-import' ); ?>">
+						<p class="ocdi__ajax-loader  js-ocdi-ajax-loader">
+							<span class="spinner"></span> <?php esc_html_e( 'Importing, please wait!', 'pt-ocdi' ); ?>
+						</p>
+					</div>
+				</div>
+
+				<div class="ocdi-imported js-ocdi-imported">
+					<div class="ocdi-imported-header">
+						<h2 class="js-ocdi-ajax-response-title"><?php esc_html_e( 'Import Complete!' , 'one-click-demo-import' ); ?></h2>
+						<p class="js-ocdi-ajax-response-subtitle"><?php esc_html_e( 'Congrats, your demo was imported successfully. You can now begin editing your site.' , 'one-click-demo-import' ); ?></p>
+					</div>
+					<div class="ocdi-imported-content">
+						<div class="ocdi__response  js-ocdi-ajax-response"></div>
+					</div>
+					<div class="ocdi-imported-footer">
+						<a href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>" class="button button-primary button-hero"><?php esc_html_e( 'Theme Settings' , 'one-click-demo-import' ); ?></a>
+						<a href="<?php echo esc_url( get_home_url() ); ?>" class="button button-primary button-hero"><?php esc_html_e( 'Visit Site' , 'one-click-demo-import' ); ?></a>
 					</div>
 				</div>
 			</div>
 			<div class="ocdi__content-container-content--side">
-				<?php echo wp_kses_post( ViewHelpers::small_theme_card() ); ?>
+				<?php
+					$selected = isset( $_GET['import'] ) ? (int) $_GET['import'] : null;
+					echo wp_kses_post( ViewHelpers::small_theme_card( $selected ) );
+				?>
 			</div>
 		</div>
 

@@ -413,46 +413,30 @@ class OneClickDemoImport {
 		// Delete importer data transient for current import.
 		delete_transient( 'ocdi_importer_data' );
 
-		// Display final messages (success or error messages).
-		if ( empty( $this->frontend_error_messages ) ) {
-			$response['message'] = '';
+		// Display final messages (success or warning messages).
+		$response['title'] = __( 'Import Complete!', 'one-click-demo-import' );
+		$response['subtitle'] = __( 'Congrats, your demo was imported successfully. You can now begin editing your site.', 'one-click-demo-import' );
+		$response['message'] = '<img class="ocdi-imported-content-imported" src="' . esc_url( PT_OCDI_URL . 'assets/images/success.svg' ) . '" alt="' . esc_attr__( 'Successful Import', 'one-click-demo-import' ) . '">';
 
-			if ( ! Helpers::apply_filters( 'ocdi/disable_pt_branding', false ) ) {
-				$twitter_status = esc_html__( 'Just used One Click Demo Import plugin and it was awesome! Thanks @ProteusThemes! #OCDI https://www.proteusthemes.com/', 'pt-ocdi' );
-
-				$response['message'] .= sprintf(
-					__( '%1$s%6$sWasn\'t this a great One Click Demo Import experience?%7$s Created and maintained by %3$sProteusThemes%4$s. %2$s%5$sClick to Tweet!%4$s%8$s', 'pt-ocdi' ),
-					'<div class="notice  notice-info"><p>',
-					'<br>',
-					'<strong><a href="https://www.proteusthemes.com/" target="_blank">',
-					'</a></strong>',
-					'<strong><a href="' . add_query_arg( 'status', urlencode( $twitter_status ), 'http://twitter.com/home' ) . '" target="_blank">',
-					'<strong>',
-					'</strong>',
-					'</p></div>'
-				);
-			}
-
+		if ( ! empty( $this->frontend_error_messages ) ) {
+			$response['subtitle'] = __( 'The demo import has finished, but there were some import errors.', 'one-click-demo-import' );
+			$response['message'] = '<img class="ocdi-imported-content-imported" src="' . esc_url( PT_OCDI_URL . 'assets/images/warning.svg' ) . '" alt="' . esc_attr__( 'Imported with warnings', 'one-click-demo-import' ) . '">';
+			$response['message'] .= '<br>' . $this->frontend_error_messages_display() . '<br>';
 			$response['message'] .= sprintf(
-				__( '%1$s%3$sThat\'s it, all done!%4$s%2$sThe demo import has finished. Please check your page and make sure that everything has imported correctly. If it did, you can deactivate the %3$sOne Click Demo Import%4$s plugin, because it has done its job.%5$s', 'pt-ocdi' ),
-				'<div class="notice  notice-success"><p>',
-				'<br>',
-				'<strong>',
-				'</strong>',
-				'</p></div>'
-			);
-		}
-		else {
-			$response['message'] = $this->frontend_error_messages_display() . '<br>';
-			$response['message'] .= sprintf(
-				__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'pt-ocdi' ),
-				'<div class="notice  notice-warning"><p>',
-				'<br>',
-				'<strong>',
-				'</strong>',
-				'<a href="' . Helpers::get_log_url( $this->log_file_path ) .'" target="_blank">',
-				'</a>',
-				'</p></div>'
+				wp_kses(
+				/* translators: %s - link to the log file. */
+					__( '<p>More details about the errors can be found in this <strong><a href="%s" target="_blank">log file</a></strong></p>', 'pt-ocdi' ),
+					array(
+						'p'      => [],
+						'br'     => [],
+						'strong' => [],
+						'a'      => [
+							'href'   => [],
+							'target' => [],
+						],
+					)
+				),
+				Helpers::get_log_url( $this->log_file_path )
 			);
 		}
 

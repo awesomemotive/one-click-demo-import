@@ -33,19 +33,29 @@ class ViewHelpers {
 	 *
 	 * @return string HTML output.
 	 */
-	public static function small_theme_card() {
+	public static function small_theme_card( $selected = null ) {
+		$theme      = wp_get_theme();
+		$screenshot = $theme->get_screenshot();
+		$name       = $theme->name;
+
+		if ( isset( $selected ) ) {
+			$ocdi          = OneClickDemoImport::get_instance();
+			$selected_data = $ocdi->import_files[ $selected ];
+			$name          = ! empty( $selected_data['import_file_name'] ) ? $selected_data['import_file_name'] : $name;
+			$screenshot    = ! empty( $selected_data['import_preview_image_url'] ) ? $selected_data['import_preview_image_url'] : $screenshot;
+		}
+
 		ob_start(); ?>
 		<div class="ocdi__card ocdi__card--theme">
-			<?php $theme = wp_get_theme(); ?>
 			<div class="ocdi__card-content">
-				<?php if ( $theme->get_screenshot() ) : ?>
-					<div class="screenshot"><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" alt="<?php esc_attr_e( 'Theme screenshot', 'one-click-demo-import' ); ?>" /></div>
+				<?php if ( $screenshot ) : ?>
+					<div class="screenshot"><img src="<?php echo esc_url( $screenshot ); ?>" alt="<?php esc_attr_e( 'Theme screenshot', 'one-click-demo-import' ); ?>" /></div>
 				<?php else : ?>
 					<div class="screenshot blank"></div>
 				<?php endif; ?>
 			</div>
 			<div class="ocdi__card-footer">
-				<h3><?php echo esc_html( $theme->name ); ?></h3>
+				<h3><?php echo esc_html( $name ); ?></h3>
 			</div>
 		</div>
 		<?php

@@ -320,12 +320,6 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			<div id="js-ocdi-modal-content"></div>
 
 		<?php endif; ?>
-
-		<p class="ocdi__ajax-loader  js-ocdi-ajax-loader">
-			<span class="spinner"></span> <?php esc_html_e( 'Importing, please wait!', 'pt-ocdi' ); ?>
-		</p>
-
-		<div class="ocdi__response  js-ocdi-ajax-response"></div>
 	</div>
 </div>
 
