@@ -211,6 +211,7 @@ class OneClickDemoImport {
 					'theme_screenshot' => $theme->get_screenshot(),
 					'missing_plugins'  => $this->plugin_installer->get_missing_plugins(),
 					'import_page_url'  => $this->get_plugin_settings_url( [ 'step' => 'import' ] ),
+					'plugin_url'       => PT_OCDI_URL,
 					'texts'            => array(
 						'missing_preview_image'  => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
 						'dialog_title'           => esc_html__( 'Are you sure?', 'pt-ocdi' ),
@@ -222,6 +223,8 @@ class OneClickDemoImport {
 						'successful_import'      => esc_html__( 'Successfully Imported!', 'one-click-demo-import' ),
 						'successfully_installed' => esc_html__( 'Successfully Installed!', 'one-click-demo-import' ),
 						'installed'              => esc_html__( 'Installed', 'one-click-demo-import' ),
+						'import_failed'          => esc_html__( 'Import Failed', 'one-click-demo-import' ),
+						'import_failed_subtitle' => esc_html__( 'Whoops, there was a problem importing your content.', 'one-click-demo-import' ),
 					),
 					'dialog_options'   => Helpers::apply_filters( 'ocdi/confirmation_dialog_options', array() )
 				)
@@ -416,11 +419,11 @@ class OneClickDemoImport {
 		// Display final messages (success or warning messages).
 		$response['title'] = __( 'Import Complete!', 'one-click-demo-import' );
 		$response['subtitle'] = __( 'Congrats, your demo was imported successfully. You can now begin editing your site.', 'one-click-demo-import' );
-		$response['message'] = '<img class="ocdi-imported-content-imported" src="' . esc_url( PT_OCDI_URL . 'assets/images/success.svg' ) . '" alt="' . esc_attr__( 'Successful Import', 'one-click-demo-import' ) . '">';
+		$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--success" src="' . esc_url( PT_OCDI_URL . 'assets/images/success.svg' ) . '" alt="' . esc_attr__( 'Successful Import', 'one-click-demo-import' ) . '">';
 
 		if ( ! empty( $this->frontend_error_messages ) ) {
 			$response['subtitle'] = __( 'The demo import has finished, but there were some import errors.', 'one-click-demo-import' );
-			$response['message'] = '<img class="ocdi-imported-content-imported" src="' . esc_url( PT_OCDI_URL . 'assets/images/warning.svg' ) . '" alt="' . esc_attr__( 'Imported with warnings', 'one-click-demo-import' ) . '">';
+			$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--warning" src="' . esc_url( PT_OCDI_URL . 'assets/images/warning.svg' ) . '" alt="' . esc_attr__( 'Imported with warnings', 'one-click-demo-import' ) . '">';
 			$response['message'] .= '<br>' . $this->frontend_error_messages_display() . '<br>';
 			$response['message'] .= sprintf(
 				wp_kses(

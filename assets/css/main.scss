@@ -79,23 +79,23 @@
 		text-align: center;
 		padding: 30px;
 
+		p {
+			font-size: 16px;
+			line-height: 19px;
+			font-weight: 300;
+			color: #444444;
+			margin: 0 0 10px 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
 		&-header {
 			h2 {
 				font-size: 24px;
 				line-height: 29px;
 				margin-bottom: 10px;
-			}
-
-			p {
-				font-size: 16px;
-				line-height: 19px;
-				font-weight: 300;
-				color: #444444;
-				margin: 0 0 10px 0;
-
-				&:last-child {
-					margin-bottom: 0;
-				}
 			}
 		}
 
@@ -107,9 +107,18 @@
 			}
 
 			&-imported {
-				width: 149px;
-				height: 142px;
 				margin: 80px 0 50px 0;
+
+				&--success {
+					width: 140px;
+					height: 124px;
+				}
+
+				&--error,
+				&--warning {
+					width: 124px;
+					height: 124px;
+				}
 			}
 		}
 
