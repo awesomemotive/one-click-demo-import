@@ -47,7 +47,7 @@ $content_items        = $demo_content_creator->get_default_content();
 									<span class="content-item-checkbox">
 										<input type="checkbox" id="ocdi-<?php echo esc_attr( $item['slug'] ); ?>-content-item" name="<?php echo esc_attr( $item['slug'] ); ?>" data-plugins="<?php echo esc_attr( implode( ',', $item['required_plugins'] ) ); ?>">
 										<span class="checkbox">
-											<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
+											<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" class="ocdi-check-icon" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
 										</span>
 									</span>
 								</label>
