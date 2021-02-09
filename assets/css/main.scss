@@ -100,7 +100,7 @@
 		}
 
 		&-content {
-			&-importing	{
+			&-importing {
 				width: 415px;
 				height: 228px;
 				margin: 50px 0 20px 0;
@@ -149,6 +149,15 @@
 		font-weight: 500;
 		min-height: 40px;
 		padding: 9px 36px;
+	}
+
+	// Redux.
+	&__redux-option-name {
+		&-input {
+			margin: 5px auto 0;
+			display: block;
+			width: 140px;
+		}
 	}
 }
 
@@ -996,9 +1005,4 @@
 		border-left: 4px solid #00a0d2;
 		margin: 20px 0 0;
 	}
-}
-
-// Redux.
-.ocdi__redux-option-name-label {
-	margin-right: 5px;
 }

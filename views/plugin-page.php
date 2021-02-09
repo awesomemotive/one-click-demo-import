@@ -175,11 +175,11 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							<label for="ocdi__redux-file-upload">
 								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Redux import icon', 'one-click-demo-import' ); ?>">
 								<h3><?php esc_html_e( 'Import Redux', 'pt-ocdi' ); ?></h3>
-								<p><?php esc_html_e( 'Select a JSON file to import.', 'pt-ocdi' ); ?></p>
+								<p><?php esc_html_e( 'Select a JSON file to import and', 'pt-ocdi' ); ?></p>
 							</label>
 							<div>
-								<label for="ocdi__redux-option-name" class="ocdi__redux-option-name-label"><?php esc_html_e( 'Enter the Redux option name:', 'pt-ocdi' ); ?></label>
-								<input id="ocdi__redux-option-name" type="text" name="redux-option-name">
+								<label for="ocdi__redux-option-name" class="ocdi__redux-option-name-label"><?php esc_html_e( 'enter the Redux option name:', 'pt-ocdi' ); ?></label>
+								<input id="ocdi__redux-option-name" class="ocdi__redux-option-name-input" type="text" name="redux-option-name">
 							</div>
 						</div>
 						<div class="ocdi__card-footer">
@@ -217,6 +217,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						</div>
 					</div>
 
+					<?php if ( ! class_exists( 'ReduxFramework' ) ) : ?>
 					<div class="ocdi__create-landing-pages ocdi__card ocdi__card--three">
 						<div class="ocdi__card-content">
 							<label>
@@ -235,6 +236,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</a>
 						</div>
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 
