@@ -159,6 +159,15 @@
 			width: 140px;
 		}
 	}
+
+	&-hide-input {
+		width: 0.1px;
+		height: 0.1px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		z-index: -1;
+	}
 }
 
 .feature-section + hr {
@@ -892,9 +901,8 @@
 				background: #fafafa;
 			}
 
-			// Hide default browser file input.
 			input[type="file"] {
-				display: none;
+				width: 200px;
 			}
 
 			.custom-file-upload-button {

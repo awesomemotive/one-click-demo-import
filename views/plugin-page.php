@@ -133,7 +133,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							<label for="ocdi__content-file-upload" class="custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
-							<input id="ocdi__content-file-upload" type="file" name="content-file-upload">
+							<input id="ocdi__content-file-upload" type="file" class="ocdi-hide-input" name="content-file-upload">
 						</div>
 					</div>
 
@@ -149,7 +149,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							<label for="ocdi__widget-file-upload" class="custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
-							<input id="ocdi__widget-file-upload" type="file" name="widget-file-upload">
+							<input id="ocdi__widget-file-upload" type="file" class="ocdi-hide-input" name="widget-file-upload">
 						</div>
 					</div>
 
@@ -165,7 +165,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							<label for="ocdi__customizer-file-upload" class="custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
-							<input id="ocdi__customizer-file-upload" type="file" name="customizer-file-upload">
+							<input id="ocdi__customizer-file-upload" type="file" class="ocdi-hide-input" name="customizer-file-upload">
 						</div>
 					</div>
 
@@ -186,7 +186,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							<label for="ocdi__redux-file-upload" class="custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
-							<input id="ocdi__redux-file-upload" type="file" name="redux-file-upload">
+							<input id="ocdi__redux-file-upload" type="file" class="ocdi-hide-input" name="redux-file-upload">
 						</div>
 					</div>
 					<?php endif; ?>
@@ -241,7 +241,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			</div>
 
 			<p class="ocdi__button-container">
-				<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+				<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Continue & Import', 'pt-ocdi' ); ?></button>
 			</p>
 
 		<?php elseif ( 1 === count( $predefined_themes ) ) : ?>

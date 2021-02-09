@@ -36,10 +36,29 @@ jQuery( function ( $ ) {
 
 		// AJAX call to import everything (content, widgets, before/after setup)
 		ajaxCall( data );
-	});
+	} );
 
+	/**
+	 * Move the admin notices inside the appropriate div.
+	 */
 	$( document ).on( 'ready', function() {
 		$( '.js-ocdi-notice-wrapper' ).appendTo( '.js-ocdi-admin-notices-container' );
+	} );
+
+	/**
+	 * Show and hide the file upload label and input on file input change event.
+	 */
+	$( document ).on( 'change', '.ocdi__file-upload-container-items input[type=file]', function( event ) {
+		var $input = $( this ),
+			$label = $input.siblings( 'label' );
+
+		if( this.files && this.files.length > 0 ) {
+			$input.removeClass( 'ocdi-hide-input' ).blur();
+			$label.hide();
+		} else {
+			$input.addClass( 'ocdi-hide-input' );
+			$label.show();
+		}
 	} );
 
 	/**
