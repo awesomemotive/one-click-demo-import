@@ -309,7 +309,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 									<?php if ( ! empty( $import_file['preview_url'] ) ) : ?>
 										<a class="ocdi__gl-item-button  button" href="<?php echo esc_url( $import_file['preview_url'] ); ?>" target="_blank"><?php esc_html_e( 'Preview Demo', 'pt-ocdi' ); ?></a>
 									<?php endif; ?>
-									<button class="ocdi__gl-item-button  button  button-primary  js-ocdi-gl-import-data" value="<?php echo esc_attr( $index ); ?>"><?php esc_html_e( 'Import Demo', 'pt-ocdi' ); ?></button>
+									<a class="ocdi__gl-item-button  button  button-primary" href="<?php echo $this->get_plugin_settings_url( [ 'step' => 'import', 'import' => esc_attr( $index ) ] ); ?>"><?php esc_html_e( 'Import Demo', 'pt-ocdi' ); ?></a>
 								</span>
 							</div>
 						</div>

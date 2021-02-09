@@ -207,10 +207,8 @@ class OneClickDemoImport {
 					'ajax_nonce'       => wp_create_nonce( 'ocdi-ajax-verification' ),
 					'import_files'     => $this->import_files,
 					'wp_customize_on'  => Helpers::apply_filters( 'ocdi/enable_wp_customize_save_hooks', false ),
-					'import_popup'     => Helpers::apply_filters( 'ocdi/enable_grid_layout_import_popup_confirmation', true ),
 					'theme_screenshot' => $theme->get_screenshot(),
 					'missing_plugins'  => $this->plugin_installer->get_missing_plugins(),
-					'import_page_url'  => $this->get_plugin_settings_url( [ 'step' => 'import' ] ),
 					'plugin_url'       => PT_OCDI_URL,
 					'texts'            => array(
 						'missing_preview_image'  => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
