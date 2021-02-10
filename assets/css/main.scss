@@ -765,8 +765,7 @@
 			}
 
 			li {
-				float: left;
-				margin: 0 15px;
+				margin: 0;
 
 				&.active a,
 				&.active a:hover {
@@ -814,7 +813,8 @@
 				width: calc(100% - 280px);
 
 				li {
-					margin: 0;
+					margin: 0 15px;
+					float: left;
 
 					a {
 						padding: 18px 10px;
@@ -830,30 +830,25 @@
 				margin-top: 11px;
 			}
 
-			&-item {
-				flex: 0 0 calc(50% - 10px);
-				margin-right: 20px;
+			&-item-container {
+				margin-right: -20px;
+			}
 
-				&:nth-child(2n) {
-					margin-right: 0;
-				}
+			&-item {
+				flex: 0 0 calc(50% - 20px);
+				margin-right: 20px;
 			}
 		}
 
 		@media (min-width: 1120px) {
+			&-item-container {
+				margin-right: -30px;
+			}
 
 			&-item {
-				flex: 0 0 calc(33.33% - 20px);
+				flex: 0 0 calc(33.33% - 30px);
 				margin-bottom: 30px;
 				margin-right: 30px;
-
-				&:nth-child(2n) {
-					margin-right: 30px;
-				}
-
-				&:nth-child(3n) {
-					margin-right: 0;
-				}
 			}
 		}
 	}
