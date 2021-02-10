@@ -118,7 +118,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			<hr>
 
 			<div class="ocdi__file-upload-container">
-				<h2><?php esc_html_e( 'Manual demo files upload', 'pt-ocdi' ); ?></h2>
+				<h2><?php esc_html_e( 'Manual Demo File Import', 'pt-ocdi' ); ?></h2>
 
 				<div class="ocdi__file-upload-container-items">
 					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
@@ -241,7 +241,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			</div>
 
 			<p class="ocdi__button-container">
-				<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Continue & Import', 'pt-ocdi' ); ?></button>
+				<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-start-manual-import"><?php esc_html_e( 'Continue & Import', 'pt-ocdi' ); ?></button>
 			</p>
 
 		<?php elseif ( 1 === count( $predefined_themes ) ) : ?>
@@ -253,7 +253,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			?></div>
 
 			<p class="ocdi__button-container">
-				<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-import-data"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></button>
+				<a href="<?php echo esc_url( $this->get_plugin_settings_url( [ 'step' => 'import', 'import' => 0 ] ) ); ?>" class="ocdi__button  button  button-hero  button-primary"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></a>
 			</p>
 
 		<?php else : ?>

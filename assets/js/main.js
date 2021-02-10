@@ -3,6 +3,20 @@ jQuery( function ( $ ) {
 
 	/**
 	 * ---------------------------------------
+	 * ------------- DOM Ready ---------------
+	 * ---------------------------------------
+	 */
+
+	// Move the admin notices inside the appropriate div.
+	$( '.js-ocdi-notice-wrapper' ).appendTo( '.js-ocdi-admin-notices-container' );
+
+	// Auto start the manual import if on the import page and the 'js-ocdi-start-manual-import' element is present.
+	if ( $( '.js-ocdi-start-manual-import' ).length ) {
+		startImport( false );
+	}
+
+	/**
+	 * ---------------------------------------
 	 * ------------- Events ------------------
 	 * ---------------------------------------
 	 */
@@ -10,39 +24,56 @@ jQuery( function ( $ ) {
 	/**
 	 * No or Single predefined demo import button click.
 	 */
-	$( '.js-ocdi-import-data' ).on( 'click', function () {
+	$( '.js-ocdi-start-manual-import' ).on( 'click', function () {
+		event.preventDefault();
 
-		// Reset response div content.
-		$( '.js-ocdi-ajax-response' ).empty();
+		var $button = $( this );
+
+		if ( $button.hasClass( 'ocdi-button-disabled' ) ) {
+			return false;
+		}
+
+		$button.addClass( 'ocdi-button-disabled' );
 
 		// Prepare data for the AJAX call
 		var data = new FormData();
-		data.append( 'action', 'ocdi_import_demo_data' );
+		data.append( 'action', 'ocdi_upload_manual_import_files' );
 		data.append( 'security', ocdi.ajax_nonce );
-		data.append( 'selected', $( '#ocdi__demo-import-files' ).val() );
-		if ( $('#ocdi__content-file-upload').length ) {
+
+		if ( $('#ocdi__content-file-upload').length && $('#ocdi__content-file-upload').get(0).files.length ) {
 			data.append( 'content_file', $('#ocdi__content-file-upload')[0].files[0] );
 		}
-		if ( $('#ocdi__widget-file-upload').length ) {
+		if ( $('#ocdi__widget-file-upload').length && $('#ocdi__widget-file-upload').get(0).files.length ) {
 			data.append( 'widget_file', $('#ocdi__widget-file-upload')[0].files[0] );
 		}
-		if ( $('#ocdi__customizer-file-upload').length ) {
+		if ( $('#ocdi__customizer-file-upload').length && $('#ocdi__customizer-file-upload').get(0).files.length ) {
 			data.append( 'customizer_file', $('#ocdi__customizer-file-upload')[0].files[0] );
 		}
-		if ( $('#ocdi__redux-file-upload').length ) {
+		if ( $('#ocdi__redux-file-upload').length && $('#ocdi__redux-file-upload').get(0).files.length ) {
 			data.append( 'redux_file', $('#ocdi__redux-file-upload')[0].files[0] );
 			data.append( 'redux_option_name', $('#ocdi__redux-option-name').val() );
 		}
 
-		// AJAX call to import everything (content, widgets, before/after setup)
-		ajaxCall( data );
-	} );
-
-	/**
-	 * Move the admin notices inside the appropriate div.
-	 */
-	$( document ).on( 'ready', function() {
-		$( '.js-ocdi-notice-wrapper' ).appendTo( '.js-ocdi-admin-notices-container' );
+		// AJAX call to upload all selected import files (content, widgets, customizer and redux).
+		$.ajax({
+			method: 'POST',
+			url: ocdi.ajax_url,
+			data: data,
+			contentType: false,
+			processData: false,
+		})
+			.done( function( response ) {
+				if ( response.success ) {
+					window.location.href = ocdi.import_url;
+				} else {
+					alert( response.data );
+					$button.removeClass( 'ocdi-button-disabled' );
+				}
+			})
+			.fail( function( error ) {
+				alert( error.statusText + ' (' + error.status + ')' );
+				$button.removeClass( 'ocdi-button-disabled' );
+			})
 	} );
 
 	/**
@@ -573,14 +604,19 @@ jQuery( function ( $ ) {
 	}
 
 	/**
-	 * Run the predefined imporrt.
+	 * Run the main import with a selected predefined demo or with manual files (selected = false).
+	 *
+	 * Files for the manual import have already been uploaded in the '.js-ocdi-start-manual-import' event above.
 	 */
 	function startImport( selected ) {
 		// Prepare data for the AJAX call
 		var data = new FormData();
 		data.append( 'action', 'ocdi_import_demo_data' );
 		data.append( 'security', ocdi.ajax_nonce );
-		data.append( 'selected', selected );
+
+		if ( selected ) {
+			data.append( 'selected', selected );
+		}
 
 		// AJAX call to import everything (content, widgets, before/after setup)
 		ajaxCall( data );

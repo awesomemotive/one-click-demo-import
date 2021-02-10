@@ -111,6 +111,7 @@ class OneClickDemoImport {
 		// Actions.
 		add_action( 'admin_menu', array( $this, 'create_plugin_page' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		add_action( 'wp_ajax_ocdi_upload_manual_import_files', array( $this, 'upload_manual_import_files_callback' ) );
 		add_action( 'wp_ajax_ocdi_import_demo_data', array( $this, 'import_demo_data_ajax_callback' ) );
 		add_action( 'wp_ajax_ocdi_import_customizer_data', array( $this, 'import_customizer_data_ajax_callback' ) );
 		add_action( 'wp_ajax_ocdi_after_import_data', array( $this, 'after_all_import_data_ajax_callback' ) );
@@ -210,6 +211,7 @@ class OneClickDemoImport {
 					'theme_screenshot' => $theme->get_screenshot(),
 					'missing_plugins'  => $this->plugin_installer->get_missing_plugins(),
 					'plugin_url'       => PT_OCDI_URL,
+					'import_url'       => $this->get_plugin_settings_url( [ 'step' => 'import' ] ),
 					'texts'            => array(
 						'missing_preview_image'  => esc_html__( 'No preview image defined for this import.', 'pt-ocdi' ),
 						'dialog_title'           => esc_html__( 'Are you sure?', 'pt-ocdi' ),
@@ -230,6 +232,29 @@ class OneClickDemoImport {
 
 			wp_enqueue_style( 'ocdi-main-css', PT_OCDI_URL . 'assets/css/main.css', array() , PT_OCDI_VERSION );
 		}
+	}
+
+
+	/**
+	 * AJAX callback method for uploading the manual import files.
+	 */
+	public function upload_manual_import_files_callback() {
+		Helpers::verify_ajax_call();
+
+		if ( empty( $_FILES ) ) {
+			wp_send_json_error( esc_html__( 'Manual import files are missing! Please select the import files and try again.', 'one-click-demo-import' ) );
+		}
+
+		// Get paths for the uploaded files.
+		$this->selected_import_files = Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
+
+		// Set the name of the import files, because we used the uploaded files.
+		$this->import_files[ $this->selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'pt-ocdi' );
+
+		// Save the initial import data as a transient, so the next import call (in new AJAX call) can use that data.
+		Helpers::set_ocdi_import_data_transient( $this->get_current_importer_data() );
+
+		wp_send_json_success();
 	}
 
 
