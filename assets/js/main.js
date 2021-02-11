@@ -121,7 +121,7 @@ jQuery( function ( $ ) {
 
 		$button.addClass( 'ocdi-button-disabled' );
 
-		installPluginsAjaxCall( pluginsToInstall, 0, $button, false );
+		installPluginsAjaxCall( pluginsToInstall, 0, $button, false, false );
 	} );
 
 	/**
@@ -146,7 +146,7 @@ jQuery( function ( $ ) {
 
 		$button.addClass( 'ocdi-button-disabled' );
 
-		installPluginsAjaxCall( pluginsToInstall, 0, $button, true );
+		installPluginsAjaxCall( pluginsToInstall, 0, $button, true, false );
 	} );
 
 
@@ -460,12 +460,13 @@ jQuery( function ( $ ) {
 	/**
 	 * The AJAX call for installing selected plugins.
 	 *
-	 * @param {Object[]} plugins   The array of plugin objects with name and value pairs.
-	 * @param {int}      counter   The index of the plugin to import from the list above.
-	 * @param {Object}   $button   jQuery object of the submit button.
-	 * @param {bool}     runImport If the import should be run after plugin installation.
+	 * @param {Object[]} plugins             The array of plugin objects with name and value pairs.
+	 * @param {int}      counter             The index of the plugin to import from the list above.
+	 * @param {Object}   $button             jQuery object of the submit button.
+	 * @param {bool}     runImport           If the import should be run after plugin installation.
+	 * @param {bool}     pluginInstallFailed If there were any failed plugin installs.
 	 */
-	function installPluginsAjaxCall( plugins, counter, $button , runImport ) {
+	function installPluginsAjaxCall( plugins, counter, $button , runImport, pluginInstallFailed ) {
 		var plugin = plugins[ counter ],
 			slug = plugin.name;
 
@@ -493,26 +494,36 @@ jQuery( function ( $ ) {
 					$currentPluginItem.addClass( 'plugin-item--active' );
 					$currentPluginItem.find( 'input[type=checkbox]' ).prop( 'disabled', true );
 				} else {
-					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + response.data + '</p>' );
+
+					if ( -1 === response.data.indexOf( '<p>' ) ) {
+						response.data = '<p>' + response.data + '</p>';
+					}
+
+					$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( response.data );
+					pluginInstallFailed = true;
 				}
 			})
 			.fail( function( error ) {
 				var $currentPluginItem = $( '.plugin-item-' + slug );
 				$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
 				$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).append( '<p>' + error.statusText + ' (' + error.status + ')</p>' );
+				pluginInstallFailed = true;
 			})
 			.always( function() {
 				counter++;
 
 				if ( counter === plugins.length ) {
-					$button.removeClass( 'ocdi-button-disabled' );
-
 					if ( runImport ) {
-						startImport( getUrlParameter( 'import' ) );
+						if ( ! pluginInstallFailed ) {
+							startImport( getUrlParameter( 'import' ) );
+						} else {
+							alert( ocdi.texts.plugin_install_failed );
+						}
 					}
 
+					$button.removeClass( 'ocdi-button-disabled' );
 				} else {
-					installPluginsAjaxCall( plugins, counter, $button, runImport );
+					installPluginsAjaxCall( plugins, counter, $button, runImport, pluginInstallFailed );
 				}
 			} );
 	}

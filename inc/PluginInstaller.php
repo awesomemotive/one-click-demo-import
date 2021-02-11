@@ -233,8 +233,13 @@ class PluginInstaller {
 
 		// Activate the plugin if the plugin is already installed.
 		if ( $this->is_plugin_installed( $slug ) ) {
-			$this->activate_plugin( $this->get_plugin_basename_from_slug( $slug ), $slug );
-			wp_send_json_success( esc_html__( 'Plugin was already installed! We activated it for you.', 'one-click-demo-import' ) );
+			$activated = $this->activate_plugin( $this->get_plugin_basename_from_slug( $slug ), $slug );
+
+			if ( ! is_wp_error( $activated ) ) {
+				wp_send_json_success( esc_html__( 'Plugin was already installed! We activated it for you.', 'one-click-demo-import' ) );
+			} else {
+				wp_send_json_error( $activated->get_error_message() );
+			}
 		}
 
 		// Check for file system permissions.
@@ -279,20 +284,10 @@ class PluginInstaller {
 
 			if ( ! is_wp_error( $activated ) ) {
 				wp_send_json_success(
-					[
-						'slug'         => $slug,
-						'is_installed' => true,
-						'is_activated' => true,
-					]
+					esc_html__( 'Plugin installed and activated succesfully.', 'one-click-demo-import' )
 				);
 			} else {
-				wp_send_json_success(
-					[
-						'slug'         => $slug,
-						'is_installed' => true,
-						'is_activated' => false,
-					]
-				);
+				wp_send_json_success( $activated->get_error_message() );
 			}
 		}
 
@@ -318,8 +313,9 @@ class PluginInstaller {
 
 		// Activate the plugin if the plugin is already installed.
 		if ( $this->is_plugin_installed( $slug ) ) {
-			$this->activate_plugin( $this->get_plugin_basename_from_slug( $slug ), $slug );
-			return true;
+			$activated = $this->activate_plugin( $this->get_plugin_basename_from_slug( $slug ), $slug );
+
+			return ! is_wp_error( $activated );
 		}
 
 		// Check for file system permissions.

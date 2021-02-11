@@ -225,6 +225,7 @@ class OneClickDemoImport {
 						'installed'              => esc_html__( 'Installed', 'one-click-demo-import' ),
 						'import_failed'          => esc_html__( 'Import Failed', 'one-click-demo-import' ),
 						'import_failed_subtitle' => esc_html__( 'Whoops, there was a problem importing your content.', 'one-click-demo-import' ),
+						'plugin_install_failed'  => esc_html__( 'Looks like some of the plugins failed to install. Please try again. If this issue persists, please manually install the failing plugins and come back to this step to import the theme demo data.', 'one-click-demo-import' ),
 					),
 					'dialog_options'   => Helpers::apply_filters( 'ocdi/confirmation_dialog_options', array() )
 				)
