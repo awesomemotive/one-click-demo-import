@@ -86,9 +86,6 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 					</div>
 					<div class="ocdi-importing-content">
 						<img class="ocdi-importing-content-importing" src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/importing.svg' ); ?>" alt="<?php esc_attr_e( 'Importing animation', 'one-click-demo-import' ); ?>">
-						<p class="ocdi__ajax-loader  js-ocdi-ajax-loader">
-							<span class="spinner"></span> <?php esc_html_e( 'Importing, please wait!', 'pt-ocdi' ); ?>
-						</p>
 					</div>
 				</div>
 
