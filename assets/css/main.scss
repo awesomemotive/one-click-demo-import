@@ -910,9 +910,9 @@
 			}
 
 			.custom-file-upload-button {
-				background: #fafafa;
-				color: #0071a1;
-				border: 1px solid #0071a1;
+				background: #007cba;
+				color: #ffffff;
+				border: 1px solid #007cba;
 				vertical-align: top;
 				display: inline-block;
 				text-decoration: none;
@@ -929,9 +929,9 @@
 				text-align: center;
 
 				&:hover {
-					background: #f1f1f1;
-					border-color: #016087;
-					color: #016087;
+					background: #0071a1;
+					border-color: #0071a1;
+					color: #ffffff;
 				}
 
 				@media screen and (max-width: 782px) {
