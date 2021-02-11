@@ -97,6 +97,14 @@
 				line-height: 29px;
 				margin-bottom: 10px;
 			}
+
+			p {
+				margin-bottom: 5px;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
 		}
 
 		&-content {
@@ -110,7 +118,7 @@
 				margin: 80px 0 50px 0;
 
 				&--success {
-					width: 140px;
+					width: 156px;
 					height: 124px;
 				}
 

@@ -95,7 +95,11 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 				<div class="ocdi-imported js-ocdi-imported">
 					<div class="ocdi-imported-header">
 						<h2 class="js-ocdi-ajax-response-title"><?php esc_html_e( 'Import Complete!' , 'one-click-demo-import' ); ?></h2>
-						<p class="js-ocdi-ajax-response-subtitle"><?php esc_html_e( 'Congrats, your demo was imported successfully. You can now begin editing your site.' , 'one-click-demo-import' ); ?></p>
+						<div class="js-ocdi-ajax-response-subtitle">
+							<p>
+								<?php esc_html_e( 'Congrats, your demo was imported successfully. You can now begin editing your site.' , 'one-click-demo-import' ); ?>
+							</p>
+						</div>
 					</div>
 					<div class="ocdi-imported-content">
 						<div class="ocdi__response  js-ocdi-ajax-response"></div>

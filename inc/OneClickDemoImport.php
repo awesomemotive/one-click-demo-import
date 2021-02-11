@@ -441,22 +441,18 @@ class OneClickDemoImport {
 		delete_transient( 'ocdi_importer_data' );
 
 		// Display final messages (success or warning messages).
-		$response['title'] = __( 'Import Complete!', 'one-click-demo-import' );
-		$response['subtitle'] = __( 'Congrats, your demo was imported successfully. You can now begin editing your site.', 'one-click-demo-import' );
+		$response['title'] = esc_html__( 'Import Complete!', 'one-click-demo-import' );
+		$response['subtitle'] = '<p>' . esc_html__( 'Congrats, your demo was imported successfully. You can now begin editing your site.', 'one-click-demo-import' ) . '</p>';
 		$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--success" src="' . esc_url( PT_OCDI_URL . 'assets/images/success.svg' ) . '" alt="' . esc_attr__( 'Successful Import', 'one-click-demo-import' ) . '">';
 
 		if ( ! empty( $this->frontend_error_messages ) ) {
-			$response['subtitle'] = __( 'The demo import has finished, but there were some import errors.', 'one-click-demo-import' );
-			$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--warning" src="' . esc_url( PT_OCDI_URL . 'assets/images/warning.svg' ) . '" alt="' . esc_attr__( 'Imported with warnings', 'one-click-demo-import' ) . '">';
-			$response['message'] .= '<br>' . $this->frontend_error_messages_display() . '<br>';
-			$response['message'] .= sprintf(
+			$response['subtitle'] = '<p>' . esc_html__( 'Your import completed, but some things may not have imported properly.', 'one-click-demo-import' ) . '</p>';
+			$response['subtitle'] .= sprintf(
 				wp_kses(
 				/* translators: %s - link to the log file. */
-					__( '<p>More details about the errors can be found in this <strong><a href="%s" target="_blank">log file</a></strong></p>', 'pt-ocdi' ),
+					__( '<p><a href="%s" target="_blank">View error log</a> for more information.</p>', 'pt-ocdi' ),
 					array(
 						'p'      => [],
-						'br'     => [],
-						'strong' => [],
 						'a'      => [
 							'href'   => [],
 							'target' => [],
@@ -465,6 +461,9 @@ class OneClickDemoImport {
 				),
 				Helpers::get_log_url( $this->log_file_path )
 			);
+
+			$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--warning" src="' . esc_url( PT_OCDI_URL . 'assets/images/warning.svg' ) . '" alt="' . esc_attr__( 'Imported with warnings', 'one-click-demo-import' ) . '">';
+			$response['message'] .= '<br>' . $this->frontend_error_messages_display() . '<br>';
 		}
 
 		wp_send_json( $response );

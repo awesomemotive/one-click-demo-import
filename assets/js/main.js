@@ -410,7 +410,7 @@ jQuery( function ( $ ) {
 			else {
 				$( '.js-ocdi-ajax-response' ).append( '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--error" src="' + ocdi.plugin_url + 'assets/images/error.svg" alt="' + ocdi.texts.import_failed + '"><p>' + response + '</p>' );
 				$( '.js-ocdi-ajax-response-title' ).html( ocdi.texts.import_failed );
-				$( '.js-ocdi-ajax-response-subtitle' ).html( ocdi.texts.import_failed_subtitle );
+				$( '.js-ocdi-ajax-response-subtitle' ).html( '<p>' + ocdi.texts.import_failed_subtitle + '</p>' );
 				$( '.js-ocdi-importing' ).hide();
 				$( '.js-ocdi-imported' ).show();
 			}
@@ -418,7 +418,7 @@ jQuery( function ( $ ) {
 		.fail( function( error ) {
 			$( '.js-ocdi-ajax-response' ).append( '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--error" src="' + ocdi.plugin_url + 'assets/images/error.svg" alt="' + ocdi.texts.import_failed + '"><p>Error: ' + error.statusText + ' (' + error.status + ')' + '</p>' );
 			$( '.js-ocdi-ajax-response-title' ).html( ocdi.texts.import_failed );
-			$( '.js-ocdi-ajax-response-subtitle' ).html( ocdi.texts.import_failed_subtitle );
+			$( '.js-ocdi-ajax-response-subtitle' ).html( '<p>' + ocdi.texts.import_failed_subtitle + '</p>' );
 			$( '.js-ocdi-importing' ).hide();
 			$( '.js-ocdi-imported' ).show();
 		});
