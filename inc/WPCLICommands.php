@@ -187,7 +187,7 @@ class WPCLICommands extends \WP_CLI_Command {
 		}
 
 		// Change the single AJAX call duration so the whole content import will be done in one go.
-		add_filter( 'pt-ocdi/time_for_one_ajax_call', function() {
+		add_filter( 'ocdi/time_for_one_ajax_call', function() {
 			return 3600;
 		} );
 

@@ -47,7 +47,7 @@ Plugin default is 25 seconds. Add this code at the end of your theme functions.p
 	function ocdi_change_time_of_single_ajax_call() {
 		return 10;
 	}
-	add_action( 'pt-ocdi/time_for_one_ajax_call', 'ocdi_change_time_of_single_ajax_call' );
+	add_filter( 'ocdi/time_for_one_ajax_call', 'ocdi_change_time_of_single_ajax_call' );
 
 This will "slice" the requests to smaller chunks and it might bypass the low server settings (timeouts and memory per request).
 
@@ -57,7 +57,7 @@ If you see that the 500 server error shows up, when the new AJAX request is bein
 
 While importing, smaller versions of images are being generated, which takes up a lot of server memory, so you can disable that in the plugin with a line of code. Add this code at the end of your theme functions.php file:
 
-`add_filter( 'pt-ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
+`add_filter( 'ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
 
 If the import is complete and you used the above solution, please install this plugin: https://wordpress.org/plugins/regenerate-thumbnails/ and run it in Tools -> Regen. Thumbnails. This will then create the smaller versions of images, that we skipped in the import.
 

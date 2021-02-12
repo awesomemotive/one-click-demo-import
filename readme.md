@@ -69,7 +69,7 @@ The log file will also be registered in the *wp-admin -> Media* section, so you 
 
 ### How to predefine demo imports? ###
 
-This question is for theme authors. To predefine demo imports, you just have to add the following code structure, with your own values to your theme (using the `pt-ocdi/import_files` filter):
+This question is for theme authors. To predefine demo imports, you just have to add the following code structure, with your own values to your theme (using the `ocdi/import_files` filter):
 
 
 	function ocdi_import_files() {
@@ -112,14 +112,14 @@ This question is for theme authors. To predefine demo imports, you just have to 
 			),
 		);
 	}
-	add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
+	add_filter( 'ocdi/import_files', 'ocdi_import_files' );
 
 
 You can set content import, widgets, customizer and Redux framework import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports. Categories can be assigned to each demo import, so that they can be filtered easily. The preview URL will display the "Preview" button in the predefined demo item, which will open this URL in a new tab and user can view how the demo site looks like.
 
 ### How to automatically assign "Front page", "Posts page" and menu locations after the importer is done? ###
 
-You can do that, with the `pt-ocdi/after_import` action hook. The code would look something like this:
+You can do that, with the `ocdi/after_import` action hook. The code would look something like this:
 
 
 	function ocdi_after_import_setup() {
@@ -140,7 +140,7 @@ You can do that, with the `pt-ocdi/after_import` action hook. The code would loo
 		update_option( 'page_for_posts', $blog_page_id->ID );
 	
 	}
-	add_action( 'pt-ocdi/after_import', 'ocdi_after_import_setup' );
+	add_action( 'ocdi/after_import', 'ocdi_after_import_setup' );
 
 
 ### What about using local import files (from theme folder)? ###
@@ -188,12 +188,12 @@ You have to use the same filter as in above example, but with a slightly differe
 			),
 		);
 	}
-	add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
+	add_filter( 'ocdi/import_files', 'ocdi_import_files' );
 
 
 ### How to handle different "after import setups" depending on which predefined import was selected? ###
 
-This question might be asked by a theme author wanting to implement different after import setups for multiple predefined demo imports. Lets say we have predefined two demo imports with the following names: 'Demo Import 1' and 'Demo Import 2', the code for after import setup would be (using the `pt-ocdi/after_import` filter):
+This question might be asked by a theme author wanting to implement different after import setups for multiple predefined demo imports. Lets say we have predefined two demo imports with the following names: 'Demo Import 1' and 'Demo Import 2', the code for after import setup would be (using the `ocdi/after_import` filter):
 
 
 	function ocdi_after_import( $selected_import ) {
@@ -212,18 +212,18 @@ This question might be asked by a theme author wanting to implement different af
 			set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo2.png' );
 		}
 	}
-	add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
+	add_action( 'ocdi/after_import', 'ocdi_after_import' );
 
 
 ### Can I add some code before the widgets get imported? ###
 
-Of course you can, use the `pt-ocdi/before_widgets_import` action. You can also target different predefined demo imports like in the example above. Here is a simple example code of the `pt-ocdi/before_widgets_import` action:
+Of course you can, use the `ocdi/before_widgets_import` action. You can also target different predefined demo imports like in the example above. Here is a simple example code of the `ocdi/before_widgets_import` action:
 
 
 	function ocdi_before_widgets_import( $selected_import ) {
 		echo "Add your code here that will be executed before the widgets get imported!";
 	}
-	add_action( 'pt-ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
+	add_action( 'ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
 
 
 ### How can I import via the WP-CLI? ###
@@ -246,7 +246,7 @@ The content, widgets and customizer options can be mixed and used at the same ti
 
 ### I'm a theme author and I want to change the plugin intro text, how can I do that? ###
 
-You can change the plugin intro text by using the `pt-ocdi/plugin_intro_text` filter:
+You can change the plugin intro text by using the `ocdi/plugin_intro_text` filter:
 
 
 	function ocdi_plugin_intro_text( $default_text ) {
@@ -254,7 +254,7 @@ You can change the plugin intro text by using the `pt-ocdi/plugin_intro_text` fi
 	
 		return $default_text;
 	}
-	add_filter( 'pt-ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
+	add_filter( 'ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
 
 
 To add some text in a separate "box", you should wrap your text in a div with a class of 'ocdi__intro-text', like in the code example above.
@@ -263,7 +263,7 @@ To add some text in a separate "box", you should wrap your text in a div with a 
 
 This will greatly improve the time needed to import the content (images), but only the original sized images will be imported. You can disable it with a filter, so just add this code to your theme function.php file:
 
-`add_filter( 'pt-ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
+`add_filter( 'ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
 
 ### How to change the location, title and other parameters of the plugin page? ###
 
@@ -279,12 +279,12 @@ As a theme author you do not like the location of the "Import Demo Data" plugin 
 	
 		return $default_settings;
 	}
-	add_filter( 'pt-ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
+	add_filter( 'ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
 
 
 ### How to do something before the content import executes? ###
 
-In version 2.0.0 there is a new action hook: `pt-ocdi/before_content_import`, which will let you hook before the content import starts. An example of the code would look like this:
+In version 2.0.0 there is a new action hook: `ocdi/before_content_import`, which will let you hook before the content import starts. An example of the code would look like this:
 
 
 	function ocdi_before_content_import( $selected_import ) {
@@ -297,14 +297,14 @@ In version 2.0.0 there is a new action hook: `pt-ocdi/before_content_import`, wh
 			echo "before import 2";
 		}
 	}
-	add_action( 'pt-ocdi/before_content_import', 'ocdi_before_content_import' );
+	add_action( 'ocdi/before_content_import', 'ocdi_before_content_import' );
 
 
 ### How can I enable the `customize_save*` wp action hooks in the customizer import? ###
 
 It's easy, just add this to your theme:
 
-`add_action( 'pt-ocdi/enable_wp_customize_save_hooks', '__return_true' );`
+`add_action( 'ocdi/enable_wp_customize_save_hooks', '__return_true' );`
 
 This will enable the following WP hooks when importing the customizer data: `customize_save`, `customize_save_*`, `customize_save_after`.
 
@@ -313,7 +313,7 @@ This will enable the following WP hooks when importing the customizer data: `cus
 
 If you want to disable the popup confirmation modal window, use this filter:
 
-`add_filter( 'pt-ocdi/enable_grid_layout_import_popup_confirmation', '__return_false' );`
+`add_filter( 'ocdi/enable_grid_layout_import_popup_confirmation', '__return_false' );`
 
 If you want to just change some options for the jQuery modal window we use for the popup confirmation, then use this filter:
 
@@ -327,23 +327,23 @@ If you want to just change some options for the jQuery modal window we use for t
 			'modal'       => true,
 		) );
 	}
-	add_filter( 'pt-ocdi/confirmation_dialog_options', 'my_theme_ocdi_confirmation_dialog_options', 10, 1 );
+	add_filter( 'ocdi/confirmation_dialog_options', 'my_theme_ocdi_confirmation_dialog_options', 10, 1 );
 
 
 ### How can I disable the ProteusThemes branding notice after successful demo import? ###
 
 You can disable the branding notice with a WP filter. All you need to do is add this bit of code to your theme:
 
-`add_filter( 'pt-ocdi/disable_pt_branding', '__return_true' );`
+`add_filter( 'ocdi/disable_pt_branding', '__return_true' );`
 
 and the notice will not be displayed.
 
 ### How can I pass Amazon S3 presigned URL's (temporary links) as external files ? ###
 
-If you want to host your import content files on Amazon S3, but you want them to be publicly available, rather through an own API as presigned URL's (which expires) you can use the filter `pt-ocdi/pre_download_import_files` in which you can pass your own URL's, for example:
+If you want to host your import content files on Amazon S3, but you want them to be publicly available, rather through an own API as presigned URL's (which expires) you can use the filter `ocdi/pre_download_import_files` in which you can pass your own URL's, for example:
 
 ```
-add_filter( 'pt-ocdi/pre_download_import_files', function( $import_file_info ){
+add_filter( 'ocdi/pre_download_import_files', function( $import_file_info ){
 
 	// In this example `get_my_custom_urls` is supposedly making a `wp_remote_get` request, getting the urls from an API server where you're creating the presigned urls, [example here](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-presigned-url.html).
 	// This request should return an array containing all the 3 links - `import_file_url`, `import_widget_file_url`, `import_customizer_file_url`

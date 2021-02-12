@@ -711,4 +711,30 @@ class Helpers {
 			do_action( "pt-$hook", ...$arg );
 		}
 	}
+
+	/**
+	 * Backwards compatible has_action helper.
+	 * With 3.0 we changed the action prefix from 'pt-ocdi/' to just 'ocdi/',
+	 * but we needed to make sure backwards compatibility is in place.
+	 * This method should be used for all has_action calls.
+	 *
+	 * @param string        $hook              The name of the action hook.
+	 * @param callable|bool $function_to_check Optional. The callback to check for. Default false.
+	 *
+	 * @return bool|int If $function_to_check is omitted, returns boolean for whether the hook has
+	 *                  anything registered. When checking a specific function, the priority of that
+	 *                  hook is returned, or false if the function is not attached. When using the
+	 *                  $function_to_check argument, this function may return a non-boolean value
+	 *                  that evaluates to false (e.g.) 0, so use the === operator for testing the
+	 *                  return value.
+	 */
+	public static function has_action( $hook, $function_to_check = false ) {
+		if ( has_action( $hook ) ) {
+			return has_action( $hook, $function_to_check );
+		} else if ( has_action( "pt-$hook" ) ) {
+			return has_action( "pt-$hook", $function_to_check );
+		}
+
+		return false;
+	}
 }

@@ -2,7 +2,7 @@
 /**
  * Class OneClickDemoImportTest.
  *
- * @package pt-ocdi
+ * @package ocdi
  */
 
 /**

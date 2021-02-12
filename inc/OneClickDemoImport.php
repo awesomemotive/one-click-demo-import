@@ -287,7 +287,7 @@ class OneClickDemoImport {
 
 			/**
 			 * 1). Prepare import files.
-			 * Manually uploaded import files or predefined import files via filter: pt-ocdi/import_files
+			 * Manually uploaded import files or predefined import files via filter: ocdi/import_files
 			 */
 			if ( ! empty( $_FILES ) ) { // Using manual file uploads?
 				// Get paths for the uploaded files.
@@ -296,7 +296,7 @@ class OneClickDemoImport {
 				// Set the name of the import files, because we used the uploaded files.
 				$this->import_files[ $this->selected_index ]['import_file_name'] = esc_html__( 'Manually uploaded files', 'one-click-demo-import' );
 			}
-			elseif ( ! empty( $this->import_files[ $this->selected_index ] ) ) { // Use predefined import files from wp filter: pt-ocdi/import_files.
+			elseif ( ! empty( $this->import_files[ $this->selected_index ] ) ) { // Use predefined import files from wp filter: ocdi/import_files.
 
 				// Download the import files (content, widgets and customizer files).
 				$this->selected_import_files = Helpers::download_import_files( $this->import_files[ $this->selected_index ] );
@@ -334,7 +334,7 @@ class OneClickDemoImport {
 			$this->before_import_executed = true;
 
 			/**
-			 * 2). Execute the actions hooked to the 'pt-ocdi/before_content_import_execution' action:
+			 * 2). Execute the actions hooked to the 'ocdi/before_content_import_execution' action:
 			 *
 			 * Default actions:
 			 * 1 - Before content import WP action (with priority 10).
@@ -351,7 +351,7 @@ class OneClickDemoImport {
 		}
 
 		/**
-		 * 4). Execute the actions hooked to the 'pt-ocdi/after_content_import_execution' action:
+		 * 4). Execute the actions hooked to the 'ocdi/after_content_import_execution' action:
 		 *
 		 * Default actions:
 		 * 1 - Before widgets import setup (with priority 10).
@@ -369,7 +369,7 @@ class OneClickDemoImport {
 		}
 
 		// Request the after all import AJAX call.
-		if ( false !== has_action( 'pt-ocdi/after_all_import_execution' ) ) {
+		if ( false !== Helpers::has_action( 'ocdi/after_all_import_execution' ) ) {
 			wp_send_json( array( 'status' => 'afterAllImportAJAX' ) );
 		}
 
@@ -400,7 +400,7 @@ class OneClickDemoImport {
 		}
 
 		// Request the after all import AJAX call.
-		if ( false !== has_action( 'pt-ocdi/after_all_import_execution' ) ) {
+		if ( false !== Helpers::has_action( 'ocdi/after_all_import_execution' ) ) {
 			wp_send_json( array( 'status' => 'afterAllImportAJAX' ) );
 		}
 
@@ -570,7 +570,7 @@ class OneClickDemoImport {
 
 		/**
 		 * Register all default actions (before content import, widget, customizer import and other actions)
-		 * to the 'before_content_import_execution' and the 'pt-ocdi/after_content_import_execution' action hook.
+		 * to the 'before_content_import_execution' and the 'ocdi/after_content_import_execution' action hook.
 		 */
 		$import_actions = new ImportActions();
 		$import_actions->register_hooks();
