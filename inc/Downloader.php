@@ -55,7 +55,7 @@ class Downloader {
 		if ( empty( $url ) ) {
 			return new \WP_Error(
 				'missing_url',
-				__( 'Missing URL for downloading a file!', 'pt-ocdi' )
+				__( 'Missing URL for downloading a file!', 'one-click-demo-import' )
 			);
 		}
 
@@ -72,8 +72,8 @@ class Downloader {
 
 			return new \WP_Error(
 				'download_error',
-				sprintf(
-					__( 'An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s.', 'pt-ocdi' ),
+				sprintf( /* translators: %1$s and %3$s - strong HTML tags, %2$s - file URL, %4$s - br HTML tag, %5$s - error code, %6$s - error message. */
+					__( 'An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s.', 'one-click-demo-import' ),
 					'<strong>',
 					$url,
 					'</strong>',

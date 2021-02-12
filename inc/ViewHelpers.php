@@ -16,7 +16,7 @@ class ViewHelpers {
 	public static function plugin_header_output() {
 		ob_start(); ?>
 		<div class="ocdi__title-container">
-			<h1 class="ocdi__title-container-title"><?php esc_html_e( 'One Click Demo Import', 'pt-ocdi' ); ?></h1>
+			<h1 class="ocdi__title-container-title"><?php esc_html_e( 'One Click Demo Import', 'one-click-demo-import' ); ?></h1>
 			<a href="#">
 				<img class="ocdi__title-container-icon" src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/question-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Questionmark icon', 'one-click-demo-import' ); ?>">
 			</a>

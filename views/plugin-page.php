@@ -28,8 +28,8 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 		<?php
 		// Display warrning if PHP safe mode is enabled, since we wont be able to change the max_execution_time.
 		if ( ini_get( 'safe_mode' ) ) {
-			printf(
-				esc_html__( '%sWarning: your server is using %sPHP safe mode%s. This means that you might experience server timeout errors.%s', 'pt-ocdi' ),
+			printf( /* translators: %1$s - the opening div and paragraph HTML tags, %2$s and %3$s - strong HTML tags, %4$s - the closing div and paragraph HTML tags. */
+				esc_html__( '%1$sWarning: your server is using %2$sPHP safe mode%3$s. This means that you might experience server timeout errors.%4$s', 'one-click-demo-import' ),
 				'<div class="notice  notice-warning  is-dismissible"><p>',
 				'<strong>',
 				'</strong>',
@@ -47,9 +47,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 
 		<div class="ocdi__intro-text">
 			<p class="about-description">
-				<?php esc_html_e( 'Importing demo data (post, pages, images, theme settings, etc.) is the quickest and easiest way to set up your new theme.', 'pt-ocdi' ); ?>
-				<?php esc_html_e( 'It allows you to simply edit everything instead of creating content and layouts from scratch.', 'pt-ocdi' ); ?>
-				<a href="#"><?php esc_html_e( 'Learn more', 'pt-ocdi' ); ?></a>.
+				<?php esc_html_e( 'Importing demo data (post, pages, images, theme settings, etc.) is the quickest and easiest way to set up your new theme.', 'one-click-demo-import' ); ?>
+				<?php esc_html_e( 'It allows you to simply edit everything instead of creating content and layouts from scratch.', 'one-click-demo-import' ); ?>
+				<a href="#"><?php esc_html_e( 'Learn more', 'one-click-demo-import' ); ?></a>.
 			</p>
 		</div>
 
@@ -62,7 +62,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 
 		<?php if ( empty( $this->import_files ) ) : ?>
 			<div class="notice  notice-info">
-				<p><?php esc_html_e( 'There are no predefined import files available for this theme. Please upload the import files manually below.', 'pt-ocdi' ); ?></p>
+				<p><?php esc_html_e( 'There are no predefined import files available for this theme. Please upload the import files manually below.', 'one-click-demo-import' ); ?></p>
 			</div>
 		<?php endif; ?>
 
@@ -104,9 +104,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 				<div class="bottom-content">
 					<?php if ( ! empty( $this->import_files ) ) : ?>
 						<?php if ( empty( $_GET['import-mode'] ) || 'manual' !== $_GET['import-mode'] ) : ?>
-							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'import-mode' => 'manual' ) ) ); ?>" class="ocdi-import-mode-switch"><?php esc_html_e( 'Switch to Manual Import', 'pt-ocdi' ); ?></a>
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'import-mode' => 'manual' ) ) ); ?>" class="ocdi-import-mode-switch"><?php esc_html_e( 'Switch to Manual Import', 'one-click-demo-import' ); ?></a>
 						<?php else : ?>
-							<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="ocdi-import-mode-switch"><?php esc_html_e( 'Switch back to Theme Predefined Imports', 'pt-ocdi' ); ?></a>
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="ocdi-import-mode-switch"><?php esc_html_e( 'Switch back to Theme Predefined Imports', 'one-click-demo-import' ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
 				</div>
@@ -118,15 +118,15 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			<hr>
 
 			<div class="ocdi__file-upload-container">
-				<h2><?php esc_html_e( 'Manual Demo File Import', 'pt-ocdi' ); ?></h2>
+				<h2><?php esc_html_e( 'Manual Demo File Import', 'one-click-demo-import' ); ?></h2>
 
 				<div class="ocdi__file-upload-container-items">
 					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
 						<div class="ocdi__card-content">
 							<label for="ocdi__content-file-upload">
 								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/content.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Content import icon', 'one-click-demo-import' ); ?>">
-								<h3><?php esc_html_e( 'Import Content', 'pt-ocdi' ); ?></h3>
-								<p><?php esc_html_e( 'Select an XML file to import.', 'pt-ocdi' ); ?></p>
+								<h3><?php esc_html_e( 'Import Content', 'one-click-demo-import' ); ?></h3>
+								<p><?php esc_html_e( 'Select an XML file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
@@ -141,8 +141,8 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						<div class="ocdi__card-content">
 							<label for="ocdi__widget-file-upload">
 								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/widgets.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Widgets import icon', 'one-click-demo-import' ); ?>">
-								<h3><?php esc_html_e( 'Import Widgets', 'pt-ocdi' ); ?></h3>
-								<p><?php esc_html_e( 'Select a JSON/WIE file to import.', 'pt-ocdi' ); ?></p>
+								<h3><?php esc_html_e( 'Import Widgets', 'one-click-demo-import' ); ?></h3>
+								<p><?php esc_html_e( 'Select a JSON/WIE file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
@@ -157,8 +157,8 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						<div class="ocdi__card-content">
 							<label for="ocdi__customizer-file-upload">
 								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Customizer import icon', 'one-click-demo-import' ); ?>">
-								<h3><?php esc_html_e( 'Import Customizer', 'pt-ocdi' ); ?></h3>
-								<p><?php esc_html_e( 'Select a DAT file to import.', 'pt-ocdi' ); ?></p>
+								<h3><?php esc_html_e( 'Import Customizer', 'one-click-demo-import' ); ?></h3>
+								<p><?php esc_html_e( 'Select a DAT file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
@@ -174,11 +174,11 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						<div class="ocdi__card-content">
 							<label for="ocdi__redux-file-upload">
 								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Redux import icon', 'one-click-demo-import' ); ?>">
-								<h3><?php esc_html_e( 'Import Redux', 'pt-ocdi' ); ?></h3>
-								<p><?php esc_html_e( 'Select a JSON file to import and', 'pt-ocdi' ); ?></p>
+								<h3><?php esc_html_e( 'Import Redux', 'one-click-demo-import' ); ?></h3>
+								<p><?php esc_html_e( 'Select a JSON file to import and', 'one-click-demo-import' ); ?></p>
 							</label>
 							<div>
-								<label for="ocdi__redux-option-name" class="ocdi__redux-option-name-label"><?php esc_html_e( 'enter the Redux option name:', 'pt-ocdi' ); ?></label>
+								<label for="ocdi__redux-option-name" class="ocdi__redux-option-name-label"><?php esc_html_e( 'enter the Redux option name:', 'one-click-demo-import' ); ?></label>
 								<input id="ocdi__redux-option-name" class="ocdi__redux-option-name-input" type="text" name="redux-option-name">
 							</div>
 						</div>
@@ -195,8 +195,8 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						<div class="ocdi__card-content">
 							<label>
 								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/plugins.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Recommended plugins icon', 'one-click-demo-import' ); ?>">
-								<h3><?php esc_html_e( 'Recommended Plugins', 'pt-ocdi' ); ?></h3>
-								<p><?php esc_html_e( 'Install our recommended plugins.', 'pt-ocdi' ); ?></p>
+								<h3><?php esc_html_e( 'Recommended Plugins', 'one-click-demo-import' ); ?></h3>
+								<p><?php esc_html_e( 'Install our recommended plugins.', 'one-click-demo-import' ); ?></p>
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
@@ -208,8 +208,8 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						<div class="ocdi__card-content">
 							<label>
 								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/copy.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Create demo content icon', 'one-click-demo-import' ); ?>">
-								<h3><?php esc_html_e( 'Create Demo Content', 'pt-ocdi' ); ?></h3>
-								<p><?php esc_html_e( 'Create useful content with a few clicks.', 'pt-ocdi' ); ?></p>
+								<h3><?php esc_html_e( 'Create Demo Content', 'one-click-demo-import' ); ?></h3>
+								<p><?php esc_html_e( 'Create useful content with a few clicks.', 'one-click-demo-import' ); ?></p>
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
@@ -222,8 +222,8 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						<div class="ocdi__card-content">
 							<label>
 								<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/layout.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Create landing pages icon', 'one-click-demo-import' ); ?>">
-								<h3><?php esc_html_e( 'Create Landing Pages', 'pt-ocdi' ); ?></h3>
-								<p><?php esc_html_e( 'Create beautiful converting pages.', 'pt-ocdi' ); ?></p>
+								<h3><?php esc_html_e( 'Create Landing Pages', 'one-click-demo-import' ); ?></h3>
+								<p><?php esc_html_e( 'Create beautiful converting pages.', 'one-click-demo-import' ); ?></p>
 							</label>
 						</div>
 						<div class="ocdi__card-footer">
@@ -241,7 +241,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			</div>
 
 			<p class="ocdi__button-container">
-				<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-start-manual-import"><?php esc_html_e( 'Continue & Import', 'pt-ocdi' ); ?></button>
+				<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-start-manual-import"><?php esc_html_e( 'Continue & Import', 'one-click-demo-import' ); ?></button>
 			</p>
 
 		<?php elseif ( 1 === count( $predefined_themes ) ) : ?>
@@ -253,7 +253,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			?></div>
 
 			<p class="ocdi__button-container">
-				<a href="<?php echo esc_url( $this->get_plugin_settings_url( [ 'step' => 'import', 'import' => 0 ] ) ); ?>" class="ocdi__button  button  button-hero  button-primary"><?php esc_html_e( 'Import Demo Data', 'pt-ocdi' ); ?></a>
+				<a href="<?php echo esc_url( $this->get_plugin_settings_url( [ 'step' => 'import', 'import' => 0 ] ) ); ?>" class="ocdi__button  button  button-hero  button-primary"><?php esc_html_e( 'Import Demo Data', 'one-click-demo-import' ); ?></a>
 			</p>
 
 		<?php else : ?>
@@ -268,7 +268,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<div class="ocdi__gl-header  js-ocdi-gl-header">
 						<nav class="ocdi__gl-navigation">
 							<ul>
-								<li class="active"><a href="#all" class="ocdi__gl-navigation-link  js-ocdi-nav-link"><span><?php esc_html_e( 'All Demos', 'pt-ocdi' ); ?></span></a></li>
+								<li class="active"><a href="#all" class="ocdi__gl-navigation-link  js-ocdi-nav-link"><span><?php esc_html_e( 'All Demos', 'one-click-demo-import' ); ?></span></a></li>
 								<?php foreach ( $categories as $key => $name ) : ?>
 									<li>
 										<a href="#<?php echo esc_attr( $key ); ?>" class="ocdi__gl-navigation-link  js-ocdi-nav-link">
@@ -281,7 +281,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</ul>
 						</nav>
 						<div clas="ocdi__gl-search">
-							<input type="search" class="ocdi__gl-search-input  js-ocdi-gl-search" name="ocdi-gl-search" value="" placeholder="<?php esc_html_e( 'Search Demos...', 'pt-ocdi' ); ?>">
+							<input type="search" class="ocdi__gl-search-input  js-ocdi-gl-search" name="ocdi-gl-search" value="" placeholder="<?php esc_html_e( 'Search Demos...', 'one-click-demo-import' ); ?>">
 						</div>
 					</div>
 				<?php endif; ?>
@@ -302,16 +302,16 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								<?php if ( ! empty( $img_src ) ) : ?>
 									<img class="ocdi__gl-item-image" src="<?php echo esc_url( $img_src ) ?>">
 								<?php else : ?>
-									<div class="ocdi__gl-item-image  ocdi__gl-item-image--no-image"><?php esc_html_e( 'No preview image.', 'pt-ocdi' ); ?></div>
+									<div class="ocdi__gl-item-image  ocdi__gl-item-image--no-image"><?php esc_html_e( 'No preview image.', 'one-click-demo-import' ); ?></div>
 								<?php endif; ?>
 							</div>
 							<div class="ocdi__gl-item-footer<?php echo ! empty( $import_file['preview_url'] ) ? '  ocdi__gl-item-footer--with-preview' : ''; ?>">
 								<h4 class="ocdi__gl-item-title" title="<?php echo esc_attr( $import_file['import_file_name'] ); ?>"><?php echo esc_html( $import_file['import_file_name'] ); ?></h4>
 								<span class="ocdi__gl-item-buttons">
 									<?php if ( ! empty( $import_file['preview_url'] ) ) : ?>
-										<a class="ocdi__gl-item-button  button" href="<?php echo esc_url( $import_file['preview_url'] ); ?>" target="_blank"><?php esc_html_e( 'Preview Demo', 'pt-ocdi' ); ?></a>
+										<a class="ocdi__gl-item-button  button" href="<?php echo esc_url( $import_file['preview_url'] ); ?>" target="_blank"><?php esc_html_e( 'Preview Demo', 'one-click-demo-import' ); ?></a>
 									<?php endif; ?>
-									<a class="ocdi__gl-item-button  button  button-primary" href="<?php echo $this->get_plugin_settings_url( [ 'step' => 'import', 'import' => esc_attr( $index ) ] ); ?>"><?php esc_html_e( 'Import Demo', 'pt-ocdi' ); ?></a>
+									<a class="ocdi__gl-item-button  button  button-primary" href="<?php echo $this->get_plugin_settings_url( [ 'step' => 'import', 'import' => esc_attr( $index ) ] ); ?>"><?php esc_html_e( 'Import Demo', 'one-click-demo-import' ); ?></a>
 								</span>
 							</div>
 						</div>

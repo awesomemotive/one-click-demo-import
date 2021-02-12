@@ -1,0 +1,858 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: One Click Demo Import 2.6.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/one-click-demo-import\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-02-12T12:53:08+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: one-click-demo-import\n"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+#: inc/Helpers.php:310
+#: inc/OneClickDemoImport.php:671
+#: inc/ViewHelpers.php:19
+msgid "One Click Demo Import"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/one-click-demo-import/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Import your content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data."
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://profiles.wordpress.org/ocdi/"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:43
+msgid "About Page"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:44
+#: inc/CreateDemoContent/DemoContentCreator.php:51
+#: inc/CreateDemoContent/DemoContentCreator.php:57
+#: inc/CreateDemoContent/DemoContentCreator.php:63
+#: inc/CreateDemoContent/DemoContentCreator.php:69
+#: inc/CreateDemoContent/DemoContentCreator.php:75
+msgid "Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci."
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:50
+msgid "Contact Page"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:56
+msgid "FAQ Page"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:62
+msgid "Coming Soon Page"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:68
+msgid "Getting Started Page"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:74
+msgid "Portfolio Page"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:115
+msgid "Could not complete the import process for this page. Required WPForms plugin is not activated."
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:119
+msgid "Could not complete the import process for this page. Required WPForms plugin doesn't exist."
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:125
+msgid "Could not complete the import process for this page. Something went wrong while creating a WPForms contact form."
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:131
+msgid "Could not complete the import process for this page. Could not update the imported page with correct WPForms form ID."
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:144
+msgid "Could not import this page. You don't have permission to import content."
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:150
+msgid "Could not import this page. Page slug is missing."
+msgstr ""
+
+#. translators: %s - The actual error message.
+#: inc/CreateDemoContent/DemoContentCreator.php:177
+msgid "An error occured while importing this page: %s"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:217
+msgid "The demo content import file is missing."
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:252
+msgid "Contact Form"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:269
+msgid "Name"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:276
+msgid "Email"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:283
+msgid "Comment or Message"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:305
+msgid "Thanks for contacting us! We will be in touch with you shortly."
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:310
+msgid "Submit"
+msgstr ""
+
+#: inc/CreateDemoContent/DemoContentCreator.php:311
+msgid "Sending..."
+msgstr ""
+
+#: inc/CustomizerImporter.php:37
+#: inc/CustomizerImporter.php:45
+msgid "Importing customizer settings"
+msgstr ""
+
+#: inc/CustomizerImporter.php:43
+msgid "Customizer settings import finished!"
+msgstr ""
+
+#. translators: %s - file path
+#: inc/CustomizerImporter.php:73
+msgid "Error: The customizer import file is missing! File path: %s"
+msgstr ""
+
+#: inc/CustomizerImporter.php:93
+msgid "Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file."
+msgstr ""
+
+#: inc/CustomizerImporter.php:99
+msgid "Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme."
+msgstr ""
+
+#: inc/Downloader.php:58
+msgid "Missing URL for downloading a file!"
+msgstr ""
+
+#. translators: %1$s and %3$s - strong HTML tags, %2$s - file URL, %4$s - br HTML tag, %5$s - error code, %6$s - error message.
+#: inc/Downloader.php:76
+msgid "An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s."
+msgstr ""
+
+#. translators: %1$s - br HTML tag, %2$s - file path
+#: inc/Helpers.php:199
+#: inc/Helpers.php:242
+msgid "An error occurred while writing file to your server! Tried to write a file to: %1$s%2$s."
+msgstr ""
+
+#. translators: %1$s - br HTML tag, %2$s - file path
+#: inc/Helpers.php:276
+msgid "An error occurred while reading a file from your server! Tried reading file from path: %1$s%2$s."
+msgstr ""
+
+#. translators: %1$s and %2$s - strong HTML tags, %3$s - HTML link to a doc page.
+#: inc/Helpers.php:299
+msgid "This WordPress page does not have %1$sdirect%2$s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %3$s."
+msgstr ""
+
+#: inc/Helpers.php:311
+#: inc/OneClickDemoImport.php:672
+#: views/plugin-page.php:256
+msgid "Import Demo Data"
+msgstr ""
+
+#: inc/Helpers.php:323
+msgid "An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!"
+msgstr ""
+
+#: inc/Helpers.php:331
+msgid "Your WordPress login credentials don't allow to use WP_Filesystem!"
+msgstr ""
+
+#: inc/Helpers.php:371
+msgid "One Click Demo Import - "
+msgstr ""
+
+#. translators: %1$s - opening div and paragraph HTML tags, %2$s - closing div and paragraph HTML tags.
+#: inc/Helpers.php:405
+msgid "%1$sYour user role isn't high enough. You don't have permission to import demo data.%2$s"
+msgstr ""
+
+#: inc/Helpers.php:438
+msgid "No file provided."
+msgstr ""
+
+#. translators: %s - the error message.
+#: inc/Helpers.php:467
+msgid "Content file was not uploaded. Error: %s"
+msgstr ""
+
+#: inc/Helpers.php:471
+#: inc/Helpers.php:488
+#: inc/Helpers.php:505
+#: inc/Helpers.php:516
+#: inc/Helpers.php:536
+#: inc/Helpers.php:544
+msgid "Upload files"
+msgstr ""
+
+#. translators: %s - the error message.
+#: inc/Helpers.php:484
+msgid "Widget file was not uploaded. Error: %s"
+msgstr ""
+
+#. translators: %s - the error message.
+#: inc/Helpers.php:501
+msgid "Customizer file was not uploaded. Error: %s"
+msgstr ""
+
+#: inc/Helpers.php:514
+msgid "Missing Redux option name! Please also enter the Redux option name!"
+msgstr ""
+
+#. translators: %s - the error message.
+#: inc/Helpers.php:532
+msgid "Redux file was not uploaded. Error: %s"
+msgstr ""
+
+#: inc/Helpers.php:542
+msgid "The import files were successfully uploaded!"
+msgstr ""
+
+#. translators: %s - the max execution time.
+#: inc/Helpers.php:568
+msgid "Initial max execution time = %s"
+msgstr ""
+
+#. translators: %1$s - new line break, %2$s - the site URL, %3$s - the file path for content import, %4$s - the file path for widgets import, %5$s - the file path for widgets import, %6$s - the file path for redux import.
+#: inc/Helpers.php:572
+msgid "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s"
+msgstr ""
+
+#: inc/Helpers.php:575
+#: inc/Helpers.php:576
+#: inc/Helpers.php:577
+#: inc/Helpers.php:578
+msgid "not defined!"
+msgstr ""
+
+#: inc/Importer.php:174
+msgid "New AJAX call!"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:215
+msgid "No preview image defined for this import."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:216
+msgid "Are you sure?"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:217
+msgid "Cancel"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:218
+msgid "Yes, import!"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:219
+msgid "Selected demo import:"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:220
+msgid "Installing..."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:221
+#: inc/WPCLICommands.php:153
+msgid "Importing..."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:222
+msgid "Successfully Imported!"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:223
+msgid "Successfully Installed!"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:224
+#: views/plugin-page.php:235
+msgid "Installed"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:225
+msgid "Import Failed"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:226
+msgid "Whoops, there was a problem importing your content."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:227
+msgid "Looks like some of the plugins failed to install. Please try again. If this issue persists, please manually install the failing plugins and come back to this step to import the theme demo data."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:245
+msgid "Manual import files are missing! Please select the import files and try again."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:252
+#: inc/OneClickDemoImport.php:297
+msgid "Manually uploaded files"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:310
+#: inc/OneClickDemoImport.php:321
+msgid "Downloaded files"
+msgstr ""
+
+#. translators: %s - the name of the selected import.
+#: inc/OneClickDemoImport.php:317
+msgid "The import files for: %s were successfully downloaded!"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:326
+msgid "No import files specified!"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:443
+#: views/import.php:94
+msgid "Import Complete!"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:444
+#: views/import.php:97
+msgid "Congrats, your demo was imported successfully. You can now begin editing your site."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:445
+msgid "Successful Import"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:448
+msgid "Your import completed, but some things may not have imported properly."
+msgstr ""
+
+#. translators: %s - link to the log file.
+#: inc/OneClickDemoImport.php:452
+msgid "<p><a href=\"%s\" target=\"_blank\">View error log</a> for more information.</p>"
+msgstr ""
+
+#: inc/OneClickDemoImport.php:464
+msgid "Imported with warnings"
+msgstr ""
+
+#: inc/PluginInstaller.php:85
+msgid "WPForms"
+msgstr ""
+
+#: inc/PluginInstaller.php:86
+msgid "Join 3,000,000+ professionals who build smarter forms and surveys with WPForms."
+msgstr ""
+
+#: inc/PluginInstaller.php:92
+msgid "All in One SEO"
+msgstr ""
+
+#: inc/PluginInstaller.php:93
+msgid "Use All in One SEO Pack to optimize your WordPress site for SEO."
+msgstr ""
+
+#: inc/PluginInstaller.php:99
+msgid "MonsterInsights"
+msgstr ""
+
+#: inc/PluginInstaller.php:100
+msgid "The #1 Google Analytics Plugin for WordPress that’s easy and powerful."
+msgstr ""
+
+#: inc/PluginInstaller.php:106
+msgid "Custom Landing Pages by SeedProd"
+msgstr ""
+
+#: inc/PluginInstaller.php:107
+msgid "Work on your site in private while visitors see a \"Coming Soon\" or \"Maintenance Mode\" page."
+msgstr ""
+
+#: inc/PluginInstaller.php:112
+msgid "Smash Balloon Social Photo Feed"
+msgstr ""
+
+#: inc/PluginInstaller.php:113
+msgid "Display beautifully clean, customizable, and responsive Instagram feeds."
+msgstr ""
+
+#: inc/PluginInstaller.php:118
+msgid "WP Mail SMTP"
+msgstr ""
+
+#: inc/PluginInstaller.php:119
+msgid "Make email delivery easy for WordPress. Connect with SMTP, Gmail, Outlook, Mailgun, and more."
+msgstr ""
+
+#: inc/PluginInstaller.php:220
+msgid "Could not install the plugin. You don't have permission to install plugins."
+msgstr ""
+
+#: inc/PluginInstaller.php:226
+msgid "Could not install the plugin. Plugin slug is missing."
+msgstr ""
+
+#: inc/PluginInstaller.php:231
+msgid "Plugin is already installed and activated!"
+msgstr ""
+
+#: inc/PluginInstaller.php:239
+msgid "Plugin was already installed! We activated it for you."
+msgstr ""
+
+#: inc/PluginInstaller.php:247
+msgid "Could not install the plugin. Don't have file permission."
+msgstr ""
+
+#: inc/PluginInstaller.php:287
+msgid "Plugin installed and activated succesfully."
+msgstr ""
+
+#: inc/PluginInstaller.php:294
+msgid "Could not install the plugin. WP Plugin installer could not retrieve plugin information."
+msgstr ""
+
+#: inc/ReduxImporter.php:23
+msgid "The Redux plugin is not activated, so the Redux import was skipped!"
+msgstr ""
+
+#: inc/ReduxImporter.php:32
+#: inc/ReduxImporter.php:53
+#: inc/ReduxImporter.php:66
+msgid "Importing Redux settings"
+msgstr ""
+
+#. translators: %s - the name of the Redux option.
+#: inc/ReduxImporter.php:51
+msgid "Redux settings import for: %s finished successfully!"
+msgstr ""
+
+#. translators: %s - the name of the Redux option.
+#: inc/ReduxImporter.php:57
+msgid "The Redux option name: %s, was not found in this WP site, so it was not imported!"
+msgstr ""
+
+#: inc/ViewHelpers.php:21
+msgid "Questionmark icon"
+msgstr ""
+
+#: inc/ViewHelpers.php:52
+#: views/plugin-page.php:74
+msgid "Theme screenshot"
+msgstr ""
+
+#: inc/WidgetImporter.php:40
+#: inc/WidgetImporter.php:52
+msgid "Importing widgets"
+msgstr ""
+
+#: inc/WidgetImporter.php:88
+msgid "Error: Widget import file could not be found."
+msgstr ""
+
+#: inc/WidgetImporter.php:118
+msgid "Error: Widget import data could not be read. Please try a different file."
+msgstr ""
+
+#: inc/WidgetImporter.php:157
+msgid "Sidebar does not exist in theme (moving widget to Inactive)"
+msgstr ""
+
+#: inc/WidgetImporter.php:178
+msgid "Site does not support widget"
+msgstr ""
+
+#: inc/WidgetImporter.php:211
+msgid "Widget already exists"
+msgstr ""
+
+#: inc/WidgetImporter.php:276
+msgid "Imported"
+msgstr ""
+
+#: inc/WidgetImporter.php:280
+msgid "Imported to Inactive"
+msgstr ""
+
+#: inc/WidgetImporter.php:286
+msgid "No Title"
+msgstr ""
+
+#: inc/WidgetImporter.php:333
+msgid "No results for widget import!"
+msgstr ""
+
+#: inc/WPCLICommands.php:34
+msgid "There are no predefined demo imports for currently active theme!"
+msgstr ""
+
+#: inc/WPCLICommands.php:37
+msgid "Here are the predefined demo imports:"
+msgstr ""
+
+#: inc/WPCLICommands.php:71
+msgid "At least one of the possible options should be set! Check them with --help"
+msgstr ""
+
+#: inc/WPCLICommands.php:122
+msgid "The \"predefined\" parameter should be a number (an index of the OCDI predefined demo import)!"
+msgstr ""
+
+#: inc/WPCLICommands.php:128
+msgid "The supplied predefined index does not exist! Please take a look at the available predefined demo imports:"
+msgstr ""
+
+#: inc/WPCLICommands.php:135
+msgid "Predefined demo import started! All other parameters will be ignored!"
+msgstr ""
+
+#. translators: %s - the name of the selected demo import.
+#: inc/WPCLICommands.php:140
+msgid "Selected predefined demo import: %s"
+msgstr ""
+
+#: inc/WPCLICommands.php:143
+msgid "Preparing the demo import files..."
+msgstr ""
+
+#: inc/WPCLICommands.php:148
+msgid "Demo import files could not be retrieved!"
+msgstr ""
+
+#: inc/WPCLICommands.php:151
+msgid "Demo import files retrieved successfully!"
+msgstr ""
+
+#: inc/WPCLICommands.php:173
+msgid "Predefined import finished!"
+msgstr ""
+
+#: inc/WPCLICommands.php:185
+msgid "Content import file provided does not exist! Skipping this import!"
+msgstr ""
+
+#: inc/WPCLICommands.php:194
+msgid "Importing content (this might take a while)..."
+msgstr ""
+
+#: inc/WPCLICommands.php:196
+msgid "Importing content"
+msgstr ""
+
+#: inc/WPCLICommands.php:201
+msgid "Content import finished!"
+msgstr ""
+
+#: inc/WPCLICommands.php:204
+msgid "There were some issues while importing the content!"
+msgstr ""
+
+#: inc/WPCLICommands.php:223
+msgid "Widgets import file provided does not exist! Skipping this import!"
+msgstr ""
+
+#: inc/WPCLICommands.php:227
+msgid "Importing widgets..."
+msgstr ""
+
+#: inc/WPCLICommands.php:232
+msgid "Widgets imported successfully!"
+msgstr ""
+
+#: inc/WPCLICommands.php:235
+msgid "There were some issues while importing widgets!"
+msgstr ""
+
+#: inc/WPCLICommands.php:254
+msgid "Customizer import file provided does not exist! Skipping this import!"
+msgstr ""
+
+#: inc/WPCLICommands.php:258
+msgid "Importing customizer settings..."
+msgstr ""
+
+#: inc/WPCLICommands.php:263
+msgid "Customizer settings imported successfully!"
+msgstr ""
+
+#: inc/WPCLICommands.php:266
+msgid "There were some issues while importing customizer settings!"
+msgstr ""
+
+#. translators: %s - the name of the executing action.
+#: inc/WPCLICommands.php:286
+msgid "Executing action: %s ..."
+msgstr ""
+
+#. translators: %1$s - the PHP version, %2$s and %3$s - strong HTML tags, %4$s - br HTMl tag.
+#: one-click-demo-import.php:58
+msgid "The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.6+%3$s to run properly. Please contact your hosting company and ask them to update the PHP version of your site to at least PHP 7.4%4$s Your current version of PHP: %2$s%1$s%3$s"
+msgstr ""
+
+#: views/create-content.php:26
+#: views/plugin-page.php:211
+msgid "Create Demo Content"
+msgstr ""
+
+#: views/create-content.php:28
+#: views/install-plugins.php:27
+msgid "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh."
+msgstr ""
+
+#: views/create-content.php:50
+#: views/import.php:63
+#: views/install-plugins.php:49
+msgid "Checkmark icon"
+msgstr ""
+
+#: views/create-content.php:59
+msgid "The following plugins will be installed for free: "
+msgstr ""
+
+#: views/create-content.php:65
+#: views/import.php:74
+#: views/install-plugins.php:56
+msgid "Back icon"
+msgstr ""
+
+#: views/create-content.php:65
+#: views/import.php:74
+#: views/install-plugins.php:56
+msgid "Go Back"
+msgstr ""
+
+#: views/create-content.php:66
+msgid "Import"
+msgstr ""
+
+#: views/import.php:27
+msgid "Before We Import Your Demo"
+msgstr ""
+
+#: views/import.php:29
+msgid "To ensure the best experience, installing the following plugins is strongly recommended, and in some cases required."
+msgstr ""
+
+#: views/import.php:36
+msgid "All required/recommended plugins are already installed. You can import your demo content."
+msgstr ""
+
+#: views/import.php:48
+msgid "Star icon"
+msgstr ""
+
+#: views/import.php:65
+msgid "Lock icon"
+msgstr ""
+
+#: views/import.php:75
+#: views/plugin-page.php:244
+msgid "Continue & Import"
+msgstr ""
+
+#: views/import.php:84
+msgid "Importing Demo"
+msgstr ""
+
+#: views/import.php:85
+msgid "Please sit tight while we import your demo content."
+msgstr ""
+
+#: views/import.php:88
+msgid "Importing animation"
+msgstr ""
+
+#: views/import.php:105
+msgid "Theme Settings"
+msgstr ""
+
+#: views/import.php:106
+msgid "Visit Site"
+msgstr ""
+
+#: views/install-plugins.php:25
+msgid "Install Recommended Plugins"
+msgstr ""
+
+#: views/install-plugins.php:57
+#: views/plugin-page.php:203
+msgid "Install Plugins"
+msgstr ""
+
+#. translators: %1$s - the opening div and paragraph HTML tags, %2$s and %3$s - strong HTML tags, %4$s - the closing div and paragraph HTML tags.
+#: views/plugin-page.php:32
+msgid "%1$sWarning: your server is using %2$sPHP safe mode%3$s. This means that you might experience server timeout errors.%4$s"
+msgstr ""
+
+#: views/plugin-page.php:50
+msgid "Importing demo data (post, pages, images, theme settings, etc.) is the quickest and easiest way to set up your new theme."
+msgstr ""
+
+#: views/plugin-page.php:51
+msgid "It allows you to simply edit everything instead of creating content and layouts from scratch."
+msgstr ""
+
+#: views/plugin-page.php:52
+msgid "Learn more"
+msgstr ""
+
+#: views/plugin-page.php:65
+msgid "There are no predefined import files available for this theme. Please upload the import files manually below."
+msgstr ""
+
+#: views/plugin-page.php:107
+msgid "Switch to Manual Import"
+msgstr ""
+
+#: views/plugin-page.php:109
+msgid "Switch back to Theme Predefined Imports"
+msgstr ""
+
+#: views/plugin-page.php:121
+msgid "Manual Demo File Import"
+msgstr ""
+
+#: views/plugin-page.php:127
+msgid "Content import icon"
+msgstr ""
+
+#: views/plugin-page.php:128
+msgid "Import Content"
+msgstr ""
+
+#: views/plugin-page.php:129
+msgid "Select an XML file to import."
+msgstr ""
+
+#: views/plugin-page.php:134
+#: views/plugin-page.php:150
+#: views/plugin-page.php:166
+#: views/plugin-page.php:187
+msgid "Select a File"
+msgstr ""
+
+#: views/plugin-page.php:143
+msgid "Widgets import icon"
+msgstr ""
+
+#: views/plugin-page.php:144
+msgid "Import Widgets"
+msgstr ""
+
+#: views/plugin-page.php:145
+msgid "Select a JSON/WIE file to import."
+msgstr ""
+
+#: views/plugin-page.php:159
+msgid "Customizer import icon"
+msgstr ""
+
+#: views/plugin-page.php:160
+msgid "Import Customizer"
+msgstr ""
+
+#: views/plugin-page.php:161
+msgid "Select a DAT file to import."
+msgstr ""
+
+#: views/plugin-page.php:176
+msgid "Redux import icon"
+msgstr ""
+
+#: views/plugin-page.php:177
+msgid "Import Redux"
+msgstr ""
+
+#: views/plugin-page.php:178
+msgid "Select a JSON file to import and"
+msgstr ""
+
+#: views/plugin-page.php:181
+msgid "enter the Redux option name:"
+msgstr ""
+
+#: views/plugin-page.php:197
+msgid "Recommended plugins icon"
+msgstr ""
+
+#: views/plugin-page.php:198
+msgid "Recommended Plugins"
+msgstr ""
+
+#: views/plugin-page.php:199
+msgid "Install our recommended plugins."
+msgstr ""
+
+#: views/plugin-page.php:210
+msgid "Create demo content icon"
+msgstr ""
+
+#: views/plugin-page.php:212
+msgid "Create useful content with a few clicks."
+msgstr ""
+
+#: views/plugin-page.php:216
+msgid "Create Content"
+msgstr ""
+
+#: views/plugin-page.php:224
+msgid "Create landing pages icon"
+msgstr ""
+
+#: views/plugin-page.php:225
+msgid "Create Landing Pages"
+msgstr ""
+
+#: views/plugin-page.php:226
+msgid "Create beautiful converting pages."
+msgstr ""
+
+#: views/plugin-page.php:235
+msgid "Install Plugin"
+msgstr ""
+
+#: views/plugin-page.php:271
+msgid "All Demos"
+msgstr ""
+
+#: views/plugin-page.php:284
+msgid "Search Demos..."
+msgstr ""
+
+#: views/plugin-page.php:305
+msgid "No preview image."
+msgstr ""
+
+#: views/plugin-page.php:312
+msgid "Preview Demo"
+msgstr ""
+
+#: views/plugin-page.php:314
+msgid "Import Demo"
+msgstr ""

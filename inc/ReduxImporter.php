@@ -20,7 +20,7 @@ class ReduxImporter {
 
 		// Redux plugin is not active!
 		if ( ! class_exists( 'ReduxFramework' ) ) {
-			$error_message = esc_html__( 'The Redux plugin is not activated, so the Redux import was skipped!', 'pt-ocdi' );
+			$error_message = esc_html__( 'The Redux plugin is not activated, so the Redux import was skipped!', 'one-click-demo-import' );
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			$ocdi->append_to_frontend_error_messages( $error_message );
@@ -29,7 +29,7 @@ class ReduxImporter {
 			Helpers::append_to_file(
 				$error_message,
 				$log_file_path,
-				esc_html__( 'Importing Redux settings' , 'pt-ocdi' )
+				esc_html__( 'Importing Redux settings' , 'one-click-demo-import' )
 			);
 
 			return;
@@ -47,14 +47,14 @@ class ReduxImporter {
 				$redux_framework->set_options( $redux_options_data );
 
 				// Add this message to log file.
-				$log_added = Helpers::append_to_file(
-					sprintf( esc_html__( 'Redux settings import for: %s finished successfully!', 'pt-ocdi' ), $redux_item['option_name'] ),
+				$log_added = Helpers::append_to_file( /* translators: %s - the name of the Redux option. */
+					sprintf( esc_html__( 'Redux settings import for: %s finished successfully!', 'one-click-demo-import' ), $redux_item['option_name'] ),
 					$log_file_path,
-					esc_html__( 'Importing Redux settings' , 'pt-ocdi' )
+					esc_html__( 'Importing Redux settings' , 'one-click-demo-import' )
 				);
 			}
-			else {
-				$error_message = sprintf( esc_html__( 'The Redux option name: %s, was not found in this WP site, so it was not imported!', 'pt-ocdi' ), $redux_item['option_name'] );
+			else { /* translators: %s - the name of the Redux option. */
+				$error_message = sprintf( esc_html__( 'The Redux option name: %s, was not found in this WP site, so it was not imported!', 'one-click-demo-import' ), $redux_item['option_name'] );
 
 				// Add any error messages to the frontend_error_messages variable in OCDI main class.
 				$ocdi->append_to_frontend_error_messages( $error_message );
@@ -63,7 +63,7 @@ class ReduxImporter {
 				Helpers::append_to_file(
 					$error_message,
 					$log_file_path,
-					esc_html__( 'Importing Redux settings' , 'pt-ocdi' )
+					esc_html__( 'Importing Redux settings' , 'one-click-demo-import' )
 				);
 			}
 		}

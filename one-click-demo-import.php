@@ -9,7 +9,8 @@ Author: One Click Demo Import
 Author URI: https://profiles.wordpress.org/ocdi/
 License: GPL3
 License URI: http://www.gnu.org/licenses/gpl.html
-Text Domain: pt-ocdi
+Text Domain: one-click-demo-import
+Domain Path: /languages
 */
 
 // Block direct access to the main plugin file.
@@ -53,8 +54,8 @@ class OCDI_Plugin {
 	 * Display an admin error notice when PHP is older the version 5.6.
 	 * Hook it to the 'admin_notices' action.
 	 */
-	public function old_php_admin_error_notice() {
-		$message = sprintf( esc_html__( 'The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.6+%3$s to run properly. Please contact your hosting company and ask them to update the PHP version of your site to at least PHP 7.4%4$s Your current version of PHP: %2$s%1$s%3$s', 'pt-ocdi' ), phpversion(), '<strong>', '</strong>', '<br>' );
+	public function old_php_admin_error_notice() { /* translators: %1$s - the PHP version, %2$s and %3$s - strong HTML tags, %4$s - br HTMl tag. */
+		$message = sprintf( esc_html__( 'The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.6+%3$s to run properly. Please contact your hosting company and ask them to update the PHP version of your site to at least PHP 7.4%4$s Your current version of PHP: %2$s%1$s%3$s', 'one-click-demo-import' ), phpversion(), '<strong>', '</strong>', '<br>' );
 
 		printf( '<div class="notice notice-error"><p>%1$s</p></div>', wp_kses_post( $message ) );
 	}
