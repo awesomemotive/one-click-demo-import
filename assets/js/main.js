@@ -10,8 +10,8 @@ jQuery( function ( $ ) {
 	// Move the admin notices inside the appropriate div.
 	$( '.js-ocdi-notice-wrapper' ).appendTo( '.js-ocdi-admin-notices-container' );
 
-	// Auto start the manual import if on the import page and the 'js-ocdi-start-manual-import' element is present.
-	if ( $( '.js-ocdi-start-manual-import' ).length ) {
+	// Auto start the manual import if on the import page and the 'js-ocdi-auto-start-manual-import' element is present.
+	if ( $( '.js-ocdi-auto-start-manual-import' ).length ) {
 		startImport( false );
 	}
 

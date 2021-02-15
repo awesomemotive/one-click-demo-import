@@ -245,6 +245,8 @@ class OneClickDemoImport {
 			wp_send_json_error( esc_html__( 'Manual import files are missing! Please select the import files and try again.', 'one-click-demo-import' ) );
 		}
 
+		$this->selected_index = 0;
+
 		// Get paths for the uploaded files.
 		$this->selected_import_files = Helpers::process_uploaded_files( $_FILES, $this->log_file_path );
 

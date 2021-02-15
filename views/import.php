@@ -76,7 +76,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 						</div>
 					</div>
 				<?php else : ?>
-					<div class="js-ocdi-start-manual-import"></div>
+					<div class="js-ocdi-auto-start-manual-import"></div>
 				<?php endif; ?>
 
 				<div class="ocdi-importing js-ocdi-importing">
