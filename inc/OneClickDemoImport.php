@@ -245,6 +245,12 @@ class OneClickDemoImport {
 			wp_send_json_error( esc_html__( 'Manual import files are missing! Please select the import files and try again.', 'one-click-demo-import' ) );
 		}
 
+		// Create a date and time string to use for demo and log file names.
+		Helpers::set_demo_import_start_time();
+
+		// Define log file path.
+		$this->log_file_path = Helpers::get_log_path();
+
 		$this->selected_index = 0;
 
 		// Get paths for the uploaded files.
