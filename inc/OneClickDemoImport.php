@@ -132,11 +132,11 @@ class OneClickDemoImport {
 
 
 	/**
-	 * Private unserialize method to prevent unserializing of the *Singleton* instance.
+	 * Empty unserialize method to prevent unserializing of the *Singleton* instance.
 	 *
 	 * @return void
 	 */
-	private function __wakeup() {}
+	public function __wakeup() {}
 
 
 	/**

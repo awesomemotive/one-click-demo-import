@@ -398,6 +398,12 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 ## Changelog ##
 
+### 3.0.0 ###
+
+*Release Date - xx February 2021*
+
+* Fixed PHP8 warning.
+
 ### 2.6.1 ###
 
 *Release Date - 21 July 2020*
