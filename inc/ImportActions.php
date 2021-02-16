@@ -144,7 +144,7 @@ class ImportActions {
 	 * @param array  $selected_import The data of selected import from `ocdi/import_files` filter.
 	 */
 	private function do_import_action( $action, $selected_import ) {
-		if ( false !== has_action( $action ) ) {
+		if ( false !== Helpers::has_action( $action ) ) {
 			$ocdi          = OneClickDemoImport::get_instance();
 			$log_file_path = $ocdi->get_log_file_path();
 

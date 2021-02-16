@@ -282,7 +282,7 @@ class WPCLICommands extends \WP_CLI_Command {
 	 * @param null   $selected_index    Selected predefined index.
 	 */
 	private function do_action( $action, $import_files = array(), $all_import_files = array(), $selected_index = null ) {
-		if ( false !== has_action( $action ) ) { /* translators: %s - the name of the executing action. */
+		if ( false !== Helpers::has_action( $action ) ) { /* translators: %s - the name of the executing action. */
 			WP_CLI::log( sprintf( esc_html__( 'Executing action: %s ...', 'one-click-demo-import' ), $action ) );
 
 			ob_start();
