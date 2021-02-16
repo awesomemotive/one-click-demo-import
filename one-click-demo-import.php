@@ -16,6 +16,11 @@ Domain Path: /languages
 // Block direct access to the main plugin file.
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
+// Return if OCDI_Plugin class already exist.
+if( class_exists( 'OCDI_Plugin' ) ) {
+	return;
+}
+
 /**
  * Main plugin class with initialization tasks.
  */
