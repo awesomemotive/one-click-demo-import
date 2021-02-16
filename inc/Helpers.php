@@ -305,14 +305,7 @@ class Helpers {
 		}
 
 		// Get plugin page settings.
-		$plugin_page_setup = self::apply_filters( 'ocdi/plugin_page_setup', array(
-				'parent_slug' => 'themes.php',
-				'page_title'  => esc_html__( 'One Click Demo Import' , 'one-click-demo-import' ),
-				'menu_title'  => esc_html__( 'Import Demo Data' , 'one-click-demo-import' ),
-				'capability'  => 'import',
-				'menu_slug'   => 'pt-one-click-demo-import',
-			)
-		);
+		$plugin_page_setup = self::get_plugin_page_setup_data();
 
 		// Get user credentials for WP file-system API.
 		$demo_import_page_url = wp_nonce_url( $plugin_page_setup['parent_slug'] . '?page=' . $plugin_page_setup['menu_slug'], $plugin_page_setup['menu_slug'] );
@@ -736,5 +729,20 @@ class Helpers {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Get the plugin page setup data.
+	 *
+	 * @return array
+	 */
+	public static function get_plugin_page_setup_data() {
+		return Helpers::apply_filters( 'ocdi/plugin_page_setup', array(
+			'parent_slug' => 'themes.php',
+			'page_title'  => esc_html__( 'One Click Demo Import' , 'one-click-demo-import' ),
+			'menu_title'  => esc_html__( 'Import Demo Data' , 'one-click-demo-import' ),
+			'capability'  => 'import',
+			'menu_slug'   => 'one-click-demo-import',
+		) );
 	}
 }

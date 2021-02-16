@@ -275,7 +275,7 @@ function ocdi_plugin_page_setup( $default_settings ) {
 	$default_settings['page_title']  = esc_html__( 'One Click Demo Import' , 'one-click-demo-import' );
 	$default_settings['menu_title']  = esc_html__( 'Import Demo Data' , 'one-click-demo-import' );
 	$default_settings['capability']  = 'import';
-	$default_settings['menu_slug']   = 'pt-one-click-demo-import';
+	$default_settings['menu_slug']   = 'one-click-demo-import';
 
 	return $default_settings;
 }
