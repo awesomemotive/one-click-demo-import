@@ -129,7 +129,7 @@ class DownloaderTest extends \WP_UnitTestCase {
 			$this->downloader,
 			'get_content_from_url',
 			array(
-				'https://raw.githubusercontent.com/proteusthemes/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/test-files/test.txt'
+				'https://raw.githubusercontent.com/awesomemotive/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/test-files/test.txt'
 			)
 		);
 
@@ -141,7 +141,7 @@ class DownloaderTest extends \WP_UnitTestCase {
 	 */
 	function test_download_file() {
 		$expected = $this->default_path . 'test.txt';
-		$file     = $this->downloader->download_file( 'https://raw.githubusercontent.com/proteusthemes/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/test-files/test.txt', 'test.txt' );
+		$file     = $this->downloader->download_file( 'https://raw.githubusercontent.com/awesomemotive/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/test-files/test.txt', 'test.txt' );
 
 		$this->assertEquals( $expected, $file );
 		$this->assertTrue( file_exists( $file ) );

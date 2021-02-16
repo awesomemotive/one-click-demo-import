@@ -329,15 +329,6 @@ If you want to just change some options for the jQuery modal window we use for t
 	}
 	add_filter( 'ocdi/confirmation_dialog_options', 'my_theme_ocdi_confirmation_dialog_options', 10, 1 );
 
-
-### How can I disable the ProteusThemes branding notice after successful demo import? ###
-
-You can disable the branding notice with a WP filter. All you need to do is add this bit of code to your theme:
-
-`add_filter( 'ocdi/disable_pt_branding', '__return_true' );`
-
-and the notice will not be displayed.
-
 ### How can I pass Amazon S3 presigned URL's (temporary links) as external files ? ###
 
 If you want to host your import content files on Amazon S3, but you want them to be publicly available, rather through an own API as presigned URL's (which expires) you can use the filter `ocdi/pre_download_import_files` in which you can pass your own URL's, for example:

@@ -86,13 +86,13 @@ So just set the `WP_DEBUG` constant to `true` in your *wp-config.php* file and t
 
 That means, that your hosting server is missing one of a very common PHP modules and it has to be enabled before any import functionality will work on your site. The missing PHP modules are: **php-xml** or/and **php-dom**. Please contact your hosting company and ask them to install that for you. These are very common modules, so I don't know why they do not install them by default.
 
-> Fatal error:  Class 'XMLReader' not found in .../wp-content/plugins/one-click-demo-import/vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php on line 123
+> Fatal error:  Class 'XMLReader' not found in .../wp-content/plugins/one-click-demo-import/vendor/awesomemotive/wp-content-importer-v2/src/WXRImporter.php on line 123
 
 Similarly as above, but this time the [XMLReader](http://php.net/manual/en/book.xmlreader.php) PHP module/extention is missing. Please contact your hosting company and ask them to install that for you. These are very common modules, so I don't know why they do not install them by default.
 
 **2. no errors, but media import failing**
 
-If there are no errors in log file as well as no errors in the plugin importer screen or server logs, the issue might be a custom, changed WordPress installation. Some hosting providers install their own "improved" modified WordPress, with must-use plugins or other changes in the script. [We've received reports before (private link)](https://proteusthemes.zendesk.com/agent/tickets/11650) that the importer was not working due to these hosting provider "improvements":
+If there are no errors in log file as well as no errors in the plugin importer screen or server logs, the issue might be a custom, changed WordPress installation. Some hosting providers install their own "improved" modified WordPress, with must-use plugins or other changes in the script. We've received reports before, that the importer was not working due to these hosting provider "improvements":
 
 > Our hosting and domain provider is using their "better" wordpress edition, there are some plugins added as default, i don´t know what else.
 > This time i used just official wordpress and all was quick and smooth.

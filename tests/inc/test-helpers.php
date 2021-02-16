@@ -253,7 +253,7 @@ class HelpersTest extends \WP_UnitTestCase {
 
 		// Content import file URL is set, so it should be returned in the "download" array.
 		$import_file_info = array(
-			'import_file_url'   => 'https://raw.githubusercontent.com/proteusthemes/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/import-files/content.xml',
+			'import_file_url'   => 'https://raw.githubusercontent.com/awesomemotive/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/import-files/content.xml',
 			'local_import_file' => '',
 			'import_file_name'  => 'Import name',
 		);
@@ -271,9 +271,9 @@ class HelpersTest extends \WP_UnitTestCase {
 
 		// Content import file URL, widgets URL and customizer URL are set, so the downloaded paths should be returned in the "download" array.
 		$import_file_info = array(
-			'import_file_url'            => 'https://raw.githubusercontent.com/proteusthemes/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/import-files/content.xml',
-			'import_widget_file_url'     => 'https://raw.githubusercontent.com/proteusthemes/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/import-files/widgets.json',
-			'import_customizer_file_url' => 'https://raw.githubusercontent.com/proteusthemes/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/import-files/customizer.dat',
+			'import_file_url'            => 'https://raw.githubusercontent.com/awesomemotive/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/import-files/content.xml',
+			'import_widget_file_url'     => 'https://raw.githubusercontent.com/awesomemotive/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/import-files/widgets.json',
+			'import_customizer_file_url' => 'https://raw.githubusercontent.com/awesomemotive/one-click-demo-import/aa2fbfccbc3331ac46e64ebba33c4cf58b1c39a8/tests/data/import-files/customizer.dat',
 			'local_import_file' => '',
 			'import_file_name'  => 'Import name',
 		);
