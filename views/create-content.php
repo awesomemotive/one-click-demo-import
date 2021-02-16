@@ -47,7 +47,7 @@ $content_items        = $demo_content_creator->get_default_content();
 									<span class="content-item-checkbox">
 										<input type="checkbox" id="ocdi-<?php echo esc_attr( $item['slug'] ); ?>-content-item" name="<?php echo esc_attr( $item['slug'] ); ?>" data-plugins="<?php echo esc_attr( implode( ',', $item['required_plugins'] ) ); ?>">
 										<span class="checkbox">
-											<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" class="ocdi-check-icon" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
+											<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" class="ocdi-check-icon" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
 										</span>
 									</span>
 								</label>
@@ -62,7 +62,7 @@ $content_items        = $demo_content_creator->get_default_content();
 						</div>
 					</div>
 					<div class="ocdi-create-content-footer">
-						<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="button"><img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/long-arrow-alt-left-blue.svg' ); ?>" alt="<?php esc_attr_e( 'Back icon', 'one-click-demo-import' ); ?>"><span><?php esc_html_e( 'Go Back' , 'one-click-demo-import' ); ?></span></a>
+						<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="button"><img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/long-arrow-alt-left-blue.svg' ); ?>" alt="<?php esc_attr_e( 'Back icon', 'one-click-demo-import' ); ?>"><span><?php esc_html_e( 'Go Back' , 'one-click-demo-import' ); ?></span></a>
 						<a href="#" class="button button-primary js-ocdi-create-content"><?php esc_html_e( 'Import' , 'one-click-demo-import' ); ?></a>
 					</div>
 				</div>

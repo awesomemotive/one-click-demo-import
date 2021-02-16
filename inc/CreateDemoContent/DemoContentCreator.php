@@ -46,7 +46,7 @@ class DemoContentCreator {
 			),
 			array(
 				'slug'             => 'contact-page',
-				'file'             => PT_OCDI_PATH . 'assets/demo-content/contact-page.xml',
+				'file'             => OCDI_PATH . 'assets/demo-content/contact-page.xml',
 				'name'             => esc_html__( 'Contact Page', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
 				'required_plugins' => array( 'wpforms-lite' ),

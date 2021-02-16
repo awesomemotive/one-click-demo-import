@@ -45,7 +45,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 												<h3><?php echo esc_html( $plugin['name'] ); ?></h3>
 												<?php if ( in_array( $plugin['slug'], [ 'wpforms-lite', 'all-in-one-seo-pack', 'google-analytics-for-wordpress' ], true ) ) : ?>
 													<span>
-														<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/star.svg' ); ?>" alt="<?php esc_attr_e( 'Star icon', 'one-click-demo-import' ); ?>">
+														<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/star.svg' ); ?>" alt="<?php esc_attr_e( 'Star icon', 'one-click-demo-import' ); ?>">
 													</span>
 												<?php endif; ?>
 											</div>
@@ -60,9 +60,9 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 										<span class="plugin-item-checkbox">
 											<input type="checkbox" id="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin" name="<?php echo esc_attr( $plugin['slug'] ); ?>" <?php checked( ! empty( $plugin['preselected'] ) || ! empty( $plugin['required'] ) || $is_plugin_active ); ?><?php disabled( $is_plugin_active ); ?>>
 											<span class="checkbox">
-												<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" class="ocdi-check-icon" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
+												<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" class="ocdi-check-icon" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
 												<?php if ( ! empty( $plugin['required'] ) ) : ?>
-													<img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/lock.png' ); ?>" class="ocdi-lock-icon" alt="<?php esc_attr_e( 'Lock icon', 'one-click-demo-import' ); ?>">
+													<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/lock.png' ); ?>" class="ocdi-lock-icon" alt="<?php esc_attr_e( 'Lock icon', 'one-click-demo-import' ); ?>">
 												<?php endif; ?>
 											</span>
 										</span>
@@ -71,7 +71,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 							<?php endif; ?>
 						</div>
 						<div class="ocdi-install-plugins-content-footer">
-							<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="button"><img src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/icons/long-arrow-alt-left-blue.svg' ); ?>" alt="<?php esc_attr_e( 'Back icon', 'one-click-demo-import' ); ?>"><span><?php esc_html_e( 'Go Back' , 'one-click-demo-import' ); ?></span></a>
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url() ); ?>" class="button"><img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/long-arrow-alt-left-blue.svg' ); ?>" alt="<?php esc_attr_e( 'Back icon', 'one-click-demo-import' ); ?>"><span><?php esc_html_e( 'Go Back' , 'one-click-demo-import' ); ?></span></a>
 							<a href="#" class="button button-primary js-ocdi-install-plugins-before-import"><?php esc_html_e( 'Continue & Import' , 'one-click-demo-import' ); ?></a>
 						</div>
 					</div>
@@ -85,7 +85,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 						<p><?php esc_html_e( 'Please sit tight while we import your demo content.' , 'one-click-demo-import' ); ?></p>
 					</div>
 					<div class="ocdi-importing-content">
-						<img class="ocdi-importing-content-importing" src="<?php echo esc_url( PT_OCDI_URL . 'assets/images/importing.svg' ); ?>" alt="<?php esc_attr_e( 'Importing animation', 'one-click-demo-import' ); ?>">
+						<img class="ocdi-importing-content-importing" src="<?php echo esc_url( OCDI_URL . 'assets/images/importing.svg' ); ?>" alt="<?php esc_attr_e( 'Importing animation', 'one-click-demo-import' ); ?>">
 					</div>
 				</div>
 

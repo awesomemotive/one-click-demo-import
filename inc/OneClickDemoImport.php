@@ -164,24 +164,24 @@ class OneClickDemoImport {
 	public function display_plugin_page() {
 
 		if ( isset( $_GET['step'] ) && 'install-plugins' === $_GET['step'] ) {
-			require_once PT_OCDI_PATH . 'views/install-plugins.php';
+			require_once OCDI_PATH . 'views/install-plugins.php';
 
 			return;
 		}
 
 		if ( isset( $_GET['step'] ) && 'create-content' === $_GET['step'] ) {
-			require_once PT_OCDI_PATH . 'views/create-content.php';
+			require_once OCDI_PATH . 'views/create-content.php';
 
 			return;
 		}
 
 		if ( isset( $_GET['step'] ) && 'import' === $_GET['step'] ) {
-			require_once PT_OCDI_PATH . 'views/import.php';
+			require_once OCDI_PATH . 'views/import.php';
 
 			return;
 		}
 
-		require_once PT_OCDI_PATH . 'views/plugin-page.php';
+		require_once OCDI_PATH . 'views/plugin-page.php';
 	}
 
 
@@ -196,7 +196,7 @@ class OneClickDemoImport {
 			wp_enqueue_script( 'jquery-ui-dialog' );
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
 
-			wp_enqueue_script( 'ocdi-main-js', PT_OCDI_URL . 'assets/js/main.js' , array( 'jquery', 'jquery-ui-dialog' ), PT_OCDI_VERSION );
+			wp_enqueue_script( 'ocdi-main-js', OCDI_URL . 'assets/js/main.js' , array( 'jquery', 'jquery-ui-dialog' ), OCDI_VERSION );
 
 			// Get theme data.
 			$theme = wp_get_theme();
@@ -209,7 +209,7 @@ class OneClickDemoImport {
 					'wp_customize_on'  => Helpers::apply_filters( 'ocdi/enable_wp_customize_save_hooks', false ),
 					'theme_screenshot' => $theme->get_screenshot(),
 					'missing_plugins'  => $this->plugin_installer->get_missing_plugins(),
-					'plugin_url'       => PT_OCDI_URL,
+					'plugin_url'       => OCDI_URL,
 					'import_url'       => $this->get_plugin_settings_url( [ 'step' => 'import' ] ),
 					'texts'            => array(
 						'missing_preview_image'  => esc_html__( 'No preview image defined for this import.', 'one-click-demo-import' ),
@@ -230,7 +230,7 @@ class OneClickDemoImport {
 				)
 			);
 
-			wp_enqueue_style( 'ocdi-main-css', PT_OCDI_URL . 'assets/css/main.css', array() , PT_OCDI_VERSION );
+			wp_enqueue_style( 'ocdi-main-css', OCDI_URL . 'assets/css/main.css', array() , OCDI_VERSION );
 		}
 	}
 
@@ -450,7 +450,7 @@ class OneClickDemoImport {
 		// Display final messages (success or warning messages).
 		$response['title'] = esc_html__( 'Import Complete!', 'one-click-demo-import' );
 		$response['subtitle'] = '<p>' . esc_html__( 'Congrats, your demo was imported successfully. You can now begin editing your site.', 'one-click-demo-import' ) . '</p>';
-		$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--success" src="' . esc_url( PT_OCDI_URL . 'assets/images/success.svg' ) . '" alt="' . esc_attr__( 'Successful Import', 'one-click-demo-import' ) . '">';
+		$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--success" src="' . esc_url( OCDI_URL . 'assets/images/success.svg' ) . '" alt="' . esc_attr__( 'Successful Import', 'one-click-demo-import' ) . '">';
 
 		if ( ! empty( $this->frontend_error_messages ) ) {
 			$response['subtitle'] = '<p>' . esc_html__( 'Your import completed, but some things may not have imported properly.', 'one-click-demo-import' ) . '</p>';
@@ -469,7 +469,7 @@ class OneClickDemoImport {
 				Helpers::get_log_url( $this->log_file_path )
 			);
 
-			$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--warning" src="' . esc_url( PT_OCDI_URL . 'assets/images/warning.svg' ) . '" alt="' . esc_attr__( 'Imported with warnings', 'one-click-demo-import' ) . '">';
+			$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--warning" src="' . esc_url( OCDI_URL . 'assets/images/warning.svg' ) . '" alt="' . esc_attr__( 'Imported with warnings', 'one-click-demo-import' ) . '">';
 			$response['message'] .= '<br>' . $this->frontend_error_messages_display() . '<br>';
 		}
 

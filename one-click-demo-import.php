@@ -36,10 +36,10 @@ class OCDI_Plugin {
 			$this->set_plugin_constants();
 
 			// Composer autoloader.
-			require_once PT_OCDI_PATH . 'vendor/autoload.php';
+			require_once OCDI_PATH . 'vendor/autoload.php';
 
 			// Instantiate the main plugin class *Singleton*.
-			$pt_one_click_demo_import = OCDI\OneClickDemoImport::get_instance();
+			$one_click_demo_import = OCDI\OneClickDemoImport::get_instance();
 
 			// Register WP CLI commands
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -68,6 +68,14 @@ class OCDI_Plugin {
 	 */
 	private function set_plugin_constants() {
 		// Path/URL to root of this plugin, with trailing slash.
+		if ( ! defined( 'OCDI_PATH' ) ) {
+			define( 'OCDI_PATH', plugin_dir_path( __FILE__ ) );
+		}
+		if ( ! defined( 'OCDI_URL' ) ) {
+			define( 'OCDI_URL', plugin_dir_url( __FILE__ ) );
+		}
+
+		// Used for backward compatibility.
 		if ( ! defined( 'PT_OCDI_PATH' ) ) {
 			define( 'PT_OCDI_PATH', plugin_dir_path( __FILE__ ) );
 		}
@@ -81,11 +89,17 @@ class OCDI_Plugin {
 
 
 	/**
-	 * Set plugin version constant -> PT_OCDI_VERSION.
+	 * Set plugin version constant -> OCDI_VERSION.
 	 */
 	public function set_plugin_version_constant() {
+		$plugin_data = get_plugin_data( __FILE__ );
+
+		if ( ! defined( 'OCDI_VERSION' ) ) {
+			define( 'OCDI_VERSION', $plugin_data['Version'] );
+		}
+
+		// Used for backward compatibility.
 		if ( ! defined( 'PT_OCDI_VERSION' ) ) {
-			$plugin_data = get_plugin_data( __FILE__ );
 			define( 'PT_OCDI_VERSION', $plugin_data['Version'] );
 		}
 	}

@@ -208,7 +208,7 @@ class HelpersTest extends \WP_UnitTestCase {
 		$this->assertEquals( $expected, $actual );
 
 		// Local content import file path is set, so it should be returned in the "download" array.
-		$local_import_file_path = PT_OCDI_PATH . 'tests/data/import-files/content.xml';
+		$local_import_file_path = OCDI_PATH . 'tests/data/import-files/content.xml';
 		$import_file_info = array(
 			'import_file_url'   => '',
 			'local_import_file' => $local_import_file_path,
@@ -227,7 +227,7 @@ class HelpersTest extends \WP_UnitTestCase {
 		$this->assertEquals( $expected, $actual );
 
 		// Local content import file, widgets file and customizer file path is set, so it should be returned in the "download" array.
-		$root_local_import_file_path = PT_OCDI_PATH . 'tests/data/import-files/';
+		$root_local_import_file_path = OCDI_PATH . 'tests/data/import-files/';
 		$import_file_info = array(
 			'import_file_url'              => '',
 			'local_import_file'            => $root_local_import_file_path . 'content.xml',
@@ -342,7 +342,7 @@ class HelpersTest extends \WP_UnitTestCase {
 		$this->assertEquals( $expected->get_error_code(), $actual->get_error_code() );
 
 		// Valid file path.
-		$file_path = PT_OCDI_PATH . 'tests/data/test-files/test.txt';
+		$file_path = OCDI_PATH . 'tests/data/test-files/test.txt';
 		$this->assertEquals( 'test', Helpers::data_from_file( $file_path ) );
 	}
 
