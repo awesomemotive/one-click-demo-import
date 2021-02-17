@@ -306,6 +306,11 @@ class PluginInstaller {
 			return false;
 		}
 
+		// Check if user has the WP capability to install plugins.
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			return false;
+		}
+
 		// Check if the plugin is already installed and activated.
 		if ( $this->is_plugin_active( $slug ) ) {
 			return true;
