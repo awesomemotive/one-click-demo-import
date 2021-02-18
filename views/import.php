@@ -62,8 +62,9 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 											<span class="checkbox">
 												<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" class="ocdi-check-icon" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
 												<?php if ( ! empty( $plugin['required'] ) ) : ?>
-													<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/lock.png' ); ?>" class="ocdi-lock-icon" alt="<?php esc_attr_e( 'Lock icon', 'one-click-demo-import' ); ?>">
+													<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/lock.svg' ); ?>" class="ocdi-lock-icon" alt="<?php esc_attr_e( 'Lock icon', 'one-click-demo-import' ); ?>">
 												<?php endif; ?>
+												<img src="<?php echo esc_url( OCDI_URL . 'assets/images/loader.svg' ); ?>" class="ocdi-loading ocdi-loading-md" alt="<?php esc_attr_e( 'Loading...', 'one-click-demo-import' ); ?>">
 											</span>
 										</span>
 									</label>

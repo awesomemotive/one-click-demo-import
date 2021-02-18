@@ -310,8 +310,55 @@
 					padding: 25px 0;
 					border-bottom: 1px solid #eeeeee;
 
+					.ocdi-loading {
+						display: none;
+					}
+
 					&--active {
-						opacity: 0.6;
+						cursor: default;
+
+						.plugin-item-checkbox,
+						.content-item-checkbox {
+
+							input[type=checkbox]:checked + .checkbox {
+								border: none;
+								background: #64B450;
+
+								.ocdi-check-icon {
+									display: inline-block;
+								}
+
+								&::after {
+									display: none !important;
+								}
+							}
+						}
+					}
+
+					&--required {
+						cursor: default;
+					}
+
+					&--loading {
+						.ocdi-loading {
+							display: block;
+						}
+
+						.plugin-item-checkbox,
+						.content-item-checkbox {
+
+							input[type=checkbox] + .checkbox {
+								border: none !important;
+
+								.ocdi-lock-icon {
+									display: none !important;
+								}
+
+								&::after {
+									display: none !important;
+								}
+							}
+						}
 					}
 
 					&-content {
@@ -382,12 +429,14 @@
 					.plugin-item-checkbox,
 					.content-item-checkbox {
 						.checkbox {
+							box-sizing: border-box;
 							position: relative;
 							display: block;
-							background: #e6e6e6;
+							background: #f1f1f1;
 							width: 32px;
 							height: 32px;
 							border-radius: 16px;
+							border: 1px solid #dddddd;
 
 							.ocdi-check-icon {
 								display: none;
@@ -399,8 +448,8 @@
 							.ocdi-lock-icon {
 								position: absolute;
 								width: 14px;
-								height: auto;
-								bottom: -4px;
+								height: 17px;
+								bottom: -5px;
 								right: -2px;
 							}
 						}
@@ -410,10 +459,15 @@
 						}
 
 						input[type=checkbox]:checked + .checkbox {
-							background: #64B450;
-
-							.ocdi-check-icon {
-								display: inline-block;
+							&::after {
+								content: '';
+								display: block;
+								font-size: 10px;
+								background: #007cba;
+								width: 20px;
+								height: 20px;
+								border-radius: 10px;
+								margin: 5px;
 							}
 						}
 					}
@@ -1030,5 +1084,29 @@
 		border: 1px solid #e5e5e5;
 		border-left: 4px solid #00a0d2;
 		margin: 20px 0 0;
+	}
+}
+
+// Custom style for the plugin SVG loader.
+.ocdi-loading {
+	animation: 0.65s linear infinite ocdi-loading-spin;
+}
+
+.ocdi-loading-md {
+	width: 32px;
+	height: 32px;
+}
+
+.ocdi-loading-sm {
+	width: 16px;
+	height: 16px;
+}
+
+@keyframes ocdi-loading-spin {
+	0% {
+		transform: rotateZ(270deg);
+	}
+	100% {
+		transform: rotateZ(630deg)
 	}
 }
