@@ -81,8 +81,8 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 
 				<div class="ocdi-importing js-ocdi-importing">
 					<div class="ocdi-importing-header">
-						<h2><?php esc_html_e( 'Importing Demo' , 'one-click-demo-import' ); ?></h2>
-						<p><?php esc_html_e( 'Please sit tight while we import your demo content.' , 'one-click-demo-import' ); ?></p>
+						<h2><?php esc_html_e( 'Importing Content' , 'one-click-demo-import' ); ?></h2>
+						<p><?php esc_html_e( 'Please sit tight while we import your content.' , 'one-click-demo-import' ); ?></p>
 					</div>
 					<div class="ocdi-importing-content">
 						<img class="ocdi-importing-content-importing" src="<?php echo esc_url( OCDI_URL . 'assets/images/importing.svg' ); ?>" alt="<?php esc_attr_e( 'Importing animation', 'one-click-demo-import' ); ?>">

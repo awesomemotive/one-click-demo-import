@@ -108,6 +108,8 @@
 		}
 
 		&-content {
+			margin: 0 20px;
+
 			&-importing {
 				width: 415px;
 				height: 228px;
@@ -126,6 +128,18 @@
 				&--warning {
 					width: 124px;
 					height: 124px;
+				}
+			}
+
+			.notice {
+				text-align: left;
+				margin: 30px 0;
+
+				p {
+					padding: 15px 3px;
+					font-size: 14px;
+					line-height: 22px;
+					color: #777777;
 				}
 			}
 		}

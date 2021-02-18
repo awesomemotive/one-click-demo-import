@@ -469,8 +469,7 @@ class OneClickDemoImport {
 				Helpers::get_log_url( $this->log_file_path )
 			);
 
-			$response['message'] = '<img class="ocdi-imported-content-imported ocdi-imported-content-imported--warning" src="' . esc_url( OCDI_URL . 'assets/images/warning.svg' ) . '" alt="' . esc_attr__( 'Imported with warnings', 'one-click-demo-import' ) . '">';
-			$response['message'] .= '<br>' . $this->frontend_error_messages_display() . '<br>';
+			$response['message'] = '<div class="notice notice-warning"><p>' . $this->frontend_error_messages_display() . '</p></div>';
 		}
 
 		wp_send_json( $response );
