@@ -21,7 +21,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 
 		<div class="ocdi__content-container-content">
 			<div class="ocdi__content-container-content--main">
-				<?php if ( ! empty( $_GET['import'] ) ) : ?>
+				<?php if ( isset( $_GET['import'] ) ) : ?>
 					<div class="ocdi-install-plugins-content js-ocdi-install-plugins-content">
 						<div class="ocdi-install-plugins-content-header">
 							<h2><?php esc_html_e( 'Before We Import Your Demo', 'one-click-demo-import' ); ?></h2>
