@@ -7,15 +7,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-02-12T12:53:08+00:00\n"
+"POT-Creation-Date: 2021-02-19T13:32:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: one-click-demo-import\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
-#: inc/Helpers.php:310
-#: inc/OneClickDemoImport.php:671
+#: inc/Helpers.php:742
 #: inc/ViewHelpers.php:19
 msgid "One Click Demo Import"
 msgstr ""
@@ -173,85 +172,84 @@ msgstr ""
 msgid "This WordPress page does not have %1$sdirect%2$s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %3$s."
 msgstr ""
 
-#: inc/Helpers.php:311
-#: inc/OneClickDemoImport.php:672
-#: views/plugin-page.php:256
-msgid "Import Demo Data"
-msgstr ""
-
-#: inc/Helpers.php:323
+#: inc/Helpers.php:316
 msgid "An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!"
 msgstr ""
 
-#: inc/Helpers.php:331
+#: inc/Helpers.php:324
 msgid "Your WordPress login credentials don't allow to use WP_Filesystem!"
 msgstr ""
 
-#: inc/Helpers.php:371
+#: inc/Helpers.php:364
 msgid "One Click Demo Import - "
 msgstr ""
 
 #. translators: %1$s - opening div and paragraph HTML tags, %2$s - closing div and paragraph HTML tags.
-#: inc/Helpers.php:405
+#: inc/Helpers.php:398
 msgid "%1$sYour user role isn't high enough. You don't have permission to import demo data.%2$s"
 msgstr ""
 
-#: inc/Helpers.php:438
+#: inc/Helpers.php:431
 msgid "No file provided."
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:467
+#: inc/Helpers.php:460
 msgid "Content file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:471
-#: inc/Helpers.php:488
-#: inc/Helpers.php:505
-#: inc/Helpers.php:516
-#: inc/Helpers.php:536
-#: inc/Helpers.php:544
+#: inc/Helpers.php:464
+#: inc/Helpers.php:481
+#: inc/Helpers.php:498
+#: inc/Helpers.php:509
+#: inc/Helpers.php:529
+#: inc/Helpers.php:537
 msgid "Upload files"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:484
+#: inc/Helpers.php:477
 msgid "Widget file was not uploaded. Error: %s"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:501
+#: inc/Helpers.php:494
 msgid "Customizer file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:514
+#: inc/Helpers.php:507
 msgid "Missing Redux option name! Please also enter the Redux option name!"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:532
+#: inc/Helpers.php:525
 msgid "Redux file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:542
+#: inc/Helpers.php:535
 msgid "The import files were successfully uploaded!"
 msgstr ""
 
 #. translators: %s - the max execution time.
-#: inc/Helpers.php:568
+#: inc/Helpers.php:561
 msgid "Initial max execution time = %s"
 msgstr ""
 
 #. translators: %1$s - new line break, %2$s - the site URL, %3$s - the file path for content import, %4$s - the file path for widgets import, %5$s - the file path for widgets import, %6$s - the file path for redux import.
-#: inc/Helpers.php:572
+#: inc/Helpers.php:565
 msgid "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s"
 msgstr ""
 
-#: inc/Helpers.php:575
-#: inc/Helpers.php:576
-#: inc/Helpers.php:577
-#: inc/Helpers.php:578
+#: inc/Helpers.php:568
+#: inc/Helpers.php:569
+#: inc/Helpers.php:570
+#: inc/Helpers.php:571
 msgid "not defined!"
+msgstr ""
+
+#: inc/Helpers.php:743
+#: views/plugin-page.php:256
+msgid "Import Demo Data"
 msgstr ""
 
 #: inc/Importer.php:174
@@ -316,50 +314,46 @@ msgstr ""
 msgid "Manual import files are missing! Please select the import files and try again."
 msgstr ""
 
-#: inc/OneClickDemoImport.php:252
-#: inc/OneClickDemoImport.php:297
+#: inc/OneClickDemoImport.php:260
+#: inc/OneClickDemoImport.php:305
 msgid "Manually uploaded files"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:310
-#: inc/OneClickDemoImport.php:321
+#: inc/OneClickDemoImport.php:318
+#: inc/OneClickDemoImport.php:329
 msgid "Downloaded files"
 msgstr ""
 
 #. translators: %s - the name of the selected import.
-#: inc/OneClickDemoImport.php:317
+#: inc/OneClickDemoImport.php:325
 msgid "The import files for: %s were successfully downloaded!"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:326
+#: inc/OneClickDemoImport.php:334
 msgid "No import files specified!"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:443
-#: views/import.php:94
+#: inc/OneClickDemoImport.php:451
+#: views/import.php:95
 msgid "Import Complete!"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:444
-#: views/import.php:97
+#: inc/OneClickDemoImport.php:452
+#: views/import.php:98
 msgid "Congrats, your demo was imported successfully. You can now begin editing your site."
 msgstr ""
 
-#: inc/OneClickDemoImport.php:445
+#: inc/OneClickDemoImport.php:453
 msgid "Successful Import"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:448
+#: inc/OneClickDemoImport.php:456
 msgid "Your import completed, but some things may not have imported properly."
 msgstr ""
 
 #. translators: %s - link to the log file.
-#: inc/OneClickDemoImport.php:452
+#: inc/OneClickDemoImport.php:460
 msgid "<p><a href=\"%s\" target=\"_blank\">View error log</a> for more information.</p>"
-msgstr ""
-
-#: inc/OneClickDemoImport.php:464
-msgid "Imported with warnings"
 msgstr ""
 
 #: inc/PluginInstaller.php:85
@@ -631,23 +625,29 @@ msgstr ""
 msgid "Checkmark icon"
 msgstr ""
 
-#: views/create-content.php:59
+#: views/create-content.php:51
+#: views/import.php:67
+#: views/install-plugins.php:50
+msgid "Loading..."
+msgstr ""
+
+#: views/create-content.php:60
 msgid "The following plugins will be installed for free: "
 msgstr ""
 
-#: views/create-content.php:65
-#: views/import.php:74
-#: views/install-plugins.php:56
+#: views/create-content.php:66
+#: views/import.php:75
+#: views/install-plugins.php:57
 msgid "Back icon"
 msgstr ""
 
-#: views/create-content.php:65
-#: views/import.php:74
-#: views/install-plugins.php:56
+#: views/create-content.php:66
+#: views/import.php:75
+#: views/install-plugins.php:57
 msgid "Go Back"
 msgstr ""
 
-#: views/create-content.php:66
+#: views/create-content.php:67
 msgid "Import"
 msgstr ""
 
@@ -671,28 +671,28 @@ msgstr ""
 msgid "Lock icon"
 msgstr ""
 
-#: views/import.php:75
+#: views/import.php:76
 #: views/plugin-page.php:244
 msgid "Continue & Import"
 msgstr ""
 
-#: views/import.php:84
-msgid "Importing Demo"
-msgstr ""
-
 #: views/import.php:85
-msgid "Please sit tight while we import your demo content."
+msgid "Importing Content"
 msgstr ""
 
-#: views/import.php:88
+#: views/import.php:86
+msgid "Please sit tight while we import your content."
+msgstr ""
+
+#: views/import.php:89
 msgid "Importing animation"
 msgstr ""
 
-#: views/import.php:105
+#: views/import.php:106
 msgid "Theme Settings"
 msgstr ""
 
-#: views/import.php:106
+#: views/import.php:107
 msgid "Visit Site"
 msgstr ""
 
@@ -700,9 +700,8 @@ msgstr ""
 msgid "Install Recommended Plugins"
 msgstr ""
 
-#: views/install-plugins.php:57
-#: views/plugin-page.php:203
-msgid "Install Plugins"
+#: views/install-plugins.php:58
+msgid "Install & Activate"
 msgstr ""
 
 #. translators: %1$s - the opening div and paragraph HTML tags, %2$s and %3$s - strong HTML tags, %4$s - the closing div and paragraph HTML tags.
@@ -807,6 +806,10 @@ msgstr ""
 
 #: views/plugin-page.php:199
 msgid "Install our recommended plugins."
+msgstr ""
+
+#: views/plugin-page.php:203
+msgid "Install Plugins"
 msgstr ""
 
 #: views/plugin-page.php:210
