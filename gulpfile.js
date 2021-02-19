@@ -37,6 +37,7 @@ var plugin = {
 		'!**/*.sh',
 		'!**/*.rst',
 		'!**/*.xml',
+		'assets/demo-content/*.xml',
 		'!**/*.yml',
 		'!**/*.dist',
 		'!**/*.json',
