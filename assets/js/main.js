@@ -558,6 +558,7 @@ jQuery( function ( $ ) {
 			.done( function( response ) {
 				if ( response.data && response.data.refresh ) {
 					createDemoContentAjaxCall( items, counter, $button );
+					return;
 				}
 
 				var $currentItem = $( '.content-item-' + slug );
