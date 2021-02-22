@@ -115,13 +115,14 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 
 		<?php if ( empty( $predefined_themes ) ) : ?>
 
-			<hr>
-
 			<div class="ocdi__file-upload-container">
-				<h2><?php esc_html_e( 'Manual Demo File Import', 'one-click-demo-import' ); ?></h2>
+				<div class="ocdi__file-upload-container--header">
+					<h2><?php esc_html_e( 'Manual Demo File Import', 'one-click-demo-import' ); ?></h2>
+				</div>
 
 				<div class="ocdi__file-upload-container-items">
-					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
+					<?php $first_row_class = class_exists( 'ReduxFramework' ) ? 'four' : 'three'; ?>
+					<div class="ocdi__file-upload ocdi__card ocdi__card--<?php echo esc_attr( $first_row_class ); ?>">
 						<div class="ocdi__card-content">
 							<label for="ocdi__content-file-upload">
 								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/content.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Content import icon', 'one-click-demo-import' ); ?>">
@@ -137,7 +138,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						</div>
 					</div>
 
-					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
+					<div class="ocdi__file-upload ocdi__card ocdi__card--<?php echo esc_attr( $first_row_class ); ?>">
 						<div class="ocdi__card-content">
 							<label for="ocdi__widget-file-upload">
 								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/widgets.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Widgets import icon', 'one-click-demo-import' ); ?>">
@@ -153,7 +154,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						</div>
 					</div>
 
-					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
+					<div class="ocdi__file-upload ocdi__card ocdi__card--<?php echo esc_attr( $first_row_class ); ?>">
 						<div class="ocdi__card-content">
 							<label for="ocdi__customizer-file-upload">
 								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Customizer import icon', 'one-click-demo-import' ); ?>">
@@ -170,10 +171,10 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					</div>
 
 					<?php if ( class_exists( 'ReduxFramework' ) ) : ?>
-					<div class="ocdi__file-upload ocdi__card ocdi__card--three">
+					<div class="ocdi__file-upload ocdi__card ocdi__card--<?php echo esc_attr( $first_row_class ); ?>">
 						<div class="ocdi__card-content">
 							<label for="ocdi__redux-file-upload">
-								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Redux import icon', 'one-click-demo-import' ); ?>">
+								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/redux.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Redux import icon', 'one-click-demo-import' ); ?>">
 								<h3><?php esc_html_e( 'Import Redux', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select a JSON file to import and', 'one-click-demo-import' ); ?></p>
 							</label>
@@ -191,6 +192,8 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					</div>
 					<?php endif; ?>
 
+				</div>
+				<div class="ocdi__file-upload-container-items ocdi__file-upload-container-items--second-row">
 					<div class="ocdi__recommended-plugins ocdi__card ocdi__card--three">
 						<div class="ocdi__card-content">
 							<label>
@@ -217,7 +220,6 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						</div>
 					</div>
 
-					<?php if ( ! class_exists( 'ReduxFramework' ) ) : ?>
 					<div class="ocdi__create-landing-pages ocdi__card ocdi__card--three">
 						<div class="ocdi__card-content">
 							<label>
@@ -236,13 +238,12 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</a>
 						</div>
 					</div>
-					<?php endif; ?>
+				</div>
+				<div class="ocdi__file-upload-container--footer">
+					<button class="ocdi__button button button-hero js-ocdi-cancel-manual-import" disabled><?php esc_html_e( 'Cancel', 'one-click-demo-import' ); ?></button>
+					<button class="ocdi__button button button-hero button-primary js-ocdi-start-manual-import" disabled><?php esc_html_e( 'Continue & Import', 'one-click-demo-import' ); ?></button>
 				</div>
 			</div>
-
-			<p class="ocdi__button-container">
-				<button class="ocdi__button  button  button-hero  button-primary  js-ocdi-start-manual-import"><?php esc_html_e( 'Continue & Import', 'one-click-demo-import' ); ?></button>
-			</p>
 
 		<?php elseif ( 1 === count( $predefined_themes ) ) : ?>
 

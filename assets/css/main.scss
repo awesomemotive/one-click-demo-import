@@ -170,7 +170,15 @@
 		line-height: 20px;
 		font-weight: 500;
 		min-height: 40px;
-		padding: 9px 36px;
+		padding: 9px 18px;
+
+		&.ocdi__button.button-primary:disabled,
+		&.ocdi__button.button-primary[disabled] {
+			color: #ffffff !important;
+			background: #999999 !important;
+			border-color: #999999 !important;
+			opacity: 0.5;
+		}
 	}
 
 	// Redux.
@@ -659,16 +667,44 @@
 	}
 
 	&__file-upload-container {
-		h2 {
-			font-size: 24px;
-			line-height: 29px;
-			margin-bottom: 25px;
-			margin-top: -6px !important;
+		border: 1px solid #dddddd;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
+
+		&--header {
+			padding: 30px;
+			border-bottom: 1px solid #dddddd;
+			background-color: #ffffff;
+
+			h2 {
+				font-size: 22px;
+				line-height: 27px;
+				margin: 0;
+			}
 		}
 
 		&-items {
+			padding: 30px 30px 0 30px;
+			background-color: #ffffff;
+
 			display: flex;
 			flex-wrap: wrap;
+
+			&--second-row {
+				padding-top: 0;
+			}
+
+			.ocdi__card {
+				box-shadow: none;
+			}
+		}
+
+		&--footer {
+			padding: 30px;
+			background-color: #fafafa;
+			border-top: 1px solid #dddddd;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 		}
 	}
 
@@ -685,7 +721,7 @@
 
 	// Plugin button.
 	&__button-container {
-		margin-top: 1.62em;
+		margin-top: 30px;
 	}
 
 	// AJAX loader.
@@ -1017,7 +1053,7 @@
 			flex: 0 0 100%;
 			margin-bottom: 20px;
 
-			@media (min-width: 640px) {
+			@media (min-width: 768px) {
 				flex: 0 0 calc(50% - 10px);
 				margin-right: 20px;
 
@@ -1038,6 +1074,26 @@
 				&:nth-child(3n) {
 					margin-right: 0;
 				}
+			}
+		}
+
+		&--four {
+			flex: 0 0 100%;
+			margin-bottom: 20px;
+
+			@media (min-width: 768px) {
+				flex: 0 0 calc(50% - 10px);
+				margin-right: 20px;
+
+				&:nth-child(2n) {
+					margin-right: 0;
+				}
+			}
+
+			@media (min-width: 1120px) {
+				flex: 0 0 calc(50% - 15px);
+				margin-bottom: 30px;
+				margin-right: 30px;
 			}
 		}
 	}

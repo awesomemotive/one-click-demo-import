@@ -22,9 +22,9 @@ jQuery( function ( $ ) {
 	 */
 
 	/**
-	 * No or Single predefined demo import button click.
+	 * No predefined demo import button click (manual import).
 	 */
-	$( '.js-ocdi-start-manual-import' ).on( 'click', function () {
+	$( '.js-ocdi-start-manual-import' ).on( 'click', function ( event ) {
 		event.preventDefault();
 
 		var $button = $( this );
@@ -77,11 +77,21 @@ jQuery( function ( $ ) {
 	} );
 
 	/**
+	 * Remove the files from the manual import upload controls (when clicked on the "cancel" button).
+	 */
+	$( '.js-ocdi-cancel-manual-import').on( 'click', function() {
+		$( '.ocdi__file-upload-container-items input[type=file]' ).each( function() {
+			$( this ).val( '' ).trigger( 'change' );
+		} );
+	} );
+
+	/**
 	 * Show and hide the file upload label and input on file input change event.
 	 */
-	$( document ).on( 'change', '.ocdi__file-upload-container-items input[type=file]', function( event ) {
+	$( document ).on( 'change', '.ocdi__file-upload-container-items input[type=file]', function() {
 		var $input = $( this ),
-			$label = $input.siblings( 'label' );
+			$label = $input.siblings( 'label' ),
+			fileIsSet = false;
 
 		if( this.files && this.files.length > 0 ) {
 			$input.removeClass( 'ocdi-hide-input' ).blur();
@@ -90,6 +100,17 @@ jQuery( function ( $ ) {
 			$input.addClass( 'ocdi-hide-input' );
 			$label.show();
 		}
+
+		// Enable or disable the main manual import/cancel buttons.
+		$( '.ocdi__file-upload-container-items input[type=file]' ).each( function() {
+			if ( this.files && this.files.length > 0 ) {
+				fileIsSet = true;
+			}
+		} );
+
+		$( '.js-ocdi-start-manual-import' ).prop( 'disabled', ! fileIsSet );
+		$( '.js-ocdi-cancel-manual-import' ).prop( 'disabled', ! fileIsSet );
+
 	} );
 
 	/**
