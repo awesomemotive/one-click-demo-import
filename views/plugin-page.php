@@ -184,18 +184,15 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 									<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/redux.svg' ); ?>" class="ocdi-icon--redux" alt="<?php esc_attr_e( 'Redux import icon', 'one-click-demo-import' ); ?>">
 								</div>
 								<h3><?php esc_html_e( 'Import Redux', 'one-click-demo-import' ); ?></h3>
-								<p><?php esc_html_e( 'Select a JSON file to import and', 'one-click-demo-import' ); ?></p>
+								<p><?php esc_html_e( 'Select a JSON file and enter Redux option name.', 'one-click-demo-import' ); ?></p>
 							</label>
-							<div>
-								<label for="ocdi__redux-option-name" class="ocdi__redux-option-name-label"><?php esc_html_e( 'enter the Redux option name:', 'one-click-demo-import' ); ?></label>
-								<input id="ocdi__redux-option-name" class="ocdi__redux-option-name-input" type="text" name="redux-option-name">
-							</div>
 						</div>
 						<div class="ocdi__card-footer">
 							<label for="ocdi__redux-file-upload" class="custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
 							<input id="ocdi__redux-file-upload" type="file" class="ocdi-hide-input" name="redux-file-upload">
+							<input id="ocdi__redux-option-name" class="ocdi__redux-option-name-input" type="text" name="redux-option-name" placeholder="<?php esc_attr_e( 'Enter Option Name', 'one-click-demo-import' ); ?>">
 						</div>
 					</div>
 					<?php endif; ?>
