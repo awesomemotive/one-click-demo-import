@@ -308,33 +308,11 @@ It's easy, just add this to your theme:
 
 This will enable the following WP hooks when importing the customizer data: `customize_save`, `customize_save_*`, `customize_save_after`.
 
-
-= How to configure the multi grid layout import popup confirmation? =
-
-If you want to disable the popup confirmation modal window, use this filter:
-
-`add_filter( 'ocdi/enable_grid_layout_import_popup_confirmation', '__return_false' );`
-
-If you want to just change some options for the jQuery modal window we use for the popup confirmation, then use this filter:
-
-`
-function my_theme_ocdi_confirmation_dialog_options ( $options ) {
-	return array_merge( $options, array(
-		'width'       => 300,
-		'dialogClass' => 'wp-dialog',
-		'resizable'   => false,
-		'height'      => 'auto',
-		'modal'       => true,
-	) );
-}
-add_filter( 'ocdi/confirmation_dialog_options', 'my_theme_ocdi_confirmation_dialog_options', 10, 1 );
-`
-
 = How can I pass Amazon S3 presigned URL's (temporary links) as external files ? =
 
 If you want to host your import content files on Amazon S3, but you want them to be publicly available, rather through an own API as presigned URL's (which expires) you can use the filter `ocdi/pre_download_import_files` in which you can pass your own URL's, for example:
 
-```
+`
 add_filter( 'ocdi/pre_download_import_files', function( $import_file_info ){
 
 	// In this example `get_my_custom_urls` is supposedly making a `wp_remote_get` request, getting the urls from an API server where you're creating the presigned urls, [example here](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-presigned-url.html).
@@ -360,7 +338,7 @@ add_filter( 'ocdi/pre_download_import_files', function( $import_file_info ){
 	return $import_file_info;
 
 } );
-```
+`
 
 = I can't activate the plugin, because of a fatal error, what can I do? =
 
