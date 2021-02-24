@@ -979,8 +979,48 @@
 			padding: 30px;
 
 			.ocdi-icon {
-				width: 64px;
-				height: 70px;
+
+				&--content {
+					width: 53px;
+					height: 53px;
+				}
+
+				&--widgets {
+					width: 56px;
+					height: 49px;
+				}
+
+				&--brush {
+					width: 55px;
+					height: 52px;
+				}
+
+				&--redux {
+					width: 82px;
+					height: 70px;
+				}
+
+				&--plugins {
+					width: 65px;
+					height: 64px;
+				}
+
+				&--copy {
+					width: 42px;
+					height: 52px;
+				}
+
+				&--layout {
+					width: 53px;
+					height: 52px;
+				}
+
+				&-container {
+					height: 70px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
 			}
 
 			h3 {

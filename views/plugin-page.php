@@ -125,7 +125,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<div class="ocdi__file-upload ocdi__card ocdi__card--<?php echo esc_attr( $first_row_class ); ?>">
 						<div class="ocdi__card-content">
 							<label for="ocdi__content-file-upload">
-								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/content.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Content import icon', 'one-click-demo-import' ); ?>">
+								<div class="ocdi-icon-container">
+									<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/content.svg' ); ?>" class="ocdi-icon--content" alt="<?php esc_attr_e( 'Content import icon', 'one-click-demo-import' ); ?>">
+								</div>
 								<h3><?php esc_html_e( 'Import Content', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select an XML file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
@@ -141,7 +143,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<div class="ocdi__file-upload ocdi__card ocdi__card--<?php echo esc_attr( $first_row_class ); ?>">
 						<div class="ocdi__card-content">
 							<label for="ocdi__widget-file-upload">
-								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/widgets.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Widgets import icon', 'one-click-demo-import' ); ?>">
+								<div class="ocdi-icon-container">
+									<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/widgets.svg' ); ?>" class="ocdi-icon--widgets" alt="<?php esc_attr_e( 'Widgets import icon', 'one-click-demo-import' ); ?>">
+								</div>
 								<h3><?php esc_html_e( 'Import Widgets', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select a JSON/WIE file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
@@ -157,7 +161,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<div class="ocdi__file-upload ocdi__card ocdi__card--<?php echo esc_attr( $first_row_class ); ?>">
 						<div class="ocdi__card-content">
 							<label for="ocdi__customizer-file-upload">
-								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Customizer import icon', 'one-click-demo-import' ); ?>">
+								<div class="ocdi-icon-container">
+									<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/brush.svg' ); ?>" class="ocdi-icon--brush" alt="<?php esc_attr_e( 'Customizer import icon', 'one-click-demo-import' ); ?>">
+								</div>
 								<h3><?php esc_html_e( 'Import Customizer', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select a DAT file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
@@ -174,7 +180,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<div class="ocdi__file-upload ocdi__card ocdi__card--<?php echo esc_attr( $first_row_class ); ?>">
 						<div class="ocdi__card-content">
 							<label for="ocdi__redux-file-upload">
-								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/redux.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Redux import icon', 'one-click-demo-import' ); ?>">
+								<div class="ocdi-icon-container">
+									<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/redux.svg' ); ?>" class="ocdi-icon--redux" alt="<?php esc_attr_e( 'Redux import icon', 'one-click-demo-import' ); ?>">
+								</div>
 								<h3><?php esc_html_e( 'Import Redux', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select a JSON file to import and', 'one-click-demo-import' ); ?></p>
 							</label>
@@ -197,7 +205,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<div class="ocdi__recommended-plugins ocdi__card ocdi__card--three">
 						<div class="ocdi__card-content">
 							<label>
-								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/plugins.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Recommended plugins icon', 'one-click-demo-import' ); ?>">
+								<div class="ocdi-icon-container">
+									<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/plugins.svg' ); ?>" class="ocdi-icon--plugins" alt="<?php esc_attr_e( 'Recommended plugins icon', 'one-click-demo-import' ); ?>">
+								</div>
 								<h3><?php esc_html_e( 'Recommended Plugins', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Install our recommended plugins.', 'one-click-demo-import' ); ?></p>
 							</label>
@@ -210,7 +220,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<div class="ocdi__create-demo-content ocdi__card ocdi__card--three">
 						<div class="ocdi__card-content">
 							<label>
-								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/copy.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Create demo content icon', 'one-click-demo-import' ); ?>">
+								<div class="ocdi-icon-container">
+									<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/copy.svg' ); ?>" class="ocdi-icon--copy" alt="<?php esc_attr_e( 'Create demo content icon', 'one-click-demo-import' ); ?>">
+								</div>
 								<h3><?php esc_html_e( 'Create Demo Content', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Create useful content with a few clicks.', 'one-click-demo-import' ); ?></p>
 							</label>
@@ -223,7 +235,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<div class="ocdi__create-landing-pages ocdi__card ocdi__card--three">
 						<div class="ocdi__card-content">
 							<label>
-								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/layout.svg' ); ?>" class="ocdi-icon" alt="<?php esc_attr_e( 'Create landing pages icon', 'one-click-demo-import' ); ?>">
+								<div class="ocdi-icon-container">
+									<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/layout.svg' ); ?>" class="ocdi-icon--layout" alt="<?php esc_attr_e( 'Create landing pages icon', 'one-click-demo-import' ); ?>">
+								</div>
 								<h3><?php esc_html_e( 'Create Landing Pages', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Create beautiful converting pages.', 'one-click-demo-import' ); ?></p>
 							</label>

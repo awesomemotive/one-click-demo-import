@@ -24,7 +24,7 @@ $plugin_installer = new PluginInstaller();
 					<div class="ocdi-install-plugins-content-header">
 						<h2><?php esc_html_e( 'Install Recommended Plugins', 'one-click-demo-import' ); ?></h2>
 						<p>
-							<?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh.', 'one-click-demo-import' ); ?>
+							<?php esc_html_e( 'Want to use the best plugins for the job? Here is the list of awesome plugins that will help you achieve your goals.', 'one-click-demo-import' ); ?>
 						</p>
 					</div>
 					<div class="ocdi-install-plugins-content-content">
