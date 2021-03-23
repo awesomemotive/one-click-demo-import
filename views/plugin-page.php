@@ -49,7 +49,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 			<p class="about-description">
 				<?php esc_html_e( 'Importing demo data (post, pages, images, theme settings, etc.) is the quickest and easiest way to set up your new theme.', 'one-click-demo-import' ); ?>
 				<?php esc_html_e( 'It allows you to simply edit everything instead of creating content and layouts from scratch.', 'one-click-demo-import' ); ?>
-				<a href="#"><?php esc_html_e( 'Learn more', 'one-click-demo-import' ); ?></a>.
+				<a href="https://ocdi.com/user-guide/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more', 'one-click-demo-import' ); ?></a>.
 			</p>
 		</div>
 

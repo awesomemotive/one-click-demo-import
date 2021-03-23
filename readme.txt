@@ -2,7 +2,7 @@
 Contributors: ocdi, smub, jaredatch, capuderg
 Tags: import, content, demo, data, widgets, settings, redux, theme options
 Requires at least: 4.9
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.6
 Stable tag: 2.6.1
 License: GPLv3 or later
@@ -17,13 +17,13 @@ The best feature of this plugin is, that theme authors can define import files i
 >
 > Setup One Click Demo Imports for your theme and your users will thank you for it!
 >
-> [Follow this easy guide on how to setup this plugin for your themes!](http://awesomemotive.github.io/one-click-demo-import/)
+> [Follow this easy guide on how to setup this plugin for your themes!](https://ocdi.com/quick-integration-guide/)
 
 > **Are you a theme user?**
 >
-> Contact the author of your theme and [let them know about this plugin](http://awesomemotive.github.io/one-click-demo-import/theme-users.html). Theme authors can make any theme compatible with this plugin in 15 minutes and make it much more user-friendly.
+> Contact the author of your theme and [let them know about this plugin](https://ocdi.com/ask-your-theme-author/). Theme authors can make any theme compatible with this plugin in 15 minutes and make it much more user-friendly.
 >
-> "[Where can I find the contact of the theme author?](http://awesomemotive.github.io/one-click-demo-import/theme-users.html)"
+> "[Where can I find the theme author contact?](https://ocdi.com/ask-your-theme-author/#how-can-you-contact-your-theme-author)"
 
 This plugin will create a submenu page under Appearance with the title **Import demo data**.
 
@@ -37,7 +37,7 @@ NOTE: There is no setting to "connect" authors from the demo import file to the 
 
 **Do you want to contribute?**
 
-Please refer to the official [GitHub repository](https://github.com/awesomemotive/one-click-demo-import) of this plugin.
+Please refer to our official [GitHub repository](https://github.com/awesomemotive/one-click-demo-import).
 
 == Installation ==
 
