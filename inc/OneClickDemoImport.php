@@ -193,10 +193,7 @@ class OneClickDemoImport {
 	public function admin_enqueue_scripts( $hook ) {
 		// Enqueue the scripts only on the plugin page.
 		if ( $this->plugin_page === $hook || ( 'admin.php' === $hook && $this->plugin_page_setup['menu_slug'] === esc_attr( $_GET['import'] ) ) ) {
-			wp_enqueue_script( 'jquery-ui-dialog' );
-			wp_enqueue_style( 'wp-jquery-ui-dialog' );
-
-			wp_enqueue_script( 'ocdi-main-js', OCDI_URL . 'assets/js/main.js' , array( 'jquery', 'jquery-ui-dialog' ), OCDI_VERSION );
+			wp_enqueue_script( 'ocdi-main-js', OCDI_URL . 'assets/js/main.js' , array( 'jquery' ), OCDI_VERSION );
 
 			// Get theme data.
 			$theme = wp_get_theme();

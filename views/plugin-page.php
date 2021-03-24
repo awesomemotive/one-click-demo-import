@@ -351,9 +351,6 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<?php endforeach; ?>
 				</div>
 			</div>
-
-			<div id="js-ocdi-modal-content"></div>
-
 		<?php endif; ?>
 	</div>
 </div>
