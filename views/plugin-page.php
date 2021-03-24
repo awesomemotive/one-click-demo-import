@@ -131,6 +131,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								<h3><?php esc_html_e( 'Import Content', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select an XML file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
+							<a href="https://ocdi.com/user-guide/#import-content" target="_blank" rel="noopener noreferrer" class="ocdi__card-content-info">
+								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/info-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Info icon', 'one-click-demo-import' ); ?>">
+							</a>
 						</div>
 						<div class="ocdi__card-footer">
 							<label for="ocdi__content-file-upload" class="custom-file-upload-button">
@@ -149,6 +152,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								<h3><?php esc_html_e( 'Import Widgets', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select a JSON/WIE file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
+							<a href="https://ocdi.com/user-guide/#import-widgets" target="_blank" rel="noopener noreferrer" class="ocdi__card-content-info">
+								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/info-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Info icon', 'one-click-demo-import' ); ?>">
+							</a>
 						</div>
 						<div class="ocdi__card-footer">
 							<label for="ocdi__widget-file-upload" class="custom-file-upload-button">
@@ -167,6 +173,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								<h3><?php esc_html_e( 'Import Customizer', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select a DAT file to import.', 'one-click-demo-import' ); ?></p>
 							</label>
+							<a href="https://ocdi.com/user-guide/#import-customizer" target="_blank" rel="noopener noreferrer" class="ocdi__card-content-info">
+								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/info-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Info icon', 'one-click-demo-import' ); ?>">
+							</a>
 						</div>
 						<div class="ocdi__card-footer">
 							<label for="ocdi__customizer-file-upload" class="custom-file-upload-button">
@@ -186,6 +195,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								<h3><?php esc_html_e( 'Import Redux', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Select a JSON file and enter Redux option name.', 'one-click-demo-import' ); ?></p>
 							</label>
+							<a href="https://ocdi.com/user-guide/#import-redux" target="_blank" rel="noopener noreferrer" class="ocdi__card-content-info">
+								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/info-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Info icon', 'one-click-demo-import' ); ?>">
+							</a>
 						</div>
 						<div class="ocdi__card-footer">
 							<label for="ocdi__redux-file-upload" class="custom-file-upload-button">
@@ -208,6 +220,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								<h3><?php esc_html_e( 'Recommended Plugins', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Install our recommended plugins.', 'one-click-demo-import' ); ?></p>
 							</label>
+							<a href="https://ocdi.com/user-guide/#recommended-plugins" target="_blank" rel="noopener noreferrer" class="ocdi__card-content-info">
+								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/info-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Info icon', 'one-click-demo-import' ); ?>">
+							</a>
 						</div>
 						<div class="ocdi__card-footer">
 							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'install-plugins' ) ) ); ?>" class="button"><?php esc_html_e( 'Install Plugins', 'one-click-demo-import' ); ?></a>
@@ -223,6 +238,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								<h3><?php esc_html_e( 'Create Demo Content', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Create useful content with a few clicks.', 'one-click-demo-import' ); ?></p>
 							</label>
+							<a href="https://ocdi.com/user-guide/#create-demo-content" target="_blank" rel="noopener noreferrer" class="ocdi__card-content-info">
+								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/info-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Info icon', 'one-click-demo-import' ); ?>">
+							</a>
 						</div>
 						<div class="ocdi__card-footer">
 							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'create-content' ) ) ); ?>" class="button"><?php esc_html_e( 'Create Content', 'one-click-demo-import' ); ?></a>
@@ -238,6 +256,9 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								<h3><?php esc_html_e( 'Create Landing Pages', 'one-click-demo-import' ); ?></h3>
 								<p><?php esc_html_e( 'Create beautiful converting pages.', 'one-click-demo-import' ); ?></p>
 							</label>
+							<a href="https://ocdi.com/user-guide/#create-landing-pages" target="_blank" rel="noopener noreferrer" class="ocdi__card-content-info">
+								<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/info-circle.svg' ); ?>" alt="<?php esc_attr_e( 'Info icon', 'one-click-demo-import' ); ?>">
+							</a>
 						</div>
 						<div class="ocdi__card-footer">
 							<?php

@@ -698,6 +698,21 @@
 
 			.ocdi__card {
 				box-shadow: none;
+
+				&-content {
+					position: relative;
+
+					&-info {
+						position: absolute;
+						right: 10px;
+						top: 10px;
+
+						img {
+							width: 16px;
+							height: 16px;
+						}
+					}
+				}
 			}
 		}
 
