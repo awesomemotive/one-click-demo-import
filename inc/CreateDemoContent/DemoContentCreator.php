@@ -8,6 +8,8 @@
 namespace OCDI\CreateDemoContent;
 
 use OCDI\Helpers;
+use OCDI\Importer;
+use OCDI\Logger;
 use OCDI\OneClickDemoImport;
 use OCDI\PluginInstaller;
 
@@ -26,7 +28,7 @@ class DemoContentCreator {
 	public function init() {
 		$this->set_content();
 
-		add_action( 'ocdi/demo_content_creater_after_import', array( $this, 'after_import_wpforms_setup' ) );
+		add_action( 'ocdi/demo_content_creator_after_import', array( $this, 'after_import_wpforms_setup' ) );
 
 		add_action( 'wp_ajax_ocdi_import_created_content', array( $this, 'import_created_content' ) );
 	}
@@ -217,17 +219,37 @@ class DemoContentCreator {
 			return esc_html__( 'The demo content import file is missing.', 'one-click-demo-import' );
 		}
 
-		$ocdi = OneClickDemoImport::get_instance();
+		// Change the date to allow same page import multiple times.
+		add_filter( 'wxr_importer.pre_process.post', function ( $data ) {
+			if ( $data['post_type'] === 'page' ) {
+				$data['post_date'] = date( 'Y-m-d H:i:s' );
+			}
+
+			return $data;
+		} );
+
+		// Configure logger instance and set it to the importer.
+		$logger            = new Logger();
+		$logger->min_level = 'warning';
+
+		// Create importer instance with proper parameters.
+		$importer = new Importer(
+			array(
+				'fetch_attachments'      => true,
+				'prefill_existing_posts' => false,
+			),
+			$logger
+		);
 
 		Helpers::do_action( 'ocdi/demo_content_creater_before_import', $slug );
 
 		ob_start();
-			$ocdi->importer->import( $import_file );
+			$importer->import( $import_file );
 		$message = ob_get_clean(); // Catch any output and clear the buffers.
 
-		Helpers::do_action( 'ocdi/demo_content_creater_after_import', $slug );
+		Helpers::do_action( 'ocdi/demo_content_creator_after_import', $slug );
 
-		return $ocdi->importer->logger->error_output;
+		return $importer->logger->error_output;
 	}
 
 	/**
