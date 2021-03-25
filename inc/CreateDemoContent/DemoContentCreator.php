@@ -42,6 +42,7 @@ class DemoContentCreator {
 		return array(
 			array(
 				'slug'             => 'about-page',
+				'file'             => OCDI_PATH . 'assets/demo-content/about-page.xml',
 				'name'             => esc_html__( 'About Page', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
 				'required_plugins' => array(),
