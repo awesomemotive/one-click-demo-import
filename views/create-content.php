@@ -25,7 +25,7 @@ $content_items        = $demo_content_creator->get_default_content();
 					<div class="ocdi-create-content-header">
 						<h2><?php esc_html_e( 'Create Demo Content', 'one-click-demo-import' ); ?></h2>
 						<p>
-							<?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh.', 'one-click-demo-import' ); ?>
+							<?php esc_html_e( 'Select and import pre-made common pages with great layouts. All you need to do is edit the content to fit your needs and your page is good to go.', 'one-click-demo-import' ); ?>
 						</p>
 					</div>
 					<div class="ocdi-create-content-content">
