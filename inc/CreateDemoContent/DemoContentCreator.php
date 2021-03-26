@@ -55,16 +55,17 @@ class DemoContentCreator {
 				'required_plugins' => array( 'wpforms-lite' ),
 			),
 			array(
+				'slug'             => 'book-now',
+				'file'             => OCDI_PATH . 'assets/demo-content/book-now-page.xml',
+				'name'             => esc_html__( 'Book Now', 'one-click-demo-import' ),
+				'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
+				'required_plugins' => array(),
+			),
+			array(
 				'slug'             => 'faq-page',
 				'name'             => esc_html__( 'FAQ Page', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
 				'required_plugins' => array( 'google-analytics-for-wordpress' ),
-			),
-			array(
-				'slug'             => 'coming-soon-page',
-				'name'             => esc_html__( 'Coming Soon Page', 'one-click-demo-import' ),
-				'description'      => esc_html__( 'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.', 'one-click-demo-import' ),
-				'required_plugins' => array( 'coming-soon', 'wpforms-lite' ),
 			),
 			array(
 				'slug'             => 'getting-started-page',
