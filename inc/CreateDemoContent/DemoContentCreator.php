@@ -229,6 +229,14 @@ class DemoContentCreator {
 			return $data;
 		} );
 
+		// Increase PHP max execution time.
+		if ( strpos( ini_get( 'disable_functions' ), 'set_time_limit' ) === false ) {
+			set_time_limit( Helpers::apply_filters( 'ocdi/set_time_limit_for_demo_data_import', 300 ) );
+		}
+
+		// Disable import of authors.
+		add_filter( 'wxr_importer.pre_process.user', '__return_false' );
+
 		// Configure logger instance and set it to the importer.
 		$logger            = new Logger();
 		$logger->min_level = 'warning';
