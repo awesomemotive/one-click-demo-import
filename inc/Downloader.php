@@ -55,14 +55,14 @@ class Downloader {
 		if ( empty( $url ) ) {
 			return new \WP_Error(
 				'missing_url',
-				__( 'Missing URL for downloading a file!', 'pt-ocdi' )
+				__( 'Missing URL for downloading a file!', 'one-click-demo-import' )
 			);
 		}
 
 		// Get file content from the server.
 		$response = wp_remote_get(
 			$url,
-			array( 'timeout' => apply_filters( 'pt-ocdi/timeout_for_downloading_import_file', 20 ) )
+			array( 'timeout' => Helpers::apply_filters( 'ocdi/timeout_for_downloading_import_file', 20 ) )
 		);
 
 		// Test if the get request was not successful.
@@ -72,8 +72,8 @@ class Downloader {
 
 			return new \WP_Error(
 				'download_error',
-				sprintf(
-					__( 'An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s.', 'pt-ocdi' ),
+				sprintf( /* translators: %1$s and %3$s - strong HTML tags, %2$s - file URL, %4$s - br HTML tag, %5$s - error code, %6$s - error message. */
+					__( 'An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s.', 'one-click-demo-import' ),
 					'<strong>',
 					$url,
 					'</strong>',
@@ -81,7 +81,7 @@ class Downloader {
 					$response_error['error_code'],
 					$response_error['error_message']
 				) . '<br>' .
-				apply_filters( 'pt-ocdi/message_after_file_fetching_error', '' )
+				Helpers::apply_filters( 'ocdi/message_after_file_fetching_error', '' )
 			);
 		}
 
@@ -132,7 +132,7 @@ class Downloader {
 		}
 		else {
 			$upload_dir = wp_upload_dir();
-			$this->download_directory_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+			$this->download_directory_path = Helpers::apply_filters( 'ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 		}
 	}
 }

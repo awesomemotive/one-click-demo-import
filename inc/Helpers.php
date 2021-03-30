@@ -67,7 +67,7 @@ class Helpers {
 		);
 		$downloader = new Downloader();
 
-		$import_file_info = apply_filters('pt-ocdi/pre_download_import_files', $import_file_info);
+		$import_file_info = self::apply_filters('ocdi/pre_download_import_files', $import_file_info);
 
 		// ----- Set content file path -----
 		// Check if 'import_file_url' is not defined. That would mean a local file.
@@ -78,7 +78,7 @@ class Helpers {
 		}
 		else {
 			// Set the filename string for content import file.
-			$content_filename = apply_filters( 'pt-ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
+			$content_filename = self::apply_filters( 'ocdi/downloaded_content_file_prefix', 'demo-content-import-file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_content_file_suffix_and_file_extension', '.xml' );
 
 			// Download the content import file.
 			$downloaded_files['content'] = $downloader->download_file( $import_file_info['import_file_url'], $content_filename );
@@ -93,7 +93,7 @@ class Helpers {
 		// Get widgets file as well. If defined!
 		if ( ! empty( $import_file_info['import_widget_file_url'] ) ) {
 			// Set the filename string for widgets import file.
-			$widget_filename = apply_filters( 'pt-ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+			$widget_filename = self::apply_filters( 'ocdi/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_widgets_file_suffix_and_file_extension', '.json' );
 
 			// Download the widgets import file.
 			$downloaded_files['widgets'] = $downloader->download_file( $import_file_info['import_widget_file_url'], $widget_filename );
@@ -113,7 +113,7 @@ class Helpers {
 		// Get customizer import file as well. If defined!
 		if ( ! empty( $import_file_info['import_customizer_file_url'] ) ) {
 			// Setup filename path to save the customizer content.
-			$customizer_filename = apply_filters( 'pt-ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
+			$customizer_filename = self::apply_filters( 'ocdi/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
 
 			// Download the customizer import file.
 			$downloaded_files['customizer'] = $downloader->download_file( $import_file_info['import_customizer_file_url'], $customizer_filename );
@@ -136,7 +136,7 @@ class Helpers {
 
 			// Setup filename paths to save the Redux content.
 			foreach ( $import_file_info['import_redux'] as $index => $redux_item ) {
-				$redux_filename = apply_filters( 'pt-ocdi/downloaded_redux_file_prefix', 'demo-redux-import-file_' ) . $index . '-' . self::$demo_import_start_time . apply_filters( 'pt-ocdi/downloaded_redux_file_suffix_and_file_extension', '.json' );
+				$redux_filename = self::apply_filters( 'ocdi/downloaded_redux_file_prefix', 'demo-redux-import-file_' ) . $index . '-' . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_redux_file_suffix_and_file_extension', '.json' );
 
 				// Download the Redux import file.
 				$file_path = $downloader->download_file( $redux_item['file_url'], $redux_filename );
@@ -195,8 +195,8 @@ class Helpers {
 		if ( ! $wp_filesystem->put_contents( $file_path, $content ) ) {
 			return new \WP_Error(
 				'failed_writing_file_to_server',
-				sprintf(
-					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
+				sprintf( /* translators: %1$s - br HTML tag, %2$s - file path */
+					__( 'An error occurred while writing file to your server! Tried to write a file to: %1$s%2$s.', 'one-click-demo-import' ),
 					'<br>',
 					$file_path
 				)
@@ -238,8 +238,8 @@ class Helpers {
 		if ( ! $wp_filesystem->put_contents( $file_path, $existing_data . $separator . $content . PHP_EOL ) ) {
 			return new \WP_Error(
 				'failed_writing_file_to_server',
-				sprintf(
-					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'pt-ocdi' ),
+				sprintf( /* translators: %1$s - br HTML tag, %2$s - file path */
+					__( 'An error occurred while writing file to your server! Tried to write a file to: %1$s%2$s.', 'one-click-demo-import' ),
 					'<br>',
 					$file_path
 				)
@@ -272,8 +272,8 @@ class Helpers {
 		if ( ! $data ) {
 			return new \WP_Error(
 				'failed_reading_file_from_server',
-				sprintf(
-					__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'pt-ocdi' ),
+				sprintf( /* translators: %1$s - br HTML tag, %2$s - file path */
+					__( 'An error occurred while reading a file from your server! Tried reading file from path: %1$s%2$s.', 'one-click-demo-import' ),
 					'<br>',
 					$file_path
 				)
@@ -295,8 +295,8 @@ class Helpers {
 		if ( ! ( 'direct' === get_filesystem_method() ) ) {
 			return new \WP_Error(
 				'no_direct_file_access',
-				sprintf(
-					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'pt-ocdi' ),
+				sprintf( /* translators: %1$s and %2$s - strong HTML tags, %3$s - HTML link to a doc page. */
+					__( 'This WordPress page does not have %1$sdirect%2$s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %3$s.', 'one-click-demo-import' ),
 					'<strong>',
 					'</strong>',
 					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
@@ -305,14 +305,7 @@ class Helpers {
 		}
 
 		// Get plugin page settings.
-		$plugin_page_setup = apply_filters( 'pt-ocdi/plugin_page_setup', array(
-				'parent_slug' => 'themes.php',
-				'page_title'  => esc_html__( 'One Click Demo Import' , 'pt-ocdi' ),
-				'menu_title'  => esc_html__( 'Import Demo Data' , 'pt-ocdi' ),
-				'capability'  => 'import',
-				'menu_slug'   => 'pt-one-click-demo-import',
-			)
-		);
+		$plugin_page_setup = self::get_plugin_page_setup_data();
 
 		// Get user credentials for WP file-system API.
 		$demo_import_page_url = wp_nonce_url( $plugin_page_setup['parent_slug'] . '?page=' . $plugin_page_setup['menu_slug'], $plugin_page_setup['menu_slug'] );
@@ -320,7 +313,7 @@ class Helpers {
 		if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
 			return new \WP_error(
 				'filesystem_credentials_could_not_be_retrieved',
-				__( 'An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!', 'pt-ocdi' )
+				__( 'An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!', 'one-click-demo-import' )
 			);
 		}
 
@@ -328,7 +321,7 @@ class Helpers {
 		if ( ! WP_Filesystem( $creds ) ) {
 			return new \WP_Error(
 				'wrong_login_credentials',
-				__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'pt-ocdi' )
+				__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'one-click-demo-import' )
 			);
 		}
 
@@ -343,9 +336,9 @@ class Helpers {
 	 */
 	public static function get_log_path() {
 		$upload_dir  = wp_upload_dir();
-		$upload_path = apply_filters( 'pt-ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+		$upload_path = self::apply_filters( 'ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
-		$log_path = $upload_path . apply_filters( 'pt-ocdi/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . apply_filters( 'pt-ocdi/log_file_suffix_and_file_extension', '.txt' );
+		$log_path = $upload_path . self::apply_filters( 'ocdi/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/log_file_suffix_and_file_extension', '.txt' );
 
 		self::register_file_as_media_attachment( $log_path );
 
@@ -362,13 +355,13 @@ class Helpers {
 	public static function register_file_as_media_attachment( $log_path ) {
 		// Check the type of file.
 		$log_mimes = array( 'txt' => 'text/plain' );
-		$filetype  = wp_check_filetype( basename( $log_path ), apply_filters( 'pt-ocdi/file_mimes', $log_mimes ) );
+		$filetype  = wp_check_filetype( basename( $log_path ), self::apply_filters( 'ocdi/file_mimes', $log_mimes ) );
 
 		// Prepare an array of post data for the attachment.
 		$attachment = array(
 			'guid'           => self::get_log_url( $log_path ),
 			'post_mime_type' => $filetype['type'],
-			'post_title'     => apply_filters( 'pt-ocdi/attachment_prefix', esc_html__( 'One Click Demo Import - ', 'pt-ocdi' ) ) . preg_replace( '/\.[^.]+$/', '', basename( $log_path ) ),
+			'post_title'     => self::apply_filters( 'ocdi/attachment_prefix', esc_html__( 'One Click Demo Import - ', 'one-click-demo-import' ) ) . preg_replace( '/\.[^.]+$/', '', basename( $log_path ) ),
 			'post_content'   => '',
 			'post_status'    => 'inherit',
 		);
@@ -386,7 +379,7 @@ class Helpers {
 	 */
 	public static function get_log_url( $log_path ) {
 		$upload_dir = wp_upload_dir();
-		$upload_url = apply_filters( 'pt-ocdi/upload_file_url', trailingslashit( $upload_dir['url'] ) );
+		$upload_url = self::apply_filters( 'ocdi/upload_file_url', trailingslashit( $upload_dir['url'] ) );
 
 		return $upload_url . basename( $log_path );
 	}
@@ -401,8 +394,8 @@ class Helpers {
 		// Check if user has the WP capability to import data.
 		if ( ! current_user_can( 'import' ) ) {
 			wp_die(
-				sprintf(
-					__( '%sYour user role isn\'t high enough. You don\'t have permission to import demo data.%s', 'pt-ocdi' ),
+				sprintf( /* translators: %1$s - opening div and paragraph HTML tags, %2$s - closing div and paragraph HTML tags. */
+					__( '%1$sYour user role isn\'t high enough. You don\'t have permission to import demo data.%2$s', 'one-click-demo-import' ),
 					'<div class="notice  notice-error"><p>',
 					'</p></div>'
 				)
@@ -435,7 +428,7 @@ class Helpers {
 
 		// Error data if the demo file was not provided.
 		$file_not_provided_error = array(
-			'error' => esc_html__( 'No file provided.', 'pt-ocdi' )
+			'error' => esc_html__( 'No file provided.', 'one-click-demo-import' )
 		);
 
 		// Handle demo file uploads.
@@ -463,12 +456,12 @@ class Helpers {
 		else {
 			// Add this error to log file.
 			$log_added = self::append_to_file(
-				sprintf(
-					__( 'Content file was not uploaded. Error: %s', 'pt-ocdi' ),
+				sprintf( /* translators: %s - the error message. */
+					__( 'Content file was not uploaded. Error: %s', 'one-click-demo-import' ),
 					$content_file_info['error']
 				),
 				$log_file_path,
-				esc_html__( 'Upload files' , 'pt-ocdi' )
+				esc_html__( 'Upload files' , 'one-click-demo-import' )
 			);
 		}
 
@@ -480,12 +473,12 @@ class Helpers {
 		else {
 			// Add this error to log file.
 			$log_added = self::append_to_file(
-				sprintf(
-					__( 'Widget file was not uploaded. Error: %s', 'pt-ocdi' ),
+				sprintf( /* translators: %s - the error message. */
+					__( 'Widget file was not uploaded. Error: %s', 'one-click-demo-import' ),
 					$widget_file_info['error']
 				),
 				$log_file_path,
-				esc_html__( 'Upload files' , 'pt-ocdi' )
+				esc_html__( 'Upload files' , 'one-click-demo-import' )
 			);
 		}
 
@@ -497,12 +490,12 @@ class Helpers {
 		else {
 			// Add this error to log file.
 			$log_added = self::append_to_file(
-				sprintf(
-					__( 'Customizer file was not uploaded. Error: %s', 'pt-ocdi' ),
+				sprintf( /* translators: %s - the error message. */
+					__( 'Customizer file was not uploaded. Error: %s', 'one-click-demo-import' ),
 					$customizer_file_info['error']
 				),
 				$log_file_path,
-				esc_html__( 'Upload files' , 'pt-ocdi' )
+				esc_html__( 'Upload files' , 'one-click-demo-import' )
 			);
 		}
 
@@ -511,9 +504,9 @@ class Helpers {
 			if ( isset( $_POST['redux_option_name'] ) && empty( $_POST['redux_option_name'] ) ) {
 				// Write error to log file and send an AJAX response with the error.
 				self::log_error_and_send_ajax_response(
-					esc_html__( 'Missing Redux option name! Please also enter the Redux option name!', 'pt-ocdi' ),
+					esc_html__( 'Missing Redux option name! Please also enter the Redux option name!', 'one-click-demo-import' ),
 					$log_file_path,
-					esc_html__( 'Upload files', 'pt-ocdi' )
+					esc_html__( 'Upload files', 'one-click-demo-import' )
 				);
 			}
 
@@ -528,20 +521,20 @@ class Helpers {
 		else {
 			// Add this error to log file.
 			$log_added = self::append_to_file(
-				sprintf(
-					__( 'Redux file was not uploaded. Error: %s', 'pt-ocdi' ),
+				sprintf( /* translators: %s - the error message. */
+					__( 'Redux file was not uploaded. Error: %s', 'one-click-demo-import' ),
 					$redux_file_info['error']
 				),
 				$log_file_path,
-				esc_html__( 'Upload files' , 'pt-ocdi' )
+				esc_html__( 'Upload files' , 'one-click-demo-import' )
 			);
 		}
 
 		// Add this message to log file.
 		$log_added = self::append_to_file(
-			__( 'The import files were successfully uploaded!', 'pt-ocdi' ) . self::import_file_info( $selected_import_files ),
+			__( 'The import files were successfully uploaded!', 'one-click-demo-import' ) . self::import_file_info( $selected_import_files ),
 			$log_file_path,
-			esc_html__( 'Upload files' , 'pt-ocdi' )
+			esc_html__( 'Upload files' , 'one-click-demo-import' )
 		);
 
 		// Return array with paths of uploaded files.
@@ -564,18 +557,18 @@ class Helpers {
 		}
 
 		return PHP_EOL .
-		sprintf(
-			__( 'Initial max execution time = %s', 'pt-ocdi' ),
+		sprintf( /* translators: %s - the max execution time. */
+			__( 'Initial max execution time = %s', 'one-click-demo-import' ),
 			ini_get( 'max_execution_time' )
 		) . PHP_EOL .
-		sprintf(
-			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s', 'pt-ocdi' ),
+		sprintf( /* translators: %1$s - new line break, %2$s - the site URL, %3$s - the file path for content import, %4$s - the file path for widgets import, %5$s - the file path for widgets import, %6$s - the file path for redux import. */
+			__( 'Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s', 'one-click-demo-import' ),
 			PHP_EOL,
 			get_site_url(),
-			empty( $selected_import_files['content'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['content'],
-			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['widgets'],
-			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $selected_import_files['customizer'],
-			empty( $redux_file_string ) ? esc_html__( 'not defined!', 'pt-ocdi' ) : $redux_file_string
+			empty( $selected_import_files['content'] ) ? esc_html__( 'not defined!', 'one-click-demo-import' ) : $selected_import_files['content'],
+			empty( $selected_import_files['widgets'] ) ? esc_html__( 'not defined!', 'one-click-demo-import' ) : $selected_import_files['widgets'],
+			empty( $selected_import_files['customizer'] ) ? esc_html__( 'not defined!', 'one-click-demo-import' ) : $selected_import_files['customizer'],
+			empty( $redux_file_string ) ? esc_html__( 'not defined!', 'one-click-demo-import' ) : $redux_file_string
 		);
 	}
 
@@ -604,7 +597,7 @@ class Helpers {
 	 * Set the $demo_import_start_time class variable with the current date and time string.
 	 */
 	public static function set_demo_import_start_time() {
-		self::$demo_import_start_time = date( apply_filters( 'pt-ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
+		self::$demo_import_start_time = date( self::apply_filters( 'ocdi/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
 	}
 
 
@@ -664,5 +657,92 @@ class Helpers {
 	 */
 	public static function set_ocdi_import_data_transient( $data ) {
 		set_transient( 'ocdi_importer_data', $data, 0.1 * HOUR_IN_SECONDS );
+	}
+
+
+	/**
+	 * Backwards compatible apply_filters helper.
+	 * With 3.0 we changed the filter prefix from 'pt-ocdi/' to just 'ocdi/',
+	 * but we needed to make sure backwards compatibility is in place.
+	 * This method should be used for all apply_filters calls.
+	 *
+	 * @param string $hook         The filter hook name.
+	 * @param mixed  $default_data The default filter data.
+	 *
+	 * @return mixed|void
+	 */
+	public static function apply_filters( $hook, $default_data ) {
+		$new_data = apply_filters( $hook, $default_data );
+
+		if ( $new_data !== $default_data ) {
+			return $new_data;
+		}
+
+		$old_data = apply_filters( "pt-$hook", $default_data );
+
+		if ( $old_data !== $default_data ) {
+			return $old_data;
+		}
+
+		return $default_data;
+	}
+
+	/**
+	 * Backwards compatible do_action helper.
+	 * With 3.0 we changed the action prefix from 'pt-ocdi/' to just 'ocdi/',
+	 * but we needed to make sure backwards compatibility is in place.
+	 * This method should be used for all do_action calls.
+	 *
+	 * @param string $hook   The action hook name.
+	 * @param mixed  ...$arg Optional. Additional arguments which are passed on to the
+	 *                       functions hooked to the action. Default empty.
+	 */
+	public static function do_action( $hook, ...$arg ) {
+		if ( has_action( $hook ) ) {
+			do_action( $hook, ...$arg );
+		} else if ( has_action( "pt-$hook" ) ) {
+			do_action( "pt-$hook", ...$arg );
+		}
+	}
+
+	/**
+	 * Backwards compatible has_action helper.
+	 * With 3.0 we changed the action prefix from 'pt-ocdi/' to just 'ocdi/',
+	 * but we needed to make sure backwards compatibility is in place.
+	 * This method should be used for all has_action calls.
+	 *
+	 * @param string        $hook              The name of the action hook.
+	 * @param callable|bool $function_to_check Optional. The callback to check for. Default false.
+	 *
+	 * @return bool|int If $function_to_check is omitted, returns boolean for whether the hook has
+	 *                  anything registered. When checking a specific function, the priority of that
+	 *                  hook is returned, or false if the function is not attached. When using the
+	 *                  $function_to_check argument, this function may return a non-boolean value
+	 *                  that evaluates to false (e.g.) 0, so use the === operator for testing the
+	 *                  return value.
+	 */
+	public static function has_action( $hook, $function_to_check = false ) {
+		if ( has_action( $hook ) ) {
+			return has_action( $hook, $function_to_check );
+		} else if ( has_action( "pt-$hook" ) ) {
+			return has_action( "pt-$hook", $function_to_check );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get the plugin page setup data.
+	 *
+	 * @return array
+	 */
+	public static function get_plugin_page_setup_data() {
+		return Helpers::apply_filters( 'ocdi/plugin_page_setup', array(
+			'parent_slug' => 'themes.php',
+			'page_title'  => esc_html__( 'One Click Demo Import' , 'one-click-demo-import' ),
+			'menu_title'  => esc_html__( 'Import Demo Data' , 'one-click-demo-import' ),
+			'capability'  => 'import',
+			'menu_slug'   => 'one-click-demo-import',
+		) );
 	}
 }

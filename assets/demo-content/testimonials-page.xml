@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- generator="WordPress/5.7" created="2021-03-25 06:41" -->
+<rss version="2.0"
+	 xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	 xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	 xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	 xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns:wp="http://wordpress.org/export/1.2/"
+>
+
+	<channel>
+		<title>ocdi</title>
+		<link>https://ocdi.com</link>
+		<description>Just another WordPress site</description>
+		<pubDate>Thu, 25 Mar 2021 06:41:21 +0000</pubDate>
+		<language>en-US</language>
+		<wp:wxr_version>1.2</wp:wxr_version>
+		<wp:base_site_url>https://ocdi.com</wp:base_site_url>
+		<wp:base_blog_url>https://ocdi.com</wp:base_blog_url>
+
+		<generator>https://wordpress.org/?v=5.7</generator>
+
+		<item>
+			<title><![CDATA[Testimonials]]></title>
+			<link>https://ocdi.com/testimonials/</link>
+			<pubDate>Fri, 26 Feb 2021 11:05:31 +0000</pubDate>
+			<description></description>
+			<content:encoded><![CDATA[<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:quote {"className":"is-style-large"} -->
+<blockquote class="wp-block-quote is-style-large"><p>Acme Marketing provided the tools and strategies we needed to build PPC campaigns with great ROI.</p><cite>John Doe, ABC Corp</cite></blockquote>
+<!-- /wp:quote --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"33%"} -->
+<div class="wp-block-column" style="flex-basis:33%"><!-- wp:image {"id":2120,"width":200,"height":200,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-large is-resized is-style-rounded"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-man-3.png" alt="" class="wp-image-2120" width="200" height="200"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"33%"} -->
+<div class="wp-block-column" style="flex-basis:33%"><!-- wp:image {"id":2126,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-large is-style-rounded"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-woman-3.png" alt="" class="wp-image-2126"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>I wouldn't hesitate to recommend Acme for marketing support. Their team of experts have assisted us with everything from keyword research to getting our social media strategy on the right track.</p><cite>Jane Doe, XYZ Interiors</cite></blockquote>
+<!-- /wp:quote --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:quote {"className":"is-style-large"} -->
+<blockquote class="wp-block-quote is-style-large"><p>Our team is free to work on the tasks they do best.</p><cite>Vasu Sameer, AK Consulting</cite></blockquote>
+<!-- /wp:quote --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"33%"} -->
+<div class="wp-block-column" style="flex-basis:33%"><!-- wp:image {"id":2127,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-large is-style-rounded"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-man-4.png" alt="" class="wp-image-2127"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"33%"} -->
+<div class="wp-block-column" style="flex-basis:33%"><!-- wp:image {"id":2128,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-large is-style-rounded"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-woman-2.png" alt="" class="wp-image-2128"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>From day one, the team at Acme become partners and friends. They immediately got to know the business are driven to help small businesses succeed.</p><cite>Amanda Smith, Awesome Software</cite></blockquote>
+<!-- /wp:quote --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_date><![CDATA[2021-02-26 06:05:31]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-26 11:05:31]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-23 08:56:22]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-23 08:56:22]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[testimonials]]></wp:post_name>
+			<wp:status><![CDATA[publish]]></wp:status>
+			<wp:post_parent>0</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[page]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+		</item>
+
+		<item>
+			<title><![CDATA[demo-man-3]]></title>
+			<link>https://ocdi.com/testimonials/demo-man-3/</link>
+			<pubDate>Tue, 23 Feb 2021 14:36:42 +0000</pubDate>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/02/demo-man-3.png</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2120</wp:post_id>
+			<wp:post_date><![CDATA[2021-02-23 09:36:42]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-23 14:36:42]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:55]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:55]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[demo-man-3]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2119</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/02/demo-man-3.png]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/02/demo-man-3.png]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:800;s:6:"height";i:800;s:4:"file";s:22:"2021/02/demo-man-3.png";s:5:"sizes";a:3:{s:6:"medium";a:4:{s:4:"file";s:22:"demo-man-3-300x300.png";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:22:"demo-man-3-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:22:"demo-man-3-768x768.png";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+		<item>
+			<title><![CDATA[demo-woman-3]]></title>
+			<link>https://ocdi.com/testimonials/demo-woman-3/</link>
+			<pubDate>Tue, 23 Feb 2021 15:12:59 +0000</pubDate>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/02/demo-woman-3.png</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2126</wp:post_id>
+			<wp:post_date><![CDATA[2021-02-23 10:12:59]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-23 15:12:59]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:55]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:55]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[demo-woman-3]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2119</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/02/demo-woman-3.png]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/02/demo-woman-3.png]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:800;s:6:"height";i:800;s:4:"file";s:24:"2021/02/demo-woman-3.png";s:5:"sizes";a:3:{s:6:"medium";a:4:{s:4:"file";s:24:"demo-woman-3-300x300.png";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:24:"demo-woman-3-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:24:"demo-woman-3-768x768.png";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+		<item>
+			<title><![CDATA[demo-man-4]]></title>
+			<link>https://ocdi.com/testimonials/demo-man-4/</link>
+			<pubDate>Tue, 23 Feb 2021 15:15:38 +0000</pubDate>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/02/demo-man-4.png</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2127</wp:post_id>
+			<wp:post_date><![CDATA[2021-02-23 10:15:38]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-23 15:15:38]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:55]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:55]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[demo-man-4]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2119</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/02/demo-man-4.png]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/02/demo-man-4.png]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:800;s:6:"height";i:800;s:4:"file";s:22:"2021/02/demo-man-4.png";s:5:"sizes";a:3:{s:6:"medium";a:4:{s:4:"file";s:22:"demo-man-4-300x300.png";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:22:"demo-man-4-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:22:"demo-man-4-768x768.png";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+		<item>
+			<title><![CDATA[demo-woman-2]]></title>
+			<link>https://ocdi.com/testimonials/demo-woman-2/</link>
+			<pubDate>Tue, 23 Feb 2021 15:20:28 +0000</pubDate>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/02/demo-woman-2.png</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2128</wp:post_id>
+			<wp:post_date><![CDATA[2021-02-23 10:20:28]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-23 15:20:28]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:55]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:55]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[demo-woman-2]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2119</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/02/demo-woman-2.png]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/02/demo-woman-2.png]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:800;s:6:"height";i:800;s:4:"file";s:24:"2021/02/demo-woman-2.png";s:5:"sizes";a:3:{s:6:"medium";a:4:{s:4:"file";s:24:"demo-woman-2-300x300.png";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:24:"demo-woman-2-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:24:"demo-woman-2-768x768.png";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+	</channel>
+</rss>

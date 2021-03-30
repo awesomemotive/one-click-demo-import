@@ -1,13 +1,13 @@
 # One Click Demo Import #
-**Contributors:** ocdi, smub, jaredatch, capuderg  
-**Tags:** import, content, demo, data, widgets, settings, redux, theme options  
-**Requires at least:** 4.0  
-**Tested up to:** 5.4  
-**Requires PHP:** 5.3.2  
-**Stable tag:** 2.6.1  
-**License:** GPLv3 or later  
+**Contributors:** ocdi, smub, jaredatch, capuderg
+**Tags:** import, content, demo, data, widgets, settings, redux, theme options
+**Requires at least:** 4.9
+**Tested up to:** 5.7
+**Requires PHP:** 5.6
+**Stable tag:** 3.0.0
+**License:** GPLv3 or later
 
-Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
+Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple theme demo import for your users.
 
 ## Description ##
 
@@ -17,27 +17,23 @@ The best feature of this plugin is, that theme authors can define import files i
 >
 > Setup One Click Demo Imports for your theme and your users will thank you for it!
 >
-> [Follow this easy guide on how to setup this plugin for your themes!](http://awesomemotive.github.io/one-click-demo-import/)
+> [Follow this easy guide on how to setup this plugin for your themes!](https://ocdi.com/quick-integration-guide/)
 
 > **Are you a theme user?**
 >
-> Contact the author of your theme and [let them know about this plugin](http://awesomemotive.github.io/one-click-demo-import/theme-users.html). Theme authors can make any theme compatible with this plugin in 15 minutes and make it much more user-friendly.
+> Contact the author of your theme and [let them know about this plugin](https://ocdi.com/ask-your-theme-author/). Theme authors can make any theme compatible with this plugin in 15 minutes and make it much more user-friendly.
 >
-> "[Where can I find the contact of the theme author?](http://awesomemotive.github.io/one-click-demo-import/theme-users.html)"
+> "[Where can I find the theme author contact?](https://ocdi.com/ask-your-theme-author/#how-can-you-contact-your-theme-author)"
 
-This plugin will create a submenu page under Appearance with the title **Import demo data**.
+Please take a look at our [plugin documentation](https://ocdi.com/user-guide/) for more information on how to import your demo content.
 
-If the theme you are using does not have any predefined import files, then you will be presented with three file upload inputs. First one is required and you will have to upload a demo content XML file, for the actual demo import. The second one is optional and will ask you for a WIE or JSON file for widgets import. You create that file using the [Widget Importer & Exporter](https://wordpress.org/plugins/widget-importer-exporter/) plugin. The third one is also optional and will import the customizer settings, select the DAT file which you can generate from [Customizer Export/Import](https://wordpress.org/plugins/customizer-export-import/) plugin (the customizer settings will be imported only if the export file was created from the same theme). The final one is optional as well and will import your Redux framework settings. You can generate the export json file with the [Redux framework](https://wordpress.org/plugins/redux-framework/) plugin.
-
-This plugin is using the improved WP import 2.0 that is still in development and can be found here: https://github.com/humanmade/WordPress-Importer.
-
-All progress of this plugin's work is logged in a log file in the default WP upload directory, together with the demo import files used in the importing process.
+This plugin is using the modified version of the improved WP import 2.0 that is still in development and can be found here: https://github.com/humanmade/WordPress-Importer.
 
 NOTE: There is no setting to "connect" authors from the demo import file to the existing users in your WP site (like there is in the original WP Importer plugin). All demo content will be imported under the current user.
 
 **Do you want to contribute?**
 
-Please refer to the official [GitHub repository](https://github.com/awesomemotive/one-click-demo-import) of this plugin.
+Please refer to our official [GitHub repository](https://github.com/awesomemotive/one-click-demo-import).
 
 ## Installation ##
 
@@ -69,162 +65,162 @@ The log file will also be registered in the *wp-admin -> Media* section, so you 
 
 ### How to predefine demo imports? ###
 
-This question is for theme authors. To predefine demo imports, you just have to add the following code structure, with your own values to your theme (using the `pt-ocdi/import_files` filter):
+This question is for theme authors. To predefine demo imports, you just have to add the following code structure, with your own values to your theme (using the `ocdi/import_files` filter):
 
-
-	function ocdi_import_files() {
-		return array(
-			array(
-				'import_file_name'           => 'Demo Import 1',
-				'categories'                 => array( 'Category 1', 'Category 2' ),
-				'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content.xml',
-				'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets.json',
-				'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer.dat',
-				'import_redux'               => array(
-					array(
-						'file_url'    => 'http://www.your_domain.com/ocdi/redux.json',
-						'option_name' => 'redux_option_name',
-					),
+```
+function ocdi_import_files() {
+	return array(
+		array(
+			'import_file_name'           => 'Demo Import 1',
+			'categories'                 => array( 'Category 1', 'Category 2' ),
+			'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content.xml',
+			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets.json',
+			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer.dat',
+			'import_redux'               => array(
+				array(
+					'file_url'    => 'http://www.your_domain.com/ocdi/redux.json',
+					'option_name' => 'redux_option_name',
 				),
-				'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
-				'import_notice'              => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
-				'preview_url'                => 'http://www.your_domain.com/my-demo-1',
 			),
-			array(
-				'import_file_name'           => 'Demo Import 2',
-				'categories'                 => array( 'New category', 'Old category' ),
-				'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content2.xml',
-				'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets2.json',
-				'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer2.dat',
-				'import_redux'               => array(
-					array(
-						'file_url'    => 'http://www.your_domain.com/ocdi/redux.json',
-						'option_name' => 'redux_option_name',
-					),
-					array(
-						'file_url'    => 'http://www.your_domain.com/ocdi/redux2.json',
-						'option_name' => 'redux_option_name_2',
-					),
+			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
+			'import_notice'              => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
+			'preview_url'                => 'http://www.your_domain.com/my-demo-1',
+		),
+		array(
+			'import_file_name'           => 'Demo Import 2',
+			'categories'                 => array( 'New category', 'Old category' ),
+			'import_file_url'            => 'http://www.your_domain.com/ocdi/demo-content2.xml',
+			'import_widget_file_url'     => 'http://www.your_domain.com/ocdi/widgets2.json',
+			'import_customizer_file_url' => 'http://www.your_domain.com/ocdi/customizer2.dat',
+			'import_redux'               => array(
+				array(
+					'file_url'    => 'http://www.your_domain.com/ocdi/redux.json',
+					'option_name' => 'redux_option_name',
 				),
-				'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
-				'import_notice'              => __( 'A special note for this import.', 'your-textdomain' ),
-				'preview_url'                => 'http://www.your_domain.com/my-demo-2',
+				array(
+					'file_url'    => 'http://www.your_domain.com/ocdi/redux2.json',
+					'option_name' => 'redux_option_name_2',
+				),
 			),
-		);
-	}
-	add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
-
+			'import_preview_image_url'   => 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
+			'import_notice'              => __( 'A special note for this import.', 'your-textdomain' ),
+			'preview_url'                => 'http://www.your_domain.com/my-demo-2',
+		),
+	);
+}
+add_filter( 'ocdi/import_files', 'ocdi_import_files' );
+```
 
 You can set content import, widgets, customizer and Redux framework import files. You can also define a preview image, which will be used only when multiple demo imports are defined, so that the user will see the difference between imports. Categories can be assigned to each demo import, so that they can be filtered easily. The preview URL will display the "Preview" button in the predefined demo item, which will open this URL in a new tab and user can view how the demo site looks like.
 
 ### How to automatically assign "Front page", "Posts page" and menu locations after the importer is done? ###
 
-You can do that, with the `pt-ocdi/after_import` action hook. The code would look something like this:
+You can do that, with the `ocdi/after_import` action hook. The code would look something like this:
 
+```
+function ocdi_after_import_setup() {
+	// Assign menus to their locations.
+	$main_menu = get_term_by( 'name', 'Main Menu', 'nav_menu' );
 
-	function ocdi_after_import_setup() {
-		// Assign menus to their locations.
-		$main_menu = get_term_by( 'name', 'Main Menu', 'nav_menu' );
-	
-		set_theme_mod( 'nav_menu_locations', array(
-				'main-menu' => $main_menu->term_id, // replace 'main-menu' here with the menu location identifier from register_nav_menu() function
-			)
-		);
-	
-		// Assign front page and posts page (blog page).
-		$front_page_id = get_page_by_title( 'Home' );
-		$blog_page_id  = get_page_by_title( 'Blog' );
-	
-		update_option( 'show_on_front', 'page' );
-		update_option( 'page_on_front', $front_page_id->ID );
-		update_option( 'page_for_posts', $blog_page_id->ID );
-	
-	}
-	add_action( 'pt-ocdi/after_import', 'ocdi_after_import_setup' );
+	set_theme_mod( 'nav_menu_locations', array(
+			'main-menu' => $main_menu->term_id, // replace 'main-menu' here with the menu location identifier from register_nav_menu() function
+		)
+	);
 
+	// Assign front page and posts page (blog page).
+	$front_page_id = get_page_by_title( 'Home' );
+	$blog_page_id  = get_page_by_title( 'Blog' );
+
+	update_option( 'show_on_front', 'page' );
+	update_option( 'page_on_front', $front_page_id->ID );
+	update_option( 'page_for_posts', $blog_page_id->ID );
+
+}
+add_action( 'ocdi/after_import', 'ocdi_after_import_setup' );
+```
 
 ### What about using local import files (from theme folder)? ###
 
 You have to use the same filter as in above example, but with a slightly different array keys: `local_*`. The values have to be absolute paths (not URLs) to your import files. To use local import files, that reside in your theme folder, please use the below code. Note: make sure your import files are readable!
 
-
-	function ocdi_import_files() {
-		return array(
-			array(
-				'import_file_name'             => 'Demo Import 1',
-				'categories'                   => array( 'Category 1', 'Category 2' ),
-				'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content.xml',
-				'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets.json',
-				'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer.dat',
-				'local_import_redux'           => array(
-					array(
-						'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux.json',
-						'option_name' => 'redux_option_name',
-					),
+```
+function ocdi_import_files() {
+	return array(
+		array(
+			'import_file_name'             => 'Demo Import 1',
+			'categories'                   => array( 'Category 1', 'Category 2' ),
+			'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content.xml',
+			'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets.json',
+			'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer.dat',
+			'local_import_redux'           => array(
+				array(
+					'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux.json',
+					'option_name' => 'redux_option_name',
 				),
-				'import_preview_image_url'     => 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
-				'import_notice'                => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
-				'preview_url'                  => 'http://www.your_domain.com/my-demo-1',
 			),
-			array(
-				'import_file_name'             => 'Demo Import 2',
-				'categories'                   => array( 'New category', 'Old category' ),
-				'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content2.xml',
-				'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets2.json',
-				'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer2.dat',
-				'local_import_redux'           => array(
-					array(
-						'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux.json',
-						'option_name' => 'redux_option_name',
-					),
-					array(
-						'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux2.json',
-						'option_name' => 'redux_option_name_2',
-					),
+			'import_preview_image_url'     => 'http://www.your_domain.com/ocdi/preview_import_image1.jpg',
+			'import_notice'                => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
+			'preview_url'                  => 'http://www.your_domain.com/my-demo-1',
+		),
+		array(
+			'import_file_name'             => 'Demo Import 2',
+			'categories'                   => array( 'New category', 'Old category' ),
+			'local_import_file'            => trailingslashit( get_template_directory() ) . 'ocdi/demo-content2.xml',
+			'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'ocdi/widgets2.json',
+			'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'ocdi/customizer2.dat',
+			'local_import_redux'           => array(
+				array(
+					'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux.json',
+					'option_name' => 'redux_option_name',
 				),
-				'import_preview_image_url'     => 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
-				'import_notice'                => __( 'A special note for this import.', 'your-textdomain' ),
-				'preview_url'                  => 'http://www.your_domain.com/my-demo-2',
+				array(
+					'file_path'   => trailingslashit( get_template_directory() ) . 'ocdi/redux2.json',
+					'option_name' => 'redux_option_name_2',
+				),
 			),
-		);
-	}
-	add_filter( 'pt-ocdi/import_files', 'ocdi_import_files' );
-
+			'import_preview_image_url'     => 'http://www.your_domain.com/ocdi/preview_import_image2.jpg',
+			'import_notice'                => __( 'A special note for this import.', 'your-textdomain' ),
+			'preview_url'                  => 'http://www.your_domain.com/my-demo-2',
+		),
+	);
+}
+add_filter( 'ocdi/import_files', 'ocdi_import_files' );
+```
 
 ### How to handle different "after import setups" depending on which predefined import was selected? ###
 
-This question might be asked by a theme author wanting to implement different after import setups for multiple predefined demo imports. Lets say we have predefined two demo imports with the following names: 'Demo Import 1' and 'Demo Import 2', the code for after import setup would be (using the `pt-ocdi/after_import` filter):
+This question might be asked by a theme author wanting to implement different after import setups for multiple predefined demo imports. Lets say we have predefined two demo imports with the following names: 'Demo Import 1' and 'Demo Import 2', the code for after import setup would be (using the `ocdi/after_import` filter):
 
+```
+function ocdi_after_import( $selected_import ) {
+	echo "This will be displayed on all after imports!";
 
-	function ocdi_after_import( $selected_import ) {
-		echo "This will be displayed on all after imports!";
-	
-		if ( 'Demo Import 1' === $selected_import['import_file_name'] ) {
-			echo "This will be displayed only on after import if user selects Demo Import 1";
-	
-			// Set logo in customizer
-			set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo1.png' );
-		}
-		elseif ( 'Demo Import 2' === $selected_import['import_file_name'] ) {
-			echo "This will be displayed only on after import if user selects Demo Import 2";
-	
-			// Set logo in customizer
-			set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo2.png' );
-		}
+	if ( 'Demo Import 1' === $selected_import['import_file_name'] ) {
+		echo "This will be displayed only on after import if user selects Demo Import 1";
+
+		// Set logo in customizer
+		set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo1.png' );
 	}
-	add_action( 'pt-ocdi/after_import', 'ocdi_after_import' );
+	elseif ( 'Demo Import 2' === $selected_import['import_file_name'] ) {
+		echo "This will be displayed only on after import if user selects Demo Import 2";
 
+		// Set logo in customizer
+		set_theme_mod( 'logo_img', get_template_directory_uri() . '/assets/images/logo2.png' );
+	}
+}
+add_action( 'ocdi/after_import', 'ocdi_after_import' );
+```
 
 ### Can I add some code before the widgets get imported? ###
 
-Of course you can, use the `pt-ocdi/before_widgets_import` action. You can also target different predefined demo imports like in the example above. Here is a simple example code of the `pt-ocdi/before_widgets_import` action:
+Of course you can, use the `ocdi/before_widgets_import` action. You can also target different predefined demo imports like in the example above. Here is a simple example code of the `ocdi/before_widgets_import` action:
 
-
-	function ocdi_before_widgets_import( $selected_import ) {
-		echo "Add your code here that will be executed before the widgets get imported!";
-	}
-	add_action( 'pt-ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
-
+```
+function ocdi_before_widgets_import( $selected_import ) {
+	echo "Add your code here that will be executed before the widgets get imported!";
+}
+add_action( 'ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
+```
 
 ### How can I import via the WP-CLI? ###
 
@@ -246,16 +242,16 @@ The content, widgets and customizer options can be mixed and used at the same ti
 
 ### I'm a theme author and I want to change the plugin intro text, how can I do that? ###
 
-You can change the plugin intro text by using the `pt-ocdi/plugin_intro_text` filter:
+You can change the plugin intro text by using the `ocdi/plugin_intro_text` filter:
 
+```
+function ocdi_plugin_intro_text( $default_text ) {
+	$default_text .= '<div class="ocdi__intro-text">This is a custom text added to this plugin intro text.</div>';
 
-	function ocdi_plugin_intro_text( $default_text ) {
-		$default_text .= '<div class="ocdi__intro-text">This is a custom text added to this plugin intro text.</div>';
-	
-		return $default_text;
-	}
-	add_filter( 'pt-ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
-
+	return $default_text;
+}
+add_filter( 'ocdi/plugin_intro_text', 'ocdi_plugin_intro_text' );
+```
 
 To add some text in a separate "box", you should wrap your text in a div with a class of 'ocdi__intro-text', like in the code example above.
 
@@ -263,87 +259,57 @@ To add some text in a separate "box", you should wrap your text in a div with a 
 
 This will greatly improve the time needed to import the content (images), but only the original sized images will be imported. You can disable it with a filter, so just add this code to your theme function.php file:
 
-`add_filter( 'pt-ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
+`add_filter( 'ocdi/regenerate_thumbnails_in_content_import', '__return_false' );`
 
 ### How to change the location, title and other parameters of the plugin page? ###
 
 As a theme author you do not like the location of the "Import Demo Data" plugin page in *Appearance -> Import Demo Data*? You can change that with the filter below. Apart from the location, you can also change the title or the page/menu and some other parameters as well.
 
+```
+function ocdi_plugin_page_setup( $default_settings ) {
+	$default_settings['parent_slug'] = 'themes.php';
+	$default_settings['page_title']  = esc_html__( 'One Click Demo Import' , 'one-click-demo-import' );
+	$default_settings['menu_title']  = esc_html__( 'Import Demo Data' , 'one-click-demo-import' );
+	$default_settings['capability']  = 'import';
+	$default_settings['menu_slug']   = 'one-click-demo-import';
 
-	function ocdi_plugin_page_setup( $default_settings ) {
-		$default_settings['parent_slug'] = 'themes.php';
-		$default_settings['page_title']  = esc_html__( 'One Click Demo Import' , 'pt-ocdi' );
-		$default_settings['menu_title']  = esc_html__( 'Import Demo Data' , 'pt-ocdi' );
-		$default_settings['capability']  = 'import';
-		$default_settings['menu_slug']   = 'pt-one-click-demo-import';
-	
-		return $default_settings;
-	}
-	add_filter( 'pt-ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
-
+	return $default_settings;
+}
+add_filter( 'ocdi/plugin_page_setup', 'ocdi_plugin_page_setup' );
+```
 
 ### How to do something before the content import executes? ###
 
-In version 2.0.0 there is a new action hook: `pt-ocdi/before_content_import`, which will let you hook before the content import starts. An example of the code would look like this:
+In version 2.0.0 there is a new action hook: `ocdi/before_content_import`, which will let you hook before the content import starts. An example of the code would look like this:
 
-
-	function ocdi_before_content_import( $selected_import ) {
-		if ( 'Demo Import 1' === $selected_import['import_file_name'] ) {
-			// Here you can do stuff for the "Demo Import 1" before the content import starts.
-			echo "before import 1";
-		}
-		else {
-			// Here you can do stuff for all other imports before the content import starts.
-			echo "before import 2";
-		}
+```
+function ocdi_before_content_import( $selected_import ) {
+	if ( 'Demo Import 1' === $selected_import['import_file_name'] ) {
+		// Here you can do stuff for the "Demo Import 1" before the content import starts.
+		echo "before import 1";
 	}
-	add_action( 'pt-ocdi/before_content_import', 'ocdi_before_content_import' );
-
+	else {
+		// Here you can do stuff for all other imports before the content import starts.
+		echo "before import 2";
+	}
+}
+add_action( 'ocdi/before_content_import', 'ocdi_before_content_import' );
+```
 
 ### How can I enable the `customize_save*` wp action hooks in the customizer import? ###
 
 It's easy, just add this to your theme:
 
-`add_action( 'pt-ocdi/enable_wp_customize_save_hooks', '__return_true' );`
+`add_action( 'ocdi/enable_wp_customize_save_hooks', '__return_true' );`
 
 This will enable the following WP hooks when importing the customizer data: `customize_save`, `customize_save_*`, `customize_save_after`.
 
-
-### How to configure the multi grid layout import popup confirmation? ###
-
-If you want to disable the popup confirmation modal window, use this filter:
-
-`add_filter( 'pt-ocdi/enable_grid_layout_import_popup_confirmation', '__return_false' );`
-
-If you want to just change some options for the jQuery modal window we use for the popup confirmation, then use this filter:
-
-
-	function my_theme_ocdi_confirmation_dialog_options ( $options ) {
-		return array_merge( $options, array(
-			'width'       => 300,
-			'dialogClass' => 'wp-dialog',
-			'resizable'   => false,
-			'height'      => 'auto',
-			'modal'       => true,
-		) );
-	}
-	add_filter( 'pt-ocdi/confirmation_dialog_options', 'my_theme_ocdi_confirmation_dialog_options', 10, 1 );
-
-
-### How can I disable the ProteusThemes branding notice after successful demo import? ###
-
-You can disable the branding notice with a WP filter. All you need to do is add this bit of code to your theme:
-
-`add_filter( 'pt-ocdi/disable_pt_branding', '__return_true' );`
-
-and the notice will not be displayed.
-
 ### How can I pass Amazon S3 presigned URL's (temporary links) as external files ? ###
 
-If you want to host your import content files on Amazon S3, but you want them to be publicly available, rather through an own API as presigned URL's (which expires) you can use the filter `pt-ocdi/pre_download_import_files` in which you can pass your own URL's, for example:
+If you want to host your import content files on Amazon S3, but you want them to be publicly available, rather through an own API as presigned URL's (which expires) you can use the filter `ocdi/pre_download_import_files` in which you can pass your own URL's, for example:
 
 ```
-add_filter( 'pt-ocdi/pre_download_import_files', function( $import_file_info ){
+add_filter( 'ocdi/pre_download_import_files', function( $import_file_info ){
 
 	// In this example `get_my_custom_urls` is supposedly making a `wp_remote_get` request, getting the urls from an API server where you're creating the presigned urls, [example here](https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-presigned-url.html).
 	// This request should return an array containing all the 3 links - `import_file_url`, `import_widget_file_url`, `import_customizer_file_url`
@@ -400,9 +366,16 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 ### 3.0.0 ###
 
-*Release Date - xx February 2021*
+*Release Date - 31 March 2021*
 
+* IMPORTANT: Support for PHP 5.5 or lower has been discontinued. If you are running one of those versions, you MUST upgrade PHP before installing or upgrading to One Click Demo Import v3.0. Failure to do that will disable One Click Demo Import functionality.
+* IMPORTANT: Support for WordPress core v4.9 or lower has been discontinued. If you are running one of those versions, you MUST upgrade WordPress core before installing or upgrading to One Click Demo Import v3.0. Failure to do that could cause issues with the One Click Demo Import functionality.
+* Added support for recommended theme plugins.
+* Added useful single page demo content imports.
+* Added recommended plugins installer.
+* Updated the UI/UX of the plugin.
 * Fixed PHP8 warning.
+* Fixed deprecated WP function `wp_slash_strings_only`.
 
 ### 2.6.1 ###
 

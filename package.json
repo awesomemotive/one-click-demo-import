@@ -1,11 +1,23 @@
 {
   "private": true,
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-po2mo": "^0.1.2",
-    "grunt-wp-i18n": "^0.5.1",
-    "grunt-wp-readme-to-markdown": "^1.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-cached": "^1.1.1",
+    "gulp-copy": "^4.0.1",
+    "gulp-debug": "^4.0.0",
+    "gulp-readme-to-markdown": "^0.2.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1",
     "load-grunt-tasks": "^3.1.0"
-  }
+  },
+  "scripts": {
+    "gulp": "node ./node_modules/gulp/bin/gulp.js"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
 }

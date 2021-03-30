@@ -119,7 +119,7 @@ class Importer {
 
 		// Increase PHP max execution time. Just in case, even though the AJAX calls are only 25 sec long.
 		if ( strpos( ini_get( 'disable_functions' ), 'set_time_limit' ) === false ) {
-			set_time_limit( apply_filters( 'pt-ocdi/set_time_limit_for_demo_data_import', 300 ) );
+			set_time_limit( Helpers::apply_filters( 'ocdi/set_time_limit_for_demo_data_import', 300 ) );
 		}
 
 		// Disable import of authors.
@@ -129,7 +129,7 @@ class Importer {
 		add_filter( 'wxr_importer.pre_process.post', array( $this, 'new_ajax_request_maybe' ) );
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
-		if ( ! apply_filters( 'pt-ocdi/regenerate_thumbnails_in_content_import', true ) ) {
+		if ( ! Helpers::apply_filters( 'ocdi/regenerate_thumbnails_in_content_import', true ) ) {
 			add_filter( 'intermediate_image_sizes_advanced', '__return_null' );
 		}
 
@@ -155,7 +155,7 @@ class Importer {
 		$time = microtime( true ) - $this->microtime;
 
 		// We should make a new ajax call, if the time is right.
-		if ( $time > apply_filters( 'pt-ocdi/time_for_one_ajax_call', 25 ) ) {
+		if ( $time > Helpers::apply_filters( 'ocdi/time_for_one_ajax_call', 25 ) ) {
 			$response = array(
 				'status'  => 'newAJAX',
 				'message' => 'Time for new AJAX request!: ' . $time,
@@ -171,7 +171,7 @@ class Importer {
 
 			// Add message to log file.
 			$log_added = Helpers::append_to_file(
-				__( 'New AJAX call!' , 'pt-ocdi' ) . PHP_EOL . $message,
+				__( 'New AJAX call!' , 'one-click-demo-import' ) . PHP_EOL . $message,
 				$this->ocdi->get_log_file_path(),
 				''
 			);

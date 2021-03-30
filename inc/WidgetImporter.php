@@ -37,7 +37,7 @@ class WidgetImporter {
 			Helpers::append_to_file(
 				$error_message,
 				$log_file_path,
-				esc_html__( 'Importing widgets', 'pt-ocdi' )
+				esc_html__( 'Importing widgets', 'one-click-demo-import' )
 			);
 		}
 		else {
@@ -49,7 +49,7 @@ class WidgetImporter {
 			$log_added = Helpers::append_to_file(
 				$message,
 				$log_file_path,
-				esc_html__( 'Importing widgets' , 'pt-ocdi' )
+				esc_html__( 'Importing widgets' , 'one-click-demo-import' )
 			);
 		}
 
@@ -85,7 +85,7 @@ class WidgetImporter {
 		if ( ! file_exists( $file ) ) {
 			return new \WP_Error(
 				'widget_import_file_not_found',
-				__( 'Error: Widget import file could not be found.', 'pt-ocdi' )
+				__( 'Error: Widget import file could not be found.', 'one-click-demo-import' )
 			);
 		}
 
@@ -115,13 +115,13 @@ class WidgetImporter {
 		if ( empty( $data ) || ! is_object( $data ) ) {
 			return new \WP_Error(
 				'corrupted_widget_import_data',
-				__( 'Error: Widget import data could not be read. Please try a different file.', 'pt-ocdi' )
+				__( 'Error: Widget import data could not be read. Please try a different file.', 'one-click-demo-import' )
 			);
 		}
 
 		// Hook before import.
-		do_action( 'pt-ocdi/widget_importer_before_widgets_import' );
-		$data = apply_filters( 'pt-ocdi/before_widgets_import_data', $data );
+		Helpers::do_action( 'ocdi/widget_importer_before_widgets_import' );
+		$data = Helpers::apply_filters( 'ocdi/before_widgets_import_data', $data );
 
 		// Get all available widgets site supports.
 		$available_widgets = self::available_widgets();
@@ -154,7 +154,7 @@ class WidgetImporter {
 				$sidebar_available    = false;
 				$use_sidebar_id       = 'wp_inactive_widgets'; // Add to inactive if sidebar does not exist in theme.
 				$sidebar_message_type = 'error';
-				$sidebar_message      = __( 'Sidebar does not exist in theme (moving widget to Inactive)', 'pt-ocdi' );
+				$sidebar_message      = __( 'Sidebar does not exist in theme (moving widget to Inactive)', 'one-click-demo-import' );
 			}
 
 			// Result for sidebar.
@@ -175,13 +175,13 @@ class WidgetImporter {
 				if ( ! $fail && ! isset( $available_widgets[ $id_base ] ) ) {
 					$fail                = true;
 					$widget_message_type = 'error';
-					$widget_message      = __( 'Site does not support widget', 'pt-ocdi' ); // Explain why widget not imported.
+					$widget_message      = __( 'Site does not support widget', 'one-click-demo-import' ); // Explain why widget not imported.
 				}
 
 				// Filter to modify settings object before conversion to array and import.
 				// Leave this filter here for backwards compatibility with manipulating objects (before conversion to array below).
 				// Ideally the newer wie_widget_settings_array below will be used instead of this.
-				$widget = apply_filters( 'pt-ocdi/widget_settings', $widget ); // Object.
+				$widget = Helpers::apply_filters( 'ocdi/widget_settings', $widget ); // Object.
 
 				// Convert multidimensional objects to multidimensional arrays.
 				// Some plugins like Jetpack Widget Visibility store settings as multidimensional arrays.
@@ -193,7 +193,7 @@ class WidgetImporter {
 				// Filter to modify settings array.
 				// This is preferred over the older wie_widget_settings filter above.
 				// Do before identical check because changes may make it identical to end result (such as URL replacements).
-				$widget = apply_filters( 'pt-ocdi/widget_settings_array', $widget );
+				$widget = Helpers::apply_filters( 'ocdi/widget_settings_array', $widget );
 
 				// Does widget with identical settings already exist in same sidebar?
 				if ( ! $fail && isset( $widget_instances[ $id_base ] ) ) {
@@ -208,7 +208,7 @@ class WidgetImporter {
 						if ( in_array( "$id_base-$check_id", $sidebar_widgets ) && (array) $widget == $check_widget ) {
 							$fail                = true;
 							$widget_message_type = 'warning';
-							$widget_message      = __( 'Widget already exists', 'pt-ocdi' ); // Explain why widget not imported.
+							$widget_message      = __( 'Widget already exists', 'one-click-demo-import' ); // Explain why widget not imported.
 
 							break;
 						}
@@ -268,22 +268,22 @@ class WidgetImporter {
 						'widget_id_num'     => $new_instance_id_number,
 						'widget_id_num_old' => $instance_id_number,
 					);
-					do_action( 'pt-ocdi/widget_importer_after_single_widget_import', $after_widget_import );
+					Helpers::do_action( 'ocdi/widget_importer_after_single_widget_import', $after_widget_import );
 
 					// Success message.
 					if ( $sidebar_available ) {
 						$widget_message_type = 'success';
-						$widget_message      = __( 'Imported', 'pt-ocdi' );
+						$widget_message      = __( 'Imported', 'one-click-demo-import' );
 					}
 					else {
 						$widget_message_type = 'warning';
-						$widget_message      = __( 'Imported to Inactive', 'pt-ocdi' );
+						$widget_message      = __( 'Imported to Inactive', 'one-click-demo-import' );
 					}
 				}
 
 				// Result for widget instance.
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['name']         = isset( $available_widgets[ $id_base ]['name'] ) ? $available_widgets[ $id_base ]['name'] : $id_base; // Widget name or ID if name not available (not supported by site).
-				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['title']        = ! empty( $widget['title'] ) ? $widget['title'] : __( 'No Title', 'pt-ocdi' ); // Show "No Title" if widget instance is untitled.
+				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['title']        = ! empty( $widget['title'] ) ? $widget['title'] : __( 'No Title', 'one-click-demo-import' ); // Show "No Title" if widget instance is untitled.
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['message_type'] = $widget_message_type;
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['message']      = $widget_message;
 
@@ -291,10 +291,10 @@ class WidgetImporter {
 		}
 
 		// Hook after import.
-		do_action( 'pt-ocdi/widget_importer_after_widgets_import' );
+		Helpers::do_action( 'ocdi/widget_importer_after_widgets_import' );
 
 		// Return results.
-		return apply_filters( 'pt-ocdi/widget_import_results', $results );
+		return Helpers::apply_filters( 'ocdi/widget_import_results', $results );
 	}
 
 
@@ -319,7 +319,7 @@ class WidgetImporter {
 			}
 		}
 
-		return apply_filters( 'pt-ocdi/available_widgets', $available_widgets );
+		return Helpers::apply_filters( 'ocdi/available_widgets', $available_widgets );
 	}
 
 
@@ -330,7 +330,7 @@ class WidgetImporter {
 	 */
 	private static function format_results_for_log( $results ) {
 		if ( empty( $results ) ) {
-			esc_html_e( 'No results for widget import!', 'pt-ocdi' );
+			esc_html_e( 'No results for widget import!', 'one-click-demo-import' );
 		}
 
 		// Loop sidebars.

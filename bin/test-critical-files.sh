@@ -12,6 +12,8 @@ function testRequiredFiles {
 		readme.txt
 		assets/css/main.css
 		assets/js/main.js
+		assets/demo-content/about-page.xml
+		inc/CreateDemoContent/DemoContentCreator.php
 		inc/CustomizerImporter.php
 		inc/CustomizerOption.php
 		inc/Downloader.php
@@ -32,7 +34,10 @@ function testRequiredFiles {
 	requiredFolders=(
 		assets/js
 		assets/css
+		assets/demo-content
+		assets/images
 		inc
+		inc/CreateDemoContent
 		languages
 		vendor
 	)

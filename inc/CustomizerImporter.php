@@ -34,15 +34,15 @@ class CustomizerImporter {
 			Helpers::append_to_file(
 				$error_message,
 				$log_file_path,
-				esc_html__( 'Importing customizer settings', 'pt-ocdi' )
+				esc_html__( 'Importing customizer settings', 'one-click-demo-import' )
 			);
 		}
 		else {
 			// Add this message to log file.
 			$log_added = Helpers::append_to_file(
-				esc_html__( 'Customizer settings import finished!', 'pt-ocdi' ),
+				esc_html__( 'Customizer settings import finished!', 'one-click-demo-import' ),
 				$log_file_path,
-				esc_html__( 'Importing customizer settings' , 'pt-ocdi' )
+				esc_html__( 'Importing customizer settings' , 'one-click-demo-import' )
 			);
 		}
 	}
@@ -69,8 +69,8 @@ class CustomizerImporter {
 		if ( ! file_exists( $import_file_path ) ) {
 			return new \WP_Error(
 				'missing_cutomizer_import_file',
-				sprintf(
-					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'pt-ocdi' ),
+				sprintf( /* translators: %s - file path */
+					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'one-click-demo-import' ),
 					$import_file_path
 				)
 			);
@@ -90,18 +90,18 @@ class CustomizerImporter {
 		if ( ! is_array( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
 			return new \WP_Error(
 				'customizer_import_data_error',
-				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'pt-ocdi' )
+				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'one-click-demo-import' )
 			);
 		}
 		if ( $data['template'] !== $template ) {
 			return new \WP_Error(
 				'customizer_import_wrong_theme',
-				esc_html__( 'Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'pt-ocdi' )
+				esc_html__( 'Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'one-click-demo-import' )
 			);
 		}
 
 		// Import images.
-		if ( apply_filters( 'pt-ocdi/customizer_import_images', true ) ) {
+		if ( Helpers::apply_filters( 'ocdi/customizer_import_images', true ) ) {
 			$data['mods'] = self::import_customizer_images( $data['mods'] );
 		}
 
@@ -124,7 +124,7 @@ class CustomizerImporter {
 		}
 
 		// Should the customizer import use the WP customize_save* hooks?
-		$use_wp_customize_save_hooks = apply_filters( 'pt-ocdi/enable_wp_customize_save_hooks', false );
+		$use_wp_customize_save_hooks = Helpers::apply_filters( 'ocdi/enable_wp_customize_save_hooks', false );
 
 		if ( $use_wp_customize_save_hooks ) {
 			do_action( 'customize_save', $wp_customize );

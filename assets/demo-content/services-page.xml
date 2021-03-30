@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- generator="WordPress/5.7" created="2021-03-25 06:41" -->
+<rss version="2.0"
+	 xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	 xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	 xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	 xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns:wp="http://wordpress.org/export/1.2/"
+>
+
+	<channel>
+		<title>ocdi</title>
+		<link>https://ocdi.com</link>
+		<description>Just another WordPress site</description>
+		<pubDate>Thu, 25 Mar 2021 06:41:21 +0000</pubDate>
+		<language>en-US</language>
+		<wp:wxr_version>1.2</wp:wxr_version>
+		<wp:base_site_url>https://ocdi.com</wp:base_site_url>
+		<wp:base_blog_url>https://ocdi.com</wp:base_blog_url>
+
+		<generator>https://wordpress.org/?v=5.7</generator>
+
+		<item>
+			<title><![CDATA[Services]]></title>
+			<link>https://ocdi.com/services/</link>
+			<pubDate>Tue, 09 Mar 2021 14:11:37 +0000</pubDate>
+			<description></description>
+			<content:encoded><![CDATA[<!-- wp:paragraph -->
+<p>Choose between three monthly plans. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:columns {"backgroundColor":"gray"} -->
+<div class="wp-block-columns has-gray-background-color has-background"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"textAlign":"center","level":3} -->
+<h3 class="has-text-align-center" id="h-basic">Basic</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">$20/mo</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This service is awesome if you're just starting out!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Service</li><li>Service</li><li>Service</li></ul>
+<!-- /wp:list --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"textAlign":"center","level":3} -->
+<h3 class="has-text-align-center" id="h-agency">Agency</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">$50/mo</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This is the best choice for small businesses who want to see rapid results.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Service</li><li>Service</li><li>Service</li><li>Service</li><li>Service</li></ul>
+<!-- /wp:list --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"textAlign":"center","level":3} -->
+<h3 class="has-text-align-center" id="h-pro">Pro</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">$30/mo</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Want the whole package? We got it covered.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Service</li><li>Service</li><li>Service</li><li>Service</li></ul>
+<!-- /wp:list --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:buttons {"contentJustification":"center"} -->
+<div class="wp-block-buttons is-content-justification-center"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link">Learn More</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:buttons {"contentJustification":"center"} -->
+<div class="wp-block-buttons is-content-justification-center"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link">Learn More</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:buttons {"contentJustification":"center"} -->
+<div class="wp-block-buttons is-content-justification-center"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link">Learn More</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:heading -->
+<h2 id="h-our-guarantee">Our Guarantee</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>We offer a full money-back guarantee on all plans if you cancel within the first 30-days. Not happy with your plan? Switch it any time!</p>
+<!-- /wp:paragraph -->]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_date><![CDATA[2021-03-09 09:11:37]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-03-09 14:11:37]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-23 08:46:09]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-23 08:46:09]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[services]]></wp:post_name>
+			<wp:status><![CDATA[publish]]></wp:status>
+			<wp:post_parent>0</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[page]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+		</item>
+
+	</channel>
+</rss>

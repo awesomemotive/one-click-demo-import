@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- generator="WordPress/5.7" created="2021-03-25 06:41" -->
+<rss version="2.0"
+	 xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	 xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	 xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	 xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns:wp="http://wordpress.org/export/1.2/"
+>
+
+	<channel>
+		<title>ocdi</title>
+		<link>https://ocdi.com</link>
+		<description>Just another WordPress site</description>
+		<pubDate>Thu, 25 Mar 2021 06:41:21 +0000</pubDate>
+		<language>en-US</language>
+		<wp:wxr_version>1.2</wp:wxr_version>
+		<wp:base_site_url>https://ocdi.com</wp:base_site_url>
+		<wp:base_blog_url>https://ocdi.com</wp:base_blog_url>
+
+		<generator>https://wordpress.org/?v=5.7</generator>
+
+		<item>
+			<title><![CDATA[Contact Us]]></title>
+			<link>https://ocdi.com/contact-us/</link>
+			<pubDate>Fri, 05 Mar 2021 17:38:57 +0000</pubDate>
+			<description></description>
+			<content:encoded><![CDATA[<!-- wp:cover {"url":"https://ocdi.com/wp-content/uploads/2021/03/adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1.jpg","id":2318,"dimRatio":15,"focalPoint":{"x":"0.40","y":"0.26"},"minHeight":375,"minHeightUnit":"px","contentPosition":"center center","align":"wide","className":"is-position-center-center"} -->
+<div class="wp-block-cover alignwide has-background-dim-20 has-background-dim is-position-center-center" style="min-height:375px"><img class="wp-block-cover__image-background wp-image-2318" alt="" src="https://ocdi.com/wp-content/uploads/2021/03/adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1.jpg" style="object-position:40% 26%" data-object-fit="cover" data-object-position="40% 26%"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","style":{"typography":{"fontSize":74,"lineHeight":"1.1"},"color":{"text":"#fffffa"}}} -->
+<p class="has-text-align-center has-text-color" style="color:#fffffa;font-size:74px;line-height:1.1"></p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:cover -->
+
+<!-- wp:columns {"verticalAlignment":"center","align":"full"} -->
+<div class="wp-block-columns alignfull are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center"} -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:buttons {"contentJustification":"center"} -->
+<div class="wp-block-buttons is-content-justification-center"><!-- wp:button {"backgroundColor":"yellow","textColor":"white"} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-white-color has-yellow-background-color has-text-color has-background" href="#">Learn More About Our Features</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"center"} -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:buttons {"contentJustification":"center"} -->
+<div class="wp-block-buttons is-content-justification-center"><!-- wp:button {"backgroundColor":"yellow","textColor":"white"} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-white-color has-yellow-background-color has-text-color has-background" href="#">View Our Support Documentation</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:heading {"textAlign":"center","level":1,"align":"full"} -->
+<h1 class="alignfull has-text-align-center" id="h-talk-to-a-human">Talk to a Human</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","fontSize":"medium"} -->
+<p class="has-text-align-center has-medium-font-size">We promise, your message won't disappear into the abyss. We're standing by and ready to help with any questions, comments, or thoughts you may have. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"33.33%"} -->
+<div class="wp-block-column" style="flex-basis:33.33%"><!-- wp:heading {"textAlign":"center","align":"full"} -->
+<h2 class="alignfull has-text-align-center" id="h-let-s-chat">Let's Chat!</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":2367,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://ocdi.com/wp-content/uploads/2021/03/animated-arrow-form.gif" alt="" class="wp-image-2367"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"66.66%"} -->
+<div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:wpforms/form-selector {"formId":"9999"} /--></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2307</wp:post_id>
+			<wp:post_date><![CDATA[2021-03-05 12:38:57]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-03-05 17:38:57]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-24 12:24:08]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-24 12:24:08]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[contact-us]]></wp:post_name>
+			<wp:status><![CDATA[publish]]></wp:status>
+			<wp:post_parent>0</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[page]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[ocdi_precreated_demo]]></wp:meta_key>
+				<wp:meta_value><![CDATA[contact-page]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[ocdi_precreated_demo_updated]]></wp:meta_key>
+				<wp:meta_value><![CDATA[no]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+		<item>
+			<title><![CDATA[animated-arrow-form]]></title>
+			<link>https://ocdi.com/contact-us/animated-arrow-form/</link>
+			<pubDate>Fri, 05 Mar 2021 23:11:12 +0000</pubDate>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/03/animated-arrow-form.gif</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2367</wp:post_id>
+			<wp:post_date><![CDATA[2021-03-05 18:11:12]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-03-05 23:11:12]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:58]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:58]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[animated-arrow-form]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2307</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/03/animated-arrow-form.gif]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/03/animated-arrow-form.gif]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:600;s:6:"height";i:600;s:4:"file";s:31:"2021/03/animated-arrow-form.gif";s:5:"sizes";a:2:{s:6:"medium";a:4:{s:4:"file";s:31:"animated-arrow-form-300x300.gif";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:9:"image/gif";}s:9:"thumbnail";a:4:{s:4:"file";s:31:"animated-arrow-form-150x150.gif";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/gif";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+		<item>
+			<title><![CDATA[adam-solomon-WHUDOzd5IYU-unsplash-1]]></title>
+			<link>https://ocdi.com/contact-us/adam-solomon-whudozd5iyu-unsplash-1/</link>
+			<pubDate>Fri, 05 Mar 2021 17:25:32 +0000</pubDate>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/03/adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1.jpg</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2318</wp:post_id>
+			<wp:post_date><![CDATA[2021-03-05 12:25:32]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-03-05 17:25:32]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:57]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:57]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[adam-solomon-whudozd5iyu-unsplash-1]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2307</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/03/adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1.jpg]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/03/adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1.jpg]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:2560;s:6:"height";i:1105;s:4:"file";s:56:"2021/03/adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1.jpg";s:5:"sizes";a:6:{s:6:"medium";a:4:{s:4:"file";s:56:"adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1-300x129.jpg";s:5:"width";i:300;s:6:"height";i:129;s:9:"mime-type";s:10:"image/jpeg";}s:5:"large";a:4:{s:4:"file";s:57:"adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1-1024x442.jpg";s:5:"width";i:1024;s:6:"height";i:442;s:9:"mime-type";s:10:"image/jpeg";}s:9:"thumbnail";a:4:{s:4:"file";s:56:"adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:12:"medium_large";a:4:{s:4:"file";s:56:"adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1-768x332.jpg";s:5:"width";i:768;s:6:"height";i:332;s:9:"mime-type";s:10:"image/jpeg";}s:9:"1536x1536";a:4:{s:4:"file";s:57:"adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1-1536x663.jpg";s:5:"width";i:1536;s:6:"height";i:663;s:9:"mime-type";s:10:"image/jpeg";}s:9:"2048x2048";a:4:{s:4:"file";s:57:"adam-solomon-WHUDOzd5IYU-unsplash-1-scaled-1-2048x884.jpg";s:5:"width";i:2048;s:6:"height";i:884;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+	</channel>
+</rss>

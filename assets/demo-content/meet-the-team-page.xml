@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- generator="WordPress/5.7" created="2021-03-25 06:41" -->
+<rss version="2.0"
+	 xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	 xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	 xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	 xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns:wp="http://wordpress.org/export/1.2/"
+>
+
+	<channel>
+		<title>ocdi</title>
+		<link>https://ocdi.com</link>
+		<description>Just another WordPress site</description>
+		<pubDate>Thu, 25 Mar 2021 06:41:21 +0000</pubDate>
+		<language>en-US</language>
+		<wp:wxr_version>1.2</wp:wxr_version>
+		<wp:base_site_url>https://ocdi.com</wp:base_site_url>
+		<wp:base_blog_url>https://ocdi.com</wp:base_blog_url>
+
+		<generator>https://wordpress.org/?v=5.7</generator>
+
+		<item>
+			<title><![CDATA[Meet the Team]]></title>
+			<link>https://ocdi.com/meet-the-team/</link>
+			<pubDate>Tue, 09 Mar 2021 11:43:12 +0000</pubDate>
+			<description></description>
+			<content:encoded><![CDATA[<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">Meet the awesome team behind Acme Marketing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:columns {"className":"is-style-default"} -->
+<div class="wp-block-columns is-style-default"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"textAlign":"center","level":3} -->
+<h3 class="has-text-align-center">Leah Robinson</h3>
+<!-- /wp:heading -->
+
+<!-- wp:image {"align":"center","id":2098,"width":200,"height":200,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<div class="wp-block-image is-style-rounded"><figure class="aligncenter size-large is-resized"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-woman.png" alt="" class="wp-image-2098" width="200" height="200"/></figure></div>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"textAlign":"center","level":3} -->
+<h3 class="has-text-align-center">Dan D. Connor</h3>
+<!-- /wp:heading -->
+
+<!-- wp:image {"align":"center","id":2100,"width":200,"height":200,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<div class="wp-block-image is-style-rounded"><figure class="aligncenter size-large is-resized"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-man-2.png" alt="" class="wp-image-2100" width="200" height="200"/></figure></div>
+<!-- /wp:image --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"textAlign":"center","level":3} -->
+<h3 class="has-text-align-center">Thomas J. Turner</h3>
+<!-- /wp:heading -->
+
+<!-- wp:image {"align":"center","id":2099,"width":200,"height":200,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<div class="wp-block-image is-style-rounded"><figure class="aligncenter size-large is-resized"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-man.png" alt="" class="wp-image-2099" width="200" height="200"/></figure></div>
+<!-- /wp:image --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:separator {"className":"is-style-dots"} -->
+<hr class="wp-block-separator is-style-dots"/>
+<!-- /wp:separator -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"33%"} -->
+<div class="wp-block-column" style="flex-basis:33%"><!-- wp:image {"id":2098,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-large is-style-rounded"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-woman.png" alt="" class="wp-image-2098"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:social-links {"className":"is-style-logos-only"} -->
+<ul class="wp-block-social-links is-style-logos-only"><!-- wp:social-link {"url":"#url","service":"linkedin"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"twitch"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"youtube"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"facebook"} /--></ul>
+<!-- /wp:social-links --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p>Leah is the CEO and founder of Acme Marketing. She spent several years working as a freelance marketing consultant before moving into full-time management positions. Before founding Acme Marketing, Leah handled several million-dollar accounts for some of the biggest names in tech.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:spacer -->
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"33%"} -->
+<div class="wp-block-column" style="flex-basis:33%"><!-- wp:image {"id":2099,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-large is-style-rounded"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-man.png" alt="" class="wp-image-2099"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:social-links {"className":"is-style-logos-only"} -->
+<ul class="wp-block-social-links is-style-logos-only"><!-- wp:social-link {"url":"#url","service":"linkedin"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"twitch"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"youtube"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"facebook"} /--></ul>
+<!-- /wp:social-links --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p>Thomas started out as a freelance content writer and quickly moved into full-time content production for one of America's biggest homeware brands. As Acme's first full-time employee, he's developed and perfected the content strategy from the ground up. </p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:spacer -->
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"33%"} -->
+<div class="wp-block-column" style="flex-basis:33%"><!-- wp:image {"id":2100,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-large is-style-rounded"><img src="https://ocdi.com/wp-content/uploads/2021/02/demo-man-2.png" alt="" class="wp-image-2100"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:social-links {"className":"is-style-logos-only"} -->
+<ul class="wp-block-social-links is-style-logos-only"><!-- wp:social-link {"url":"#url","service":"linkedin"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"twitch"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"youtube"} /-->
+
+<!-- wp:social-link {"url":"#url","service":"facebook"} /--></ul>
+<!-- /wp:social-links --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p>Dan is an experienced social media manager, and his skills span everything from video production to creating PPC campaigns. Dan has deep understanding of the tools and strategies needed to get your content in front of the right people on social networks.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:paragraph -->
+<p>Contact the Team</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:wpforms/form-selector {"formId":"9999"} /-->]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_date><![CDATA[2021-03-09 06:43:12]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-03-09 11:43:12]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:37:00]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:37:00]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[meet-the-team]]></wp:post_name>
+			<wp:status><![CDATA[publish]]></wp:status>
+			<wp:post_parent>0</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[page]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[ocdi_precreated_demo]]></wp:meta_key>
+				<wp:meta_value><![CDATA[contact-page]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[ocdi_precreated_demo_updated]]></wp:meta_key>
+				<wp:meta_value><![CDATA[no]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+		<item>
+			<title><![CDATA[demo-woman]]></title>
+			<link>https://ocdi.com/meet-the-team/demo-woman/</link>
+			<pubDate>Tue, 23 Feb 2021 10:21:11 +0000</pubDate>
+			<dc:creator><![CDATA[gcapuder@awesomemotive.com]]></dc:creator>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/02/demo-woman.png</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2098</wp:post_id>
+			<wp:post_date><![CDATA[2021-02-23 05:21:11]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-23 10:21:11]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:54]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:54]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[demo-woman]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2097</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/02/demo-woman.png]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/02/demo-woman.png]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:800;s:6:"height";i:800;s:4:"file";s:22:"2021/02/demo-woman.png";s:5:"sizes";a:3:{s:6:"medium";a:4:{s:4:"file";s:22:"demo-woman-300x300.png";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:22:"demo-woman-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:22:"demo-woman-768x768.png";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_image_alt]]></wp:meta_key>
+				<wp:meta_value><![CDATA[demo-woman]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+		<item>
+			<title><![CDATA[demo-man]]></title>
+			<link>https://ocdi.com/meet-the-team/demo-man/</link>
+			<pubDate>Tue, 23 Feb 2021 10:21:16 +0000</pubDate>
+			<dc:creator><![CDATA[gcapuder@awesomemotive.com]]></dc:creator>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/02/demo-man.png</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2099</wp:post_id>
+			<wp:post_date><![CDATA[2021-02-23 05:21:16]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-23 10:21:16]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:54]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:54]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[demo-man]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2097</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/02/demo-man.png]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/02/demo-man.png]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:800;s:6:"height";i:800;s:4:"file";s:20:"2021/02/demo-man.png";s:5:"sizes";a:3:{s:6:"medium";a:4:{s:4:"file";s:20:"demo-man-300x300.png";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:20:"demo-man-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:20:"demo-man-768x768.png";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+		<item>
+			<title><![CDATA[demo-man-2]]></title>
+			<link>https://ocdi.com/meet-the-team/demo-man-2/</link>
+			<pubDate>Tue, 23 Feb 2021 10:27:58 +0000</pubDate>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/02/demo-man-2.png</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2100</wp:post_id>
+			<wp:post_date><![CDATA[2021-02-23 05:27:58]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-23 10:27:58]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:54]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:54]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[demo-man-2]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2097</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/02/demo-man-2.png]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/02/demo-man-2.png]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:800;s:6:"height";i:800;s:4:"file";s:22:"2021/02/demo-man-2.png";s:5:"sizes";a:3:{s:6:"medium";a:4:{s:4:"file";s:22:"demo-man-2-300x300.png";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:22:"demo-man-2-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:22:"demo-man-2-768x768.png";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+	</channel>
+</rss>
