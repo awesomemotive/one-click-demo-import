@@ -84,6 +84,7 @@ class DemoContentCreator {
 			),
 			array(
 				'slug'             => 'portfolio-page',
+				'file'             => OCDI_PATH . 'assets/demo-content/portfolio-page.xml',
 				'name'             => esc_html__( 'Portfolio', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Impress leads by visually showcasing your achievements, case studies, and past work.', 'one-click-demo-import' ),
 				'required_plugins' => array(),
