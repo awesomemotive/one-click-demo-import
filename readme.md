@@ -25,7 +25,7 @@ The best feature of this plugin is, that theme authors can define import files i
 >
 > "[Where can I find the theme author contact?](https://ocdi.com/ask-your-theme-author/#how-can-you-contact-your-theme-author)"
 
-Please take a look at our [plugin documentation](https://ocdi.com/user-guide/) for more information on how to import yor demo content.
+Please take a look at our [plugin documentation](https://ocdi.com/user-guide/) for more information on how to import your demo content.
 
 This plugin is using the modified version of the improved WP import 2.0 that is still in development and can be found here: https://github.com/humanmade/WordPress-Importer.
 
