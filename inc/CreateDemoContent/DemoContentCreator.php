@@ -63,6 +63,7 @@ class DemoContentCreator {
 			),
 			array(
 				'slug'             => 'faq-page',
+				'file'             => OCDI_PATH . 'assets/demo-content/faq-page.xml',
 				'name'             => esc_html__( 'FAQ', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Lighten the load on your support team or your inbox by addressing frequently asked questions.', 'one-click-demo-import' ),
 				'required_plugins' => array(),

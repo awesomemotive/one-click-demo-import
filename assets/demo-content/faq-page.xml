@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- generator="WordPress/5.7" created="2021-03-25 06:41" -->
+<rss version="2.0"
+	 xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	 xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	 xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	 xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns:wp="http://wordpress.org/export/1.2/"
+>
+
+	<channel>
+		<title>ocdi</title>
+		<link>https://ocdi.com</link>
+		<description>Just another WordPress site</description>
+		<pubDate>Thu, 25 Mar 2021 06:41:21 +0000</pubDate>
+		<language>en-US</language>
+		<wp:wxr_version>1.2</wp:wxr_version>
+		<wp:base_site_url>https://ocdi.com</wp:base_site_url>
+		<wp:base_blog_url>https://ocdi.com</wp:base_blog_url>
+
+		<generator>https://wordpress.org/?v=5.7</generator>
+
+		<item>
+			<title><![CDATA[FAQ]]></title>
+			<link>https://ocdi.com/faq/</link>
+			<pubDate>Fri, 26 Feb 2021 20:33:06 +0000</pubDate>
+			<description></description>
+			<content:encoded><![CDATA[<!-- wp:media-text {"mediaPosition":"right","mediaId":2203,"mediaLink":"https://ocdi.com/faq/pexels-dids-1616472-1/","mediaType":"image","mediaSizeSlug":"full","imageFill":true,"className":"is-style-default"} -->
+<div class="wp-block-media-text alignwide has-media-on-the-right is-stacked-on-mobile is-image-fill is-style-default"><figure class="wp-block-media-text__media" style="background-image:url(https://ocdi.com/wp-content/uploads/2021/02/pexels-dids-1616472-1-scaled-1.jpg);background-position:50% 50%"><img src="https://ocdi.com/wp-content/uploads/2021/02/pexels-dids-1616472-1-scaled-1.jpg" alt="" class="wp-image-2203 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:heading -->
+<h2 id="h-got-questions-we-re-here-to-help-get-you-started-with-our-product"><strong>Got Questions? We’re Here to Help Get You Started With Our Product.</strong></h2>
+<!-- /wp:heading --></div></div>
+<!-- /wp:media-text -->
+
+<!-- wp:search {"label":"What Do You Need Help With?","buttonText":"Search"} /-->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"100%"} -->
+<div class="wp-block-column" style="flex-basis:100%"><!-- wp:heading {"textAlign":"center"} -->
+<h2 class="has-text-align-center" id="h-frequently-asked-questions">Frequently Asked Questions</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"textAlign":"left","level":3,"align":"wide"} -->
+<h3 class="alignwide has-text-align-left" id="h-what-if-i-change-my-mind">What if I change my mind?</h3>
+<!-- /wp:heading --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p>No problem! We're confident you'll love our product. We offer a 14-day money-back guarantee, no questions asked. </p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":3,"align":"full"} -->
+<h3 class="alignfull" id="h-is-your-product-eco-friendly">Is your product eco-friendly?</h3>
+<!-- /wp:heading --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p>It sure is. We're 100% biodegradable and sustainable. Plus, we're Leaping Bunny certified.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":3,"align":"full"} -->
+<h3 class="alignfull" id="h-do-you-offer-any-discounts">Do you offer any discounts?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:paragraph -->
+<p>Although we don't currently have any active coupon codes, we occasionally run seasonal sales - <a href="http://newsletterlandingpageexample.com">join our newsletter</a> to stay updated!</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:heading {"textAlign":"center"} -->
+<h2 class="has-text-align-center" id="h-still-need-help-we-re-here">Still Need Help? We're Here!</h2>
+<!-- /wp:heading -->
+
+<!-- wp:buttons {"contentJustification":"center"} -->
+<div class="wp-block-buttons is-content-justification-center"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link">Contact Us Now</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_date><![CDATA[2021-02-26 15:33:06]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-26 20:33:06]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-29 14:36:50]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-29 14:36:50]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[faq]]></wp:post_name>
+			<wp:status><![CDATA[publish]]></wp:status>
+			<wp:post_parent>0</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[page]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+		</item>
+
+		<item>
+			<title><![CDATA[pexels-dids-1616472-1]]></title>
+			<link>https://ocdi.com/faq/pexels-dids-1616472-1/</link>
+			<pubDate>Fri, 26 Feb 2021 20:26:40 +0000</pubDate>
+			<guid isPermaLink="false">https://ocdi.com/wp-content/uploads/2021/02/pexels-dids-1616472-1.jpg</guid>
+			<description></description>
+			<content:encoded><![CDATA[]]></content:encoded>
+			<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+			<wp:post_id>2203</wp:post_id>
+			<wp:post_date><![CDATA[2021-02-26 15:26:40]]></wp:post_date>
+			<wp:post_date_gmt><![CDATA[2021-02-26 20:26:40]]></wp:post_date_gmt>
+			<wp:post_modified><![CDATA[2021-03-22 15:36:55]]></wp:post_modified>
+			<wp:post_modified_gmt><![CDATA[2021-03-22 15:36:55]]></wp:post_modified_gmt>
+			<wp:comment_status><![CDATA[open]]></wp:comment_status>
+			<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+			<wp:post_name><![CDATA[pexels-dids-1616472-1]]></wp:post_name>
+			<wp:status><![CDATA[inherit]]></wp:status>
+			<wp:post_parent>2201</wp:post_parent>
+			<wp:menu_order>0</wp:menu_order>
+			<wp:post_type><![CDATA[attachment]]></wp:post_type>
+			<wp:post_password><![CDATA[]]></wp:post_password>
+			<wp:is_sticky>0</wp:is_sticky>
+			<wp:attachment_url><![CDATA[https://ocdi.com/wp-content/uploads/2021/02/pexels-dids-1616472-1-scaled-1.jpg]]></wp:attachment_url>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+				<wp:meta_value><![CDATA[2021/02/pexels-dids-1616472-1-scaled-1.jpg]]></wp:meta_value>
+			</wp:postmeta>
+			<wp:postmeta>
+				<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+				<wp:meta_value><![CDATA[a:5:{s:5:"width";i:2560;s:6:"height";i:1707;s:4:"file";s:42:"2021/02/pexels-dids-1616472-1-scaled-1.jpg";s:5:"sizes";a:6:{s:6:"medium";a:4:{s:4:"file";s:42:"pexels-dids-1616472-1-scaled-1-300x200.jpg";s:5:"width";i:300;s:6:"height";i:200;s:9:"mime-type";s:10:"image/jpeg";}s:5:"large";a:4:{s:4:"file";s:43:"pexels-dids-1616472-1-scaled-1-1024x683.jpg";s:5:"width";i:1024;s:6:"height";i:683;s:9:"mime-type";s:10:"image/jpeg";}s:9:"thumbnail";a:4:{s:4:"file";s:42:"pexels-dids-1616472-1-scaled-1-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:12:"medium_large";a:4:{s:4:"file";s:42:"pexels-dids-1616472-1-scaled-1-768x512.jpg";s:5:"width";i:768;s:6:"height";i:512;s:9:"mime-type";s:10:"image/jpeg";}s:9:"1536x1536";a:4:{s:4:"file";s:44:"pexels-dids-1616472-1-scaled-1-1536x1024.jpg";s:5:"width";i:1536;s:6:"height";i:1024;s:9:"mime-type";s:10:"image/jpeg";}s:9:"2048x2048";a:4:{s:4:"file";s:44:"pexels-dids-1616472-1-scaled-1-2048x1366.jpg";s:5:"width";i:2048;s:6:"height";i:1366;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+			</wp:postmeta>
+		</item>
+
+	</channel>
+</rss>
