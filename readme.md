@@ -375,6 +375,7 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 * Added recommended plugins installer.
 * Updated the UI/UX of the plugin.
 * Fixed PHP8 warning.
+* Fixed deprecated WP function `wp_slash_strings_only`.
 
 ### 2.6.1 ###
 
