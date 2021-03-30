@@ -360,8 +360,12 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 = 3.0.0 =
 
-*Release Date - xx March 2021*
+*Release Date - 31 March 2021*
 
+* Added support for recommended theme plugins.
+* Added useful single page demo content imports.
+* Added recommended plugins installer.
+* Updated the UI/UX of the plugin.
 * Fixed PHP8 warning.
 
 = 2.6.1 =
