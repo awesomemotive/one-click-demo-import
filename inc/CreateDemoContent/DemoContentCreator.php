@@ -77,6 +77,7 @@ class DemoContentCreator {
 			),
 			array(
 				'slug'             => 'menu-page',
+				'file'             => OCDI_PATH . 'assets/demo-content/menu-page.xml',
 				'name'             => esc_html__( 'Menu', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Display your delicious dishes online to entice website visitors to become restaurant customers.', 'one-click-demo-import' ),
 				'required_plugins' => array(),
