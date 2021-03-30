@@ -104,6 +104,7 @@ class DemoContentCreator {
 				'required_plugins' => array(),
 			),
 			array(
+				'file'             => OCDI_PATH . 'assets/demo-content/testimonials-page.xml',
 				'slug'             => 'testimonials-page',
 				'name'             => esc_html__( 'Testimonials', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Tap into the power of social proof by displaying real-life testimonials on your website.', 'one-click-demo-import' ),
