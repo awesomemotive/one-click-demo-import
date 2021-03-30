@@ -98,6 +98,7 @@ class DemoContentCreator {
 			),
 			array(
 				'slug'             => 'shop-page',
+				'file'             => OCDI_PATH . 'assets/demo-content/shop-page.xml',
 				'name'             => esc_html__( 'Shop', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Categorize and sell your products online while displaying reviews from happy customers.', 'one-click-demo-import' ),
 				'required_plugins' => array(),
