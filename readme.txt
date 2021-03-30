@@ -362,8 +362,8 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 *Release Date - 31 March 2021*
 
-* IMPORTANT: Support for PHP 5.5 has been discontinued. If you are running one of those versions, you MUST upgrade PHP before installing or upgrading to One Click Demo Import v3.0. Failure to do that will disable One Click Demo Import functionality.
-* IMPORTANT: Support for WordPress core v4.9 or less has been discontinued. If you are running one of those versions, you MUST upgrade WordPress core before installing or upgrading to One Click Demo Import v3.0. Failure to do that could cause issues with the One Click Demo Import functionality.
+* IMPORTANT: Support for PHP 5.5 or lower has been discontinued. If you are running one of those versions, you MUST upgrade PHP before installing or upgrading to One Click Demo Import v3.0. Failure to do that will disable One Click Demo Import functionality.
+* IMPORTANT: Support for WordPress core v4.9 or lower has been discontinued. If you are running one of those versions, you MUST upgrade WordPress core before installing or upgrading to One Click Demo Import v3.0. Failure to do that could cause issues with the One Click Demo Import functionality.
 * Added support for recommended theme plugins.
 * Added useful single page demo content imports.
 * Added recommended plugins installer.
