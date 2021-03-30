@@ -70,9 +70,10 @@ class DemoContentCreator {
 			),
 			array(
 				'slug'             => 'meet-the-team-page',
+				'file'             => OCDI_PATH . 'assets/demo-content/meet-the-team-page.xml',
 				'name'             => esc_html__( 'Meet the Team', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Help potential clients feel more at ease by showing off your hard-working and trustworthy team.', 'one-click-demo-import' ),
-				'required_plugins' => array(),
+				'required_plugins' => array( 'wpforms-lite' ),
 			),
 			array(
 				'slug'             => 'menu-page',
@@ -127,8 +128,9 @@ class DemoContentCreator {
 	}
 
 	public function after_import_wpforms_setup( $slug ) {
-		// Perform WPForms setup only if this is a contact page import.
-		if ( $slug !== 'contact-page' ) {
+
+		// Perform WPForms setup only if this is a contact or the meet the team page import.
+		if ( ! in_array( $slug, array( 'contact-page', 'meet-the-team-page' ), true ) ) {
 			return;
 		}
 
@@ -148,7 +150,8 @@ class DemoContentCreator {
 			wp_send_json_error( esc_html__( 'Could not complete the import process for this page. Required WPForms plugin doesn\'t exist.', 'one-click-demo-import' ) );
 		}
 
-		$form_id = $this->create_wpforms_form();
+		$form_title = ( $slug === 'meet-the-team-page' ) ? esc_html__( 'Meet the Team Form', 'one-click-demo-import' ) : esc_html__( 'Contact Form', 'one-click-demo-import' );
+		$form_id = $this->create_wpforms_form( $form_title );
 
 		if ( empty( $form_id ) ) {
 			wp_send_json_error( esc_html__( 'Could not complete the import process for this page. Something went wrong while creating a WPForms contact form.', 'one-click-demo-import' ) );
@@ -302,12 +305,13 @@ class DemoContentCreator {
 	}
 
 	/**
-	 * Create a WPForms contact form, for the pre-created Contact Page.
+	 * Create a WPForms contact form, for the pre-created pages.
+	 *
+	 * @param string $title The title of the contact form.
 	 *
 	 * @return false|int
 	 */
-	private function create_wpforms_form() {
-		$title   = esc_html__( 'Contact Form', 'one-click-demo-import' );
+	private function create_wpforms_form( $title ) {
 		$form_id = wpforms()->form->add( $title );
 
 		if ( empty( $form_id ) || is_wp_error( $form_id ) ) {
