@@ -48,18 +48,18 @@ class DemoContentCreator {
 				'required_plugins' => array(),
 			),
 			array(
-				'slug'             => 'contact-page',
-				'file'             => OCDI_PATH . 'assets/demo-content/contact-page.xml',
-				'name'             => esc_html__( 'Contact Us', 'one-click-demo-import' ),
-				'description'      => esc_html__( 'Make it easy to get in touch with you through a completely customizable built-in contact form.', 'one-click-demo-import' ),
-				'required_plugins' => array( 'wpforms-lite' ),
-			),
-			array(
 				'slug'             => 'book-now-page',
 				'file'             => OCDI_PATH . 'assets/demo-content/book-now-page.xml',
 				'name'             => esc_html__( 'Book Now', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Expand your reach by accepting appointments online plus detailing your services and staff.', 'one-click-demo-import' ),
 				'required_plugins' => array(),
+			),
+			array(
+				'slug'             => 'contact-page',
+				'file'             => OCDI_PATH . 'assets/demo-content/contact-page.xml',
+				'name'             => esc_html__( 'Contact Us', 'one-click-demo-import' ),
+				'description'      => esc_html__( 'Make it easy to get in touch with you through a completely customizable built-in contact form.', 'one-click-demo-import' ),
+				'required_plugins' => array( 'wpforms-lite' ),
 			),
 			array(
 				'slug'             => 'faq-page',
@@ -270,6 +270,7 @@ class DemoContentCreator {
 		$importer = new Importer(
 			array(
 				'fetch_attachments'      => true,
+				'aggressive_url_search'  => true,
 				'prefill_existing_posts' => false,
 			),
 			$logger
