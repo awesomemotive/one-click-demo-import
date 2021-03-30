@@ -217,7 +217,7 @@ class OneClickDemoImport {
 						'installing'             => esc_html__( 'Installing...', 'one-click-demo-import' ),
 						'importing'              => esc_html__( 'Importing...', 'one-click-demo-import' ),
 						'successful_import'      => esc_html__( 'Successfully Imported!', 'one-click-demo-import' ),
-						'successfully_installed' => esc_html__( 'Successfully Installed!', 'one-click-demo-import' ),
+						'install_plugin'         => esc_html__( 'Install Plugin', 'one-click-demo-import' ),
 						'installed'              => esc_html__( 'Installed', 'one-click-demo-import' ),
 						'import_failed'          => esc_html__( 'Import Failed', 'one-click-demo-import' ),
 						'import_failed_subtitle' => esc_html__( 'Whoops, there was a problem importing your content.', 'one-click-demo-import' ),

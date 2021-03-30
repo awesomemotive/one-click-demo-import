@@ -224,10 +224,10 @@ jQuery( function ( $ ) {
 		})
 			.done( function( response ) {
 				if ( response.success ) {
-					alert( ocdi.texts.successfully_installed );
 					$button.text( ocdi.texts.installed );
 				} else {
 					alert( response.data );
+					$button.text( ocdi.texts.install_plugin );
 					$button.removeClass( 'ocdi-button-disabled' );
 				}
 			})
