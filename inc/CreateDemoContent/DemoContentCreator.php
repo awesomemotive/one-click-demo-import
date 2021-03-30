@@ -91,6 +91,7 @@ class DemoContentCreator {
 			),
 			array(
 				'slug'             => 'services-page',
+				'file'             => OCDI_PATH . 'assets/demo-content/services-page.xml',
 				'name'             => esc_html__( 'Services', 'one-click-demo-import' ),
 				'description'      => esc_html__( 'Let the world know your services or products\' cost and features in an organized pricing table.', 'one-click-demo-import' ),
 				'required_plugins' => array(),
