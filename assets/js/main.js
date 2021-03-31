@@ -33,26 +33,62 @@ jQuery( function ( $ ) {
 			return false;
 		}
 
-		$button.addClass( 'ocdi-button-disabled' );
-
 		// Prepare data for the AJAX call
 		var data = new FormData();
 		data.append( 'action', 'ocdi_upload_manual_import_files' );
 		data.append( 'security', ocdi.ajax_nonce );
 
 		if ( $('#ocdi__content-file-upload').length && $('#ocdi__content-file-upload').get(0).files.length ) {
-			data.append( 'content_file', $('#ocdi__content-file-upload')[0].files[0] );
+			var contentFile = $('#ocdi__content-file-upload')[0].files[0];
+			var contentFileExt = contentFile.name.split('.').pop();
+
+			if ( -1 === [ 'xml' ].indexOf( contentFileExt.toLowerCase() ) ) {
+				alert( ocdi.texts.content_filetype_warn );
+
+				return false;
+			}
+
+			data.append( 'content_file', contentFile );
 		}
 		if ( $('#ocdi__widget-file-upload').length && $('#ocdi__widget-file-upload').get(0).files.length ) {
-			data.append( 'widget_file', $('#ocdi__widget-file-upload')[0].files[0] );
+			var widgetsFile = $('#ocdi__widget-file-upload')[0].files[0];
+			var widgetsFileExt = widgetsFile.name.split('.').pop();
+
+			if ( -1 === [ 'json', 'wie' ].indexOf( widgetsFileExt.toLowerCase() ) ) {
+				alert( ocdi.texts.widgets_filetype_warn );
+
+				return false;
+			}
+
+			data.append( 'widget_file', widgetsFile );
 		}
 		if ( $('#ocdi__customizer-file-upload').length && $('#ocdi__customizer-file-upload').get(0).files.length ) {
-			data.append( 'customizer_file', $('#ocdi__customizer-file-upload')[0].files[0] );
+			var customizerFile = $('#ocdi__customizer-file-upload')[0].files[0];
+			var customizerFileExt = customizerFile.name.split('.').pop();
+
+			if ( -1 === [ 'dat' ].indexOf( customizerFileExt.toLowerCase() ) ) {
+				alert( ocdi.texts.customizer_filetype_warn );
+
+				return false;
+			}
+
+			data.append( 'customizer_file', customizerFile );
 		}
 		if ( $('#ocdi__redux-file-upload').length && $('#ocdi__redux-file-upload').get(0).files.length ) {
-			data.append( 'redux_file', $('#ocdi__redux-file-upload')[0].files[0] );
+			var reduxFile = $('#ocdi__redux-file-upload')[0].files[0];
+			var reduxFileExt = reduxFile.name.split('.').pop();
+
+			if ( -1 === [ 'json' ].indexOf( reduxFileExt.toLowerCase() ) ) {
+				alert( ocdi.texts.redux_filetype_warn );
+
+				return false;
+			}
+
+			data.append( 'redux_file', reduxFile );
 			data.append( 'redux_option_name', $('#ocdi__redux-option-name').val() );
 		}
+
+		$button.addClass( 'ocdi-button-disabled' );
 
 		// AJAX call to upload all selected import files (content, widgets, customizer and redux).
 		$.ajax({
@@ -204,11 +240,11 @@ jQuery( function ( $ ) {
 		var $button = $( this ),
 			slug = 'coming-soon';
 
-		if ( $button.hasClass( 'ocdi-button-disabled' ) ) {
+		if ( $button.hasClass( 'button-disabled' ) ) {
 			return false;
 		}
 
-		$button.addClass( 'ocdi-button-disabled' );
+		$button.addClass( 'button-disabled' );
 
 		$.ajax({
 			method:      'POST',
@@ -228,12 +264,12 @@ jQuery( function ( $ ) {
 				} else {
 					alert( response.data );
 					$button.text( ocdi.texts.install_plugin );
-					$button.removeClass( 'ocdi-button-disabled' );
+					$button.removeClass( 'button-disabled' );
 				}
 			})
 			.fail( function( error ) {
 				alert( error.statusText + ' (' + error.status + ')' );
-				$button.removeClass( 'ocdi-button-disabled' );
+				$button.removeClass( 'button-disabled' );
 			})
 	} );
 

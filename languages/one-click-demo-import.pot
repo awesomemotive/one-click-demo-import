@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-30T11:44:33+00:00\n"
+"POT-Creation-Date: 2021-03-31T05:38:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: one-click-demo-import\n"
@@ -733,7 +733,7 @@ msgid "Importing Content"
 msgstr ""
 
 #: views/import.php:86
-msgid "Please sit tight while we import your content."
+msgid "Please sit tight while we import your content. Do not refresh the page or hit the back button."
 msgstr ""
 
 #: views/import.php:89

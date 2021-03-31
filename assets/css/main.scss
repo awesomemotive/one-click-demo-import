@@ -399,13 +399,13 @@
 
 					&-info {
 						p {
-							color: #00a0d2 !important;
+							color: #00a32a !important;
 						}
 					}
 
 					&-error {
 						p {
-							color: #dc3232 !important;
+							color: #d63638 !important;
 						}
 					}
 
@@ -616,8 +616,6 @@
 				line-height: 20px;
 				color: #555555;
 				margin: 4px 0 0;
-				padding-top: 24px;
-				border-top: 1px solid #dddddd;
 
 				span {
 					font-weight: 700;
@@ -1064,7 +1062,6 @@
 			justify-content: center;
 			align-items: center;
 
-			.button,
 			.button-secondary {
 				background: #fafafa;
 			}
@@ -1074,39 +1071,8 @@
 				padding: 4px 0;
 			}
 
-			.custom-file-upload-button {
-				background: #007cba;
-				color: #ffffff;
-				border: 1px solid #007cba;
-				vertical-align: top;
-				display: inline-block;
-				text-decoration: none;
-				font-size: 13px;
-				line-height: 2.15384615;
-				min-height: 30px;
-				margin: 0;
-				padding: 0 10px;
-				cursor: pointer;
-				-webkit-appearance: none;
-				border-radius: 3px;
-				white-space: nowrap;
-				box-sizing: border-box;
-				text-align: center;
-
-				&:hover {
-					background: #0071a1;
-					border-color: #0071a1;
-					color: #ffffff;
-				}
-
-				@media screen and (max-width: 782px) {
-					padding: 0 14px;
-					line-height: 2.71428571;
-					font-size: 14px;
-					vertical-align: middle;
-					min-height: 40px;
-					margin-bottom: 4px;
-				}
+			.button-disabled {
+				cursor: not-allowed;
 			}
 		}
 

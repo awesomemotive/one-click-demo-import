@@ -98,6 +98,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 					<p class="theme-description"><?php echo wp_kses_post( $theme->description ); ?></p>
 
 					<?php if ( ! empty( $theme->tags ) ) : ?>
+					<hr>
 					<p class="theme-tags"><span><?php esc_html_e( 'Tags:' ); ?></span> <?php echo esc_html( implode( ', ', $theme->tags ) ); ?></p>
 					<?php endif; ?>
 				</div>
@@ -136,7 +137,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</a>
 						</div>
 						<div class="ocdi__card-footer">
-							<label for="ocdi__content-file-upload" class="custom-file-upload-button">
+							<label for="ocdi__content-file-upload" class="button button-primary custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
 							<input id="ocdi__content-file-upload" type="file" class="ocdi-hide-input" name="content-file-upload">
@@ -157,7 +158,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</a>
 						</div>
 						<div class="ocdi__card-footer">
-							<label for="ocdi__widget-file-upload" class="custom-file-upload-button">
+							<label for="ocdi__widget-file-upload" class="button button-primary custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
 							<input id="ocdi__widget-file-upload" type="file" class="ocdi-hide-input" name="widget-file-upload">
@@ -178,7 +179,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</a>
 						</div>
 						<div class="ocdi__card-footer">
-							<label for="ocdi__customizer-file-upload" class="custom-file-upload-button">
+							<label for="ocdi__customizer-file-upload" class="button button-primary custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
 							<input id="ocdi__customizer-file-upload" type="file" class="ocdi-hide-input" name="customizer-file-upload">
@@ -200,7 +201,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</a>
 						</div>
 						<div class="ocdi__card-footer">
-							<label for="ocdi__redux-file-upload" class="custom-file-upload-button">
+							<label for="ocdi__redux-file-upload" class="button button-primary custom-file-upload-button">
 								<?php esc_html_e( 'Select a File', 'one-click-demo-import' ); ?>
 							</label>
 							<input id="ocdi__redux-file-upload" type="file" class="ocdi-hide-input" name="redux-file-upload">
@@ -225,7 +226,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</a>
 						</div>
 						<div class="ocdi__card-footer">
-							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'install-plugins' ) ) ); ?>" class="button"><?php esc_html_e( 'Install Plugins', 'one-click-demo-import' ); ?></a>
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'install-plugins' ) ) ); ?>" class="button button-secondary"><?php esc_html_e( 'Install Plugins', 'one-click-demo-import' ); ?></a>
 						</div>
 					</div>
 
@@ -243,7 +244,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							</a>
 						</div>
 						<div class="ocdi__card-footer">
-							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'create-content' ) ) ); ?>" class="button"><?php esc_html_e( 'Create Content', 'one-click-demo-import' ); ?></a>
+							<a href="<?php echo esc_url( $this->get_plugin_settings_url( array( 'step' => 'create-content' ) ) ); ?>" class="button button-secondary"><?php esc_html_e( 'Create Content', 'one-click-demo-import' ); ?></a>
 						</div>
 					</div>
 
@@ -265,7 +266,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 								$plugin_installer = new PluginInstaller();
 								$seedprod_active = $plugin_installer->is_plugin_active( 'coming-soon' );
 							?>
-							<a href="#" class="button js-ocdi-install-coming-soon-plugin<?php echo empty( $seedprod_active ) ? '' : ' ocdi-button-disabled'; ?>">
+							<a href="#" class="button button-secondary js-ocdi-install-coming-soon-plugin<?php echo empty( $seedprod_active ) ? '' : ' button-disabled'; ?>">
 								<?php echo empty( $seedprod_active ) ? esc_html__( 'Install Plugin', 'one-click-demo-import' ) : esc_html__( 'Installed', 'one-click-demo-import' ); ?>
 							</a>
 						</div>
@@ -317,6 +318,8 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 							<input type="search" class="ocdi__gl-search-input  js-ocdi-gl-search" name="ocdi-gl-search" value="" placeholder="<?php esc_html_e( 'Search Demos...', 'one-click-demo-import' ); ?>">
 						</div>
 					</div>
+				<?php else : ?>
+					<hr>
 				<?php endif; ?>
 				<div class="ocdi__gl-item-container js-ocdi-gl-item-container">
 					<?php foreach ( $predefined_themes as $index => $import_file ) : ?>
