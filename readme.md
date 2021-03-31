@@ -361,6 +361,9 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 ### 3. Example of how the import page looks like, when no demo imports are predefined a.k.a manual import. ###
 ![Example of how the import page looks like, when no demo imports are predefined a.k.a manual import.](http://ps.w.org/one-click-demo-import/assets/screenshot-3.png)
 
+### 4. How the Recommended & Required theme plugins step looks like, just before the import step. ###
+![How the Recommended & Required theme plugins step looks like, just before the import step.](http://ps.w.org/one-click-demo-import/assets/screenshot-4.png)
+
 
 ## Changelog ##
 

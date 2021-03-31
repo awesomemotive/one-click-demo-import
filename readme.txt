@@ -355,6 +355,7 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 1. Example of multiple predefined demo imports, that a user can choose from.
 2. How the import page looks like, when only one demo import is predefined.
 3. Example of how the import page looks like, when no demo imports are predefined a.k.a manual import.
+4. How the Recommended & Required theme plugins step looks like, just before the import step.
 
 == Changelog ==
 
