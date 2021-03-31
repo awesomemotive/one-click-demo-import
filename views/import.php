@@ -9,6 +9,7 @@ namespace OCDI;
 
 $plugin_installer = new PluginInstaller();
 $theme_plugins    = $plugin_installer->get_theme_plugins();
+$theme            = wp_get_theme();
 ?>
 
 <div class="ocdi ocdi--install-plugins">
@@ -43,6 +44,7 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 									</p>
 								</div>
 							<?php else : ?>
+								<div>
 								<?php foreach ( $theme_plugins as $plugin ) : ?>
 									<?php $is_plugin_active = $plugin_installer->is_plugin_active( $plugin['slug'] ); ?>
 									<label class="plugin-item plugin-item-<?php echo esc_attr( $plugin['slug'] ); ?><?php echo $is_plugin_active ? ' plugin-item--active' : ''; ?><?php echo ! empty( $plugin['required'] ) ? ' plugin-item--required' : ''; ?>" for="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin">
@@ -75,6 +77,21 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 										</span>
 									</label>
 								<?php endforeach; ?>
+								</div>
+								<div class="ocdi-content-notice ocdi-content-notice--warning">
+									<p>
+										<?php
+											printf(
+												esc_html__(
+													'The plugins with %1$s are recommended by One Click Demo Import plugin to help you grow your website. They are not required for the %2$s theme to work.',
+													'one-click-demo-import'
+												),
+												'<span class="ocdi-recommended-star"><img src="' . esc_url( OCDI_URL . 'assets/images/icons/star.svg' ) . '" alt="' . esc_attr__( 'Star icon', 'one-click-demo-import' ) . '"></span>',
+												$theme->name
+											);
+										?>
+									</p>
+								</div>
 							<?php endif; ?>
 						</div>
 						<div class="ocdi-install-plugins-content-footer">

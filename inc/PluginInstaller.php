@@ -176,6 +176,12 @@ class PluginInstaller {
 
 		$plugins = array_slice( $this->get_partner_plugins(), 0, 3 );
 
+		$plugins = array_map( function ( $plugin ) {
+			unset( $plugin['preselected'] );
+
+			return $plugin;
+		} , $plugins );
+
 		return array_filter(
 			$plugins,
 			function ( $plugin ) use ( $installed_plugins, $contact_form, $seo, $google_analytics ) {

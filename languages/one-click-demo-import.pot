@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 3.0.0\n"
+"Project-Id-Version: One Click Demo Import 3.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/one-click-demo-import\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-31T10:43:06+00:00\n"
+"POT-Creation-Date: 2021-03-31T18:29:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: one-click-demo-import\n"
@@ -403,12 +403,12 @@ msgid "No import files specified!"
 msgstr ""
 
 #: inc/OneClickDemoImport.php:451
-#: views/import.php:101
+#: views/import.php:118
 msgid "Import Complete!"
 msgstr ""
 
 #: inc/OneClickDemoImport.php:452
-#: views/import.php:104
+#: views/import.php:121
 msgid "Congrats, your demo was imported successfully. You can now begin editing your site."
 msgstr ""
 
@@ -473,31 +473,31 @@ msgstr ""
 msgid "Make email delivery easy for WordPress. Connect with SMTP, Gmail, Outlook, Mailgun, and more."
 msgstr ""
 
-#: inc/PluginInstaller.php:220
+#: inc/PluginInstaller.php:226
 msgid "Could not install the plugin. You don't have permission to install plugins."
 msgstr ""
 
-#: inc/PluginInstaller.php:226
+#: inc/PluginInstaller.php:232
 msgid "Could not install the plugin. Plugin slug is missing."
 msgstr ""
 
-#: inc/PluginInstaller.php:231
+#: inc/PluginInstaller.php:237
 msgid "Plugin is already installed and activated!"
 msgstr ""
 
-#: inc/PluginInstaller.php:239
+#: inc/PluginInstaller.php:245
 msgid "Plugin was already installed! We activated it for you."
 msgstr ""
 
-#: inc/PluginInstaller.php:247
+#: inc/PluginInstaller.php:253
 msgid "Could not install the plugin. Don't have file permission."
 msgstr ""
 
-#: inc/PluginInstaller.php:287
+#: inc/PluginInstaller.php:293
 msgid "Plugin installed and activated succesfully."
 msgstr ""
 
-#: inc/PluginInstaller.php:294
+#: inc/PluginInstaller.php:300
 msgid "Could not install the plugin. WP Plugin installer could not retrieve plugin information."
 msgstr ""
 
@@ -688,13 +688,13 @@ msgid "Select which pre-built pages you want to import to use on your website. A
 msgstr ""
 
 #: views/create-content.php:50
-#: views/import.php:69
+#: views/import.php:71
 #: views/install-plugins.php:49
 msgid "Checkmark icon"
 msgstr ""
 
 #: views/create-content.php:51
-#: views/import.php:73
+#: views/import.php:75
 #: views/install-plugins.php:50
 msgid "Loading..."
 msgstr ""
@@ -704,13 +704,13 @@ msgid "The following plugins will be installed for free: "
 msgstr ""
 
 #: views/create-content.php:66
-#: views/import.php:81
+#: views/import.php:98
 #: views/install-plugins.php:57
 msgid "Back icon"
 msgstr ""
 
 #: views/create-content.php:66
-#: views/import.php:81
+#: views/import.php:98
 #: views/install-plugins.php:57
 msgid "Go Back"
 msgstr ""
@@ -719,48 +719,53 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: views/import.php:27
+#: views/import.php:28
 msgid "Before We Import Your Demo"
 msgstr ""
 
-#: views/import.php:29
+#: views/import.php:30
 msgid "To ensure the best experience, installing the following plugins is strongly recommended, and in some cases required."
 msgstr ""
 
-#: views/import.php:42
+#: views/import.php:43
 msgid "All required/recommended plugins are already installed. You can import your demo content."
 msgstr ""
 
-#: views/import.php:54
+#: views/import.php:56
+#: views/import.php:89
 msgid "Star icon"
 msgstr ""
 
-#: views/import.php:71
+#: views/import.php:73
 msgid "Lock icon"
 msgstr ""
 
-#: views/import.php:82
+#: views/import.php:85
+msgid "The plugins with %1$s are recommended by One Click Demo Import plugin to help you grow your website. They are not required for the %2$s theme to work."
+msgstr ""
+
+#: views/import.php:99
 #: views/plugin-page.php:277
 msgid "Continue & Import"
 msgstr ""
 
-#: views/import.php:91
+#: views/import.php:108
 msgid "Importing Content"
 msgstr ""
 
-#: views/import.php:92
+#: views/import.php:109
 msgid "Please sit tight while we import your content. Do not refresh the page or hit the back button."
 msgstr ""
 
-#: views/import.php:95
+#: views/import.php:112
 msgid "Importing animation"
 msgstr ""
 
-#: views/import.php:112
+#: views/import.php:129
 msgid "Theme Settings"
 msgstr ""
 
-#: views/import.php:113
+#: views/import.php:130
 msgid "Visit Site"
 msgstr ""
 

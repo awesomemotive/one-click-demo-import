@@ -71,6 +71,16 @@
 				margin-bottom: 0;
 			}
 		}
+
+		&--warning {
+			background: #FFF8E5;
+			margin-top: 0;
+
+			p {
+				font-size: 16px;
+				line-height: 24px;
+			}
+		}
 	}
 
 	&-importing,
@@ -512,6 +522,19 @@
 						&:last-child {
 							margin-bottom: 0;
 						}
+					}
+				}
+
+				span.ocdi-recommended-star {
+					background-color: #FFB900;
+					width: 16px;
+					height: 16px;
+					border-radius: 8px;
+
+					img {
+						width: 10px;
+						height: 10px;
+						margin: 2px 3px;
 					}
 				}
 			}
