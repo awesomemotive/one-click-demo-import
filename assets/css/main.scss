@@ -308,6 +308,18 @@
 						margin: 0;
 					}
 				}
+
+				.notice {
+					margin: 30px 0 0;
+
+					p {
+						margin: .5em 0;
+						font-size: 13px;
+						line-height: 1.5;
+						color: #3c434a;
+						font-weight: normal;
+					}
+				}
 			}
 
 			.ocdi-install-plugins-content-content,

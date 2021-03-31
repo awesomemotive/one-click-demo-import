@@ -28,6 +28,12 @@ $theme_plugins    = $plugin_installer->get_theme_plugins();
 							<p>
 								<?php esc_html_e( 'To ensure the best experience, installing the following plugins is strongly recommended, and in some cases required.', 'one-click-demo-import' ); ?>
 							</p>
+
+							<?php if ( ! empty( $this->import_files[ $_GET['import'] ]['import_notice'] ) ) : ?>
+								<div class="notice  notice-info">
+									<p><?php echo wp_kses_post( $this->import_files[ $_GET['import'] ]['import_notice'] ); ?></p>
+								</div>
+							<?php endif; ?>
 						</div>
 						<div class="ocdi-install-plugins-content-content">
 							<?php if ( empty( $theme_plugins ) ) : ?>
