@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-31T05:38:56+00:00\n"
+"POT-Creation-Date: 2021-03-31T06:36:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: one-click-demo-import\n"
@@ -299,7 +299,7 @@ msgid "not defined!"
 msgstr ""
 
 #: inc/Helpers.php:743
-#: views/plugin-page.php:289
+#: views/plugin-page.php:290
 msgid "Import Demo Data"
 msgstr ""
 
@@ -316,7 +316,7 @@ msgid "Are you sure?"
 msgstr ""
 
 #: inc/OneClickDemoImport.php:214
-#: views/plugin-page.php:275
+#: views/plugin-page.php:276
 msgid "Cancel"
 msgstr ""
 
@@ -342,12 +342,12 @@ msgid "Successfully Imported!"
 msgstr ""
 
 #: inc/OneClickDemoImport.php:220
-#: views/plugin-page.php:269
+#: views/plugin-page.php:270
 msgid "Install Plugin"
 msgstr ""
 
 #: inc/OneClickDemoImport.php:221
-#: views/plugin-page.php:269
+#: views/plugin-page.php:270
 msgid "Installed"
 msgstr ""
 
@@ -363,49 +363,65 @@ msgstr ""
 msgid "Looks like some of the plugins failed to install. Please try again. If this issue persists, please manually install the failing plugins and come back to this step to import the theme demo data."
 msgstr ""
 
-#: inc/OneClickDemoImport.php:241
+#: inc/OneClickDemoImport.php:225
+msgid "Invalid file type detected! Please select an XML file for the Content Import."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:226
+msgid "Invalid file type detected! Please select a JSON or WIE file for the Widgets Import."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:227
+msgid "Invalid file type detected! Please select a DAT file for the Customizer Import."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:228
+msgid "Invalid file type detected! Please select a JSON file for the Redux Import."
+msgstr ""
+
+#: inc/OneClickDemoImport.php:245
 msgid "Manual import files are missing! Please select the import files and try again."
 msgstr ""
 
-#: inc/OneClickDemoImport.php:256
-#: inc/OneClickDemoImport.php:301
+#: inc/OneClickDemoImport.php:260
+#: inc/OneClickDemoImport.php:305
 msgid "Manually uploaded files"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:314
-#: inc/OneClickDemoImport.php:325
+#: inc/OneClickDemoImport.php:318
+#: inc/OneClickDemoImport.php:329
 msgid "Downloaded files"
 msgstr ""
 
 #. translators: %s - the name of the selected import.
-#: inc/OneClickDemoImport.php:321
+#: inc/OneClickDemoImport.php:325
 msgid "The import files for: %s were successfully downloaded!"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:330
+#: inc/OneClickDemoImport.php:334
 msgid "No import files specified!"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:447
+#: inc/OneClickDemoImport.php:451
 #: views/import.php:95
 msgid "Import Complete!"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:448
+#: inc/OneClickDemoImport.php:452
 #: views/import.php:98
 msgid "Congrats, your demo was imported successfully. You can now begin editing your site."
 msgstr ""
 
-#: inc/OneClickDemoImport.php:449
+#: inc/OneClickDemoImport.php:453
 msgid "Successful Import"
 msgstr ""
 
-#: inc/OneClickDemoImport.php:452
+#: inc/OneClickDemoImport.php:456
 msgid "Your import completed, but some things may not have imported properly."
 msgstr ""
 
 #. translators: %s - link to the log file.
-#: inc/OneClickDemoImport.php:456
+#: inc/OneClickDemoImport.php:460
 msgid "<p><a href=\"%s\" target=\"_blank\">View error log</a> for more information.</p>"
 msgstr ""
 
@@ -663,7 +679,7 @@ msgid "The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.6+%3$s to run
 msgstr ""
 
 #: views/create-content.php:26
-#: views/plugin-page.php:238
+#: views/plugin-page.php:239
 msgid "Create Demo Content"
 msgstr ""
 
@@ -724,7 +740,7 @@ msgid "Lock icon"
 msgstr ""
 
 #: views/import.php:76
-#: views/plugin-page.php:276
+#: views/plugin-page.php:277
 msgid "Continue & Import"
 msgstr ""
 
@@ -781,143 +797,143 @@ msgstr ""
 msgid "There are no predefined import files available for this theme. Please upload the import files manually below."
 msgstr ""
 
-#: views/plugin-page.php:107
+#: views/plugin-page.php:108
 msgid "Switch to Manual Import"
 msgstr ""
 
-#: views/plugin-page.php:109
+#: views/plugin-page.php:110
 msgid "Switch back to Theme Predefined Imports"
 msgstr ""
 
-#: views/plugin-page.php:120
+#: views/plugin-page.php:121
 msgid "Manual Demo File Import"
 msgstr ""
 
-#: views/plugin-page.php:129
+#: views/plugin-page.php:130
 msgid "Content import icon"
 msgstr ""
 
-#: views/plugin-page.php:131
+#: views/plugin-page.php:132
 msgid "Import Content"
 msgstr ""
 
-#: views/plugin-page.php:132
+#: views/plugin-page.php:133
 msgid "Select an XML file to import."
 msgstr ""
 
-#: views/plugin-page.php:135
-#: views/plugin-page.php:156
-#: views/plugin-page.php:177
-#: views/plugin-page.php:199
-#: views/plugin-page.php:224
-#: views/plugin-page.php:242
-#: views/plugin-page.php:260
+#: views/plugin-page.php:136
+#: views/plugin-page.php:157
+#: views/plugin-page.php:178
+#: views/plugin-page.php:200
+#: views/plugin-page.php:225
+#: views/plugin-page.php:243
+#: views/plugin-page.php:261
 msgid "Info icon"
 msgstr ""
 
-#: views/plugin-page.php:140
-#: views/plugin-page.php:161
-#: views/plugin-page.php:182
-#: views/plugin-page.php:204
+#: views/plugin-page.php:141
+#: views/plugin-page.php:162
+#: views/plugin-page.php:183
+#: views/plugin-page.php:205
 msgid "Select a File"
 msgstr ""
 
-#: views/plugin-page.php:150
+#: views/plugin-page.php:151
 msgid "Widgets import icon"
 msgstr ""
 
-#: views/plugin-page.php:152
+#: views/plugin-page.php:153
 msgid "Import Widgets"
 msgstr ""
 
-#: views/plugin-page.php:153
+#: views/plugin-page.php:154
 msgid "Select a JSON/WIE file to import."
 msgstr ""
 
-#: views/plugin-page.php:171
+#: views/plugin-page.php:172
 msgid "Customizer import icon"
 msgstr ""
 
-#: views/plugin-page.php:173
+#: views/plugin-page.php:174
 msgid "Import Customizer"
 msgstr ""
 
-#: views/plugin-page.php:174
+#: views/plugin-page.php:175
 msgid "Select a DAT file to import."
 msgstr ""
 
-#: views/plugin-page.php:193
+#: views/plugin-page.php:194
 msgid "Redux import icon"
 msgstr ""
 
-#: views/plugin-page.php:195
+#: views/plugin-page.php:196
 msgid "Import Redux"
 msgstr ""
 
-#: views/plugin-page.php:196
+#: views/plugin-page.php:197
 msgid "Select a JSON file and enter Redux option name."
 msgstr ""
 
-#: views/plugin-page.php:207
+#: views/plugin-page.php:208
 msgid "Enter Option Name"
 msgstr ""
 
-#: views/plugin-page.php:218
+#: views/plugin-page.php:219
 msgid "Recommended plugins icon"
 msgstr ""
 
-#: views/plugin-page.php:220
+#: views/plugin-page.php:221
 msgid "Recommended Plugins"
 msgstr ""
 
-#: views/plugin-page.php:221
+#: views/plugin-page.php:222
 msgid "Install our recommended plugins."
 msgstr ""
 
-#: views/plugin-page.php:228
+#: views/plugin-page.php:229
 msgid "Install Plugins"
 msgstr ""
 
-#: views/plugin-page.php:236
+#: views/plugin-page.php:237
 msgid "Create demo content icon"
 msgstr ""
 
-#: views/plugin-page.php:239
+#: views/plugin-page.php:240
 msgid "Create useful content with a few clicks."
 msgstr ""
 
-#: views/plugin-page.php:246
+#: views/plugin-page.php:247
 msgid "Create Content"
 msgstr ""
 
-#: views/plugin-page.php:254
+#: views/plugin-page.php:255
 msgid "Create landing pages icon"
 msgstr ""
 
-#: views/plugin-page.php:256
+#: views/plugin-page.php:257
 msgid "Create Landing Pages"
 msgstr ""
 
-#: views/plugin-page.php:257
+#: views/plugin-page.php:258
 msgid "Create beautiful converting pages."
 msgstr ""
 
-#: views/plugin-page.php:304
+#: views/plugin-page.php:305
 msgid "All Demos"
 msgstr ""
 
-#: views/plugin-page.php:317
+#: views/plugin-page.php:318
 msgid "Search Demos..."
 msgstr ""
 
-#: views/plugin-page.php:338
+#: views/plugin-page.php:341
 msgid "No preview image."
 msgstr ""
 
-#: views/plugin-page.php:345
+#: views/plugin-page.php:348
 msgid "Preview Demo"
 msgstr ""
 
-#: views/plugin-page.php:347
+#: views/plugin-page.php:350
 msgid "Import Demo"
 msgstr ""
