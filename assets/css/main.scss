@@ -270,9 +270,8 @@
 				}
 
 				.screenshot {
-					height: 278px;
-
 					&.blank {
+						height: 278px;
 						border: 1px solid #CCD0D4;
 						filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.07));
 						background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAALElEQVQYGWO8d+/efwYkoKioiMRjYGBC4WHhUK6A8T8QIJt8//59ZC493AAAQssKpBK4F5AAAAAASUVORK5CYII=);
@@ -292,6 +291,7 @@
 
 				img {
 					width: 100%;
+					display: block;
 				}
 			}
 

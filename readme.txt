@@ -365,6 +365,7 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 * Fixed missing old default settings page (breaking existing links to the OCDI settings page).
 * Fixed PHP notices in network admin area for WP Multisite.
+* Fixed theme card image style in the sidebar.
 
 = 3.0.1 =
 
