@@ -4,7 +4,7 @@
 **Requires at least:** 4.9
 **Tested up to:** 5.7
 **Requires PHP:** 5.6
-**Stable tag:** 3.0.1
+**Stable tag:** 3.0.2
 **License:** GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple theme demo import for your users.
@@ -369,7 +369,7 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 ### 3.0.2 ###
 
-*Release Date - XX April 2021*
+*Release Date - 2 April 2021*
 
 * Fixed missing old default settings page (breaking existing links to the OCDI settings page).
 * Fixed PHP notices in network admin area for WP Multisite.
