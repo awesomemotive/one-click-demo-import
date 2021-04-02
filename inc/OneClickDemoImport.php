@@ -116,7 +116,6 @@ class OneClickDemoImport {
 		add_action( 'wp_ajax_ocdi_import_customizer_data', array( $this, 'import_customizer_data_ajax_callback' ) );
 		add_action( 'wp_ajax_ocdi_after_import_data', array( $this, 'after_all_import_data_ajax_callback' ) );
 		add_action( 'after_setup_theme', array( $this, 'setup_plugin_with_filter_data' ) );
-		add_action( 'network_admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
 		add_action( 'user_admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
 		add_action( 'admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
 		add_action( 'all_admin_notices', array( $this, 'finish_notice_output_capturing' ), PHP_INT_MAX );
@@ -644,6 +643,10 @@ class OneClickDemoImport {
 	 * Output the ending of the container div for all notices, but only on OCDI pages.
 	 */
 	public function finish_notice_output_capturing() {
+		if ( is_network_admin() ) {
+			return;
+		}
+
 		$screen = get_current_screen();
 
 		if ( false === strpos( $screen->base, $this->plugin_page_setup['menu_slug'] ) ) {
