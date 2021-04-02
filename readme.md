@@ -367,12 +367,18 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 ## Changelog ##
 
+### 3.0.2 ###
+
+*Release Date - XX April 2021*
+
+* Fixed missing old default settings page (breaking existing links to the OCDI settings page).
+
 ### 3.0.1 ###
 
 *Release Date - 31 March 2021*
 
-* Add more details about recommended plugins.
-* Change recommended plugins to opt-in.
+* Added more details about recommended plugins.
+* Changed recommended plugins to opt-in.
 
 ### 3.0.0 ###
 

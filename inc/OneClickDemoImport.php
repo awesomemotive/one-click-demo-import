@@ -120,6 +120,7 @@ class OneClickDemoImport {
 		add_action( 'user_admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
 		add_action( 'admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
 		add_action( 'all_admin_notices', array( $this, 'finish_notice_output_capturing' ), PHP_INT_MAX );
+		add_action( 'admin_init', array( $this, 'redirect_from_old_default_admin_page' ) );
 	}
 
 
@@ -152,6 +153,15 @@ class OneClickDemoImport {
 			$this->plugin_page_setup['capability'],
 			$this->plugin_page_setup['menu_slug'],
 			Helpers::apply_filters( 'ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) )
+		);
+
+		// Register the old default settings page, so we can redirect to the new one and not break any existing links.
+		add_submenu_page(
+			'',
+			$this->plugin_page_setup['page_title'],
+			$this->plugin_page_setup['menu_title'],
+			$this->plugin_page_setup['capability'],
+			'pt-one-click-demo-import'
 		);
 
 		register_importer( $this->plugin_page_setup['menu_slug'], $this->plugin_page_setup['page_title'], $this->plugin_page_setup['menu_title'], Helpers::apply_filters( 'ocdi/plugin_page_display_callback_function', array( $this, 'display_plugin_page' ) ) );
@@ -665,5 +675,17 @@ class OneClickDemoImport {
 		}
 
 		return add_query_arg( $parameters, $url );
+	}
+
+	/**
+	 * Redirect from the old default OCDI settings page URL to the new one.
+	 */
+	public function redirect_from_old_default_admin_page() {
+		global $pagenow;
+
+		if ( $pagenow == 'themes.php' && isset( $_GET['page'] ) && $_GET['page'] == 'pt-one-click-demo-import' ) {
+			wp_safe_redirect( $this->get_plugin_settings_url() );
+			exit;
+		}
 	}
 }
