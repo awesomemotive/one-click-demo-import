@@ -335,7 +335,13 @@ class Helpers {
 	 * @return string, path to the log file
 	 */
 	public static function get_log_path() {
-		$upload_dir  = wp_upload_dir();
+		if(getenv('WORDPRESS_PLUGIN_OCDI_LOG_PATH')){
+			$upload_dir['path'] = getenv('WORDPRESS_PLUGIN_OCDI_LOG_PATH');
+			is_dir($upload_dir['path']) || mkdir($upload_dir['path']);
+		} else {
+			$upload_dir = wp_upload_dir();
+		}
+
 		$upload_path = self::apply_filters( 'ocdi/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
 		$log_path = $upload_path . self::apply_filters( 'ocdi/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/log_file_suffix_and_file_extension', '.txt' );
