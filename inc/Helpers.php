@@ -346,7 +346,9 @@ class Helpers {
 
 		$log_path = $upload_path . self::apply_filters( 'ocdi/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/log_file_suffix_and_file_extension', '.txt' );
 
-		self::register_file_as_media_attachment( $log_path );
+		if(!getenv('WORDPRESS_PLUGIN_OCDI_LOG_PATH')) {
+			self::register_file_as_media_attachment($log_path);
+		}
 
 		return $log_path;
 	}
