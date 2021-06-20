@@ -224,7 +224,7 @@ add_action( 'ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
 
 = How can I import via the WP-CLI? =
 
-In the 2.4.0 version of this pugin we added two WP-CLI commands:
+In the 2.4.0 version of this plugin we added two WP-CLI commands:
 
 * `wp ocdi list` - Which will list any predefined demo imports currently active theme might have,
 * `wp ocdi import` - which has a few options that you can use to import the things you want (content/widgets/customizer/predefined demos). Let's look at these options below.
