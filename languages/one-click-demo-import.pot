@@ -1,19 +1,19 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 3.0.2\n"
+"Project-Id-Version: One Click Demo Import 3.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/one-click-demo-import\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-04-02T10:38:22+00:00\n"
+"POT-Creation-Date: 2022-03-18T11:33:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: one-click-demo-import\n"
 
 #. Plugin Name of the plugin
-#: inc/Helpers.php:742
+#: inc/Helpers.php:753
 #: inc/ViewHelpers.php:19
 msgid "One Click Demo Import"
 msgstr ""
@@ -243,65 +243,65 @@ msgstr ""
 msgid "%1$sYour user role isn't high enough. You don't have permission to import demo data.%2$s"
 msgstr ""
 
-#: inc/Helpers.php:431
+#: inc/Helpers.php:442
 msgid "No file provided."
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:460
+#: inc/Helpers.php:471
 msgid "Content file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:464
-#: inc/Helpers.php:481
-#: inc/Helpers.php:498
+#: inc/Helpers.php:475
+#: inc/Helpers.php:492
 #: inc/Helpers.php:509
-#: inc/Helpers.php:529
-#: inc/Helpers.php:537
+#: inc/Helpers.php:520
+#: inc/Helpers.php:540
+#: inc/Helpers.php:548
 msgid "Upload files"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:477
+#: inc/Helpers.php:488
 msgid "Widget file was not uploaded. Error: %s"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:494
+#: inc/Helpers.php:505
 msgid "Customizer file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:507
+#: inc/Helpers.php:518
 msgid "Missing Redux option name! Please also enter the Redux option name!"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:525
+#: inc/Helpers.php:536
 msgid "Redux file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:535
+#: inc/Helpers.php:546
 msgid "The import files were successfully uploaded!"
 msgstr ""
 
 #. translators: %s - the max execution time.
-#: inc/Helpers.php:561
+#: inc/Helpers.php:572
 msgid "Initial max execution time = %s"
 msgstr ""
 
 #. translators: %1$s - new line break, %2$s - the site URL, %3$s - the file path for content import, %4$s - the file path for widgets import, %5$s - the file path for widgets import, %6$s - the file path for redux import.
-#: inc/Helpers.php:565
+#: inc/Helpers.php:576
 msgid "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s"
 msgstr ""
 
-#: inc/Helpers.php:568
-#: inc/Helpers.php:569
-#: inc/Helpers.php:570
-#: inc/Helpers.php:571
+#: inc/Helpers.php:579
+#: inc/Helpers.php:580
+#: inc/Helpers.php:581
+#: inc/Helpers.php:582
 msgid "not defined!"
 msgstr ""
 
-#: inc/Helpers.php:743
+#: inc/Helpers.php:754
 #: views/plugin-page.php:290
 msgid "Import Demo Data"
 msgstr ""

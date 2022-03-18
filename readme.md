@@ -1,10 +1,10 @@
 # One Click Demo Import #
 **Contributors:** ocdi, smub, jaredatch, capuderg
 **Tags:** import, content, demo, data, widgets, settings, redux, theme options
-**Requires at least:** 4.9
-**Tested up to:** 5.7
+**Requires at least:** 5.2
+**Tested up to:** 5.9
 **Requires PHP:** 5.6
-**Stable tag:** 3.0.2
+**Stable tag:** 3.1.0
 **License:** GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple theme demo import for your users.
@@ -224,7 +224,7 @@ add_action( 'ocdi/before_widgets_import', 'ocdi_before_widgets_import' );
 
 ### How can I import via the WP-CLI? ###
 
-In the 2.4.0 version of this pugin we added two WP-CLI commands:
+In the 2.4.0 version of this plugin we added two WP-CLI commands:
 
 * `wp ocdi list` - Which will list any predefined demo imports currently active theme might have,
 * `wp ocdi import` - which has a few options that you can use to import the things you want (content/widgets/customizer/predefined demos). Let's look at these options below.
@@ -366,6 +366,13 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 
 ## Changelog ##
+
+### 3.1.0 ###
+
+*Release Date - 18th March 2022*
+
+* Changed the minimal WordPress version to 5.2.
+* Fixed uploaded file types. Allow just whitelisted import file types.
 
 ### 3.0.2 ###
 
