@@ -364,7 +364,7 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 *Release Date - 18th March 2022*
 
 * Changed the minimal WordPress version to 5.2.
-* Fixed uploaded file types. Allow just whitelisted import file types.
+* Fixed upload file types. Allow just whitelisted import file types.
 
 = 3.0.2 =
 
