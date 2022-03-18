@@ -444,7 +444,7 @@ class Helpers {
 			wp_handle_upload( $_FILES['customizer_file'], $upload_overrides ) :
 			$file_not_provided_error;
 
-		$redux_file_info = isset( $_FILES['customizer_file'] ) ?
+		$redux_file_info = isset( $_FILES['redux_file'] ) ?
 			wp_handle_upload( $_FILES['redux_file'], $upload_overrides ) :
 			$file_not_provided_error;
 
