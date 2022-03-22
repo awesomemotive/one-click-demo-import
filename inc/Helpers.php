@@ -524,7 +524,7 @@ class Helpers {
 			// Set uploaded Redux file.
 			$selected_import_files['redux'] = array(
 				array(
-					'option_name' => $_POST['redux_option_name'],
+					'option_name' => sanitize_text_field( $_POST['redux_option_name'] ),
 					'file_path'   => $redux_file_info['file'],
 				),
 			);
