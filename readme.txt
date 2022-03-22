@@ -4,7 +4,7 @@ Tags: import, content, demo, data, widgets, settings, redux, theme options
 Requires at least: 5.2
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 3.1.0
+Stable tag: 3.1.1
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple theme demo import for your users.
@@ -358,6 +358,12 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 4. How the Recommended & Required theme plugins step looks like, just before the import step.
 
 == Changelog ==
+
+= 3.1.1 =
+
+*Release Date - 22nd March 2022*
+
+* Fixed missing sanitization for the redux option name.
 
 = 3.1.0 =
 

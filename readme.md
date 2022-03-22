@@ -4,7 +4,7 @@
 **Requires at least:** 5.2
 **Tested up to:** 5.9
 **Requires PHP:** 5.6
-**Stable tag:** 3.1.0
+**Stable tag:** 3.1.1
 **License:** GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple theme demo import for your users.
@@ -367,12 +367,18 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 ## Changelog ##
 
+### 3.1.1 ###
+
+*Release Date - 22nd March 2022*
+
+* Fixed missing sanitization for the redux option name.
+
 ### 3.1.0 ###
 
 *Release Date - 18th March 2022*
 
 * Changed the minimal WordPress version to 5.2.
-* Fixed uploaded file types. Allow just whitelisted import file types.
+* Fixed upload file types. Allow just whitelisted import file types.
 
 ### 3.0.2 ###
 
