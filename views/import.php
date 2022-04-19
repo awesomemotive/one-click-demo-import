@@ -66,7 +66,8 @@ $theme            = wp_get_theme();
 											<div class="plugin-item-info js-ocdi-plugin-item-info"></div>
 										</div>
 										<span class="plugin-item-checkbox">
-											<input type="checkbox" id="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin" name="<?php echo esc_attr( $plugin['slug'] ); ?>" <?php checked( ! empty( $plugin['preselected'] ) || ! empty( $plugin['required'] ) || $is_plugin_active ); ?><?php disabled( $is_plugin_active ); ?>>
+												<?php  $source = isset($plugin['source']) ? 'data-external=\''.json_encode($plugin).'\'': ''; ?>
+												<input type="checkbox" id="ocdi-<?php echo esc_attr( $plugin['slug'] ); ?>-plugin" name="<?php echo esc_attr( $plugin['slug'] ); ?>" <?php checked( ! empty( $plugin['preselected'] ) || ! empty( $plugin['required'] ) || $is_plugin_active ); ?><?php disabled( $is_plugin_active );  echo $source?>>
 											<span class="checkbox">
 												<img src="<?php echo esc_url( OCDI_URL . 'assets/images/icons/check-solid-white.svg' ); ?>" class="ocdi-check-icon" alt="<?php esc_attr_e( 'Checkmark icon', 'one-click-demo-import' ); ?>">
 												<?php if ( ! empty( $plugin['required'] ) ) : ?>

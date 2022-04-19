@@ -127,11 +127,11 @@ class PluginInstaller {
 	 * Set all registered plugins.
 	 * With our recommended plugins being set as defaults.
 	 */
-	public function set_plugins() {
-		$all_plugins = array_merge( $this->get_partner_plugins(), Helpers::apply_filters( 'ocdi/register_plugins', array() ) );
+    public function set_plugins( $ext_plugin = [] ) {
+        $all_plugins = array_merge( $this->get_partner_plugins(), Helpers::apply_filters( 'ocdi/register_plugins', array() ), $ext_plugin );
 
-		$this->plugins = $this->filter_plugins( $all_plugins );
-	}
+        $this->plugins = $this->filter_plugins( $all_plugins );
+    }
 
 	/**
 	 * Get all theme registered plugins.
@@ -227,6 +227,17 @@ class PluginInstaller {
 		}
 
 		$slug = ! empty( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
+        $external_plugin = isset( $_POST['external_plugin'] )  ? $_POST['external_plugin'] : [];
+        // Search crrint plugin in the list of recommended plugins.
+        $recommended_plugins = $this->plugins;
+        $recommended_plugins = array_filter( $recommended_plugins, function ( $plugin ) use ( $slug ) {
+            return $plugin['slug'] === $slug;
+        } );
+
+        // Set the plugin
+        if ( $recommended_plugins == false ) {
+            $this->set_plugins( [$external_plugin] );
+        }
 
 		if ( empty( $slug ) ) {
 			wp_send_json_error( esc_html__( 'Could not install the plugin. Plugin slug is missing.', 'one-click-demo-import' ) );
