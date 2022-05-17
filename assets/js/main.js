@@ -518,30 +518,30 @@ jQuery(function ($) {
 	 * @param {bool}     runImport           If the import should be run after plugin installation.
 	 * @param {bool}     pluginInstallFailed If there were any failed plugin installs.
 	 */
-	function installPluginsAjaxCall( plugins, counter, $button , runImport, pluginInstallFailed ) {
-		var plugin = plugins[ counter ],
+	function installPluginsAjaxCall(plugins, counter, $button, runImport, pluginInstallFailed) {
+		var plugin = plugins[counter],
 			slug = plugin.name,
 			external_plugin = $("[name=" + plugin.name + "]").data('external'),
 			external_plugin = typeof external_plugin !== 'undefined' ? external_plugin : '';
 
 		$.ajax({
-			method:      'POST',
-			url:         ocdi.ajax_url,
-			data:        {
-				action: 'ocdi_install_plugin',
-				security: ocdi.ajax_nonce,
-				slug: slug,
-				external_plugin: external_plugin,
-			},
-			beforeSend:  function() {
-				var $currentPluginItem = $( '.plugin-item-' + slug );
-				$currentPluginItem.find( '.js-ocdi-plugin-item-info' ).empty();
-				$currentPluginItem.find( '.js-ocdi-plugin-item-error' ).empty();
-				$currentPluginItem.addClass( 'plugin-item--loading' );
-			}
-		})
-			.done( function( response ) {
-				var $currentPluginItem = $( '.plugin-item-' + slug );
+				method: 'POST',
+				url: ocdi.ajax_url,
+				data: {
+					action: 'ocdi_install_plugin',
+					security: ocdi.ajax_nonce,
+					slug: slug,
+					external_plugin: external_plugin,
+				},
+				beforeSend: function () {
+					var $currentPluginItem = $('.plugin-item-' + slug);
+					$currentPluginItem.find('.js-ocdi-plugin-item-info').empty();
+					$currentPluginItem.find('.js-ocdi-plugin-item-error').empty();
+					$currentPluginItem.addClass('plugin-item--loading');
+				}
+			})
+			.done(function (response) {
+				var $currentPluginItem = $('.plugin-item-' + slug);
 
 				$currentPluginItem.removeClass('plugin-item--loading');
 
