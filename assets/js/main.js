@@ -525,7 +525,9 @@ jQuery( function ( $ ) {
 	 */
 	function installPluginsAjaxCall( plugins, counter, $button , runImport, pluginInstallFailed ) {
 		var plugin = plugins[ counter ],
-			slug = plugin.name;
+			slug = plugin.name,
+			external_plugin = $("[name=" + plugin.name + "]").data('external'),
+			external_plugin = typeof external_plugin !== 'undefined' ? external_plugin : '';
 
 		$.ajax({
 			method:      'POST',
@@ -534,6 +536,7 @@ jQuery( function ( $ ) {
 				action: 'ocdi_install_plugin',
 				security: ocdi.ajax_nonce,
 				slug: slug,
+				external_plugin: external_plugin,
 			},
 			beforeSend:  function() {
 				var $currentPluginItem = $( '.plugin-item-' + slug );
