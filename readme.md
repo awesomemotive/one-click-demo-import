@@ -2,9 +2,9 @@
 **Contributors:** ocdi, smub, jaredatch, capuderg
 **Tags:** import, content, demo, data, widgets, settings, redux, theme options
 **Requires at least:** 5.2
-**Tested up to:** 5.9
+**Tested up to:** 6.0
 **Requires PHP:** 5.6
-**Stable tag:** 3.1.1
+**Stable tag:** 3.1.2
 **License:** GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple theme demo import for your users.
@@ -366,6 +366,12 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 
 ## Changelog ##
+
+### 3.1.2 ###
+
+*Release Date - 8th July 2022*
+
+* Fixed missing terms count update (fixes missing menu items after WP 6.0 update).
 
 ### 3.1.1 ###
 
