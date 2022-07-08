@@ -89,6 +89,13 @@ class OneClickDemoImport {
 	private $plugin_page_setup = array();
 
 	/**
+	 * Imported terms.
+	 *
+	 * @var array
+	 */
+	private $imported_terms = array();
+
+	/**
 	 * Returns the *Singleton* instance of this class.
 	 *
 	 * @return OneClickDemoImport the *Singleton* instance.
@@ -120,6 +127,7 @@ class OneClickDemoImport {
 		add_action( 'admin_notices', array( $this, 'start_notice_output_capturing' ), 0 );
 		add_action( 'all_admin_notices', array( $this, 'finish_notice_output_capturing' ), PHP_INT_MAX );
 		add_action( 'admin_init', array( $this, 'redirect_from_old_default_admin_page' ) );
+		add_action( 'set_object_terms', array( $this, 'add_imported_terms' ), 10, 6 );
 	}
 
 
@@ -390,6 +398,9 @@ class OneClickDemoImport {
 			wp_send_json( array( 'status' => 'afterAllImportAJAX' ) );
 		}
 
+		// Update terms count.
+		$this->update_terms_count();
+
 		// Send a JSON response with final report.
 		$this->final_response();
 	}
@@ -443,6 +454,9 @@ class OneClickDemoImport {
 			 */
 			Helpers::do_action( 'ocdi/after_all_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
 		}
+
+		// Update terms count.
+		$this->update_terms_count();
 
 		// Send a JSON response with final report.
 		$this->final_response();
@@ -498,6 +512,7 @@ class OneClickDemoImport {
 			$this->selected_import_files   = empty( $data['selected_import_files'] ) ? array() : $data['selected_import_files'];
 			$this->import_files            = empty( $data['import_files'] ) ? array() : $data['import_files'];
 			$this->before_import_executed  = empty( $data['before_import_executed'] ) ? false : $data['before_import_executed'];
+			$this->imported_terms          = empty( $data['imported_terms'] ) ? [] : $data['imported_terms'];
 			$this->importer->set_importer_data( $data );
 
 			return true;
@@ -519,6 +534,7 @@ class OneClickDemoImport {
 			'selected_import_files'   => $this->selected_import_files,
 			'import_files'            => $this->import_files,
 			'before_import_executed'  => $this->before_import_executed,
+			'imported_terms'          => $this->imported_terms,
 		);
 	}
 
@@ -689,6 +705,32 @@ class OneClickDemoImport {
 		if ( $pagenow == 'themes.php' && isset( $_GET['page'] ) && $_GET['page'] == 'pt-one-click-demo-import' ) {
 			wp_safe_redirect( $this->get_plugin_settings_url() );
 			exit;
+		}
+	}
+
+	/**
+	 * Add imported terms.
+	 *
+	 * Mainly it's needed for saving all imported terms and trigger terms count updates.
+	 * WP core term defer counting is not working, since import split to chunks and we are losing `$_deffered` array
+	 * items between ajax calls.
+	 */
+	public function add_imported_terms( $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids ){
+
+		if ( ! isset( $this->imported_terms[ $taxonomy ] ) ) {
+			$this->imported_terms[ $taxonomy ] = array();
+		}
+
+		$this->imported_terms[ $taxonomy ] = array_unique( array_merge( $this->imported_terms[ $taxonomy ], $tt_ids ) );
+	}
+
+	/**
+	 * Update imported terms count.
+	 */
+	private function update_terms_count() {
+
+		foreach ( $this->imported_terms as $tax => $terms ) {
+			wp_update_term_count_now( $terms, $tax );
 		}
 	}
 }
