@@ -83,7 +83,7 @@ class PluginInstaller {
 		return array(
 			array(
 				'name'        => esc_html__( 'WPForms', 'one-click-demo-import' ),
-				'description' => esc_html__( 'Join 4,000,000+ professionals who build smarter forms and surveys with WPForms.', 'one-click-demo-import' ),
+				'description' => esc_html__( 'Join 6,000,000+ professionals who build smarter forms and surveys with WPForms.', 'one-click-demo-import' ),
 				'slug'        => 'wpforms-lite',
 				'required'    => false,
 				'preselected' => true,
