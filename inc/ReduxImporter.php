@@ -44,7 +44,7 @@ class ReduxImporter {
 
 			if ( isset( $redux_framework->args['opt_name'] ) ) {
 				// Import Redux settings.
-				if ( ! empty( $redux_framework->options_class ) && method_exists( $redux_framework, 'set' ) ) {
+				if ( ! empty( $redux_framework->options_class ) && method_exists( $redux_framework->options_class, 'set' ) ) {
 					$redux_framework->options_class->set( $redux_options_data );
 				} else {
 					// Handle backwards compatibility.
