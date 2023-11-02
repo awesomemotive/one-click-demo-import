@@ -733,4 +733,84 @@ class OneClickDemoImport {
 			wp_update_term_count_now( $terms, $tax );
 		}
 	}
+
+	/**
+	 * Get the import buttons HTML for the successful import page.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @return string
+	 */
+	public function get_import_successful_buttons_html() {
+
+		/**
+		 * Filter the buttons that are displayed on the successful import page.
+		 *
+		 * @since {VERSION}
+		 *
+		 * @param array $buttons {
+		 *     Array of buttons.
+		 *
+		 *     @type string $label  Button label.
+		 *     @type string $class  Button class.
+		 *     @type string $href   Button URL.
+		 *     @type string $target Button target. Can be `_blank`, `_parent`, `_top`. Default is `_self`.
+		 * }
+		 */
+		$buttons = Helpers::apply_filters(
+			'ocdi/import_successful_buttons',
+			[
+				[
+					'label'  => __( 'Theme Settings' , 'one-click-demo-import' ),
+					'class'  => 'button button-primary button-hero',
+					'href'   => admin_url( 'customize.php' ),
+					'target' => '_blank',
+				],
+				[
+					'label'  => __( 'Visit Site' , 'one-click-demo-import' ),
+					'class'  => 'button button-primary button-hero',
+					'href'   => get_home_url(),
+					'target' => '_blank',
+				],
+			]
+		);
+
+		if ( empty( $buttons ) || ! is_array( $buttons ) ) {
+			return '';
+		}
+
+		ob_start();
+
+		foreach ( $buttons as $button ) {
+
+			if ( empty( $button['href'] ) || empty( $button['label'] ) ) {
+				continue;
+			}
+
+			$target = '_self';
+			if (
+				! empty( $button['target'] ) &&
+				in_array( strtolower( $button['target'] ), [ '_blank', '_parent', '_top' ], true )
+			) {
+				$target = $button['target'];
+			}
+
+			$class = 'button button-primary button-hero';
+			if ( ! empty( $button['class'] ) ) {
+				$class = $button['class'];
+			}
+
+			printf(
+				'<a href="%1$s" class="%2$s" target="%3$s">%4$s</a>',
+				esc_url( $button['href'] ),
+				esc_attr( $class ),
+				esc_attr( $target ),
+				esc_html( $button['label'] )
+			);
+		}
+
+		$buttons_html = ob_get_clean();
+
+		return empty( $buttons_html ) ? '' : $buttons_html;
+	}
 }
