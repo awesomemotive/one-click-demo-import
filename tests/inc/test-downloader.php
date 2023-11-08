@@ -116,7 +116,7 @@ class DownloaderTest extends \WP_UnitTestCase {
 			$this->downloader,
 			'get_content_from_url',
 			array(
-				'http://invalid-url.com'
+				'http://invalid-url.test'
 			)
 		);
 
