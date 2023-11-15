@@ -756,4 +756,39 @@ class Helpers {
 			'menu_slug'   => 'one-click-demo-import',
 		) );
 	}
+
+	/**
+	 * Get the failed attachment imports.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @return mixed
+	 */
+	public static function get_failed_attachment_imports() {
+
+		return get_transient( 'ocdi_importer_data_failed_attachment_imports' );
+	}
+
+	/**
+	 * Set the failed attachment imports.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param string $attachment_url The attachment URL that was not imported.
+	 *
+	 * @return void
+	 */
+	public static function set_failed_attachment_import( $attachment_url ) {
+
+		// Get current importer transient.
+		$failed_media_imports = self::get_failed_attachment_imports();
+
+		if ( empty( $failed_media_imports ) || ! is_array( $failed_media_imports ) ) {
+			$failed_media_imports = [];
+		}
+
+		$failed_media_imports[] = $attachment_url;
+
+		set_transient( 'ocdi_importer_data_failed_attachment_imports', $failed_media_imports, HOUR_IN_SECONDS );
+	}
 }
