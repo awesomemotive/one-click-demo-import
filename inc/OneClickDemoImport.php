@@ -7,6 +7,8 @@
 
 namespace OCDI;
 
+use WP_Error;
+
 /**
  * One Click Demo Import class, so we don't have to worry about namespaces.
  */
@@ -128,6 +130,8 @@ class OneClickDemoImport {
 		add_action( 'all_admin_notices', array( $this, 'finish_notice_output_capturing' ), PHP_INT_MAX );
 		add_action( 'admin_init', array( $this, 'redirect_from_old_default_admin_page' ) );
 		add_action( 'set_object_terms', array( $this, 'add_imported_terms' ), 10, 6 );
+		add_filter( 'wxr_importer.pre_process.post', [ $this, 'skip_failed_attachment_import' ] );
+		add_action( 'wxr_importer.process_failed.post', [ $this, 'handle_failed_attachment_import' ], 10, 5 );
 		add_action( 'wp_import_insert_post', [ $this, 'save_wp_navigation_import_mapping' ], 10, 4 );
 		add_action( 'ocdi/after_import', [ $this, 'fix_imported_wp_navigation' ] );
 	}
@@ -139,14 +143,12 @@ class OneClickDemoImport {
 	 */
 	private function __clone() {}
 
-
 	/**
 	 * Empty unserialize method to prevent unserializing of the *Singleton* instance.
 	 *
 	 * @return void
 	 */
 	public function __wakeup() {}
-
 
 	/**
 	 * Creates the plugin page and a submenu item in WP Appearance menu.
@@ -470,6 +472,7 @@ class OneClickDemoImport {
 	private function final_response() {
 		// Delete importer data transient for current import.
 		delete_transient( 'ocdi_importer_data' );
+		delete_transient( 'ocdi_importer_data_failed_attachment_imports' );
 
 		// Display final messages (success or warning messages).
 		$response['title'] = esc_html__( 'Import Complete!', 'one-click-demo-import' );
@@ -723,6 +726,57 @@ class OneClickDemoImport {
 		}
 
 		$this->imported_terms[ $taxonomy ] = array_unique( array_merge( $this->imported_terms[ $taxonomy ], $tt_ids ) );
+	}
+
+	/**
+	 * Returns an empty array if current attachment to be imported is in the failed imports list.
+	 *
+	 * This will skip the current attachment import.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param array $data Post data to be imported.
+	 *
+	 * @return array
+	 */
+	public function skip_failed_attachment_import( $data ) {
+		// Check if failed import.
+		if (
+			! empty( $data ) &&
+			! empty( $data['post_type'] ) &&
+			$data['post_type'] === 'attachment' &&
+			! empty( $data['attachment_url'] )
+		) {
+			// Get the previously failed imports.
+			$failed_media_imports = Helpers::get_failed_attachment_imports();
+
+			if ( ! empty( $failed_media_imports ) && in_array( $data['attachment_url'], $failed_media_imports, true ) ) {
+				// If the current attachment URL is in the failed imports, then skip it.
+				return [];
+			}
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Save the failed attachment import.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param WP_Error $post_id Error object.
+	 * @param array    $data Raw data imported for the post.
+	 * @param array    $meta Raw meta data, already processed.
+	 * @param array    $comments Raw comment data, already processed.
+	 * @param array    $terms Raw term data, already processed.
+	 */
+	public function handle_failed_attachment_import( $post_id, $data, $meta, $comments, $terms ) {
+
+		if ( empty( $data ) || empty( $data['post_type'] ) || $data['post_type'] !== 'attachment' ) {
+			return;
+		}
+
+		Helpers::set_failed_attachment_import( $data['attachment_url'] );
 	}
 
 	/**
