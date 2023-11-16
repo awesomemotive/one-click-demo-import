@@ -800,6 +800,12 @@ class OneClickDemoImport {
 			return;
 		}
 
+		$replace_pairs = [];
+
+		foreach ( $nav_import_mapping as $mapping ) {
+			$replace_pairs[ '<!-- wp:navigation {"ref":' . $mapping['original_menu_id'] . '} /-->' ] = '<!-- wp:navigation {"ref":' . $mapping['new_menu_id'] . '} /-->';
+		}
+
 		// Loop through each the posts that needs to be updated.
 		foreach ( $posts_nav_block as $post_id ) {
 			$post_nav_block = get_post( $post_id );
@@ -808,21 +814,10 @@ class OneClickDemoImport {
 				return;
 			}
 
-			$new_content = $post_nav_block->post_content;
-
-			// Loop through each of the nav_import_mapping.
-			foreach ( $nav_import_mapping as $mapping ) {
-				$new_content = str_replace(
-					'<!-- wp:navigation {"ref":' . $mapping['original_menu_id'] . '} /-->',
-					'<!-- wp:navigation {"ref":' . $mapping['new_menu_id'] . '} /-->',
-					$new_content
-				);
-			}
-
 			wp_update_post(
 				[
 					'ID'           => $post_id,
-					'post_content' => $new_content,
+					'post_content' => strtr( $post_nav_block->post_content, $replace_pairs ),
 				]
 			);
 		}
