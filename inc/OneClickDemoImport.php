@@ -473,6 +473,8 @@ class OneClickDemoImport {
 		// Delete importer data transient for current import.
 		delete_transient( 'ocdi_importer_data' );
 		delete_transient( 'ocdi_importer_data_failed_attachment_imports' );
+		delete_transient( 'ocdi_import_menu_mapping' );
+		delete_transient( 'ocdi_import_posts_with_nav_block' );
 
 		// Display final messages (success or warning messages).
 		$response['title'] = esc_html__( 'Import Complete!', 'one-click-demo-import' );
