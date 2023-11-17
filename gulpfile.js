@@ -14,6 +14,8 @@ const gulp = require( 'gulp' ),
 	uglify = require( 'gulp-uglify' ),
 	copy = require( 'gulp-copy' ),
 	readme = require( 'gulp-readme-to-markdown' ),
+	replace = require( 'gulp-replace' ),
+	packageJSON = require( './package.json' ),
 	exec = require( 'child_process' ).exec;
 
 const plugin = {
@@ -64,7 +66,16 @@ const plugin = {
 	js: [
 		'assets/js/*.js',
 		'!assets/js/*.min.js',
-	]
+	],
+	files_replace_ver: [
+		"**/*.php",
+		"**/*.js",
+		"!**/*.min.js",
+		"!languages/**",
+		"!node_modules/**",
+		"!vendor/**",
+		"!gulpfile.js",
+	],
 };
 
 /**
@@ -144,6 +155,17 @@ gulp.task( 'copy', function () {
 		// } ) )
 		.pipe(copy('one-click-demo-import'))
 		.pipe( debug( { title: '[copy]' } ) );
+} );
+
+gulp.task( 'replace_since_ver', function() {
+	return gulp.src( plugin.files_replace_ver )
+		.pipe(
+			replace(
+				/@since {VERSION}/g,
+				'@since ' + packageJSON.version
+			)
+		)
+		.pipe( gulp.dest( './' ) );
 } );
 
 /**
