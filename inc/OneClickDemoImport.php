@@ -132,6 +132,8 @@ class OneClickDemoImport {
 		add_action( 'set_object_terms', array( $this, 'add_imported_terms' ), 10, 6 );
 		add_filter( 'wxr_importer.pre_process.post', [ $this, 'skip_failed_attachment_import' ] );
 		add_action( 'wxr_importer.process_failed.post', [ $this, 'handle_failed_attachment_import' ], 10, 5 );
+		add_action( 'wp_import_insert_post', [ $this, 'save_wp_navigation_import_mapping' ], 10, 4 );
+		add_action( 'ocdi/after_import', [ $this, 'fix_imported_wp_navigation' ] );
 	}
 
 	/**
@@ -471,6 +473,8 @@ class OneClickDemoImport {
 		// Delete importer data transient for current import.
 		delete_transient( 'ocdi_importer_data' );
 		delete_transient( 'ocdi_importer_data_failed_attachment_imports' );
+		delete_transient( 'ocdi_import_menu_mapping' );
+		delete_transient( 'ocdi_import_posts_with_nav_block' );
 
 		// Display final messages (success or warning messages).
 		$response['title'] = esc_html__( 'Import Complete!', 'one-click-demo-import' );
@@ -775,6 +779,104 @@ class OneClickDemoImport {
 		}
 
 		Helpers::set_failed_attachment_import( $data['attachment_url'] );
+	}
+
+	/**
+	 * Save the information needed to process the navigation block.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param int   $post_id     The new post ID.
+	 * @param int   $original_id The original post ID.
+	 * @param array $postdata    The post data used to insert the post.
+	 * @param array $data        Post data from the WXR file.
+	 */
+	public function save_wp_navigation_import_mapping( $post_id, $original_id, $postdata, $data ) {
+
+		if ( empty( $postdata['post_content'] ) ) {
+			return;
+		}
+
+		if ( $postdata['post_type'] !== 'wp_navigation' ) {
+
+			/*
+			 * Save the post ID that has navigation block in transient.
+			 */
+			if ( strpos( $postdata['post_content'], '<!-- wp:navigation' ) !== false ) {
+				// Keep track of POST ID that has navigation block.
+				$ocdi_post_nav_block = get_transient( 'ocdi_import_posts_with_nav_block' );
+
+				if ( empty( $ocdi_post_nav_block ) ) {
+					$ocdi_post_nav_block = [];
+				}
+
+				$ocdi_post_nav_block[] = $post_id;
+
+				set_transient( 'ocdi_import_posts_with_nav_block', $ocdi_post_nav_block, HOUR_IN_SECONDS );
+			}
+		} else {
+
+			/*
+			 * Save the `wp_navigation` post type mapping of the original menu ID and the new menu ID
+			 * in transient.
+			 */
+			$ocdi_menu_mapping = get_transient( 'ocdi_import_menu_mapping' );
+
+			if ( empty( $ocdi_menu_mapping ) ) {
+				$ocdi_menu_mapping = [];
+			}
+
+			// Let's save the mapping of the original menu ID and the new menu ID.
+			$ocdi_menu_mapping[] = [
+				'original_menu_id' => $original_id,
+				'new_menu_id'      => $post_id,
+			];
+
+			set_transient( 'ocdi_import_menu_mapping', $ocdi_menu_mapping, HOUR_IN_SECONDS );
+		}
+	}
+
+	/**
+	 * Fix issue with WP Navigation block.
+	 *
+	 * We did this by looping through all the imported posts with the WP Navigation block
+	 * and replacing the original menu ID with the new menu ID.
+	 *
+	 * @since {VERSION}
+	 */
+	public function fix_imported_wp_navigation() {
+
+		// Get the `wp_navigation` import mapping.
+		$nav_import_mapping = get_transient( 'ocdi_import_menu_mapping' );
+
+		// Get the post IDs that needs to be updated.
+		$posts_nav_block = get_transient( 'ocdi_import_posts_with_nav_block' );
+
+		if ( empty( $nav_import_mapping ) || empty( $posts_nav_block ) ) {
+			return;
+		}
+
+		$replace_pairs = [];
+
+		foreach ( $nav_import_mapping as $mapping ) {
+			$replace_pairs[ '<!-- wp:navigation {"ref":' . $mapping['original_menu_id'] . '} /-->' ] = '<!-- wp:navigation {"ref":' . $mapping['new_menu_id'] . '} /-->';
+		}
+
+		// Loop through each the posts that needs to be updated.
+		foreach ( $posts_nav_block as $post_id ) {
+			$post_nav_block = get_post( $post_id );
+
+			if ( empty( $post_nav_block ) || empty( $post_nav_block->post_content ) ) {
+				return;
+			}
+
+			wp_update_post(
+				[
+					'ID'           => $post_id,
+					'post_content' => strtr( $post_nav_block->post_content, $replace_pairs ),
+				]
+			);
+		}
 	}
 
 	/**
