@@ -14,6 +14,8 @@ const gulp = require( 'gulp' ),
 	uglify = require( 'gulp-uglify' ),
 	copy = require( 'gulp-copy' ),
 	readme = require( 'gulp-readme-to-markdown' ),
+	replace = require( 'gulp-replace' ),
+	packageJSON = require( './package.json' ),
 	exec = require( 'child_process' ).exec;
 
 const plugin = {
@@ -64,7 +66,16 @@ const plugin = {
 	js: [
 		'assets/js/*.js',
 		'!assets/js/*.min.js',
-	]
+	],
+	files_replace_ver: [
+		"**/*.php",
+		"**/*.js",
+		"!**/*.min.js",
+		"!languages/**",
+		"!node_modules/**",
+		"!vendor/**",
+		"!gulpfile.js",
+	],
 };
 
 /**
@@ -147,9 +158,40 @@ gulp.task( 'copy', function () {
 } );
 
 /**
+ * Replace plugin version with one from package.json in the main plugin file.
+ */
+gulp.task( 'replace_plugin_file_ver', function () {
+	return gulp.src( [ 'one-click-demo-import.php' ] )
+		.pipe(
+			// File header.
+			replace(
+				/Version: ((\*)|([0-9]+(\.((\*)|([0-9]+(\.((\*)|([0-9]+)))?)))?))/gm,
+				'Version: ' + packageJSON.version
+			)
+		)
+		.pipe( gulp.dest( './' ) );
+} );
+
+/**
+ * Replace plugin version with one from package.json in @since comments in plugin PHP and JS files.
+ */
+gulp.task( 'replace_since_ver', function() {
+	return gulp.src( plugin.files_replace_ver )
+		.pipe(
+			replace(
+				/@since {VERSION}/g,
+				'@since ' + packageJSON.version
+			)
+		)
+		.pipe( gulp.dest( './' ) );
+} );
+
+gulp.task( 'replace_ver', gulp.series( 'replace_plugin_file_ver', 'replace_since_ver' ) );
+
+/**
  * Task: build.
  */
-gulp.task( 'build', gulp.series( gulp.parallel( 'css', 'js', 'pot' ), 'copy' ) );
+gulp.task( 'build', gulp.series( gulp.parallel( 'css', 'js', 'pot' ), 'replace_ver', 'copy' ) );
 
 /**
  * Look out for relevant sass/js changes.
