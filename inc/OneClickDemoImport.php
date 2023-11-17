@@ -812,7 +812,7 @@ class OneClickDemoImport {
 
 				$ocdi_post_nav_block[] = $post_id;
 
-				set_transient( 'ocdi_import_posts_with_nav_block', $ocdi_post_nav_block, 3 * HOUR_IN_SECONDS );
+				set_transient( 'ocdi_import_posts_with_nav_block', $ocdi_post_nav_block, HOUR_IN_SECONDS );
 			}
 		} else {
 
@@ -832,7 +832,7 @@ class OneClickDemoImport {
 				'new_menu_id'      => $post_id,
 			];
 
-			set_transient( 'ocdi_import_menu_mapping', $ocdi_menu_mapping, 3 * HOUR_IN_SECONDS );
+			set_transient( 'ocdi_import_menu_mapping', $ocdi_menu_mapping, HOUR_IN_SECONDS );
 		}
 	}
 
