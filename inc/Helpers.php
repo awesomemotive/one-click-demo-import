@@ -704,16 +704,21 @@ class Helpers {
 	 * but we needed to make sure backwards compatibility is in place.
 	 * This method should be used for all do_action calls.
 	 *
+	 * @since {VERSION} Run both `$hook` and `pt-$hook` actions.
+	 *
 	 * @param string $hook   The action hook name.
 	 * @param mixed  ...$arg Optional. Additional arguments which are passed on to the
 	 *                       functions hooked to the action. Default empty.
 	 */
 	public static function do_action( $hook, ...$arg ) {
-		if ( has_action( $hook ) ) {
-			do_action( $hook, ...$arg );
-		} else if ( has_action( "pt-$hook" ) ) {
-			do_action( "pt-$hook", ...$arg );
+		do_action( $hook, ...$arg );
+
+		$args = [];
+		foreach ( $arg as $argument ) {
+			$args[] = $argument;
 		}
+
+		do_action_deprecated( "pt-$hook", $args, '3.0.0', $hook );
 	}
 
 	/**
