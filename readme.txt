@@ -1,8 +1,8 @@
 === One Click Demo Import ===
 Contributors: ocdi, smub, jaredatch, capuderg
 Tags: import, content, demo, data, widgets, settings, redux, theme options
-Requires at least: 5.2
-Tested up to: 6.0
+Requires at least: 5.5
+Tested up to: 6.4
 Requires PHP: 5.6
 Stable tag: 3.1.2
 License: GPLv3 or later
@@ -59,7 +59,7 @@ You will find the import page in *wp-admin -> Appearance -> Import Demo Data*.
 
 = Where are the demo import files and the log files saved? =
 
-The files used in the demo import will be saved to the default WordPress uploads directory. An example of that directory would be: `../wp-content/uploads/2016/03/`.
+The files used in the demo import will be saved to the default WordPress uploads directory. An example of that directory would be: `../wp-content/uploads/2023/03/`.
 
 The log file will also be registered in the *wp-admin -> Media* section, so you can access it easily.
 
