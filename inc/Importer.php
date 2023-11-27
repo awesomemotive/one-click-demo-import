@@ -152,6 +152,11 @@ class Importer {
 	 * @return array
 	 */
 	public function new_ajax_request_maybe( $data ) {
+
+		if ( empty( $data ) ) {
+			return $data;
+		}
+
 		$time = microtime( true ) - $this->microtime;
 
 		// We should make a new ajax call, if the time is right.

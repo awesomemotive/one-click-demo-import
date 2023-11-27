@@ -15,6 +15,9 @@
         }
     },
     "require": {
-        "awesomemotive/wp-content-importer-v2": "^3.0.4"
+        "awesomemotive/wp-content-importer-v2": "^3.0.5"
+    },
+    "require-dev": {
+        "yoast/phpunit-polyfills": "^2.0"
     }
 }

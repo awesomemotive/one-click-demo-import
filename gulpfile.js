@@ -1,19 +1,24 @@
 /**
  * Load plugins.
  */
-var gulp = require( 'gulp' ),
+import autoprefixer from 'gulp-autoprefixer';
+import debug from 'gulp-debug';
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+const gulp = require( 'gulp' ),
 	cached = require( 'gulp-cached' ),
-	sass = require( 'gulp-sass' ),
-	prefix = require( 'gulp-autoprefixer' ),
+	sass = require('gulp-sass')(require('sass')),
 	sourcemaps = require( 'gulp-sourcemaps' ),
 	rename = require( 'gulp-rename' ),
-	debug = require( 'gulp-debug' ),
 	uglify = require( 'gulp-uglify' ),
 	copy = require( 'gulp-copy' ),
 	readme = require( 'gulp-readme-to-markdown' ),
+	replace = require( 'gulp-replace' ),
+	packageJSON = require( './package.json' ),
 	exec = require( 'child_process' ).exec;
 
-var plugin = {
+const plugin = {
 	name: 'One Click Demo Import',
 	slug: 'one-click-demo-import',
 	files: [
@@ -61,7 +66,16 @@ var plugin = {
 	js: [
 		'assets/js/*.js',
 		'!assets/js/*.min.js',
-	]
+	],
+	files_replace_ver: [
+		"**/*.php",
+		"**/*.js",
+		"!**/*.min.js",
+		"!languages/**",
+		"!node_modules/**",
+		"!vendor/**",
+		"!gulpfile.js",
+	],
 };
 
 /**
@@ -73,7 +87,7 @@ gulp.task( 'css', function () {
 		.pipe( cached( 'processCSS' ) )
 		.pipe( sourcemaps.init() )
 		.pipe( sass( { outputStyle: 'expanded' } ).on( 'error', sass.logError ) )
-		.pipe( prefix() )
+		.pipe( autoprefixer() )
 		.pipe( rename( function ( path ) {
 			path.dirname = '/assets/css';
 			path.extname = '.css';
@@ -82,7 +96,7 @@ gulp.task( 'css', function () {
 		.pipe( gulp.dest( './' ) )
 		// Minified file.
 		.pipe( sass( { outputStyle: 'compressed' } ).on( 'error', sass.logError ) )
-		.pipe( prefix() )
+		.pipe( autoprefixer() )
 		.pipe( rename( function ( path ) {
 			path.dirname = '/assets/css';
 			path.extname = '.min.css';
@@ -144,9 +158,40 @@ gulp.task( 'copy', function () {
 } );
 
 /**
+ * Replace plugin version with one from package.json in the main plugin file.
+ */
+gulp.task( 'replace_plugin_file_ver', function () {
+	return gulp.src( [ 'one-click-demo-import.php' ] )
+		.pipe(
+			// File header.
+			replace(
+				/Version: ((\*)|([0-9]+(\.((\*)|([0-9]+(\.((\*)|([0-9]+)))?)))?))/gm,
+				'Version: ' + packageJSON.version
+			)
+		)
+		.pipe( gulp.dest( './' ) );
+} );
+
+/**
+ * Replace plugin version with one from package.json in @since comments in plugin PHP and JS files.
+ */
+gulp.task( 'replace_since_ver', function() {
+	return gulp.src( plugin.files_replace_ver )
+		.pipe(
+			replace(
+				/@since {VERSION}/g,
+				'@since ' + packageJSON.version
+			)
+		)
+		.pipe( gulp.dest( './' ) );
+} );
+
+gulp.task( 'replace_ver', gulp.series( 'replace_plugin_file_ver', 'replace_since_ver' ) );
+
+/**
  * Task: build.
  */
-gulp.task( 'build', gulp.series( gulp.parallel( 'css', 'js', 'pot' ), 'copy' ) );
+gulp.task( 'build', gulp.series( gulp.parallel( 'css', 'js', 'pot' ), 'replace_ver', 'copy' ) );
 
 /**
  * Look out for relevant sass/js changes.

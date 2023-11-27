@@ -44,7 +44,12 @@ class ReduxImporter {
 
 			if ( isset( $redux_framework->args['opt_name'] ) ) {
 				// Import Redux settings.
-				$redux_framework->set_options( $redux_options_data );
+				if ( ! empty( $redux_framework->options_class ) && method_exists( $redux_framework->options_class, 'set' ) ) {
+					$redux_framework->options_class->set( $redux_options_data );
+				} else {
+					// Handle backwards compatibility.
+					$redux_framework->set_options( $redux_options_data );
+				}
 
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file( /* translators: %s - the name of the Redux option. */

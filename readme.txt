@@ -1,10 +1,10 @@
 === One Click Demo Import ===
 Contributors: ocdi, smub, jaredatch, capuderg
 Tags: import, content, demo, data, widgets, settings, redux, theme options
-Requires at least: 5.2
-Tested up to: 6.0
+Requires at least: 5.5
+Tested up to: 6.4
 Requires PHP: 5.6
-Stable tag: 3.1.2
+Stable tag: 3.2.0
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple theme demo import for your users.
@@ -59,7 +59,7 @@ You will find the import page in *wp-admin -> Appearance -> Import Demo Data*.
 
 = Where are the demo import files and the log files saved? =
 
-The files used in the demo import will be saved to the default WordPress uploads directory. An example of that directory would be: `../wp-content/uploads/2016/03/`.
+The files used in the demo import will be saved to the default WordPress uploads directory. An example of that directory would be: `../wp-content/uploads/2023/03/`.
 
 The log file will also be registered in the *wp-admin -> Media* section, so you can access it easily.
 
@@ -358,6 +358,17 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 4. How the Recommended & Required theme plugins step looks like, just before the import step.
 
 == Changelog ==
+
+= 3.2.0 =
+*Release Date - 23rd November 2023*
+
+* Added `ocdi/import_successful_buttons` filter hook that allow developers to add custom buttons in the import successful page.
+* Added `loading="lazy"` in import preview images for better performance.
+* Fixed PHP warning notice when importing non-string term metadata.
+* Fixed Navigation block not imported properly.
+* Fixed issue with failed media import resulting to infinite loop.
+* Fixed PHP deprecated notice when importing Redux Framework options.
+* Fixed issue with old action hook, `pt-{$hook}`, not running when the new `{$hook}` is also used.
 
 = 3.1.2 =
 

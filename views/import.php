@@ -126,8 +126,16 @@ $theme            = wp_get_theme();
 						<div class="ocdi__response  js-ocdi-ajax-response"></div>
 					</div>
 					<div class="ocdi-imported-footer">
-						<a href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>" class="button button-primary button-hero"><?php esc_html_e( 'Theme Settings' , 'one-click-demo-import' ); ?></a>
-						<a href="<?php echo esc_url( get_home_url() ); ?>" class="button button-primary button-hero"><?php esc_html_e( 'Visit Site' , 'one-click-demo-import' ); ?></a>
+						<?php echo wp_kses(
+							$this->get_import_successful_buttons_html(),
+							[
+								'a' => [
+									'href'   => [],
+									'class'  => [],
+									'target' => [],
+								],
+							]
+						); ?>
 					</div>
 				</div>
 			</div>

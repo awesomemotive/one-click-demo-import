@@ -71,7 +71,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 		<div class="ocdi__theme-about">
 			<div class="ocdi__theme-about-screenshots">
 				<?php if ( $theme->get_screenshot() ) : ?>
-				<div class="screenshot"><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" alt="<?php esc_attr_e( 'Theme screenshot', 'one-click-demo-import' ); ?>" /></div>
+				<div class="screenshot"><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" alt="<?php esc_attr_e( 'Theme screenshot', 'one-click-demo-import' ); ?>" loading="lazy" /></div>
 				<?php else : ?>
 				<div class="screenshot blank"></div>
 				<?php endif; ?>
@@ -336,7 +336,7 @@ Helpers::do_action( 'ocdi/plugin_page_header' );
 						<div class="ocdi__gl-item js-ocdi-gl-item" data-categories="<?php echo esc_attr( Helpers::get_demo_import_item_categories( $import_file ) ); ?>" data-name="<?php echo esc_attr( strtolower( $import_file['import_file_name'] ) ); ?>">
 							<div class="ocdi__gl-item-image-container">
 								<?php if ( ! empty( $img_src ) ) : ?>
-									<img class="ocdi__gl-item-image" src="<?php echo esc_url( $img_src ) ?>">
+									<img class="ocdi__gl-item-image" src="<?php echo esc_url( $img_src ) ?>" loading="lazy">
 								<?php else : ?>
 									<div class="ocdi__gl-item-image  ocdi__gl-item-image--no-image"><?php esc_html_e( 'No preview image.', 'one-click-demo-import' ); ?></div>
 								<?php endif; ?>

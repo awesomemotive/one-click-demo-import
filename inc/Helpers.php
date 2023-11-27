@@ -704,16 +704,21 @@ class Helpers {
 	 * but we needed to make sure backwards compatibility is in place.
 	 * This method should be used for all do_action calls.
 	 *
+	 * @since 3.2.0 Run both `$hook` and `pt-$hook` actions.
+	 *
 	 * @param string $hook   The action hook name.
 	 * @param mixed  ...$arg Optional. Additional arguments which are passed on to the
 	 *                       functions hooked to the action. Default empty.
 	 */
 	public static function do_action( $hook, ...$arg ) {
-		if ( has_action( $hook ) ) {
-			do_action( $hook, ...$arg );
-		} else if ( has_action( "pt-$hook" ) ) {
-			do_action( "pt-$hook", ...$arg );
+		do_action( $hook, ...$arg );
+
+		$args = [];
+		foreach ( $arg as $argument ) {
+			$args[] = $argument;
 		}
+
+		do_action_deprecated( "pt-$hook", $args, '3.0.0', $hook );
 	}
 
 	/**
@@ -755,5 +760,40 @@ class Helpers {
 			'capability'  => 'import',
 			'menu_slug'   => 'one-click-demo-import',
 		) );
+	}
+
+	/**
+	 * Get the failed attachment imports.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @return mixed
+	 */
+	public static function get_failed_attachment_imports() {
+
+		return get_transient( 'ocdi_importer_data_failed_attachment_imports' );
+	}
+
+	/**
+	 * Set the failed attachment imports.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param string $attachment_url The attachment URL that was not imported.
+	 *
+	 * @return void
+	 */
+	public static function set_failed_attachment_import( $attachment_url ) {
+
+		// Get current importer transient.
+		$failed_media_imports = self::get_failed_attachment_imports();
+
+		if ( empty( $failed_media_imports ) || ! is_array( $failed_media_imports ) ) {
+			$failed_media_imports = [];
+		}
+
+		$failed_media_imports[] = $attachment_url;
+
+		set_transient( 'ocdi_importer_data_failed_attachment_imports', $failed_media_imports, HOUR_IN_SECONDS );
 	}
 }

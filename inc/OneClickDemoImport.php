@@ -7,6 +7,8 @@
 
 namespace OCDI;
 
+use WP_Error;
+
 /**
  * One Click Demo Import class, so we don't have to worry about namespaces.
  */
@@ -128,8 +130,11 @@ class OneClickDemoImport {
 		add_action( 'all_admin_notices', array( $this, 'finish_notice_output_capturing' ), PHP_INT_MAX );
 		add_action( 'admin_init', array( $this, 'redirect_from_old_default_admin_page' ) );
 		add_action( 'set_object_terms', array( $this, 'add_imported_terms' ), 10, 6 );
+		add_filter( 'wxr_importer.pre_process.post', [ $this, 'skip_failed_attachment_import' ] );
+		add_action( 'wxr_importer.process_failed.post', [ $this, 'handle_failed_attachment_import' ], 10, 5 );
+		add_action( 'wp_import_insert_post', [ $this, 'save_wp_navigation_import_mapping' ], 10, 4 );
+		add_action( 'ocdi/after_import', [ $this, 'fix_imported_wp_navigation' ] );
 	}
-
 
 	/**
 	 * Private clone method to prevent cloning of the instance of the *Singleton* instance.
@@ -138,14 +143,12 @@ class OneClickDemoImport {
 	 */
 	private function __clone() {}
 
-
 	/**
 	 * Empty unserialize method to prevent unserializing of the *Singleton* instance.
 	 *
 	 * @return void
 	 */
 	public function __wakeup() {}
-
 
 	/**
 	 * Creates the plugin page and a submenu item in WP Appearance menu.
@@ -469,6 +472,9 @@ class OneClickDemoImport {
 	private function final_response() {
 		// Delete importer data transient for current import.
 		delete_transient( 'ocdi_importer_data' );
+		delete_transient( 'ocdi_importer_data_failed_attachment_imports' );
+		delete_transient( 'ocdi_import_menu_mapping' );
+		delete_transient( 'ocdi_import_posts_with_nav_block' );
 
 		// Display final messages (success or warning messages).
 		$response['title'] = esc_html__( 'Import Complete!', 'one-click-demo-import' );
@@ -725,6 +731,155 @@ class OneClickDemoImport {
 	}
 
 	/**
+	 * Returns an empty array if current attachment to be imported is in the failed imports list.
+	 *
+	 * This will skip the current attachment import.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param array $data Post data to be imported.
+	 *
+	 * @return array
+	 */
+	public function skip_failed_attachment_import( $data ) {
+		// Check if failed import.
+		if (
+			! empty( $data ) &&
+			! empty( $data['post_type'] ) &&
+			$data['post_type'] === 'attachment' &&
+			! empty( $data['attachment_url'] )
+		) {
+			// Get the previously failed imports.
+			$failed_media_imports = Helpers::get_failed_attachment_imports();
+
+			if ( ! empty( $failed_media_imports ) && in_array( $data['attachment_url'], $failed_media_imports, true ) ) {
+				// If the current attachment URL is in the failed imports, then skip it.
+				return [];
+			}
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Save the failed attachment import.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param WP_Error $post_id Error object.
+	 * @param array    $data Raw data imported for the post.
+	 * @param array    $meta Raw meta data, already processed.
+	 * @param array    $comments Raw comment data, already processed.
+	 * @param array    $terms Raw term data, already processed.
+	 */
+	public function handle_failed_attachment_import( $post_id, $data, $meta, $comments, $terms ) {
+
+		if ( empty( $data ) || empty( $data['post_type'] ) || $data['post_type'] !== 'attachment' ) {
+			return;
+		}
+
+		Helpers::set_failed_attachment_import( $data['attachment_url'] );
+	}
+
+	/**
+	 * Save the information needed to process the navigation block.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param int   $post_id     The new post ID.
+	 * @param int   $original_id The original post ID.
+	 * @param array $postdata    The post data used to insert the post.
+	 * @param array $data        Post data from the WXR file.
+	 */
+	public function save_wp_navigation_import_mapping( $post_id, $original_id, $postdata, $data ) {
+
+		if ( empty( $postdata['post_content'] ) ) {
+			return;
+		}
+
+		if ( $postdata['post_type'] !== 'wp_navigation' ) {
+
+			/*
+			 * Save the post ID that has navigation block in transient.
+			 */
+			if ( strpos( $postdata['post_content'], '<!-- wp:navigation' ) !== false ) {
+				// Keep track of POST ID that has navigation block.
+				$ocdi_post_nav_block = get_transient( 'ocdi_import_posts_with_nav_block' );
+
+				if ( empty( $ocdi_post_nav_block ) ) {
+					$ocdi_post_nav_block = [];
+				}
+
+				$ocdi_post_nav_block[] = $post_id;
+
+				set_transient( 'ocdi_import_posts_with_nav_block', $ocdi_post_nav_block, HOUR_IN_SECONDS );
+			}
+		} else {
+
+			/*
+			 * Save the `wp_navigation` post type mapping of the original menu ID and the new menu ID
+			 * in transient.
+			 */
+			$ocdi_menu_mapping = get_transient( 'ocdi_import_menu_mapping' );
+
+			if ( empty( $ocdi_menu_mapping ) ) {
+				$ocdi_menu_mapping = [];
+			}
+
+			// Let's save the mapping of the original menu ID and the new menu ID.
+			$ocdi_menu_mapping[] = [
+				'original_menu_id' => $original_id,
+				'new_menu_id'      => $post_id,
+			];
+
+			set_transient( 'ocdi_import_menu_mapping', $ocdi_menu_mapping, HOUR_IN_SECONDS );
+		}
+	}
+
+	/**
+	 * Fix issue with WP Navigation block.
+	 *
+	 * We did this by looping through all the imported posts with the WP Navigation block
+	 * and replacing the original menu ID with the new menu ID.
+	 *
+	 * @since 3.2.0
+	 */
+	public function fix_imported_wp_navigation() {
+
+		// Get the `wp_navigation` import mapping.
+		$nav_import_mapping = get_transient( 'ocdi_import_menu_mapping' );
+
+		// Get the post IDs that needs to be updated.
+		$posts_nav_block = get_transient( 'ocdi_import_posts_with_nav_block' );
+
+		if ( empty( $nav_import_mapping ) || empty( $posts_nav_block ) ) {
+			return;
+		}
+
+		$replace_pairs = [];
+
+		foreach ( $nav_import_mapping as $mapping ) {
+			$replace_pairs[ '<!-- wp:navigation {"ref":' . $mapping['original_menu_id'] . '} /-->' ] = '<!-- wp:navigation {"ref":' . $mapping['new_menu_id'] . '} /-->';
+		}
+
+		// Loop through each the posts that needs to be updated.
+		foreach ( $posts_nav_block as $post_id ) {
+			$post_nav_block = get_post( $post_id );
+
+			if ( empty( $post_nav_block ) || empty( $post_nav_block->post_content ) ) {
+				return;
+			}
+
+			wp_update_post(
+				[
+					'ID'           => $post_id,
+					'post_content' => strtr( $post_nav_block->post_content, $replace_pairs ),
+				]
+			);
+		}
+	}
+
+	/**
 	 * Update imported terms count.
 	 */
 	private function update_terms_count() {
@@ -732,5 +887,85 @@ class OneClickDemoImport {
 		foreach ( $this->imported_terms as $tax => $terms ) {
 			wp_update_term_count_now( $terms, $tax );
 		}
+	}
+
+	/**
+	 * Get the import buttons HTML for the successful import page.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @return string
+	 */
+	public function get_import_successful_buttons_html() {
+
+		/**
+		 * Filter the buttons that are displayed on the successful import page.
+		 *
+		 * @since 3.2.0
+		 *
+		 * @param array $buttons {
+		 *     Array of buttons.
+		 *
+		 *     @type string $label  Button label.
+		 *     @type string $class  Button class.
+		 *     @type string $href   Button URL.
+		 *     @type string $target Button target. Can be `_blank`, `_parent`, `_top`. Default is `_self`.
+		 * }
+		 */
+		$buttons = Helpers::apply_filters(
+			'ocdi/import_successful_buttons',
+			[
+				[
+					'label'  => __( 'Theme Settings' , 'one-click-demo-import' ),
+					'class'  => 'button button-primary button-hero',
+					'href'   => admin_url( 'customize.php' ),
+					'target' => '_blank',
+				],
+				[
+					'label'  => __( 'Visit Site' , 'one-click-demo-import' ),
+					'class'  => 'button button-primary button-hero',
+					'href'   => get_home_url(),
+					'target' => '_blank',
+				],
+			]
+		);
+
+		if ( empty( $buttons ) || ! is_array( $buttons ) ) {
+			return '';
+		}
+
+		ob_start();
+
+		foreach ( $buttons as $button ) {
+
+			if ( empty( $button['href'] ) || empty( $button['label'] ) ) {
+				continue;
+			}
+
+			$target = '_self';
+			if (
+				! empty( $button['target'] ) &&
+				in_array( strtolower( $button['target'] ), [ '_blank', '_parent', '_top' ], true )
+			) {
+				$target = $button['target'];
+			}
+
+			$class = 'button button-primary button-hero';
+			if ( ! empty( $button['class'] ) ) {
+				$class = $button['class'];
+			}
+
+			printf(
+				'<a href="%1$s" class="%2$s" target="%3$s">%4$s</a>',
+				esc_url( $button['href'] ),
+				esc_attr( $class ),
+				esc_attr( $target ),
+				esc_html( $button['label'] )
+			);
+		}
+
+		$buttons_html = ob_get_clean();
+
+		return empty( $buttons_html ) ? '' : $buttons_html;
 	}
 }
