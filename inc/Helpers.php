@@ -704,7 +704,7 @@ class Helpers {
 	 * but we needed to make sure backwards compatibility is in place.
 	 * This method should be used for all do_action calls.
 	 *
-	 * @since {VERSION} Run both `$hook` and `pt-$hook` actions.
+	 * @since 3.2.0 Run both `$hook` and `pt-$hook` actions.
 	 *
 	 * @param string $hook   The action hook name.
 	 * @param mixed  ...$arg Optional. Additional arguments which are passed on to the
@@ -765,7 +765,7 @@ class Helpers {
 	/**
 	 * Get the failed attachment imports.
 	 *
-	 * @since {VERSION}
+	 * @since 3.2.0
 	 *
 	 * @return mixed
 	 */
@@ -777,7 +777,7 @@ class Helpers {
 	/**
 	 * Set the failed attachment imports.
 	 *
-	 * @since {VERSION}
+	 * @since 3.2.0
 	 *
 	 * @param string $attachment_url The attachment URL that was not imported.
 	 *

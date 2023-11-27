@@ -735,7 +735,7 @@ class OneClickDemoImport {
 	 *
 	 * This will skip the current attachment import.
 	 *
-	 * @since {VERSION}
+	 * @since 3.2.0
 	 *
 	 * @param array $data Post data to be imported.
 	 *
@@ -764,7 +764,7 @@ class OneClickDemoImport {
 	/**
 	 * Save the failed attachment import.
 	 *
-	 * @since {VERSION}
+	 * @since 3.2.0
 	 *
 	 * @param WP_Error $post_id Error object.
 	 * @param array    $data Raw data imported for the post.
@@ -784,7 +784,7 @@ class OneClickDemoImport {
 	/**
 	 * Save the information needed to process the navigation block.
 	 *
-	 * @since {VERSION}
+	 * @since 3.2.0
 	 *
 	 * @param int   $post_id     The new post ID.
 	 * @param int   $original_id The original post ID.
@@ -842,7 +842,7 @@ class OneClickDemoImport {
 	 * We did this by looping through all the imported posts with the WP Navigation block
 	 * and replacing the original menu ID with the new menu ID.
 	 *
-	 * @since {VERSION}
+	 * @since 3.2.0
 	 */
 	public function fix_imported_wp_navigation() {
 
@@ -892,7 +892,7 @@ class OneClickDemoImport {
 	/**
 	 * Get the import buttons HTML for the successful import page.
 	 *
-	 * @since {VERSION}
+	 * @since 3.2.0
 	 *
 	 * @return string
 	 */
@@ -901,7 +901,7 @@ class OneClickDemoImport {
 		/**
 		 * Filter the buttons that are displayed on the successful import page.
 		 *
-		 * @since {VERSION}
+		 * @since 3.2.0
 		 *
 		 * @param array $buttons {
 		 *     Array of buttons.
