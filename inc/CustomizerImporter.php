@@ -84,7 +84,7 @@ class CustomizerImporter {
 			return $raw;
 		}
 
-		$data = unserialize( $raw );
+		$data = unserialize( $raw , array( 'allowed_classes' => false ) );
 
 		// Data checks.
 		if ( ! is_array( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
