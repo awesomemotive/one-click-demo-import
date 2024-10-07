@@ -1,6 +1,6 @@
 === One Click Demo Import ===
 Contributors: ocdi, smub, jaredatch, capuderg
-Tags: import, content, demo, data, widgets, settings, redux, theme options
+Tags: import, content, widgets, settings, theme options
 Requires at least: 5.5
 Tested up to: 6.5
 Requires PHP: 5.6
