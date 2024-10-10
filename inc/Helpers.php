@@ -55,7 +55,10 @@ class Helpers {
 	/**
 	 * Download import files. Content .xml and widgets .wie|.json files.
 	 *
+	 * @since {VERSION} Add WPForms support.
+	 *
 	 * @param  array  $import_file_info array with import file details.
+	 *
 	 * @return array|WP_Error array of paths to the downloaded files or WP_Error object with error message.
 	 */
 	public static function download_import_files( $import_file_info ) {
@@ -64,6 +67,7 @@ class Helpers {
 			'widgets'    => '',
 			'customizer' => '',
 			'redux'      => '',
+			'wpforms'    => '',
 		);
 		$downloader = new Downloader();
 
@@ -168,6 +172,25 @@ class Helpers {
 
 			// Download the Redux import file.
 			$downloaded_files['redux'] = $redux_items;
+		}
+
+		// ----- Set WPForms file paths -----
+		// Get WPForms import file as well. If defined!
+		if ( ! empty( $import_file_info['import_wpforms_file_url'] ) ) {
+			// Setup filename path to save the WPForms content.
+			$wpforms_filename = self::apply_filters( 'ocdi/downloaded_wpforms_file_prefix', 'demo-wpforms-import-file_' ) . self::$demo_import_start_time . self::apply_filters( 'ocdi/downloaded_wpforms_file_suffix_and_file_extension', '.json' );
+
+			// Download the customizer import file.
+			$downloaded_files['wpforms'] = $downloader->download_file( $import_file_info['import_wpforms_file_url'], $wpforms_filename );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['wpforms'] ) ) {
+				return $downloaded_files['wpforms'];
+			}
+		} else if ( ! empty( $import_file_info['local_import_wpforms_file'] ) ) {
+			if ( file_exists( $import_file_info['local_import_wpforms_file'] ) ) {
+				$downloaded_files['wpforms'] = $import_file_info['local_import_wpforms_file'];
+			}
 		}
 
 		return $downloaded_files;
