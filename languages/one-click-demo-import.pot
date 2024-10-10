@@ -1,19 +1,19 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 3.2.0\n"
+"Project-Id-Version: One Click Demo Import 3.3.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/one-click-demo-import\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-23T09:35:25+00:00\n"
+"POT-Creation-Date: 2024-10-10T11:46:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: one-click-demo-import\n"
 
 #. Plugin Name of the plugin
-#: inc/Helpers.php:758
+#: inc/Helpers.php:781
 #: inc/ViewHelpers.php:19
 msgid "One Click Demo Import"
 msgstr ""
@@ -211,97 +211,97 @@ msgid "An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s
 msgstr ""
 
 #. translators: %1$s - br HTML tag, %2$s - file path
-#: inc/Helpers.php:199
-#: inc/Helpers.php:242
+#: inc/Helpers.php:222
+#: inc/Helpers.php:265
 msgid "An error occurred while writing file to your server! Tried to write a file to: %1$s%2$s."
 msgstr ""
 
 #. translators: %1$s - br HTML tag, %2$s - file path
-#: inc/Helpers.php:276
+#: inc/Helpers.php:299
 msgid "An error occurred while reading a file from your server! Tried reading file from path: %1$s%2$s."
 msgstr ""
 
 #. translators: %1$s and %2$s - strong HTML tags, %3$s - HTML link to a doc page.
-#: inc/Helpers.php:299
+#: inc/Helpers.php:322
 msgid "This WordPress page does not have %1$sdirect%2$s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %3$s."
 msgstr ""
 
-#: inc/Helpers.php:316
+#: inc/Helpers.php:339
 msgid "An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!"
 msgstr ""
 
-#: inc/Helpers.php:324
+#: inc/Helpers.php:347
 msgid "Your WordPress login credentials don't allow to use WP_Filesystem!"
 msgstr ""
 
-#: inc/Helpers.php:364
+#: inc/Helpers.php:387
 msgid "One Click Demo Import - "
 msgstr ""
 
 #. translators: %1$s - opening div and paragraph HTML tags, %2$s - closing div and paragraph HTML tags.
-#: inc/Helpers.php:398
+#: inc/Helpers.php:421
 msgid "%1$sYour user role isn't high enough. You don't have permission to import demo data.%2$s"
 msgstr ""
 
-#: inc/Helpers.php:442
+#: inc/Helpers.php:465
 msgid "No file provided."
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:471
+#: inc/Helpers.php:494
 msgid "Content file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:475
-#: inc/Helpers.php:492
-#: inc/Helpers.php:509
-#: inc/Helpers.php:520
-#: inc/Helpers.php:540
-#: inc/Helpers.php:548
+#: inc/Helpers.php:498
+#: inc/Helpers.php:515
+#: inc/Helpers.php:532
+#: inc/Helpers.php:543
+#: inc/Helpers.php:563
+#: inc/Helpers.php:571
 msgid "Upload files"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:488
+#: inc/Helpers.php:511
 msgid "Widget file was not uploaded. Error: %s"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:505
+#: inc/Helpers.php:528
 msgid "Customizer file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:518
+#: inc/Helpers.php:541
 msgid "Missing Redux option name! Please also enter the Redux option name!"
 msgstr ""
 
 #. translators: %s - the error message.
-#: inc/Helpers.php:536
+#: inc/Helpers.php:559
 msgid "Redux file was not uploaded. Error: %s"
 msgstr ""
 
-#: inc/Helpers.php:546
+#: inc/Helpers.php:569
 msgid "The import files were successfully uploaded!"
 msgstr ""
 
 #. translators: %s - the max execution time.
-#: inc/Helpers.php:572
+#: inc/Helpers.php:595
 msgid "Initial max execution time = %s"
 msgstr ""
 
 #. translators: %1$s - new line break, %2$s - the site URL, %3$s - the file path for content import, %4$s - the file path for widgets import, %5$s - the file path for widgets import, %6$s - the file path for redux import.
-#: inc/Helpers.php:576
+#: inc/Helpers.php:599
 msgid "Files info:%1$sSite URL = %2$s%1$sData file = %3$s%1$sWidget file = %4$s%1$sCustomizer file = %5$s%1$sRedux files:%1$s%6$s"
 msgstr ""
 
-#: inc/Helpers.php:579
-#: inc/Helpers.php:580
-#: inc/Helpers.php:581
-#: inc/Helpers.php:582
+#: inc/Helpers.php:602
+#: inc/Helpers.php:603
+#: inc/Helpers.php:604
+#: inc/Helpers.php:605
 msgid "not defined!"
 msgstr ""
 
-#: inc/Helpers.php:759
+#: inc/Helpers.php:782
 #: views/plugin-page.php:290
 msgid "Import Demo Data"
 msgstr ""
@@ -682,6 +682,23 @@ msgstr ""
 #. translators: %s - the name of the executing action.
 #: inc/WPCLICommands.php:286
 msgid "Executing action: %s ..."
+msgstr ""
+
+#: inc/WPFormsImporter.php:53
+msgid "The WPForms plugin is not activated, so the WPForms import was skipped!"
+msgstr ""
+
+#: inc/WPFormsImporter.php:60
+msgid "The WPForms plugin's version is not >= v1.8.6, so the WPForms import was skipped!"
+msgstr ""
+
+#: inc/WPFormsImporter.php:72
+msgid "WPForms import finished successfully!"
+msgstr ""
+
+#: inc/WPFormsImporter.php:74
+#: inc/WPFormsImporter.php:94
+msgid "Importing WPForms"
 msgstr ""
 
 #. translators: %1$s - the PHP version, %2$s and %3$s - strong HTML tags, %4$s - br HTMl tag.

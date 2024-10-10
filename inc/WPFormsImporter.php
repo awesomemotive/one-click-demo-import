@@ -13,7 +13,7 @@ class WPFormsImporter {
 	/**
 	 * The path to the import file.
 	 *
-	 * @since {VERSION}
+	 * @since 3.3.0
 	 *
 	 * @var string
 	 */
@@ -22,7 +22,7 @@ class WPFormsImporter {
 	/**
 	 * The OneClickDemoImport instance.
 	 *
-	 * @since {VERSION}
+	 * @since 3.3.0
 	 *
 	 * @var OneClickDemoImport
 	 */
@@ -31,7 +31,7 @@ class WPFormsImporter {
 	/**
 	 * Constructor.
 	 *
-	 * @since {VERSION}
+	 * @since 3.3.0
 	 *
 	 * @param string $import_file_path The path to the import file.
 	 */
@@ -44,7 +44,7 @@ class WPFormsImporter {
 	/**
 	 * Import WPForms data.
 	 *
-	 * @since {VERSION}
+	 * @since 3.3.0
 	 */
 	public function import() {
 
@@ -78,7 +78,7 @@ class WPFormsImporter {
 	/**
 	 * Log error message.
 	 *
-	 * @since {VERSION}
+	 * @since 3.3.0
 	 *
 	 * @param string $error_message The error message.
 	 */

@@ -55,7 +55,7 @@ class Helpers {
 	/**
 	 * Download import files. Content .xml and widgets .wie|.json files.
 	 *
-	 * @since {VERSION} Add WPForms support.
+	 * @since 3.3.0 Add WPForms support.
 	 *
 	 * @param  array  $import_file_info array with import file details.
 	 *

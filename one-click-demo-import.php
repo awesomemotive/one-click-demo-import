@@ -4,7 +4,7 @@
 Plugin Name: One Click Demo Import
 Plugin URI: https://wordpress.org/plugins/one-click-demo-import/
 Description: Import your content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
-Version: 3.2.1
+Version: 3.3.0
 Requires at least: 5.5
 Requires PHP: 5.6
 Author: OCDI
