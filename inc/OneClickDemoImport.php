@@ -385,6 +385,7 @@ class OneClickDemoImport {
 		 * 1 - Before widgets import setup (with priority 10).
 		 * 2 - Import widgets (with priority 20).
 		 * 3 - Import Redux data (with priority 30).
+		 * 4 - Import WPForms data (with priority 40).
 		 */
 		Helpers::do_action( 'ocdi/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index );
 
@@ -407,7 +408,6 @@ class OneClickDemoImport {
 		// Send a JSON response with final report.
 		$this->final_response();
 	}
-
 
 	/**
 	 * AJAX callback for importing the customizer data.
