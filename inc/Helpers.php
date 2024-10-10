@@ -72,7 +72,7 @@ class Helpers {
 		// ----- Set content file path -----
 		// Check if 'import_file_url' is not defined. That would mean a local file.
 		if ( empty( $import_file_info['import_file_url'] ) ) {
-			if ( file_exists( $import_file_info['local_import_file'] ) ) {
+			if ( ! empty( $import_file_info['local_import_file'] ) && file_exists( $import_file_info['local_import_file'] ) ) {
 				$downloaded_files['content'] = $import_file_info['local_import_file'];
 			}
 		}
