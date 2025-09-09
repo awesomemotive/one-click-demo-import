@@ -359,6 +359,12 @@ Please visit this [docs page](https://github.com/awesomemotive/one-click-demo-im
 
 == Changelog ==
 
+= 3.4.0 =
+*Release Date - XX September 2025*
+
+* Fixed a PHP fatal error on some imports. The fatal error happens when the passed `$widget` is not the expected array data type.
+
+
 = 3.3.0 =
 *Release Date - 10th October 2024*
 

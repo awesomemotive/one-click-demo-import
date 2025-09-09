@@ -40,9 +40,17 @@ class ImportActions {
 	 * This solves the issue with custom menu widgets not having the correct (new) menu ID, because they
 	 * have the old menu ID from the export site.
 	 *
+	 * @since {VERSION} Made sure `$widget` is an array.
+	 *
 	 * @param array $widget The widget settings array.
 	 */
 	public function fix_custom_menu_widget_ids( $widget ) {
+
+		// Make sure the passed variable is an array to prevent fatal error.
+		if ( ! is_array( $widget ) ) {
+			$widget = [];
+		}
+
 		// Skip (no changes needed), if this is not a custom menu widget.
 		if ( ! array_key_exists( 'nav_menu', $widget ) || empty( $widget['nav_menu'] ) || ! is_int( $widget['nav_menu'] ) ) {
 			return $widget;
