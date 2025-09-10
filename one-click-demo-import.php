@@ -6,7 +6,7 @@ Plugin URI: https://wordpress.org/plugins/one-click-demo-import/
 Description: Import your content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
 Version: 3.3.0
 Requires at least: 5.5
-Requires PHP: 5.6
+Requires PHP: 7.4
 Author: OCDI
 Author URI: https://ocdi.com
 License: GPL3
@@ -27,10 +27,10 @@ class OCDI_Plugin {
 	 */
 	public function __construct() {
 		/**
-		 * Display admin error message if PHP version is older than 5.6.
+		 * Display admin error message if PHP version is older than 7.4.
 		 * Otherwise execute the main plugin class.
 		 */
-		if ( version_compare( phpversion(), '5.6', '<' ) ) {
+		if ( version_compare( phpversion(), '7.4', '<' ) ) {
 			add_action( 'admin_notices', array( $this, 'old_php_admin_error_notice' ) );
 		}
 		else {
@@ -53,11 +53,11 @@ class OCDI_Plugin {
 
 
 	/**
-	 * Display an admin error notice when PHP is older the version 5.6.
+	 * Display an admin error notice when PHP is older the version 7.4.
 	 * Hook it to the 'admin_notices' action.
 	 */
 	public function old_php_admin_error_notice() { /* translators: %1$s - the PHP version, %2$s and %3$s - strong HTML tags, %4$s - br HTMl tag. */
-		$message = sprintf( esc_html__( 'The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.6+%3$s to run properly. Please contact your hosting company and ask them to update the PHP version of your site to at least PHP 7.4%4$s Your current version of PHP: %2$s%1$s%3$s', 'one-click-demo-import' ), phpversion(), '<strong>', '</strong>', '<br>' );
+		$message = sprintf( esc_html__( 'The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 7.4+%3$s to run properly. Please contact your hosting company and ask them to update the PHP version of your site to at least PHP 7.4%4$s Your current version of PHP: %2$s%1$s%3$s', 'one-click-demo-import' ), phpversion(), '<strong>', '</strong>', '<br>' );
 
 		printf( '<div class="notice notice-error"><p>%1$s</p></div>', wp_kses_post( $message ) );
 	}
