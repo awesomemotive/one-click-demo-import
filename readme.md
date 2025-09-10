@@ -3,7 +3,7 @@
 **Tags:** import, content, demo, data, widgets, settings, redux, theme options
 **Requires at least:** 5.5
 **Tested up to:** 6.5
-**Requires PHP:** 5.6
+**Requires PHP:** 7.4
 **Stable tag:** 3.2.1
 **License:** GPLv3 or later
 
