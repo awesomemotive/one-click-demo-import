@@ -19,5 +19,11 @@
     },
     "require-dev": {
         "yoast/phpunit-polyfills": "^2.0"
+    },
+    "scripts": {
+        "build": [
+          "npm run gulp composer:delete_vendor",
+          "composer install --no-dev --no-plugins -o"
+        ]
     }
 }

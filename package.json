@@ -6,6 +6,7 @@
     "gulp": "^5.0.1",
     "gulp-autoprefixer": "^9.0.0",
     "gulp-cached": "^1.1.1",
+    "gulp-clean": "^0.4.0",
     "gulp-copy": "^5.0.0",
     "gulp-debug": "^5.0.1",
     "gulp-imagemin": "^9.1.0",

@@ -8,6 +8,7 @@ const require = createRequire(import.meta.url);
 
 const gulp = require( 'gulp' ),
 	cached = require( 'gulp-cached' ),
+	clean = require('gulp-clean'),
 	sass = require('gulp-sass')(require('sass')),
 	sourcemaps = require( 'gulp-sourcemaps' ),
 	rename = require( 'gulp-rename' ),
@@ -16,7 +17,8 @@ const gulp = require( 'gulp' ),
 	readme = require( 'gulp-readme-to-markdown' ),
 	replace = require( 'gulp-replace' ),
 	packageJSON = require( './package.json' ),
-	exec = require( 'child_process' ).exec;
+	exec = require( 'child_process' ).exec,
+	zip = require('gulp-zip');
 
 const plugin = {
 	name: 'One Click Demo Import',
@@ -76,6 +78,9 @@ const plugin = {
 		"!vendor/**",
 		"!gulpfile.js",
 	],
+	images: [
+		'assets/images/**/*'
+	]
 };
 
 /**
@@ -119,6 +124,29 @@ gulp.task( 'js', function () {
 		.pipe( gulp.dest( '.' ) )
 		.pipe( debug( { title: '[js]' } ) );
 } );
+
+/**
+ * Optimize image files.
+ */
+gulp.task('img', async function () {
+	const {default: imagemin}= await import('gulp-imagemin');
+	const {default: mozjpeg} = await import(`imagemin-mozjpeg`);
+	const {default: optipng} = await import(`imagemin-optipng`);
+	const {default: svgo} = await import(`imagemin-svgo`);
+	const {default: gifsicle} = await import(`imagemin-gifsicle`);
+
+	return gulp.src(plugin.images)
+		.pipe(imagemin([
+			gifsicle(),
+			mozjpeg(),
+			optipng(),
+			svgo()
+		]))
+		.pipe(gulp.dest(function (file) {
+			return file.base;
+		}))
+		.pipe(debug({title: '[img]'}));
+});
 
 /**
  * Generate .pot file.
@@ -186,12 +214,42 @@ gulp.task( 'replace_since_ver', function() {
 		.pipe( gulp.dest( './' ) );
 } );
 
+/**
+ * Install composer dependencies.
+ */
+gulp.task('composer', function (cb) {
+	exec('composer build', function (err, stdout, stderr) {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+});
+
+gulp.task('composer:delete_vendor', function () {
+	return gulp.src(['vendor'], {allowEmpty: true, read: false})
+		.pipe(clean());
+});
+
+/**
+ * Generate a .zip file.
+ */
+gulp.task('zip', function () {
+	// Modifying 'base' to include plugin directory in a zip.
+	return gulp.src(plugin.files, {base: '.'})
+		.pipe(rename(function (file) {
+			file.dirname = plugin.slug + '/' + file.dirname;
+		}))
+		.pipe(zip(plugin.slug + '-' + packageJSON.version + '.zip'))
+		.pipe(gulp.dest('./build'))
+		.pipe(debug({title: '[zip]'}));
+});
+
 gulp.task( 'replace_ver', gulp.series( 'replace_plugin_file_ver', 'replace_since_ver' ) );
 
 /**
  * Task: build.
  */
-gulp.task( 'build', gulp.series( gulp.parallel( 'css', 'js', 'pot' ), 'replace_ver', 'copy' ) );
+gulp.task( 'build', gulp.series( gulp.parallel( 'css', 'js', 'img' ), 'replace_ver', 'pot', 'composer', 'zip' ) );
 
 /**
  * Look out for relevant sass/js changes.
