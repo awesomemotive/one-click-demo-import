@@ -19,6 +19,10 @@
     "gulp-watch": "^5.0.1",
     "gulp-zip": "^4.2.0",
     "load-grunt-tasks": "^5.1.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^11.0.1",
     "sass": "^1.69.5"
   },
   "overrides": {
