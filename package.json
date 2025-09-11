@@ -1,5 +1,5 @@
 {
-  "version": "3.3.0",
+  "version": "3.4.0",
   "type": "module",
   "private": true,
   "devDependencies": {
@@ -7,7 +7,6 @@
     "gulp-autoprefixer": "^9.0.0",
     "gulp-cached": "^1.1.1",
     "gulp-clean": "^0.4.0",
-    "gulp-copy": "^5.0.0",
     "gulp-debug": "^5.0.1",
     "gulp-imagemin": "^9.1.0",
     "gulp-readme-to-markdown": "^0.2.1",

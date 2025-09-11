@@ -13,7 +13,6 @@ const gulp = require( 'gulp' ),
 	sourcemaps = require( 'gulp-sourcemaps' ),
 	rename = require( 'gulp-rename' ),
 	uglify = require( 'gulp-uglify' ),
-	copy = require( 'gulp-copy' ),
 	readme = require( 'gulp-readme-to-markdown' ),
 	replace = require( 'gulp-replace' ),
 	packageJSON = require( './package.json' ),
@@ -173,16 +172,28 @@ gulp.task('readme', function() {
 		.pipe(gulp.dest('.'));
 });
 
-/**
- * Copy production ready plugin folder.
- */
-gulp.task( 'copy', function () {
-	return gulp.src( plugin.files, { base: '.' } )
-		// .pipe( rename( function ( file ) {
-		// 	file.dirname = plugin.slug + '/' + file.dirname;
-		// } ) )
-		.pipe(copy('one-click-demo-import'))
-		.pipe( debug( { title: '[copy]' } ) );
+gulp.task( 'replace_readme_stable_tag', function () {
+	return gulp.src( [ 'readme.txt' ] )
+		.pipe(
+			// File header.
+			replace(
+				/Stable tag: ((\*)|([0-9]+(\.((\*)|([0-9]+(\.((\*)|([0-9]+)))?)))?))/gm,
+				'Stable tag: ' + packageJSON.version
+			)
+		)
+		.pipe( gulp.dest( './' ) );
+} );
+
+gulp.task( 'replace_plugin_file_ver', function () {
+	return gulp.src( [ 'one-click-demo-import.php' ] )
+		.pipe(
+			// File header.
+			replace(
+				/Version: ((\*)|([0-9]+(\.((\*)|([0-9]+(\.((\*)|([0-9]+)))?)))?))/gm,
+				'Version: ' + packageJSON.version
+			)
+		)
+		.pipe( gulp.dest( './' ) );
 } );
 
 /**
@@ -244,7 +255,7 @@ gulp.task('zip', function () {
 		.pipe(debug({title: '[zip]'}));
 });
 
-gulp.task( 'replace_ver', gulp.series( 'replace_plugin_file_ver', 'replace_since_ver' ) );
+gulp.task( 'replace_ver', gulp.series( 'replace_readme_stable_tag', 'replace_plugin_file_ver', 'replace_since_ver' ) );
 
 /**
  * Task: build.
