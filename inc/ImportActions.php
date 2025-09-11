@@ -40,7 +40,7 @@ class ImportActions {
 	 * This solves the issue with custom menu widgets not having the correct (new) menu ID, because they
 	 * have the old menu ID from the export site.
 	 *
-	 * @since {VERSION} Made sure `$widget` is an array.
+	 * @since 3.4.0 Made sure `$widget` is an array.
 	 *
 	 * @param array $widget The widget settings array.
 	 */

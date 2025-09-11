@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: One Click Demo Import 3.3.0\n"
+"Project-Id-Version: One Click Demo Import 3.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/one-click-demo-import\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-10T11:46:51+00:00\n"
+"POT-Creation-Date: 2025-09-11T09:11:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: one-click-demo-import\n"
@@ -703,7 +703,7 @@ msgstr ""
 
 #. translators: %1$s - the PHP version, %2$s and %3$s - strong HTML tags, %4$s - br HTMl tag.
 #: one-click-demo-import.php:60
-msgid "The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 5.6+%3$s to run properly. Please contact your hosting company and ask them to update the PHP version of your site to at least PHP 7.4%4$s Your current version of PHP: %2$s%1$s%3$s"
+msgid "The %2$sOne Click Demo Import%3$s plugin requires %2$sPHP 7.4+%3$s to run properly. Please contact your hosting company and ask them to update the PHP version of your site to at least PHP 7.4%4$s Your current version of PHP: %2$s%1$s%3$s"
 msgstr ""
 
 #: views/create-content.php:26
