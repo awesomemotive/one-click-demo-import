@@ -1,0 +1,33 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/themes.php?page=one-click-demo-import",
+  "login": true,
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "one-click-demo-import"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "mkdir",
+      "path": "/wordpress/wp-content/mu-plugins"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/ocdi-playground-demo.php",
+      "data": "<?php\n/*\nPlugin Name: OCDI Playground Demo Setup\nDescription: Predefines a demo import for One Click Demo Import in WordPress Playground.\n*/\n\nfunction ocdi_playground_register_import() {\n    return array(\n        array(\n            'import_file_name'   => 'Playground Theme Test Demo',\n            'categories'         => array( 'Playground' ),\n            // Official Theme Unit Test WXR file.\n            'import_file_url'    => 'https://wpcom-themes.svn.automattic.com/demo/theme-unit-test-data.xml',\n            'import_notice'      => 'Imports the official WordPress Theme Unit Test content. Predefined by the Playground blueprint.',\n            'preview_url'        => home_url( '/' ),\n        ),\n    );\n}\n// Support both legacy and current filter names used by the plugin.\nadd_filter( 'ocdi/import_files', 'ocdi_playground_register_import' );\nadd_filter( 'pt-ocdi/import_files', 'ocdi_playground_register_import' );\n\nfunction ocdi_playground_intro_text( $default_text ) {\n    $default_text .= '<div class=\"ocdi__intro-text\"><p>This Playground demo predefines the <strong>Playground Theme Test Demo</strong> import which uses the official WordPress Theme Unit Test XML. Click its <strong>Import</strong> button to see One Click Demo Import in action.</p></div>';\n    return $default_text;\n}\nadd_filter( 'ocdi/plugin_intro_text', 'ocdi_playground_intro_text' );\nadd_filter( 'pt-ocdi/plugin_intro_text', 'ocdi_playground_intro_text' );\n\nfunction ocdi_playground_page_setup( $settings ) {\n    // Force a stable slug so the Playground landingPage is predictable.\n    $settings['parent_slug'] = 'themes.php';\n    $settings['menu_slug']   = 'one-click-demo-import';\n    $settings['page_title']  = 'Playground Demo Import';\n    $settings['menu_title']  = 'Import Demo Data';\n    return $settings;\n}\nadd_filter( 'ocdi/plugin_page_setup', 'ocdi_playground_page_setup' );\nadd_filter( 'pt-ocdi/plugin_page_setup', 'ocdi_playground_page_setup' );\n"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "One Click Demo Import Playground",
+        "blogdescription": "Demo site with a predefined Theme Unit Test import via One Click Demo Import."
+      }
+    }
+  ]
+}
