@@ -1,0 +1,24 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/themes.php?page=one-click-demo-import",
+  "login": true,
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "one-click-demo-import"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "One Click Demo Import Playground",
+        "blogdescription": "Demo site with a predefined Theme Unit Test import via One Click Demo Import."
+      }
+    }
+  ]
+}
