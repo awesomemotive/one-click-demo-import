@@ -104,6 +104,8 @@ class WidgetImporter {
 	/**
 	 * Import widget JSON data
 	 *
+	 * @since 3.4.1 Security update.
+	 *
 	 * @global array $wp_registered_sidebars
 	 * @param object $data JSON widget data.
 	 * @return array $results
@@ -194,6 +196,24 @@ class WidgetImporter {
 				// This is preferred over the older wie_widget_settings filter above.
 				// Do before identical check because changes may make it identical to end result (such as URL replacements).
 				$widget = Helpers::apply_filters( 'ocdi/widget_settings_array', $widget );
+
+				/**
+				 * Filter whether or not to sanitize the widget on import.
+				 *
+				 * @since 3.4.1
+				 *
+				 * @param bool  $should_sanitize Whether or not to sanitize the widget on import. Default `true`.
+				 * @param array $widget          Widget data.
+				 */
+				$should_sanitize_widget = Helpers::apply_filters( 'ocdi/widget_should_sanitize', true, $widget );
+
+				if ( $should_sanitize_widget && is_array( $widget ) ) {
+					array_walk_recursive( $widget, function( &$value ) {
+						if ( is_string( $value ) ) {
+							$value = wp_kses_post( $value );
+						}
+					} );
+				}
 
 				// Does widget with identical settings already exist in same sidebar?
 				if ( ! $fail && isset( $widget_instances[ $id_base ] ) ) {
