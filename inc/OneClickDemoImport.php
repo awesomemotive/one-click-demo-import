@@ -246,6 +246,7 @@ class OneClickDemoImport {
 						'widgets_filetype_warn'    => esc_html__( 'Invalid file type detected! Please select a JSON or WIE file for the Widgets Import.', 'one-click-demo-import' ),
 						'customizer_filetype_warn' => esc_html__( 'Invalid file type detected! Please select a DAT file for the Customizer Import.', 'one-click-demo-import' ),
 						'redux_filetype_warn'      => esc_html__( 'Invalid file type detected! Please select a JSON file for the Redux Import.', 'one-click-demo-import' ),
+						'select_at_least_one_item' => esc_html__( 'Please select at least one content item to import.', 'one-click-demo-import' ),
 					),
 				)
 			);

@@ -222,6 +222,11 @@ jQuery( function ( $ ) {
 		var itemsToImport = $( '.ocdi-create-content-content .content-item input[type=checkbox]' ).serializeArray();
 
 		if ( itemsToImport.length === 0 ) {
+
+			// Scroll to the top of the page and show a warning notice
+			var target = $('.ocdi-create-content-header');
+			sectionScrollTop( target, ocdi.texts.select_at_least_one_item );
+
 			return false;
 		}
 
@@ -689,5 +694,27 @@ jQuery( function ( $ ) {
 
 		// AJAX call to import everything (content, widgets, before/after setup)
 		ajaxCall( data );
+	}
+
+	/**
+	 * Scroll to the top of the page and show a warning notice.
+	 */
+	function sectionScrollTop( target, message, externalClass = '', duration = 5000 ) {
+		if( !target || !message ) return;
+
+		// Smooth scroll to top
+		$('html, body').animate({ scrollTop: 0 }, 300);
+
+		// Insert notice
+		const $notice = $(
+			`<div class="notice notice-warning ${externalClass}">
+				<p>${message}</p>
+			</div>`
+		);
+
+		target.append($notice);
+
+		// Auto-remove after duration
+		setTimeout(() => $notice.fadeOut(200, () => $notice.remove()), duration);
 	}
 } );
